@@ -6,7 +6,7 @@ describe('pagamento', () => {
         cy.visit('http://gla-homol.terracapnet.local')
         cy.viewport(1980, 1200)
     })
-    it('teste cadastrar pendência no empreendimento', () => {
+    it('teste tela de pagamentos', () => {
 
         cy.get(':nth-child(2) > .form-control').type('C9020840')
         cy.get(':nth-child(3) > .form-control').type('welcome_1')
@@ -59,5 +59,10 @@ describe('pagamento', () => {
         cy.get('[aria-label="Origem: Ordenar colunas de forma ascendente"]').should('have.text', "Origem")
         cy.get('[aria-label="Valor do Pagamento (R$, ha, mudas): Ordenar colunas de forma ascendente"]').should('have.text', "Valor do Pagamento (R$, ha, mudas)")
         cy.get('tr > .text-center').should('have.text', "Ação")
+        //preencher campos
+        cy.get(':nth-child(1) > :nth-child(1) > .form-group > .select2-container > .selection > .select2-selection').click()
+        // cy.get('.select2-results').find('li').contains('4 - Empreendimento XPTO 5 ').click({ force: true});
+        // cy.get('.select2-selection__rendered ').find('li').contains('RA-I-BRASILIA').click()
+        // cy.get('#select2-cd_regiao_admin-result-x3xr-1')
     })
-});
+})
