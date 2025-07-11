@@ -142,7 +142,16 @@ describe('pendência', () => {
         cy.get('.select2-results').find('li').contains('4 - Empreendimento XPTO 5 ').click({force: true})
         cy.get('#pesquisar').click()
 
-    
+        cy.wait(6000)
+        cy.get('[onclick="limpaPesquisa()"]').click({force: true})
+
+        cy.viewport(2083, 1429)
+        cy.get('.sidebar-toggle').click()
+        cy.get(':nth-child(1) > :nth-child(20) > .btn > .fas').click()
+        cy.get('.modal-footer > .btn-primary').click()
+        
+
+       
 
     })
     
