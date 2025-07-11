@@ -139,27 +139,39 @@ describe('pendência', () => {
         cy.get('.control-label').should('have.text', 'Resumo do status')
 
         //validação do botão limpar  
+        cy.get('#select2-cd_regiao_admin-container').click()
+        cy.get('.select2-results').find('li').contains('RA-I - BRASILIA ').click({force: true})
+        cy.get('#reset').click()
 
-        
+        //validando o salvamento de empreencimento
+        cy.get('#select2-cd_regiao_admin-container').click()
+        cy.get('.select2-results').find('li').contains('RA-I - BRASILIA ').click({force: true})
+        cy.get('#cd_orgao_processo_sei').type('11111')
+        cy.get('#nr_processo_sei').type('11111111')
+        cy.get('#aa_processo_sei').type('1111')
+        cy.get('#select2-tp_empreendimento-container').click()
+        cy.get('.select2-results').find('li').contains('Parcelamento de Solo Urbano - Novo').click({force: true})
+        cy.get('#ds_empreendimento').type('teste')
+        cy.get('#select2-tp_prioridade-container').click()
+        cy.get('.select2-results').find('li').contains('Planejamento Estratégico ').click({force: true})
+        cy.get('#select2-cd_pessoa_titular-container').click()
+        cy.get('.select2-results').find('li').contains('ALLAN GUIMARAES DIOGENES ').click({force: true})
+        cy.get('#select2-cd_pessoa_suplente-container').click()
+        cy.get('.select2-results').find('li').contains('ALLAN GUIMARAES DIOGENES ').click({force: true})
+        cy.get('#select2-cd_orgao_responsavel-container').click()
+        cy.get('.select2-results').find('li').contains('TERRACAP - COMPANHIA IMOBILIARIA DE BRASILIA ').click({force: true})
+        cy.get('#submit').click()
+        cy.get('.modal-footer > .btn-primary').click()
+        cy.get('button.bootbox-accept').should('have.text', 'OK').click(); 
 
-        /* //validação de pesquisar e visualizar
-
-        cy.get(':nth-child(1) > :nth-child(1) > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field').click({force: true})
-
-        cy.get('.select2-results').find('li').contains('RA-I BRASILIA ').click({force: true})
-
-        cy.get('#pesquisar').click()
-
-        cy.get('[href="/empreendimentos/39"] > .fa').click({force: true})
 
         //codigo para não contar a proteção do sistema como um erro
         Cypress.on('uncaught:exception', (err, runnable) => {
-  // Retorna false para evitar que o Cypress falhe no teste
   return false;
 });
 
 
-         // validação da escrita dessa tela de visualização 
+         // validação dos campos do empreendimento 
 
         cy.get(':nth-child(1) > [whidth="350px"] > b').should('have.text', 'RA:')
         cy.get(':nth-child(2) > [whidth="350px"] > b').should('have.text', 'Empreendimento:')
@@ -178,8 +190,28 @@ describe('pendência', () => {
         cy.get(':nth-child(15) > [whidth="350px"] > b').should('have.text', 'Concluído:')
         cy.get(':nth-child(16) > [whidth="350px"] > b').should('have.text', 'Resumo do Status:')
         cy.get(':nth-child(17) > [whidth="350px"] > b').should('have.text', 'Observação (processos):')
-        */
+        
+        // voltando para a tela de empreencimento, para a validação do salvamento
+        cy.get('[onclick="window.history.back()"]').click()
+        cy.get('[onclick="window.history.back()"]').click()
+        cy.get(':nth-child(1) > :nth-child(1) > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field').click({force: true})
+        cy.get('.select2-results').find('li').contains('RA-I BRASILIA ').click({force: true})
+        cy.get(':nth-child(1) > :nth-child(3) > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field').click()
+        cy.get('.select2-results').find('li').contains('Parcelamento de Solo Urbano - Novo ').click({force: true})
+        cy.get(':nth-child(2) > :nth-child(1) > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field').click()
+        cy.get('.select2-results').find('li').contains('Planejamento Estratégico ').click({force: true})
+        cy.get(':nth-child(2) > :nth-child(2) > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field').click()
+        cy.get('.select2-results').find('li').contains('ALLAN GUIMARAES DIOGENES ').click({force: true})
+        cy.get(':nth-child(2) > :nth-child(3) > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field').click()
+        cy.get('.select2-results').find('li').contains('ALLAN GUIMARAES DIOGENES ').click({force: true})
+        cy.get('.col-md-8 > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search').click()
+        cy.get('.select2-results').find('li').contains('TERRACAP - COMPANHIA IMOBILIARIA DE BRASILIA ').click({force: true})
+        cy.get('#pesquisar').click()
 
+        //teste da tela de visualizar
+        cy.get('[href="/empreendimentos/116"] > .fa').click()
 
+        //teste da tela de edição
+        cy.get('#emprendimento-aba > .panel-footer > :nth-child(1) > a.btn').click()
     })
 });
