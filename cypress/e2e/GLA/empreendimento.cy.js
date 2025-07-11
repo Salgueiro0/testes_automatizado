@@ -209,9 +209,26 @@ describe('pendência', () => {
         cy.get('#pesquisar').click()
 
         //teste da tela de visualizar
-        cy.get('[href="/empreendimentos/116"] > .fa').click()
+       cy.get('a[title="Visualizar"]').first().click();
 
         //teste da tela de edição
         cy.get('#emprendimento-aba > .panel-footer > :nth-child(1) > a.btn').click()
+         cy.get('#select2-cd_regiao_admin-container').click()
+        cy.get('.select2-results').find('li').contains('RA-III - TAGUATINGA ').click({force: true})
+        cy.get('#cd_orgao_processo_sei').clear();
+        cy.get('#nr_processo_sei').clear();
+        cy.get('#aa_processo_sei').clear();
+        cy.get('#cd_orgao_processo_sei').type('22222')
+        cy.get('#nr_processo_sei').type('22222222')
+        cy.get('#aa_processo_sei').type('2222')
+        cy.get('#select2-tp_empreendimento-container').click()
+        cy.get('.select2-results').find('li').contains('Obras de Construção Civil').click({force: true})
+        cy.get('#submit').click()
+        cy.get('.modal-footer > .btn-primary').click()
+        cy.get('button.bootbox-accept').should('be.visible').and('contain.text', 'OK').click();
+
+        //validação do campo excluir
+        cy.get('#btn-delete-empreendimento').click()
+        cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary').click()
     })
 });

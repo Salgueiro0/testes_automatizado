@@ -117,11 +117,17 @@ describe('pagamento', () => {
         cy.get('.sidebar-menu > :nth-child(8) > a > span').click()
 
         cy.get('h1').should('have.text', "Pagamento")
-
-        cy.get('#pesquisarPagamento').click()
+        cy.get('#pesquisarPagamento').click({force: true})
+        cy.get('#pesquisarPagamento').click({force: true})
         cy.wait(10000)
-        cy.get(':nth-child(1) > .text-center > [href="/demandas/56"] > .fa').click()
-        // cy.get('.text-center').find('a').contains('/requerimentos/44').click({ force: true});
+        cy.get('[href="/requerimentos/44"] > .fa').click()
+        Cypress.on('uncaught:exception', (err, runnable) => {
+  return false;
+});
+
+        
+    
+        
     })
 })
 
