@@ -116,18 +116,20 @@ describe('pagamento', () => {
 
         cy.get('.sidebar-menu > :nth-child(8) > a > span').click()
 
+        //Gerar pdf e excel
         cy.get('h1').should('have.text', "Pagamento")
         cy.get('#pesquisarPagamento').click({force: true})
         cy.get('#pesquisarPagamento').click({force: true})
-        cy.wait(10000)
-        cy.get('[href="/requerimentos/44"] > .fa').click()
         Cypress.on('uncaught:exception', (err, runnable) => {
-  return false;
-});
+            return false;
+        })
+        cy.get('#gerarRelatorioEXCEL').click()
+        cy.get('#gerarRelatorioPDF').click()
 
-        
-    
-        
+        //Visualizar
+        cy.get('#pesquisarPagamento').click({force: true})
+        cy.get('#pesquisarPagamento').click({force: true})
+        cy.get('a[title="Visualizar"]').first().click();
     })
 })
 
