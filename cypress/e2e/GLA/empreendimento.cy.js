@@ -130,13 +130,17 @@ describe('pendência', () => {
         cy.get(':nth-child(7) > :nth-child(2) > .form-group > label').should('have.text', 'Número NGB')
         cy.get(':nth-child(7) > :nth-child(3) > .form-group > label').should('have.text', 'Número MDE')
         cy.get(':nth-child(8) > .col-md-8 > .form-group > label').should('have.text', 'Titular *')
-        cy.get('.form-group > :nth-child(1) > label').should('have.text', ' Arquivado ')
-        cy.get(':nth-child(2) > label').should('have.text', 'Concluído')
+        cy.get('input[name="fl_arquivado"]').parent('label').invoke('text').then((text) => {expect(text.trim()).to.eq('Arquivado');});
+        cy.get('input[name="fl_concluido"]').parent('label').invoke('text').then((text) => {expect(text.trim()).to.eq('Concluído');});
         cy.get(':nth-child(9) > :nth-child(1) > .form-group > label').should('have.text', 'Suplente *')
         cy.get(':nth-child(9) > :nth-child(2) > .form-group > label').should('have.text', 'Empreendedor Responsável *')
         cy.get(':nth-child(10) > :nth-child(1) > .form-group > label').should('have.text', 'Número de lotes')
-        cy.get(':nth-child(10) > :nth-child(1) > .form-group > label').should('have.text', 'Área Total (ha)')
+        cy.get(':nth-child(10) > :nth-child(2) > .form-group > label').should('have.text', 'Área Total (ha)')
         cy.get('.control-label').should('have.text', 'Resumo do status')
+
+        //validação do botão limpar  
+
+        
 
         /* //validação de pesquisar e visualizar
 

@@ -135,7 +135,7 @@ describe('pendência', () => {
         
         cy.on('uncaught:exception', (err, runnable) => {
             return true; // Ignora o erro para que o teste continue
-          });       
+          });      
 
         cy.get('.sidebar-menu > :nth-child(1) > a > span').click()
         cy.get(':nth-child(1) > :nth-child(2) > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field').click()
@@ -145,11 +145,12 @@ describe('pendência', () => {
         cy.wait(6000)
         cy.get('[onclick="limpaPesquisa()"]').click({force: true})
 
-        cy.viewport(2083, 1429)
+        
         cy.get('.sidebar-toggle').click()
         cy.get(':nth-child(1) > :nth-child(20) > .btn > .fas').click()
-        cy.get('.modal-footer > .btn-primary').click()
-        
+        cy.contains('button', 'Confirmar').click();
+
+
 
        
 
