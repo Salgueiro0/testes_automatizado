@@ -1,7 +1,7 @@
 
 /// <reference types="cypress" />
 
-describe('pagamento', () => {
+describe('consultar_requerimentos', () => {
     beforeEach(() => {
         cy.visit('http://gla-homol.terracapnet.local')
         cy.viewport(1980, 1200)
@@ -15,9 +15,145 @@ describe('pagamento', () => {
     it('Validação dos campos de texto', () => {
 
     })
-    it.only('Validação do preenchimento dos campos e a ação de pesquisar e limpar', () => {
+    it.only('Validação do preenchimento dos campos e botão limpar', () => {
+        Cypress.on('uncaught:exception', (err) => {
+            if (err.message.includes("Cannot set properties of null")) {
+                return false; // ignora esse erro específico
+            }
+            return true; // permite falhas para outros erros
+        });
 
-    })
+
+        //RA
+        cy.get('#select2-cd_regiao_admin-container').click()
+        cy.get('.select2-results')
+            .find('li')
+            .first()
+            .click({ force: true })
+
+        cy.wait(2000)
+
+        //Empreendimento
+        cy.get('#select2-cd_empreendimento-container').click()
+        cy.get('.select2-results')
+            .find('li')
+            .first()
+            .click({ force: true })
+
+        //Demanda
+        cy.get('#select2-cd_demanda-container').click()
+        cy.get('.select2-results')
+            .find('li')
+            .first()
+            .click({force:true})
+
+        //Tipo Demanda Permissão
+        cy.get(':nth-child(2) > :nth-child(2) > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search')
+            .click()
+        cy.get('.select2-results')
+            .find('li')
+            .first()
+            .click({force:true})
+        //Tipo Requerimento é automático
+
+        //Número Ofício
+        cy.get('#nr_oficio').type('1')
+
+        //Ano Ofício
+        cy.get('#aa_oficio').type('2020')
+
+        //Emitente Ofício
+        cy.get(':nth-child(3) > :nth-child(3) > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field')
+            .click()
+        cy.get('.select2-results')
+            .find('li')
+            .first()
+            .click({force:true})
+
+        //Titular
+        cy.get(':nth-child(4) > :nth-child(1) > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field')
+            .click()
+        cy.get('.select2-results')
+            .find('li')
+            .first()
+            .click({force:true})
+
+        //Suplente
+        cy.get(':nth-child(4) > :nth-child(2) > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field')
+            .click()
+        cy.get('.select2-results')
+            .find('li')
+            .first()
+            .click({force:true})
+
+        //Descrição
+        cy.get('#ds_requerimento').type('teste')
+
+        //Órgão Requerimento
+        cy.get(':nth-child(6) > :nth-child(1) > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field')
+            .click()
+        cy.get('.select2-results')
+            .find('li')
+            .first()
+            .click({force:true})
+
+        // Período da Data de Publicação Requerimento
+        cy.get('#dt_inicio').type('2000-01-01')
+        cy.get('#dt_fim').type('2025-01-01')
+
+        //Status Requerimento
+        cy.get(':nth-child(7) > :nth-child(1) > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search')
+            .click()
+        cy.get('.select2-results')
+            .find('li')
+            .first()
+            .click({force:true})
+
+        //SEI Processo Requerimento
+        cy.get('#cd_orgao_processo_sei').type('orgão') //órgão
+        cy.get('#nr_processo_sei').type('1') //número
+        cy.get('#aa_processo_sei').type('2024') //ano
+
+        //Reserva Orçamentária enviada à DIPLA
+        cy.get('#select2-fl_reserva_orcamentaria-container').click()
+        cy.get('.select2-results')
+            .find('li')
+            .first()
+            .click({force:true})
+
+        //Nº Doc SEI Despacho
+        cy.get('#nr_doc_sei_despacho').type('1')
+
+        //Empreendedor Responsável
+        cy.get(':nth-child(8) > :nth-child(3) > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field')
+            .click()
+        cy.get('.select2-results')
+            .find('li')
+            .first()
+            .click({force:true})
+
+        // //Status do Pagamento - sem click
+
+        // //Prazo Máximo de Análise
+        cy.get('#select2-tp_prazo_maximo-container').click()
+        cy.get('.select2-results')
+            .find('li')
+            .first()
+            .click({force:true})
+
+        // //Estudo Serviço -- sem click
+
+        //Possui Reiterações?
+        cy.get(':nth-child(4) > .form-group > .select2-container > .selection > .select2-selection > #select2--container > .select2-selection__placeholder')
+            .click()
+        cy.get('.select2-results')
+            .find('li')
+            .first()
+            .click({force:true})
+
+        //LIMPAR TODOS OS CAMPOS
+        cy.get('[onclick="resetFieldsRequerimento()"]').click()
+})
 
     it('Validação dos botões de ação dos requerimentos pesquisados', () => {
         Cypress.on('uncaught:exception', (err) => {
