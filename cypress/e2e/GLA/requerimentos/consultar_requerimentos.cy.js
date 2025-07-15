@@ -1,29 +1,83 @@
+// tempo em ms entre comandos
 
 /// <reference types="cypress" />
 
 describe('consultar_requerimentos', () => {
+
     beforeEach(() => {
+
+        cy.session('loginSession', () => {
+            cy.visit('http://gla-homol.terracapnet.local')
+            cy.viewport(2560, 1440)
+            cy.get(':nth-child(2) > .form-control').type('C9020840')
+            cy.get(':nth-child(3) > .form-control').type('welcome_1')
+            cy.get('.btn').click()
+            cy.get('h1').should('have.text', "Pendência")
+        })
+
         cy.visit('http://gla-homol.terracapnet.local')
-        cy.viewport(1980, 1200)
-        cy.get(':nth-child(2) > .form-control').type('C9020840')
-        cy.get(':nth-child(3) > .form-control').type('welcome_1')
-        cy.get('.btn').click()
-        cy.get('h1').should('have.text', "Pendência")
+        cy.wait(500)
         cy.get('.sidebar-menu > :nth-child(7) > a > span').first().click()
         cy.get('.menu-open > .treeview-menu > :nth-child(1) > a > span').click()
     })
-    it('Validação dos campos de texto', () => {
+    it('Validação', () => {
 
-    })
-    it.only('Validação do preenchimento dos campos e botão limpar', () => {
         Cypress.on('uncaught:exception', (err) => {
             if (err.message.includes("Cannot set properties of null")) {
-                return false; // ignora esse erro específico
+                return false
             }
-            return true; // permite falhas para outros erros
+            return true
+        })
+
+        Cypress.on('uncaught:exception', (err) => {
+            if (
+                err.message.includes('Script error') ||
+                err.message.includes('Identifier ')
+            ) {
+                return false
+            }
+            return true
         });
 
+        //VALIDAÇÃO CAMPOS DE TEXTO
+        cy.get(':nth-child(1) > :nth-child(1) > .form-group > .control-label').should('contain',"R.A")
+        cy.get(':nth-child(1) > :nth-child(2) > .form-group > .control-label').should('contain',"Empreendimento")
+        cy.get(':nth-child(1) > :nth-child(3) > .form-group > .control-label').should('contain',"Demanda")
+        cy.get(':nth-child(2) > :nth-child(1) > .form-group > .control-label').should('contain',"Tipo Requerimento")
+        cy.get(':nth-child(2) > :nth-child(2) > .form-group > label').should('contain',"Tipo Demanda Permissão")
+        cy.get(':nth-child(3) > :nth-child(1) > .form-group > .control-label').should('contain',"Número Ofício")
+        cy.get(':nth-child(3) > :nth-child(2) > .form-group > .control-label').should('contain',"Ano Ofício")
+        cy.get(':nth-child(3) > :nth-child(3) > .form-group > .control-label').should('contain',"Emitente Ofício")
+        cy.get(':nth-child(4) > :nth-child(1) > .form-group > label').should('contain',"Titular")
+        cy.get(':nth-child(4) > :nth-child(2) > .form-group > label').should('contain',"Suplente")
+        cy.get('.col-md-12 > .form-group > .control-label').should('contain',"Descrição")
+        cy.get(':nth-child(6) > :nth-child(1) > .form-group > .control-label').should('contain',"Órgão Requerimento")
+        cy.get(':nth-child(2) > label').should('contain',"Período da Data de Publicação Requerimento")
+        cy.get(':nth-child(7) > :nth-child(1) > .form-group > .control-label')
+            .invoke('text')
+            .then((text) => {
+                const clean = text.replace(/\s+/g, ' ').trim();
+                expect(clean).to.include('Status Requerimento');
+            })
+        cy.get(':nth-child(7) > :nth-child(2) > :nth-child(1) > .form-group > label').should('contain',"SEI Processo Requerimento")
+        cy.get(':nth-child(8) > .col-md-6 > .form-group > .control-label').should('contain',"Reserva Orçamentária enviada à DIPLA")
+        cy.get(':nth-child(8) > :nth-child(2) > .form-group > .control-label').should('contain', "Nº Doc SEI Despacho")
+        cy.get(':nth-child(8) > :nth-child(3) > .form-group > label').should('contain',"Empreendedor Responsável")
+        cy.get(':nth-child(9) > :nth-child(1) > .form-group > label').should('contain',"Status do Pagamento")
+        cy.get(':nth-child(9) > :nth-child(2) > .form-group > label').should('contain',"Prazo Máximo de Análise")
+        cy.get(':nth-child(9) > :nth-child(3) > .form-group > label').should('contain',"Estudo/Serviço")
+        cy.get(':nth-child(4) > .form-group > label').should('contain',"Possui Reiterações?")
+        cy.get('.sorting_asc').should('contain',"RA")
+        cy.get('[aria-label="Empreendimento: Ordenar colunas de forma ascendente"]').should('contain',"Empreendimento")
+        cy.get('[aria-label="Requerimento: Ordenar colunas de forma ascendente"]').should('contain',"Requerimento")
+        cy.get('[aria-label="Órgão: Ordenar colunas de forma ascendente"]').should('contain',"Órgão")
+        cy.get('[aria-label="Nº Ofício: Ordenar colunas de forma ascendente"]').should('contain',"Nº Ofício")
+        cy.get('[aria-label="Ano: Ordenar colunas de forma ascendente"]').should('contain',"Ano")
+        cy.get('[aria-label="Emitente: Ordenar colunas de forma ascendente"]').should('contain',"Emitente")
+        cy.get('[aria-label="Data de Publicação: Ordenar colunas de forma ascendente"]').should('contain',"Data de Publicação")
+        cy.get('[aria-label="Ação: Ordenar colunas de forma ascendente"]').should('contain',"Ação")
 
+        //VALIDAÇÃO DO PREENCHIMENTO DOS CAMPOS
         //RA
         cy.get('#select2-cd_regiao_admin-container').click()
         cy.get('.select2-results')
@@ -153,19 +207,9 @@ describe('consultar_requerimentos', () => {
 
         //LIMPAR TODOS OS CAMPOS
         cy.get('[onclick="resetFieldsRequerimento()"]').click()
-})
 
-    it('Validação dos botões de ação dos requerimentos pesquisados', () => {
-        Cypress.on('uncaught:exception', (err) => {
-            if (
-                err.message.includes('Script error') ||
-                err.message.includes('Identifier ')
-            ) {
-                return false; // ignora esses erros específicos
-            }
-            return true; // mantém falha para outros erros
-        });
 
+        //BOTÕES DE AÇÃO
 
         cy.get('#pesquisarRequerimento').click()
 
@@ -190,10 +234,10 @@ describe('consultar_requerimentos', () => {
         cy.go('back')
         cy.get('#pesquisarRequerimento').click()
         cy.get('[href="/requerimentos/60"] > .fa').click()
-    })
 
-    it('Validação do filtro em pesquisar requerimentos', () => {
 
+        //FILTRO
+        cy.go('back')
         cy.get('#pesquisarRequerimento').click()
         cy.wait(2000)
         cy.intercept('GET', '/components/pt_br/dataTables.json').as('loadTable')
@@ -212,4 +256,4 @@ describe('consultar_requerimentos', () => {
                 cy.get('tbody > tr').should('contain.text', filtro);
             })
     })
-});
+})
