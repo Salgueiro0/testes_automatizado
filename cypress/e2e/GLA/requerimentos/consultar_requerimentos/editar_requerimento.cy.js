@@ -4,7 +4,7 @@ describe('consultar_requerimentos', () => {
 
         cy.session('loginSession', () => {
             cy.visit('http://gla-homol.terracapnet.local')
-            cy.viewport(4000, 1200)
+            cy.viewport(2000, 1200)
             cy.get(':nth-child(2) > .form-control').type('C9020840')
             cy.get(':nth-child(3) > .form-control').type('welcome_1')
             cy.get('.btn').click()
@@ -13,12 +13,38 @@ describe('consultar_requerimentos', () => {
     })
     it('Editar um requerimento', () => {
 
-        // //IR PARA EMPREENDIMENTO DO REQUERIMENTO
+
+    //VALIDAR CAMPOS DE TEXTO
 
         cy.visit('http://gla-homol.terracapnet.local')
-        cy.get(':nth-child(2) > .form-control').type('C9020840')
-        cy.get(':nth-child(3) > .form-control').type('welcome_1')
-        cy.get('.btn').click()
+        cy.get(':nth-child(7) > [href="#"] > :nth-child(2)').click()
+        cy.get('.menu-open > .treeview-menu > :nth-child(1) > a > span').click()
+        cy.get('#pesquisarRequerimento').click()
+        cy.wait(1000)
+        cy.get('.sidebar-toggle').click()
+        cy.get('a[title="Editar"]').first().click();
+        cy.get(':nth-child(3) > :nth-child(1) > .form-group > .control-label').should('contain',"Tipo Requerimento")
+        cy.get(':nth-child(3) > :nth-child(2) > .form-group > .control-label').should('contain',"Demanda")
+        cy.get(':nth-child(4) > :nth-child(1) > .form-group > .control-label').should('contain',"Número Ofício")
+        cy.get(':nth-child(4) > :nth-child(2) > .form-group > .control-label').should('contain',"Ano Ofício")
+        cy.get(':nth-child(4) > :nth-child(3) > .form-group > .control-label').should('contain',"Emitente Ofício")
+        cy.get(':nth-child(4) > .form-group > .control-label').should('contain',"Nº SEI Doc Requerimento")
+        cy.get(':nth-child(5) > :nth-child(1) > .form-group > label').should('contain',"Titular")
+        cy.get(':nth-child(5) > :nth-child(2) > .form-group > label').should('contain',"Suplente")
+        cy.get(':nth-child(6) > .col-md-12 > .form-group > .control-label').should('contain',"Descrição")
+        cy.get(':nth-child(7) > :nth-child(1) > .form-group > .control-label').should('contain',"Órgão Requerimento")
+        cy.get(':nth-child(7) > :nth-child(2) > .form-group > .control-label').should('contain',"Data Publicação Requerimento")
+        cy.get(':nth-child(7) > :nth-child(3) > .form-group > .control-label').should('contain',"Status Requerimento")
+        cy.get(':nth-child(7) > :nth-child(4) > :nth-child(1) > .form-group > label').should('contain',"SEI Processo Requerimento")
+        cy.get(':nth-child(8) > .col-md-12 > .form-group > .control-label').should('contain',"Reserva Orçamentária enviada à DIPLA")
+        cy.get('.col-md-4 > .form-group > .control-label').should('contain',"Nº Doc SEI Despacho")
+
+
+
+
+        //IR PARA EMPREENDIMENTO DO REQUERIMENTO
+
+        cy.visit('http://gla-homol.terracapnet.local')
         cy.get(':nth-child(7) > [href="#"] > :nth-child(2)').click()
         cy.get('.menu-open > .treeview-menu > :nth-child(1) > a > span').click()
         cy.get('#pesquisarRequerimento').click()
@@ -48,8 +74,18 @@ describe('consultar_requerimentos', () => {
 
         //Limpar
         cy.get('.btn-toolbar > [type="button"]').click()
-        //Voltar
-        cy.get('[onclick="window.history.back()"]').click()
+
+        //MOSTRAR MENSAGENS DE QUE É NECESSÁRIO MARCAR OS CAMPOS OBRIGATÓRIOS
+         cy.get('#submit').click();
+        cy.get('.modal-footer > .btn')
+             .eq(1)
+            .click();
+
+         cy.get('.modal-footer > .btn')
+             .eq(0)
+             .click();
+
+         cy.get('[onclick="window.history.back()"]').click()
 
         //EDITAR REQUERIMENTO
         cy.visit('http://gla-homol.terracapnet.local')
