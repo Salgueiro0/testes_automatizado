@@ -35,287 +35,216 @@ describe('consultar_requerimentos', () => {
             return false
         })
 
-        cy.get('#requerimento-aba')
-
-
         //ABA DADOS DETALHADOS
+
         //Ir para demanda
-        //cy.get('#requerimento-aba > :nth-child(1) > .col-md-12').click()
+         cy.get('#requerimento-aba > :nth-child(1) > .col-md-12').click()
 
-        //EDITAR
-        // cy.get('#requerimento-aba > .panel-footer > :nth-child(1) > a.btn').click()
-        // cy.go('back')
+         //Botão adicionar
 
-        //EXCLUIR
-        // cy.get('#btn-delete-requerimento').click()
-        // cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary').click()
-        // cy.get('.bootbox > .modal-dialog')
-        //     .should('be.visible')
-        //      .within(() => {
-        //          cy.get('.btn').click()
-        //      });
+        cy.get('.col-md-12 > .btn').click()
+        cy.get('#botao-salvar').click()//salvar sem campos obrigatórios
+        cy.get('.bootbox > .modal-dialog')
+            .should('be.visible')
+            .within(() => {
+                cy.get('.btn').click()
+            });
+
+        cy.get('#ds_sei_num_doc_pagamento').type('1')
+        cy.get('#dt_pagamento').type('2025-01-01')
+        cy.get('#vl_pagamento').type('1')
+        cy.get('#ds_pagamento').type('teste')
+        cy.get('#tp_situacao').select('Quitado')
+        cy.get('#ds_sei_num_doc_quitacao').type('1111')
+        cy.get('.btn-secondary').click()
 
         //FILTRO PESQUISAR
-       // cy.get('#table-pagamento_filter > label > .form-control').type("quitado");
-       //
-       //  //BOTÃO EDITAR
-       //  cy.get('#table-pagamento_filter > label > .form-control').click()
-       //
-       //  //BOTÃO EXCLUIR
-       //  cy.get('#btn-delete-requerimento').click()
-       //  cy.wait(1000)
-       //  cy.get('.bootbox-close-button').click()
+        cy.get('#table-pagamento_filter > label > .form-control').type("Em análise");
 
-        //NOVO DOCUMENTO
+        //FILTRO EDITAR
+        cy.get('.btn-edit-pagamento > .fa').click()
+        cy.get('.btn-secondary').click()
+        cy.reload();
+
+
+        //FILTRO EXCLUIR
+        cy.wait(1000)
+        cy.get('.btn-delete-pagamento > .fas').click()
+        cy.reload();
+
+        //IR PARA EDITAR REQUERIMENTO E VOLTAR
+         cy.get('#requerimento-aba > .panel-footer > :nth-child(1) > a.btn').click()
+         cy.go('back')
+
+        //BOTÃO EXCLUIR
+        cy.get('#table-pagamento > thead > tr > .sorting_asc').should('contain',"SEI do Comprovante de Pagamento").click()
+        cy.reload();
+
+         //IR PARA NOVO DOCUMENTO
         cy.get('.panel-footer > :nth-child(3) > .btn').click()
-        cy.wait(5000)
+        cy.go('back')
 
-        // 1. Clique no container (o elemento que mostra o valor atual)
-        cy.get('.panel-body')
-            .find('[id^="select2-tp_documento-"][id$="-container"]')
-            .first()
-            .should('be.visible')
-            .click();
+        //VALIDAÇÃO DE TEXTOS
+        cy.get('#requerimento-aba > :nth-child(3) > :nth-child(1) > .form-group > label').should('contain',"Tipo Requerimento")
+        cy.get('#requerimento-aba > :nth-child(3) > :nth-child(2) > .form-group > label').should('contain',"Demanda")
+        cy.get('#requerimento-aba > :nth-child(4) > :nth-child(1) > .form-group > label').should('contain',"Número Ofício")
+        cy.get('#requerimento-aba > :nth-child(4) > :nth-child(2) > .form-group > label').should('contain',"Ano Ofício")
+        cy.get(':nth-child(4) > :nth-child(3) > .form-group > label').should('contain',"Emitente Ofício")
+        cy.get(':nth-child(4) > label').should('contain',"Nº SEI Doc Requerimento")
+        cy.get('#requerimento-aba > :nth-child(5) > :nth-child(1) > .form-group > label').should('contain',"Titular")
+        cy.get('#requerimento-aba > :nth-child(5) > :nth-child(2) > .form-group > label').should('contain',"Suplente")
+        cy.get(':nth-child(6) > .col-md-12 > .form-group > label').should('contain',"Descrição")
+        cy.get(':nth-child(7) > :nth-child(1) > .form-group > label').should('contain',"Órgão Requerimento")
+        cy.get(':nth-child(7) > :nth-child(2) > .form-group > label').should('contain',"Data Publicação Requerimento")
+        cy.get(':nth-child(7) > :nth-child(3) > .form-group > label').should('contain',"Status Requerimento")
+        cy.get(':nth-child(4) > .form-group > label').should('contain',"SEI Processo Requerimento")
+        cy.get(':nth-child(8) > :nth-child(1) > .form-group > label').should('contain',"Reserva Orçamentária enviada à DIPLA")
+        cy.get(':nth-child(8) > :nth-child(2) > .form-group > label').should('contain',"Nº Doc SEI Despacho")
+        cy.get(':nth-child(9) > :nth-child(1) > .form-group > label').should('contain',"Status do Pagamento")
+        cy.get(':nth-child(9) > :nth-child(2) > .form-group > label').should('contain',"Prazo Máximo de Análise")
+        cy.get(':nth-child(9) > :nth-child(3) > .form-group > label').should('contain',"Estudo/Serviço")
+        cy.get(':nth-child(10) > :nth-child(1) > .form-group > label').should('contain',"Observação (SEI Documento Ofício)")
+        cy.get(':nth-child(10) > :nth-child(2) > .form-group > label').should('contain',"Observação (Processo)")
+        cy.get('.col-md-12 > label').should('contain',"Pagamentos de Preço Público de Análise (Requerimentos)")
+        cy.get('#table-pagamento > thead > tr > .sorting_asc').should('contain',"SEI do Comprovante de Pagamento")
+        cy.get('[aria-label="Data do Pagamento: Ordenar colunas de forma ascendente"]').should('contain',"Data do Pagamento")
+        cy.get('[aria-label="Valor do Pagamento (R$): Ordenar colunas de forma ascendente"]').should('contain',"Valor do Pagamento (R$)")
+        cy.get('[aria-label="Status do Pagamento: Ordenar colunas de forma ascendente"]').should('contain',"Status do Pagamento")
+        cy.get('[aria-label="SEI da Certidão de Quitação: Ordenar colunas de forma ascendente"]').should('contain',"SEI da Certidão de Quitação")
+        cy.get('[aria-label="Descrição do Pagamento: Ordenar colunas de forma ascendente"]').should('contain',"Descrição do Pagamento")
+        //cy.get('thead > tr > .text-center').should('contain',"Ação")
 
-        // 2. Aguarde a abertura das opções e escolha pelo texto visível
-        cy.get('.select2-results')             // dropdown renderizado pelo plugin
-            .contains('Comprovante de Pagamento')                    // substitua por parte do texto da opção
-            .click();
+
+        //ABA DOCUMENTO
+        cy.get('.documentos-aba').click()
+
+        //Ir para empreendimento
+        cy.get('.panel-body > :nth-child(1) > .col-md-12 > [href="https://licenciamento-ambiental-homol.terracap.df.gov.br/empreendimentos/87"]').click()
+         cy.go('back')
+
+        cy.get('#pesquisarRequerimento').click()
+
+        cy.get('.sidebar-toggle').click()
+        cy.get('a[title="Visualizar"]').first().click();
+
+        cy.get('.documentos-aba').click()
+
+        cy.get(':nth-child(3) > .col-md-6 > .form-group > .select2-container > .selection > .select2-selection').type('Outros').type('{enter}')
 
         cy.get('#nr_documento').type('1')
-
         cy.get('#dt_documento').type('2020-01-01')
-
-        cy.get('#select2-cd_orgao_documento-wb-container').click()
+        cy.get(':nth-child(4) > .col-md-6 > .form-group > .select2-container > .selection > .select2-selection').click()
+        cy.get('.select2-results')
+            .find('li')
+            .eq(0)
+            .click({force:true})
+        cy.get('#nr_documento_sei').type('2')
+        cy.get('#ds_documento').type('teste')
+        cy.get(':nth-child(5) > :nth-child(2) > .form-group > .select2-container > .selection > .select2-selection').click()
         cy.get('.select2-results')
             .find('li')
             .eq(0)
             .click({force:true})
 
-
-        cy.get('#nr_documento_sei').type('1')
-
-        cy.get('#ds_documento').type('teste')
-
-        cy.get('#anexo').click()
-        //cy.go('back')
-
-        // //ABA DOCUMENTO
-        // cy.get('.documentos-aba').click()
-        // cy.get(':nth-child(3) > .col-md-6 > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered').type('1')
-        // cy.get('#nr_documento').type('1')
-        // cy.get('#dt_documento').type('2025-01-01')
-        // cy.get(':nth-child(4) > .col-md-6 > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered').click()
-        // cy.get('.select2-results')
-        //     .find('li')
-        //     .eq(0)
-        //     .click({force:true})
-        // cy.get('#nr_documento_sei').type('1')
-        // cy.get('#ds_documento').type('teste')
-        // cy.get(':nth-child(5) > :nth-child(2) > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered').click()
-        // cy.get('.select2-results')
-        //     .find('li')
-        //     .eq(0)
-        //     .click({force:true})
-        // cy.get('[onclick="resetFields()"]').click()
-        // cy.get('#pesquisarDocumentos').click()
-        // cy.get('.panel-body > .panel-footer > .btn-toolbar > .btn-success').click()
-        // cy.get('[onclick="window.history.back()"]').click()
-
-        // //ABA ESTUDOS
-        //  cy.get('.novo-estudo-aba').click()
-        // // cy.get('#select2-tp_estudo-container').click()
-        // // cy.get('.select2-results')
-        // //     .find('li')
-        // //     .eq(0)
-        // //     .click({force:true})
-        // // cy.get('#select2-tp_natureza-container').click()
-        // // cy.get('.select2-results')
-        // //     .find('li')
-        // //     .eq(0)
-        // //     .click({force:true})
-        // // cy.get('#select2-tp_objeto-container').click()
-        // // cy.get('.select2-results')
-        // //     .find('li')
-        // //     .eq(0)
-        // //     .click({force:true})
-        // // cy.get('#ds_objeto_estudo').type('teste')
-        // // cy.get('.select2-selection__placeholder').click()
-        // // cy.get('.select2-results')
-        // //     .find('li')
-        // //     .eq(0)
-        // //     .click({force:true})
-        // // cy.get('#dt_elaboracao_start').type('2020-01-01')
-        // // cy.get('#dt_elaboracao_end').type('2020-01-01')
-        // cy.get('#btn-pesquisar-estudo').click()
-        // cy.get('.panel > .panel-footer > .btn-toolbar > .btn-success').click()
-        //
-        // //PÁGINA ESTUDO/SERVIÇO
-        //
-        // //REFERÊNCIAS
-        //
-        // //INCLUIR REQUERIMENTO
-        // cy.get('#select2-cd_regiao_admin_req-container').click()
-        // cy.get('.select2-results')
-        //      .find('li')
-        //      .eq(0)
-        //      .click({force:true})
-        // cy.wait(1000)
-        // cy.get('#select2-cd_empreendimento_req-container').click()
-        // cy.get('.select2-results')
-        //     .find('li')
-        //     .eq(0)
-        //     .click({force:true})
-        // cy.get('#select2-tp_requerimento-container').click()
-        // cy.get('.select2-results')
-        //     .find('li')
-        //     .eq(0)
-        //     .click({force:true})
-        // cy.wait(1000)
-        // cy.get('#select2-cd_requerimento-container').click()
-        // cy.get('.select2-results')
-        //     .find('li')
-        //     .eq(0)
-        //     .click({force:true})
-        // cy.get('#btnAdicionar_requerimento > .fa').click()
-        //
-        // //INCLUIR EXIGÊNCIA
-        // cy.get('#select2-cd_regiao_admin_exi-container').click()
-        // cy.get('.select2-results')
-        //     .find('li')
-        //     .eq(0)
-        //     .click({force:true})
-        // cy.wait(1000)
-        // cy.get('#select2-cd_empreendimento_exi-container').click()
-        // cy.get('.select2-results')
-        //     .find('li')
-        //     .eq(0)
-        //     .click({force:true})
-        // cy.wait(2000)
-        // cy.get('#select2-cd_demanda-container').click()
-        // cy.get('.select2-results')
-        //     .find('li')
-        //     .eq(0)
-        //     .click({force:true})
-        //
-        //
-        // //INCLUIR PENDÊNCIA
-        //
-        // cy.get('#select2-cd_regiao_admin_pen-container').click()
-        // cy.get('.select2-results')
-        //      .find('li')
-        //      .eq(0)
-        //      .click({force:true})
-        // cy.wait(1000)
-        //
-        // cy.get('#select2-cd_empreendimento_pen-container').click()
-        // cy.get('.select2-results')
-        //     .find('li')
-        //     .eq(0)
-        //     .click({force:true})
-        // cy.wait(1000)
-        //
-        // cy.get('#select2-cd_pendencia-container').click()
-        // cy.get('.select2-results')
-        //     .find('li')
-        //     .eq(0)
-        //     .click({force:true})
-        //
-        // cy.get('#btnAdicionar_pendencia').click()
-        //
-        // //DADOS GERAIS
-        //
-        // cy.get('#select2-tp_estudo-container').click()
-        // cy.get('.select2-results')
-        //      .find('li')
-        //      .eq(0)
-        //      .click({force:true})
-        //
-        // cy.get('#select2-tp_natureza-container').click()
-        // cy.get('.select2-results')
-        //     .find('li')
-        //     .eq(0)
-        //     .click({force:true})
-        //
-        // cy.get('#select2-tp_objeto-container').click()
-        // cy.get('.select2-results')
-        //     .find('li')
-        //     .eq(0)
-        //     .click({force:true})
-        //
-        // cy.get('#ds_objeto_estudo').type('teste')
-        // cy.get('#nr_area_poligonal').type('1')
-        //
-        // cy.get(':nth-child(6) > .form-group > .select2-container > .selection > .select2-selection > #select2-tp_status-container').click()
-        // cy.get('.select2-results')
-        //     .find('li')
-        //     .eq(0)
-        //     .click({force:true})
-        //
-        // cy.get('#ds_observacao_status').type('teste')
-        //
-        // cy.get('#select2-cd_orgao_avaliador-container').click()
-        // cy.get('.select2-results')
-        //     .find('li')
-        //     .eq(0)
-        //     .click({force:true})
-        //
-        // cy.get('#vl_estimado').type('1')
-        //
-        //
-        // cy.get('#cd_org_proc_sei_contratacao').type('a')
-        // cy.get('#nr_proc_sei_contratacao').type('b')
-        // cy.get('#nr_proc_sei_contratacao').type('c')
-        //
-        // cy.get('#select2-cd_pessoa_titular-container').click()
-        // cy.get('.select2-results')
-        //     .find('li')
-        //     .eq(0)
-        //     .click({force:true})
-        //
-        // cy.get('#select2-cd_pessoa_suplente-container').click()
-        // cy.get('.select2-results')
-        //     .find('li')
-        //     .eq(0)
-        //     .click({force:true})
-        //
-        // cy.get('#ds_caminho_departamento').type('teste')
-        //
-        // cy.get('#dt_elaboracao').type('2020-01-01')
-        //
-        // cy.get('#dt_prev_conclusao_estudo').type('2020-01-01')
-        //
-        // //DADOS DO CONTRATO
-        //
-        // cy.get('#ct_plus').click()
-        //
-        // cy.get('#btnSalvar').click()
-        // cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary').click()
-        // // cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary').click()
-        // // cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary').click()
-        // // cy.get('[onclick="window.history.back()"]').click()
-        // cy.contains('button', 'Sim')
-        //     .should('be.visible')
-        //     .click();
-        // cy.get('[onclick="limparEstudo()"]').click()
         // cy.go('back')
-        //
-        // // //Botão adicionar
-        // //
-        // //  cy.get('.col-md-12 > .btn').click()
-        // // cy.get('#botao-salvar').click()//salvar sem campos obrigatórios
-        // // cy.get('.bootbox > .modal-dialog')
-        // //     .should('be.visible')
-        // //     .within(() => {
-        // //         cy.get('.btn').click()
-        // //     });
-        // //
-        // // cy.get('#ds_sei_num_doc_pagamento').type('1')
-        // // cy.get('#dt_pagamento').type('2025-01-01')
-        // // cy.get('#vl_pagamento').type('1')
-        // // cy.get('#ds_pagamento').type('teste')
-        // // cy.get('#tp_situacao').select('Quitado')
-        // // cy.get('#ds_sei_num_doc_quitacao').type('1111')
-        // // cy.get('#botao-salvar').click()
-    })
-})
+        // cy.get('#pesquisarRequerimento').click()
+        // cy.get('.sidebar-toggle').click()
+        // cy.get('a[title="Visualizar"]').first().click();
+        // cy.get('.documentos-aba').click()
+
+        // //FILTRO PESQUISAR
+        // cy.wait(2000)
+         cy.get('#table-documento_filter > label > .form-control').type('teste')
+//
+        //BOTÃO PESQUISAR
+        cy.wait(1000)
+        cy.get('#pesquisarDocumentos').click()
+
+        //BOTÃO LIMPAR
+        cy.get('[onclick="resetFields()"]').click()
+
+
+        //VALIDAÇÃO DE TEXTOS
+        cy.get(':nth-child(3) > .col-md-6 > .form-group > .control-label').should('contain',"Tipo")
+        cy.get('#documento > .box > .box-body > .panel > .panel-body > :nth-child(3) > :nth-child(2) > .form-group > .control-label').should('contain',"Número")
+        cy.get(':nth-child(3) > :nth-child(3) > .form-group > .control-label').should('contain',"Data")
+        cy.get(':nth-child(4) > .col-md-6 > .form-group > .control-label').should('contain',"Órgão Documento")
+        cy.get(':nth-child(4) > :nth-child(2) > .form-group > .control-label').should('contain',"Nº SEI Doc")
+        cy.get(':nth-child(5) > :nth-child(1) > .form-group > .control-label').should('contain',"Descrição")
+        cy.get('.panel-body > :nth-child(5) > :nth-child(2) > .form-group > label').should('contain',"Empreendedor Responsável")
+        // cy.get('[aria-label="Origem: Ordenar colunas de forma ascendente"]').should('contain',"Origem")
+        // cy.get('[aria-label="RA: Ordenar colunas de forma ascendente"]').should('contain',"RA")
+        // cy.get('[aria-label="Empreendimento: Ordenar colunas de forma ascendente"]').should('contain',"Empreendimento")
+        // cy.get('[aria-label="Tipo: Ordenar colunas de forma ascendente"]').should('contain',"Tipo")
+        // cy.get('[aria-label="Número: Ordenar colunas de forma ascendente"]').should('contain',"Número")
+        // cy.get('[aria-label="Data: Ordenar colunas de forma ascendente"]').should('contain',"Data")
+        // cy.get('[aria-label="Órgão: Ordenar colunas de forma ascendente"]').should('contain',"Órgão")
+        // cy.get('[aria-label="Nº SEI Doc: Ordenar colunas de forma ascendente"]').should('contain',"Nº SEI Doc")
+        // cy.get('[aria-label="Descrição: Ordenar colunas de forma ascendente"]').should('contain',"Descrição")
+        // cy.get('#table-documento > thead > tr > .text-center').should('contain',"Ação")
+
+        //ABA ESTUDOS
+
+        cy.get('.novo-estudo-aba').click()
+
+        cy.get('#select2-tp_estudo-container').click()
+        cy.get('.select2-results')
+            .find('li')
+            .eq(0)
+            .click({force:true})
+
+        cy.get('#select2-tp_natureza-container').click()
+        cy.get('.select2-results')
+            .find('li')
+            .eq(0)
+            .click({force:true})
+
+        cy.get('#select2-tp_objeto-container').click()
+        cy.get('.select2-results')
+            .find('li')
+            .eq(0)
+            .click({force:true})
+
+        cy.get('#ds_objeto_estudo').type('teste')
+
+        cy.get('#select2-tp_status-container').click()
+        cy.get('.select2-results')
+            .find('li')
+            .eq(0)
+            .click({force:true})
+
+        cy.get('#dt_elaboracao_start').type('2020-01-01')
+        cy.get('#dt_elaboracao_end').type('2020-01-02')
+
+        //BOTÃO PESQUISAR
+        cy.get('#dt_elaboracao_end')
+
+        //FILTRO PESQUISAR
+        cy.get('#tabela-estudo-aba_filter > label > .form-control').type('teste')
+
+        //BOTÃO LIMPAR
+        cy.get('[onclick="limparFormEstudoAba()"]').click()
+
+        //VALIDAR CAMPOS DE TEXTO
+
+        cy.get('.panel-body > :nth-child(1) > :nth-child(1) > .form-group > label').should('contain',"Tipo")
+        cy.get('.panel-body > :nth-child(1) > :nth-child(2) > .form-group > .control-label').should('contain',"Natureza")
+        cy.get(':nth-child(3) > .control-label').should('contain',"Objeto")
+        cy.get('.col-md-12 > .form-group > .control-label').should('contain',"Descrição do Objeto do Estudo/Serviço")
+        cy.get('#form_estudo > .box > .box-body > .panel > .panel-body > :nth-child(3) > :nth-child(1) > .form-group > .control-label').should('contain',"Status")
+        cy.get('#form_estudo > .box > .box-body > .panel > .panel-body > :nth-child(3) > :nth-child(2) > .form-group > .control-label').should('contain',"Data de Elaboração")
+
+        cy.get('#tabela-estudo-aba > thead > tr > .sorting_asc').should('contain',"Referência")
+        cy.get('[aria-label="Natureza: Ordenar colunas de forma ascendente"]').should('contain',"Natureza")
+        cy.get('[aria-label="Objeto: Ordenar colunas de forma ascendente"]').should('contain',"Objeto")
+        cy.get('[aria-label="Descrição Objeto: Ordenar colunas de forma ascendente"]').should('contain',"Descrição Objeto")
+        cy.get('[aria-label="Status: Ordenar colunas de forma ascendente"]').should('contain',"Status")
+        //cy.get('[aria-label="Valor Estimado: Ordenar colunas de forma ascendente"]').should('contain',"Valor estimado")
+        //cy.get('[aria-label="Contrato | OS: Ordenar colunas de forma ascendente"]').should('contain',"Contrato|OS")
+        //cy.get('#tabela-estudo-aba > thead > tr > [aria-label="Ação: Ordenar colunas de forma ascendente"]').should('contain',"Ação")
+
+        //NOVO CADASTRO
+        cy.get('.panel > .panel-footer > .btn-toolbar > .btn-success').click()
+        cy.go('back')
+     })
+ })
