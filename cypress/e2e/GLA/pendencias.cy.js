@@ -77,10 +77,11 @@ describe('pendência', () => {
         cy.wait(2000)
         cy.get('#cke_1_contents iframe').its('0.contentDocument.body').should('not.be.empty').then(cy.wrap).find('p').click().type('teste');
         cy.get('#modal-alteracao-resumo > .modal-dialog > .modal-content > .modal-footer > #botao-editar').click()
-
+       
         cy.get(':nth-child(2) > :nth-child(3) > a > .fa').click()
+        cy.wait(2000)
         cy.get('#select2-cd_demanda-container').click()
-        
+        cy.wait(2000)
         cy.get(':nth-child(3) > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered').click()
         cy.get('.select2-results').find('li').contains('Informativo').click({force: true})
 
@@ -104,9 +105,9 @@ describe('pendência', () => {
         cy.get('#nr_processo_sei').type('11111111')
         cy.wait(1000)
         cy.get('#aa_processo_sei').type('1111')
-        cy.wait(1000)
+        cy.wait(2000)
         cy.get('#modal-alteracao-sei > .modal-dialog > .modal-content > .modal-footer > #botao-editar').click()
-    
+        cy.wait(1000)
         cy.get(':nth-child(5) > :nth-child(6) > select').select('2911')
 
         cy.get(':nth-child(6) > :nth-child(7) > div > a > .fa').click()
@@ -149,6 +150,9 @@ describe('pendência', () => {
         cy.get('.sidebar-toggle').click()
         cy.get(':nth-child(1) > :nth-child(20) > .btn > .fas').click()
         cy.contains('button', 'Confirmar').click();
+        cy.get('button.bootbox-accept').should('be.visible').and('contain.text', 'OK').click();
+        cy.get('#gerarRelatorioPDF').click({force: true})
+      
 
 
 
