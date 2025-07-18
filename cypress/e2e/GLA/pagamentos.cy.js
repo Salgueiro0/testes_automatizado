@@ -5,16 +5,15 @@ describe('pagamento', () => {
     beforeEach(() => {
         cy.visit('http://gla-homol.terracapnet.local')
         cy.viewport(1980, 1200)
-    })
-    it('teste tela de pagamentos', () => {
-
         cy.get(':nth-child(2) > .form-control').type('C9020840')
         cy.get(':nth-child(3) > .form-control').type('welcome_1')
         cy.get('.btn').click()
-
         cy.get('h1').should('have.text', "Pendência")
-
         cy.get('.sidebar-menu > :nth-child(8) > a > span').click()
+        cy.get('h1').should('have.text', "Pagamento")
+    })
+    it('teste tela de pagamentos', () => {
+
 
         cy.get('h1').should('have.text', "Pagamento")
         cy.get(':nth-child(1) > .box-header > .box-title').should('have.text', "Pesquisar")
@@ -103,26 +102,45 @@ describe('pagamento', () => {
         cy.get('.form-group > .row > :nth-child(2) > label').click()
         cy.get('.panel-body > :nth-child(1) > :nth-child(3) > label').click()
         cy.get('.form-group > .row > :nth-child(3) > label').click()
+
+        //botão limpar
+        cy.get('[onclick="resetFieldsPagamento()"]').click()
     })
 
 
-    it.only('teste pesquisar tela de pagamentos', () => {
+    //Botão pesquisar
+    it('teste pesquisar tela de pagamentos', () => {
 
-        cy.get(':nth-child(2) > .form-control').type('C9020840')
-        cy.get(':nth-child(3) > .form-control').type('welcome_1')
-        cy.get('.btn').click()
 
-        cy.get('h1').should('have.text', "Pendência")
-
-        cy.get('.sidebar-menu > :nth-child(8) > a > span').click()
-
-        //Gerar pdf e excel
-        cy.get('h1').should('have.text', "Pagamento")
         cy.get('#pesquisarPagamento').click({force: true})
         cy.get('#pesquisarPagamento').click({force: true})
         Cypress.on('uncaught:exception', (err, runnable) => {
             return false;
         })
+
+
+        cy.get('#pesquisarPagamento').click({force: true})
+        cy.wait(2000)
+        cy.intercept('GET', '/components/pt_br/dataTables.json').as('loadTable');
+        cy.get('#pesquisarPagamento').click({ force: true });
+
+
+        cy.get('tbody > tr').first()
+            .find('td').eq(2)
+            .invoke('text')
+            .then(texto => {
+                const filtro = texto.trim();
+
+                cy.get('#table-pagamento_filter .form-control')
+                    .clear()
+                    .type(filtro)
+
+                cy.get('tbody > tr').should('contain.text', filtro);
+            });
+
+
+        //Gerar pdf e excel
+        cy.get('#pesquisarPagamento').click({force: true})
         cy.get('#gerarRelatorioEXCEL').click()
         cy.get('#gerarRelatorioPDF').click()
 
@@ -130,6 +148,13 @@ describe('pagamento', () => {
         cy.get('#pesquisarPagamento').click({force: true})
         cy.get('#pesquisarPagamento').click({force: true})
         cy.get('a[title="Visualizar"]').first().click();
+    })
+
+    //Validação do botão editar dentro dos resultados do botão pesquisar
+    it('editar pagamento', () => {
+
+        cy.get('#pesquisarPagamento').click()
+        //   cy.get(':nth-child(1) > .text-center > .btn-edit-pagamento > .fa').click()
     })
 })
 
