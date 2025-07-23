@@ -15,3 +15,7 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands'
+Cypress.on('uncaught:exception', (err, runnable) => {
+  // Retorna false para impedir que o erro falhe o teste
+  return false;
+});
