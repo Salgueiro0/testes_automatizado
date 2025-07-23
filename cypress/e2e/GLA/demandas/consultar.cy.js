@@ -26,20 +26,17 @@ describe('pendência', () => {
         cy.get('#form_geral > :nth-child(2) > :nth-child(2) > .form-group > .control-label').should('have.text', "Número")
         cy.get('#form_geral > :nth-child(2) > :nth-child(3) > .form-group > .control-label').should('have.text', "Ano")
         cy.get(':nth-child(2) > :nth-child(4) > .form-group > label').should('have.text', "Possui Requerimento em Análise? ")
-        cy.get(':nth-child(3) > .col-md-8 > .form-group > .control-label').should('have.text', "Órgão Demanda")
-        cy.get(':nth-child(3) > .col-md-4 > .form-group > div > .control-label').should('have.text', " SEI Processo Demanda")
+        cy.get(':nth-child(3) > .col-md-12 > .form-group > .control-label').should('have.text', "Órgão Demanda")
         cy.get(':nth-child(4) > .col-md-8 > .form-group > .control-label').should('have.text', "Descrição")
         cy.get(':nth-child(5) > :nth-child(1) > :nth-child(1) > :nth-child(1) > .control-label').should('have.text', "Período de Data de Publicação ")
         cy.get(':nth-child(5) > :nth-child(2) > :nth-child(1) > .control-label').should('have.text', "Período de Vigência (em dias)")
         cy.get(':nth-child(5) > :nth-child(3) > .form-group > .control-label').should('have.text', "Status")
         cy.get('#form_geral > :nth-child(6) > :nth-child(1) > .form-group > .control-label').should('have.text', "Alerta")
-        cy.get(':nth-child(6) > :nth-child(2) > .form-group > .control-label').should('have.text', "Estudos/Serviços")
-        cy.get(':nth-child(6) > :nth-child(3) > .form-group > .control-label').should('have.text', "Período Data de Vencimento")
-        cy.get(':nth-child(6) > :nth-child(4) > :nth-child(1) > .control-label').should('have.text', "Período de Dias Restantes para vencimento")
+        cy.get(':nth-child(6) > :nth-child(3) > .form-group > .control-label').should('have.text', "Período de Dias Restantes para vencimento")
         cy.get(':nth-child(7) > :nth-child(1) > .form-group > label').should('have.text', "Titular ")
         cy.get(':nth-child(7) > :nth-child(2) > .form-group > label').should('have.text', "Suplente ")
         cy.get(':nth-child(7) > :nth-child(3) > .form-group > label').should('have.text', "Empreendedor Responsável ")
-        cy.get(':nth-child(7) > :nth-child(4) > label').should('have.text', "Período Dias Restantes ")
+        cy.get(':nth-child(6) > :nth-child(4) > label').should('have.text', "Período Dias Restantes ")
         
         cy.get(':nth-child(4) > .box-header > .box-tools > .btn > .fa').click()
         cy.get(':nth-child(3) > .box-header > .box-tools > .btn > .fa').click()
@@ -74,7 +71,7 @@ describe('pendência', () => {
         cy.get('#form_auto_infracao > :nth-child(1) > :nth-child(2) > .form-group > .control-label').should('have.text', "Tipo de Sanção")
         cy.get('#form_auto_infracao > :nth-child(1) > :nth-child(3) > :nth-child(1) > label').should('have.text', "Valor da Multa (R$)")
         cy.get(':nth-child(1) > :nth-child(4) > .form-group > .control-label').should('have.text', "Tipo de Atividade")
-        cy.get('.col-md-12 > .form-group > .control-label').should('have.text', "Descrição do AI (motivo)")
+        cy.get('.col-md-12 > .form-group > .control-label').should('have.text', "Órgão DemandaDescrição do AI (motivo)")
         cy.get('#form_auto_infracao > :nth-child(3) > :nth-child(1) > .form-group > .control-label').should('have.text', "Status do AI")
         cy.get(':nth-child(3) > :nth-child(2) > .form-group > .control-label').should('have.text', "Instância Recursal")
         cy.get('.col-md-6 > .form-group > .control-label').should('have.text', "Descrição do Status do AI")
@@ -165,6 +162,7 @@ describe('pendência', () => {
         cy.get('.select2-results').find('li').contains('RA-I - BRASILIA ').click({force: true})
 
        cy.get('#select2-cd_empreendimento-container').click()
+       cy.wait(2000)
        cy.get('.select2-results').find('li').contains('103 - Estagio de produção ').click({force: true})
        cy.get('#add_empreendimento').click()
 
@@ -177,7 +175,91 @@ describe('pendência', () => {
 
        cy.get(':nth-child(3) > :nth-child(1) > .form-group > .select2-container > .selection > .select2-selection').click()
        cy.get('.select2-results').find('li').contains('ABDI - AGENCIA BRASILEIRA DE DESENVOLVIMENTO INDUSTRIAL ').click({force: true})
+       cy.get('div[style="display: block;"] > :nth-child(4) > :nth-child(1) > .form-group > .control-label').type('2025-07-10')
+       cy.get(':nth-child(4) > :nth-child(2) > .form-group > .control-label').type('6')
+       cy.get(':nth-child(5) > .col-md-12 > .form-group > .control-label').type('teste123')
+       cy.get('#cd_orgao_processo_sei').type('111111')
+       cy.get('#nr_processo_sei').type('11111111')
+       cy.get('#aa_processo_sei').type('2025')
+       
+       cy.get('#submit').click()
+       cy.get('.modal-footer > .btn-primary').click()
+       cy.get('.modal-footer > .btn-danger').click()
 
+       //validação dos campos na tela de visualizar
+       cy.get('h1').should('have.text', "Demanda")
+       cy.get(':nth-child(1) > .col-md-12 > .accordion > b').should('have.text', "Informações dos Empreendimentos")
+       cy.get(':nth-child(1) > :nth-child(1) > :nth-child(2) > .col-md-12 > .accordion > b').should('have.text', "Dados Gerais")
+       cy.get(':nth-child(1) > :nth-child(1) > :nth-child(3) > .col-md-12 > .accordion > b').should('have.text', "Informações do Documento")
+       cy.get('.panel-body > :nth-child(2) > .col-md-12 > .accordion > b').should('have.text', "Dados Específicos da Compensação Ambiental")
+       cy.get('.panel-body > :nth-child(3) > .col-md-12 > .accordion > b').should('have.text', "Dados Específicos da Compensação Florestal")
+       cy.get(':nth-child(4) > .col-md-12 > .accordion > b').should('have.text', "Dados Específicos do Auto de Infração")
+
+       cy.get('#ep_plus').click()
+       cy.get('#id_plus').click()
+       cy.get('#ca_plus').click()
+       cy.get('#cf_plus').click()
+       cy.get('#ai_plus').click()
+
+       cy.get(':nth-child(1) > [whidth="350px"] > b').should('have.text', "Tipo")
+       cy.get(':nth-child(2) > [whidth="350px"] > b').should('have.text', "Número")
+       cy.get(':nth-child(3) > [whidth="350px"] > b').should('have.text', "Ano")
+       cy.get(':nth-child(4) > [whidth="350px"] > b').should('have.text', "Órgão")
+       cy.get(':nth-child(5) > [whidth="350px"] > b').should('have.text', "Nº SEI Doc Demanda")
+       cy.get(':nth-child(6) > [whidth="350px"] > b').should('have.text', "Processo")
+       cy.get(':nth-child(7) > [whidth="350px"] > b').should('have.text', "Data Publicação")
+       cy.get(':nth-child(8) > [whidth="350px"] > b').should('have.text', "Vigência em Dias")
+       cy.get(':nth-child(9) > [whidth="350px"] > b').should('have.text', "Dias Restantes")
+       cy.get(':nth-child(10) > [whidth="350px"] > b').should('have.text', "Status")
+       cy.get(':nth-child(11) > [whidth="350px"] > b').should('have.text', "Alerta de Prazo")
+       cy.get(':nth-child(12) > [whidth="350px"] > b').should('have.text', "Titular")
+       cy.get(':nth-child(13) > [whidth="350px"] > b').should('have.text', "Suplente")
+       cy.get(':nth-child(14) > [whidth="350px"] > b').should('have.text', "Arquivada/Suspensa/Cancelada")
+       cy.get(':nth-child(15) > [whidth="350px"] > b').should('have.text', "Data de Vencimento")
+       cy.get(':nth-child(16) > [whidth="350px"] > b').should('have.text', "Estudo/Serviços Relacionados")
+       cy.get(':nth-child(17) > [whidth="350px"] > b').should('have.text', "Observação (Processos)")
+       cy.get(':nth-child(18) > [whidth="350px"] > b').should('have.text', "Descrição")
+       cy.get('.panel-border > .table > tbody > :nth-child(1) > :nth-child(1) > b').should('have.text', "RA")
+       cy.get('.panel-border > .table > tbody > :nth-child(2) > :nth-child(1) > b').should('have.text', "Empreendimento")
+
+       //testes de outras abas dentro de visualizar demanda
+
+       cy.get('.documentos-aba').click
+       cy.wait(3000)
+
+       cy.get('.exigencias-aba').click()
+       cy.wait(3000)
+
+       cy.get('.requerimentos-aba').click()
+       cy.wait(3000)
+
+       cy.get('.novo-estudo-aba').click()
+       cy.wait(3000)
+
+       cy.get('.demanda-aba').click()
+
+       //teste na tela de edição
+       cy.get('.col-md-12 > :nth-child(1) > a.btn').click()
+       cy.get('#dt_publicacao').clear().type('2025-01-01')
+       cy.get('#qt_dias_vigencia').clear().type('9')
+       cy.get('#ds_demanda').clear().type('teste2.0') 
+       cy.get('#submit').click()
+       cy.get('.modal-footer > .btn-primary').click() 
+       cy.get('.modal-footer > .btn').should('be.visible').and('contain.text', 'OK').click(); 
+
+       //validação da pesquisa
+       cy.get(':nth-child(3) > [href="#"]').click()
+       cy.get('.menu-open > .treeview-menu > :nth-child(1) > a > span').click()
+       cy.get('#dt_publicacao_inicio').type('2025-01-01')
+       cy.get('#pesquisar').click()
+       cy.get('a[title="Visualizar"]').first().click()
+
+
+       //validação do botão excluir
+       cy.wait(4000)
+       cy.get('#btn-delete-demanda').click()
+       cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary').click()
+        
     })
     
 
