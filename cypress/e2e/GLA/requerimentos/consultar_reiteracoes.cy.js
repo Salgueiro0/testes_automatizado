@@ -41,7 +41,7 @@ describe('consultar_requerimentos', () => {
         cy.get('#aa_processo_sei').type('1111')
         cy.get('#select2-tp_empreendimento-container').click()
         cy.get('.select2-results').find('li').contains('Parcelamento de Solo Urbano - Novo').click({force: true})
-        cy.get('#ds_empreendimento').type('Ambiental11')
+        cy.get('#ds_empreendimento').type('Ambiental41')
         cy.get('#select2-tp_prioridade-container').click()
         cy.get('.select2-results').find('li').contains('Planejamento Estratégico ').click({force: true})
         cy.get('#select2-cd_pessoa_titular-container').click()
@@ -60,14 +60,14 @@ describe('consultar_requerimentos', () => {
         cy.get('.sidebar-menu > :nth-child(2) > a > span').click()
 
         cy.get('.col-md-6 > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field').click()
-        cy.get('.select2-results').find('li').contains('Ambiental11').click({ force: true })
+        cy.get('.select2-results').find('li').contains('Ambiental41').click({ force: true })
         cy.get('#pesquisar').click()
         cy.get('a[title="Visualizar"]').first().click();
 
 
         //CRIAR PRIMEIRO REQUERIMENTO PARA TESTE
         cy.wait(2000)
-        cy.get('.requerimentos-aba').should('be.visible').and('contain.text', 'Requerimento').click()
+        cy.get('.requerimentos-aba').should('contain.text', 'Requerimento').click()
 
         //Cadastro
         cy.get('#requerimento > .box > .box-body > .panel > .panel-body > .panel-footer > .btn-toolbar > .btn-success').click()
@@ -105,11 +105,11 @@ describe('consultar_requerimentos', () => {
         cy.wait(1000)
         cy.get('#nr_doc_sei_despacho').type('1111')
 
-        cy.get('#submit').should('be.visible').and('contain.text', 'Salvar').click()
+        cy.get('#submit').should('contain.text', 'Salvar').click()
         cy.wait(1000)
-        cy.get('.modal-footer > .btn-primary').should('be.visible').and('contain.text', 'Continuar').click()
+        cy.get('.modal-footer > .btn-primary').should('contain.text', 'Continuar').click()
         cy.wait(1000)
-        cy.get('.modal-footer > .btn').should('be.visible').and('contain.text', 'OK').click()
+        cy.get('.modal-footer > .btn').should('contain.text', 'OK').click()
         cy.wait(1000)
 
         //CRIAR SEGUNDO REQUERIMENTO PARA TESTE
@@ -119,7 +119,7 @@ describe('consultar_requerimentos', () => {
         cy.get('.sidebar-menu > :nth-child(2) > a > span').click()
 
         cy.get('.col-md-6 > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field').click()
-        cy.get('.select2-results').find('li').contains('Ambiental11').click({ force: true })
+        cy.get('.select2-results').find('li').contains('Ambiental41').click({ force: true })
         cy.get('#pesquisar').click()
         cy.wait(2000)
         cy.get('a[title="Visualizar"]').first().click();
@@ -163,11 +163,11 @@ describe('consultar_requerimentos', () => {
         cy.get('#nr_doc_sei_despacho').type('2222')
 
         cy.get('#submit').click()
-        cy.wait(2000)
-        cy.get('.modal-footer > .btn-primary').should('be.visible').and('contain.text', 'Continuar').click()
-        cy.wait(2000)
-        cy.get('.modal-footer > .btn').should('be.visible').and('contain.text', 'OK').click()
-        cy.wait(2000)
+        cy.wait(3000)
+        cy.get('.modal-footer > .btn-primary').should('contain.text', 'Continuar').click()
+        cy.wait(3000)
+        cy.get('.modal-footer > .btn').should('contain.text', 'OK').click()
+        cy.wait(3000)
 
         cy.reload()
 
@@ -179,13 +179,13 @@ describe('consultar_requerimentos', () => {
 
         cy.get('.btn-success').click()
 
-        // //Validar campos de texto
-        //
-        // cy.get(':nth-child(1) > .form-group > .control-label').should('contain',"R.A")
-        // cy.get(':nth-child(2) > .form-group > .control-label').should('contain',"Empreendimento")
-        // cy.get(':nth-child(3) > .form-group > .control-label').should('contain',"Tipo Requerimento")
-        // cy.get('.col-md-12 > :nth-child(1) > .control-label').should('contain',"Requerimentos")
-        // cy.get('tr > :nth-child(1)').should('contain',"Requerimentos Reiterados")
+        //Validar campos de texto
+
+        cy.get(':nth-child(1) > .form-group > .control-label').should('contain',"R.A")
+        cy.get(':nth-child(2) > .form-group > .control-label').should('contain',"Empreendimento")
+        cy.get(':nth-child(3) > .form-group > .control-label').should('contain',"Tipo Requerimento")
+        cy.get('.col-md-12 > :nth-child(1) > .control-label').should('contain',"Requerimentos")
+        cy.get('tr > :nth-child(1)').should('contain',"Requerimentos Reiterados")
 
        //Adicionar primeiro requerimento
 
@@ -194,7 +194,8 @@ describe('consultar_requerimentos', () => {
         cy.wait(2000)
 
         cy.get('#select2-combo_empreendimento-container').click()
-        cy.get('.select2-results').find('li').contains('Ambiental11').click({ force: true })
+        cy.wait(2000)
+        cy.get('.select2-results').find('li').contains('Ambiental41').click({ force: true })
 
         cy.wait(2000)
 
@@ -215,7 +216,7 @@ describe('consultar_requerimentos', () => {
         cy.wait(2000)
 
         cy.get('#select2-combo_empreendimento-container').click()
-        cy.get('.select2-results').find('li').contains('Ambiental11').click({ force: true })
+        cy.get('.select2-results').find('li').contains('Ambiental41').click({ force: true })
         cy.wait(2000)
         cy.get('#select2-combo_tipo_requerimento-container').click()
         cy.wait(2000)
@@ -227,24 +228,24 @@ describe('consultar_requerimentos', () => {
         cy.wait(2000)
         cy.get('#btn_adicionar').click()
         cy.wait(2000)
-        cy.get('#submit').should('be.visible').and('contain.text', 'Salvar').click()
+        cy.get('#submit').should('contain.text', 'Salvar').click()
         cy.wait(2000)
-        cy.get('.modal-footer > .btn-primary').should('be.visible').and('contain.text', 'Salvar').click()
+        cy.get('.modal-footer > .btn-primary').should('contain.text', 'Salvar').click()
         cy.wait(2000)
-        cy.get('.modal-footer > .btn').should('be.visible').and('contain.text', 'OK').click()
+        cy.get('.modal-footer > .btn').should('contain.text', 'OK').click()
         cy.wait(2000)
 
         //PESQUISAR REITERAÇÃO DE REQUERIMENTO
 
-        // //Validar Campos de texto
-        // cy.get(':nth-child(1) > .form-group > .control-label').should('contain',"R.A")
-        // cy.get(':nth-child(2) > .form-group > .control-label').should('contain',"Empreendimento")
-        // cy.get(':nth-child(2) > .form-group > .control-label').should('contain',"Tipo Requerimento")
-        // cy.get('[aria-label="Código  Reiteração: Ordenar colunas de forma ascendente"]').should('contain',"Código Reiteração")
-        // cy.get('[aria-label="Empreendimento: Ordenar colunas de forma ascendente"]').should('contain',"Empreendimento")
-        // cy.get('[aria-label="Tipo Requerimento: Ordenar colunas de forma ascendente"]').should('contain',"Tipo Requerimento")
-        // cy.get('[aria-label="Data Publicação/Requerimento: Ordenar colunas de forma ascendente"]').should('contain',"Data Publicação/Requerimento")
-        // cy.get('thead > tr > .text-center').should('contain',"Ação")
+        //Validar Campos de texto
+        cy.get(':nth-child(1) > .form-group > .control-label').should('contain',"R.A")
+        cy.get(':nth-child(2) > .form-group > .control-label').should('contain',"Empreendimento")
+        cy.get(':nth-child(3) > .form-group > .control-label').should('contain',"Tipo Requerimento")
+        cy.get('.sorting_asc').should('contain',"Código  Reiteração")
+        cy.get('[aria-label="Empreendimento: Ordenar colunas de forma ascendente"]').should('contain',"Empreendimento")
+        cy.get('[aria-label="Tipo Requerimento: Ordenar colunas de forma ascendente"]').should('contain',"Tipo Requerimento")
+        cy.get('[aria-label="Data Publicação/Requerimento: Ordenar colunas de forma ascendente"]').should('contain',"Data Publicação/Requerimento")
+        cy.get('[aria-label="Ação: Ordenar colunas de forma ascendente"]').should('contain',"Ação")
 
         cy.get('#select2-cd_regiao_admin-container').click()
         cy.get('.select2-results').find('li').contains('RA-I - BRASILIA ').click({ force: true })
@@ -254,27 +255,53 @@ describe('consultar_requerimentos', () => {
 
         cy.get('#pesquisar').click()
 
-        cy.get('#table-reiteracao_filter > label > .form-control').type('EcoConsultoria')
+        cy.get('#table-reiteracao_filter > label > .form-control').type('Ambiental41')
 
         cy.get('a[title="Visualizar"]').first().click()
 
-        //Visualizar Reiteração
+        //VISUALIZAR REITERAÇÃO:
 
         cy.get('[width="50%"]').should('contain',"Requerimentos Reiterados")
 
         cy.get('[width="20%"]').should('contain',"Data de Publicação")
 
         cy.get('[width="30%"]').should('contain',"Ação Requerimento")
-
-        cy.get('.form-group > :nth-child(1) > a').click()
-        cy.wait(2000)
-        cy.get('[onclick="window.history.back()"]').should('be.visible').and('contain.text', 'Voltar').click()
-        cy.wait(2000)
+        
+        
+        //Adicionar Pagamento
         cy.get(':nth-child(1) > :nth-child(3) > a > .fa').click()
+        cy.get('.col-md-12 > .btn').click()
+        cy.wait(1000)
+        cy.get('#ds_sei_num_doc_pagamento').type('teste')
+        cy.get('#dt_pagamento').type('2025-01-01')
+        cy.get('#vl_pagamento').type('121')
+        cy.get('#botao-salvar').click()
+        cy.wait(1000)
+        cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn').should('contain',"OK").click()
+        cy.wait(1000)
+        
+        //Pesquisar Pagamento
+        cy.get('#table-pagamento_filter > label > .form-control').type('teste')
+        
+        //Editar Pagamento
+        cy.get('.btn-edit-pagamento').click()
+        cy.wait(3000)
+        cy.get('#ds_pagamento').type('editando')
+        cy.get('#botao-editar').click()
+        cy.wait(1000)
+        cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn').should('contain',"OK").click()
         cy.wait(2000)
-        cy.get('[onclick="window.history.back()"]').should('be.visible').and('contain.text', 'Voltar').click()
+        //Excluir Pagamento
+        cy.get('#table-pagamento_filter > label > .form-control').type('teste')
+        cy.get('.btn-delete-pagamento > .fas').click()
+        cy.contains('button', 'Confirmar').click();
+        cy.contains('button', 'OK').click();
+        //cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn').should('contain',"OK").click()
+        
         cy.wait(2000)
-        cy.get('[onclick="window.history.back()"]').should('be.visible').and('contain.text', 'Voltar').click()
+        cy.get('[onclick="window.history.back()"]').should('contain.text', 'Voltar').click()
+        cy.wait(2000)
+        cy.get('[onclick="window.history.back()"]').should('contain.text', 'Voltar').click()
 
         //CRIAR TERCEIRO REQUERIMENTO PARA EDITAR REITERAÇÃO
 
@@ -284,7 +311,7 @@ describe('consultar_requerimentos', () => {
         cy.get('.sidebar-menu > :nth-child(2) > a > span').click()
 
         cy.get('.col-md-6 > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field').click()
-        cy.get('.select2-results').find('li').contains('Ambiental11').click({ force: true })
+        cy.get('.select2-results').find('li').contains('Ambiental41').click({ force: true })
         cy.get('#pesquisar').click()
         cy.wait(2000)
         cy.get('a[title="Visualizar"]').first().click();
@@ -330,9 +357,9 @@ describe('consultar_requerimentos', () => {
 
         cy.get('#submit').click()
         cy.wait(2000)
-        cy.get('.modal-footer > .btn-primary').should('be.visible').and('contain.text', 'Continuar').click()
+        cy.get('.modal-footer > .btn-primary').should('contain.text', 'Continuar').click()
         cy.wait(2000)
-        cy.get('.modal-footer > .btn').should('be.visible').and('contain.text', 'OK').click()
+        cy.get('.modal-footer > .btn').should('contain.text', 'OK').click()
         cy.wait(2000)
 
         //Editar Reiteração
@@ -352,12 +379,12 @@ describe('consultar_requerimentos', () => {
         cy.get('a[title="Editar"]').first().click()
 
 
-        // //validando campos de texto
-        // cy.get('.col-md-4 > .form-group > .control-label').should('contain',"R.A")
-        // cy.get('.col-md-5 > .form-group > .control-label').should('contain',"Empreendimento")
-        // cy.get('.col-md-3 > .form-group > .control-label').should('contain',"Tipo Requerimento")
-        // cy.get('.col-md-12 > :nth-child(1) > .control-label').should('contain',"Requerimentos")
-        // cy.get('thead > tr > :nth-child(1)').should('contain',"Requerimentos Reiterados")
+        //validando campos de texto
+        cy.get('.col-md-4 > .form-group > .control-label').should('contain',"R.A")
+        cy.get('.col-md-5 > .form-group > .control-label').should('contain',"Empreendimento")
+        cy.get('.col-md-3 > .form-group > .control-label').should('contain',"Tipo Requerimento")
+        cy.get('.col-md-12 > :nth-child(1) > .control-label').should('contain',"Requerimentos")
+        cy.get('thead > tr > :nth-child(1)').should('contain',"Requerimentos Reiterados")
 
         cy.get('#select2-combo_requerimento-container').click()
         cy.get('.select2-results').first().click()
@@ -365,28 +392,41 @@ describe('consultar_requerimentos', () => {
         //testando editar
         cy.get('#select2-combo_requerimento-container').click()
         cy.wait(1000)
-        cy.get('.select2-results').first().click()
-        cy.scrollTo('bottom')
-        cy.get('body').click(50, 50, { force: true })
+        cy.get('.select2-results').click({ force: true });
+
+        cy.get('.sidebar-toggle').click()
 
 
         cy.get('#btn_adicionar').click()
         cy.wait(2000)
         cy.get('#submit').click()
         cy.wait(2000)
-        cy.get('.modal-footer > .btn-primary').should('be.visible').and('contain.text', 'Continuar').click()
+        cy.get('.modal-footer > .btn-primary').should('contain.text', 'Salvar').click()
         cy.wait(2000)
-        cy.get('.modal-footer > .btn').should('be.visible').and('contain.text', 'OK').click()
+        cy.get('.modal-footer > .btn').should('contain.text', 'OK').click()
         cy.wait(2000)
         //Excluir reiteração
-        cy.get('a[title="Excluir"]').first().click()
-        cy.wait(2000)
-        cy.get('.modal-footer > .btn-primary').should('be.visible').and('contain.text', 'Confirmar').click()
-        cy.wait(2000)
-        cy.get('[onclick="window.history.back()"]').should('be.visible').and('contain.text', 'Voltar').click()
+
+        cy.get('#select2-cd_regiao_admin-container').click()
+        cy.get('.select2-results').find('li').contains('RA-I - BRASILIA ').click({ force: true })
+
+        cy.get('#select2-tp_requerimento-container').click()
+        cy.get('.select2-results').find('li').contains('Nova Permissão').click({ force: true })
+
+        cy.get('#pesquisar').click()
+        cy.wait(1000)
+        cy.get('a[title="Editar"]').first().click()
         cy.wait(2000)
 
+        cy.get('a[title="Excluir"]').first().click()
+        cy.wait(2000)
+        cy.get('.modal-footer > .btn-primary').should('contain.text', 'Confirmar').click()
+
+        cy.contains('button', 'Limpar').click();
+
+        cy.get('[onclick="window.history.back()"]').click()
         //Excluir
+
 
         cy.get('#select2-cd_regiao_admin-container').click()
         cy.get('.select2-results').find('li').contains('RA-I - BRASILIA ').click({ force: true })
@@ -397,9 +437,7 @@ describe('consultar_requerimentos', () => {
         cy.get('#pesquisar').click()
 
         cy.get('a[title="Excluir"]').first().click()
-
-
-
-
+        
+        cy.get('.modal-footer > .btn-primary').should('contain.text', 'Confirmar').click()
     })
 })
