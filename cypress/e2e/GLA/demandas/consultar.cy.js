@@ -239,7 +239,9 @@ describe('pendência', () => {
        cy.get('.demanda-aba').click()
 
        //teste na tela de edição
+
        cy.get('.col-md-12 > :nth-child(1) > a.btn').click()
+       cy.wait(4000)
        cy.get('#dt_publicacao').clear().type('2025-01-01')
        cy.get('#qt_dias_vigencia').clear().type('9')
        cy.get('#ds_demanda').clear().type('teste2.0') 
@@ -254,9 +256,17 @@ describe('pendência', () => {
        cy.get('#pesquisar').click()
        cy.get('a[title="Visualizar"]').first().click()
 
+       cy.get('[onclick="window.history.back()"]').click()
+       cy.get(':nth-child(3) > [href="#"]').click()
+       cy.get('.menu-open > .treeview-menu > :nth-child(1) > a > span').click()
+       cy.get('#dt_publicacao_inicio').type('2025-01-01')
+       cy.get('#pesquisar').click()
+       cy.get('#gerarRelatorioDemandaPDF').click()
+       
 
        //validação do botão excluir
-       cy.wait(4000)
+       cy.get('a[title="Visualizar"]').first().click()
+       cy.wait(10000)
        cy.get('#btn-delete-demanda').click()
        cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary').click()
         
