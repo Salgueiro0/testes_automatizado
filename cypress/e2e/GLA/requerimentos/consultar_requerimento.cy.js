@@ -135,14 +135,7 @@ describe('consultar_requerimentos', () => {
 
         //Testando preencher e Limpar todos os campos
 
-        cy.get(':nth-child(8) > :nth-child(3) > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field').click()
-        cy.get('.select2-results').find('li').first().click({force:true})
-
-        cy.get('#select2-tp_prazo_maximo-container').click()
-        cy.get('.select2-results').find('li').first().click({force:true})
-
-        cy.get(':nth-child(4) > .form-group > .select2-container > .selection > .select2-selection > #select2--container > .select2-selection__placeholder').click()
-        cy.get('.select2-results').find('li').first().click({force:true})
+        cy.get('#ds_requerimento').type('teste')
 
         cy.get('[onclick="resetFieldsRequerimento()"]').click()//limpar
 
@@ -166,14 +159,11 @@ describe('consultar_requerimentos', () => {
                 const clean = text.replace(/\s+/g, ' ').trim();
                 expect(clean).to.include('Status Requerimento');
             })
-        cy.get(':nth-child(7) > :nth-child(2) > :nth-child(1) > .form-group > label').should('contain',"SEI Processo Requerimento")
+        cy.get(':nth-child(7) > :nth-child(2) > .form-group > label').should('contain',"Empreendedor Responsável")
+        cy.get(':nth-child(7) > :nth-child(3) > .form-group > label').should('contain',"Possui Reiterações?")
         cy.get(':nth-child(8) > .col-md-6 > .form-group > .control-label').should('contain',"Reserva Orçamentária enviada à DIPLA")
-        cy.get(':nth-child(8) > :nth-child(2) > .form-group > .control-label').should('contain', "Nº Doc SEI Despacho")
-        cy.get(':nth-child(8) > :nth-child(3) > .form-group > label').should('contain',"Empreendedor Responsável")
-        cy.get(':nth-child(9) > :nth-child(1) > .form-group > label').should('contain',"Status do Pagamento")
-        cy.get(':nth-child(9) > :nth-child(2) > .form-group > label').should('contain',"Prazo Máximo de Análise")
-        cy.get(':nth-child(9) > :nth-child(3) > .form-group > label').should('contain',"Estudo/Serviço")
-        cy.get(':nth-child(4) > .form-group > label').should('contain',"Possui Reiterações?")
+        cy.get(':nth-child(8) > :nth-child(2) > .form-group > label').should('contain',"Status do Pagamento")
+        cy.get(':nth-child(8) > :nth-child(3) > .form-group > label').should('contain',"Prazo Máximo de Análise")
         cy.get('.sorting_asc').should('contain',"RA")
         cy.get('[aria-label="Empreendimento: Ordenar colunas de forma ascendente"]').should('contain',"Empreendimento")
         cy.get('[aria-label="Requerimento: Ordenar colunas de forma ascendente"]').should('contain',"Requerimento")
@@ -194,7 +184,6 @@ describe('consultar_requerimentos', () => {
         cy.get('#pesquisarRequerimento').should('be.visible').click();
 
         //Relatório Excel e PDF
-        cy.get('#gerarRelatorioEXCEL').should('be.visible').click();
         cy.get('#gerarRelatorioPDF').should('be.visible').click();
 
         //Filtrar por texto
