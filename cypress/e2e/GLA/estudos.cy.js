@@ -1,150 +1,205 @@
-//
-// //PÁGINA ESTUDO/SERVIÇO
-//
-// //REFERÊNCIAS
-//
-// //INCLUIR REQUERIMENTO
-// cy.get('#select2-cd_regiao_admin_req-container').click()
-// cy.get('.select2-results')
-//      .find('li')
-//      .eq(0)
-//      .click({force:true})
-// cy.wait(1000)
-// cy.get('#select2-cd_empreendimento_req-container').click()
-// cy.get('.select2-results')
-//     .find('li')
-//     .eq(0)
-//     .click({force:true})
-// cy.get('#select2-tp_requerimento-container').click()
-// cy.get('.select2-results')
-//     .find('li')
-//     .eq(0)
-//     .click({force:true})
-// cy.wait(1000)
-// cy.get('#select2-cd_requerimento-container').click()
-// cy.get('.select2-results')
-//     .find('li')
-//     .eq(0)
-//     .click({force:true})
-// cy.get('#btnAdicionar_requerimento > .fa').click()
-//
-// //INCLUIR EXIGÊNCIA
-// cy.get('#select2-cd_regiao_admin_exi-container').click()
-// cy.get('.select2-results')
-//     .find('li')
-//     .eq(0)
-//     .click({force:true})
-// cy.wait(1000)
-// cy.get('#select2-cd_empreendimento_exi-container').click()
-// cy.get('.select2-results')
-//     .find('li')
-//     .eq(0)
-//     .click({force:true})
-// cy.wait(2000)
-// cy.get('#select2-cd_demanda-container').click()
-// cy.get('.select2-results')
-//     .find('li')
-//     .eq(0)
-//     .click({force:true})
-//
-//
-// //INCLUIR PENDÊNCIA
-//
-// cy.get('#select2-cd_regiao_admin_pen-container').click()
-// cy.get('.select2-results')
-//      .find('li')
-//      .eq(0)
-//      .click({force:true})
-// cy.wait(1000)
-//
-// cy.get('#select2-cd_empreendimento_pen-container').click()
-// cy.get('.select2-results')
-//     .find('li')
-//     .eq(0)
-//     .click({force:true})
-// cy.wait(1000)
-//
-// cy.get('#select2-cd_pendencia-container').click()
-// cy.get('.select2-results')
-//     .find('li')
-//     .eq(0)
-//     .click({force:true})
-//
-// cy.get('#btnAdicionar_pendencia').click()
-//
-// //DADOS GERAIS
-//
-// cy.get('#select2-tp_estudo-container').click()
-// cy.get('.select2-results')
-//      .find('li')
-//      .eq(0)
-//      .click({force:true})
-//
-// cy.get('#select2-tp_natureza-container').click()
-// cy.get('.select2-results')
-//     .find('li')
-//     .eq(0)
-//     .click({force:true})
-//
-// cy.get('#select2-tp_objeto-container').click()
-// cy.get('.select2-results')
-//     .find('li')
-//     .eq(0)
-//     .click({force:true})
-//
-// cy.get('#ds_objeto_estudo').type('teste')
-// cy.get('#nr_area_poligonal').type('1')
-//
-// cy.get(':nth-child(6) > .form-group > .select2-container > .selection > .select2-selection > #select2-tp_status-container').click()
-// cy.get('.select2-results')
-//     .find('li')
-//     .eq(0)
-//     .click({force:true})
-//
-// cy.get('#ds_observacao_status').type('teste')
-//
-// cy.get('#select2-cd_orgao_avaliador-container').click()
-// cy.get('.select2-results')
-//     .find('li')
-//     .eq(0)
-//     .click({force:true})
-//
-// cy.get('#vl_estimado').type('1')
-//
-//
-// cy.get('#cd_org_proc_sei_contratacao').type('a')
-// cy.get('#nr_proc_sei_contratacao').type('b')
-// cy.get('#nr_proc_sei_contratacao').type('c')
-//
-// cy.get('#select2-cd_pessoa_titular-container').click()
-// cy.get('.select2-results')
-//     .find('li')
-//     .eq(0)
-//     .click({force:true})
-//
-// cy.get('#select2-cd_pessoa_suplente-container').click()
-// cy.get('.select2-results')
-//     .find('li')
-//     .eq(0)
-//     .click({force:true})
-//
-// cy.get('#ds_caminho_departamento').type('teste')
-//
-// cy.get('#dt_elaboracao').type('2020-01-01')
-//
-// cy.get('#dt_prev_conclusao_estudo').type('2020-01-01')
-//
-// //DADOS DO CONTRATO
-//
-// cy.get('#ct_plus').click()
-//
-// cy.get('#btnSalvar').click()
-// cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary').click()
-// // cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary').click()
-// // cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary').click()
-// // cy.get('[onclick="window.history.back()"]').click()
-// cy.contains('button', 'Sim')
-//     .should('be.visible')
-//     .click();
-// cy.get('[onclick="limparEstudo()"]').click()
-// cy.go('back')
+/// <reference types="cypress" />
+
+describe('pendência', () => {
+    beforeEach(() => {
+        cy.visit('http://gla-homol.terracapnet.local')
+        cy.viewport(1980, 1200)
+       
+          
+    })
+    it('teste Associação-consultar', () => {
+        //abrindo a aba de estudos
+        cy.get(':nth-child(2) > .form-control').type('C9020840')
+        cy.get(':nth-child(3) > .form-control').type('welcome_1')
+        cy.get('.btn').click()
+        cy.get('h1').should('have.text', "Pendência")
+        cy.get(':nth-child(4) > a > span').click()
+
+        //validação dos campos na tela de estudos
+        cy.get('h1').should('have.text', "Estudo / Serviço")
+        cy.get('#form_filtro_geral > :nth-child(1) > :nth-child(1) > :nth-child(1) > .form-group > .control-label').should('have.text', "R.A")
+        cy.get('#form_filtro_geral > :nth-child(1) > :nth-child(2) > .form-group > .control-label').should('have.text', "Empreendimento")
+        cy.get('#form_filtro_geral > :nth-child(1) > :nth-child(3) > .form-group > .control-label').should('have.text', "Demanda")
+        cy.get('#form_filtro_geral > :nth-child(2) > :nth-child(1) > .form-group > label').should('have.text', "Lista de Pendências")
+        cy.get('#form_filtro_geral > :nth-child(2) > :nth-child(2) > .form-group > label').should('have.text', "Tipo")
+        cy.get('#form_filtro_geral > :nth-child(2) > :nth-child(3) > .form-group > label').should('have.text', "Natureza")
+        cy.get('#form_filtro_geral > :nth-child(2) > :nth-child(4) > .form-group > label').should('have.text', "Objeto")
+        cy.get('#form_filtro_geral > :nth-child(3) > .col-md-12 > .form-group > .control-label').should('have.text', "Descrição do Objeto do Estudo/Serviço")
+        cy.get(':nth-child(4) > :nth-child(1) > .form-group > label').should('have.text', "Status")
+        cy.get(':nth-child(4) > :nth-child(2) > :nth-child(1) > label').should('have.text', "Previsão de Conclusão do Estudo")
+        cy.get(':nth-child(5) > :nth-child(1) > :nth-child(1) > label').should('have.text', "Valor Estimado - (R$)")
+        cy.get(':nth-child(5) > :nth-child(2) > :nth-child(1) > label').should('have.text', "Data Elaboração")
+        cy.get(':nth-child(6) > :nth-child(1) > .form-group > label').should('have.text', "Titular ")
+        cy.get(':nth-child(6) > :nth-child(2) > .form-group > label').should('have.text', "Suplente ")
+        cy.get(':nth-child(2) > .box-header > .box-title').should('have.text', "Dados do Contrato")
+        cy.get('#form_filtro_contrato > :nth-child(1) > :nth-child(1) > .form-group > .control-label').should('have.text', "Número do Contrato")
+        cy.get('#form_filtro_contrato > :nth-child(1) > :nth-child(2) > .form-group > .control-label').should('have.text', "Ano do Contrato")
+        cy.get('#form_filtro_contrato > :nth-child(1) > :nth-child(3) > .form-group > .control-label').should('have.text', "Contratada")
+        cy.get('#form_filtro_contrato > :nth-child(2) > :nth-child(1) > :nth-child(1) > label').should('have.text', "Valor do Contrato (inicial) - (R$)")
+        cy.get('#form_filtro_contrato > :nth-child(2) > :nth-child(2) > :nth-child(1) > label').should('have.text', "Valor do Contrato (final) - (R$)")
+        cy.get('#form_filtro_contrato > :nth-child(2) > :nth-child(3) > :nth-child(1) > label').should('have.text', "Início da Vigência do Contrato")
+        cy.get('#form_filtro_contrato > :nth-child(2) > :nth-child(4) > :nth-child(1) > label').should('have.text', "Fim da Vigência do Contrato")
+        cy.get('#form_filtro_contrato > :nth-child(3) > .col-md-12 > .form-group > .control-label').should('have.text', "Descrição do Objeto do Contrato")
+        cy.get(':nth-child(3) > .box-header > .box-title').should('have.text', "Dados da Ordem de Serviço da Empresa")
+        cy.get(':nth-child(3) > .box-body > .panel > #panel-body > #form_filtro_ordem_servico > .row > :nth-child(1) > .form-group > .control-label').should('have.text', "Número da OS")
+        cy.get(':nth-child(3) > .box-body > .panel > #panel-body > #form_filtro_ordem_servico > .row > :nth-child(2) > .form-group > .control-label').should('have.text', "Ano da OS")
+        cy.get(':nth-child(3) > .box-body > .panel > #panel-body > #form_filtro_ordem_servico > .row > .col-md-6 > .form-group > .control-label').should('have.text', "Unidade Responsável pela OS")
+        cy.get(':nth-child(4) > .box-header > .box-title').should('have.text', "Produto / Subproduto / Serviço")
+        cy.get(':nth-child(4) > .box-body > .panel > #panel-body > #form_filtro_ordem_servico > .row > :nth-child(1) > .form-group > .control-label').should('have.text', "Tipo")
+        cy.get(':nth-child(4) > .box-body > .panel > #panel-body > #form_filtro_ordem_servico > .row > :nth-child(2) > .form-group > .control-label').should('have.text', "Nome")
+        cy.get(':nth-child(4) > .box-body > .panel > #panel-body > #form_filtro_ordem_servico > .row > .col-md-6 > .form-group > .control-label').should('have.text', "Status")
+        cy.get('.sorting_asc').should('have.text', "Empreendimento")
+        cy.get('[aria-label="Referência: Ordenar colunas de forma ascendente"]').should('have.text', "Referência")
+        cy.get('[aria-label="Objeto: Ordenar colunas de forma ascendente"]').should('have.text', "Objeto")
+        cy.get('[aria-label="Status: Ordenar colunas de forma ascendente"]').should('have.text', "Status")
+        cy.get('[aria-label="Contrato | OS: Ordenar colunas de forma ascendente"]').should('have.text', "Contrato | OS")
+        cy.get('[aria-label="Ação: Ordenar colunas de forma ascendente"]').should('have.text', "Ação")
+
+        //teste do botão limpar
+        cy.get(':nth-child(1) > :nth-child(1) > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field').click()
+        cy.get('.select2-results').find('li').contains('RA-I - BRASILIA').click({force: true})
+
+        cy.wait(3000)
+        cy.get('[onclick="limparFormularioPesquisa()"]').click()
+
+        //validação de campos na tela de novo cadastro
+        cy.get('.btn-success').click()
+        cy.get('.box-title').should('have.text', "Novo Cadastro")
+        cy.get("[onclick=\"toggleFormAccordion('rf')\"] > b").should('have.text', "Referências")
+        cy.get('#form_estudo_servico > :nth-child(2) > :nth-child(7) > :nth-child(1)').should('have.text', "Incluir Requerimento")
+        cy.get(':nth-child(2) > :nth-child(1) > .form-group > .control-label').should('have.text', "R.A")
+        cy.get('#form_requerimento > :nth-child(3) > .form-group > .control-label').should('have.text', "Empreendimento")
+        cy.get('#form_requerimento > :nth-child(4) > .form-group > .control-label').should('have.text', "Tipo Requerimento")
+        cy.get('#form_requerimento > :nth-child(5) > .form-group > label').should('have.text', "Requerimentos *")
+        cy.get('#form_requerimento > :nth-child(7) > :nth-child(1)').should('have.text', "Requerimentos Referenciados")
+        cy.get('#tabela-estudo-requerimento > thead > tr > .sorting_desc').should('have.text', "Requerimento")
+        cy.get(':nth-child(7) > :nth-child(4)').should('have.text', "Incluir Exigência")
+        cy.get('#form_exigencia > :nth-child(1) > :nth-child(1) > .form-group > .control-label').should('have.text', "R.A")
+        cy.get('#form_exigencia > :nth-child(2) > .form-group > .control-label').should('have.text', "Empreendimento")
+        cy.get('#form_exigencia > :nth-child(3) > .form-group > .control-label').should('have.text', "Demanda")
+        cy.get('#form_exigencia > :nth-child(4) > .form-group > label').should('have.text', "Exigências *")
+        cy.get('#form_exigencia > :nth-child(6) > :nth-child(1)').should('have.text', "Exigências Referenciadas")
+        cy.get('#tabela-estudo-exigencia > thead > tr > .sorting_desc').should('have.text', "N°")
+        cy.get('#tabela-estudo-exigencia > thead > tr > .sorting').should('have.text', "Descrição")
+        cy.get('#tabela-estudo-exigencia > thead > tr > .text-center').should('have.text', "Ação")
+        cy.get("[onclick=\"toggleFormAccordion('gr')\"] > b").should('have.text', "Dados Gerais")
+        cy.get('#form_dados_gerais > :nth-child(1) > .form-group > label').should('have.text', "Tipo*")
+        cy.get('#form_dados_gerais > :nth-child(2) > .form-group > .control-label').should('have.text', "Natureza")
+        cy.get(':nth-child(3) > .control-label').should('have.text', "Objeto")
+        cy.get('#form_dados_gerais > :nth-child(4) > .form-group > .control-label').should('have.text', "Descrição do Objeto do Estudo/Serviço")
+        cy.get('#form_dados_gerais > :nth-child(5) > .form-group > .control-label').should('have.text', "Área da Poligonal de Estudo")
+        cy.get('#form_dados_gerais > :nth-child(6) > .form-group > .control-label').should('have.text', "Status")
+        cy.get('#form_dados_gerais > :nth-child(7) > .form-group > .control-label').should('have.text', "Descrição do Status")
+        cy.get('#form_dados_gerais > :nth-child(8) > .form-group > .control-label').should('have.text', "Órgão Externo avaliador")
+        cy.get('#form_dados_gerais > :nth-child(9) > .form-group > .control-label').should('have.text', "Valor Estimado")
+        cy.get('#form_dados_gerais > :nth-child(10) > .form-group > label').should('have.text', "Processo SEI de Acompanhamento / Contratação")
+        cy.get(':nth-child(11) > .form-group > .control-label').should('have.text', "Titular")
+        cy.get(':nth-child(12) > .form-group > .control-label').should('have.text', "Suplente")
+        cy.get(':nth-child(13) > .form-group > .control-label').should('have.text', "Caminho no Depart")
+        cy.get(':nth-child(14) > .control-label').should('have.text', "Data de Elaboração")
+        cy.get(':nth-child(15) > .control-label').should('have.text', "Previsão de Conclusão do Estudo")
+        cy.get("[onclick=\"toggleFormAccordion('ct')\"] > b").should('have.text', "Dados do Contrato")
+        cy.get('#ct_plus').click()
+        cy.get('#form_contrato_gec > :nth-child(2) > .form-group > .control-label').should('have.text', "Numero do Contrato")
+        cy.get('#form_contrato_gec > :nth-child(3) > .form-group > .control-label').should('have.text', "Ano do Contrato")
+        cy.get('#form_contrato_gec > :nth-child(5) > .form-group > .control-label').should('have.text', "Contratada")
+        cy.get('#form_contrato_gec > :nth-child(6) > .form-group > .control-label').should('have.text', "Valor do Contrato (inicial)")
+        cy.get('#form_contrato_gec > :nth-child(7) > .form-group > .control-label').should('have.text', "Valor do Contrato (reajustado)")
+        cy.get('#form_contrato_gec > :nth-child(8) > .form-group > .control-label').should('have.text', "Início da Vigência do Contrato")
+        cy.get('#form_contrato_gec > :nth-child(9) > .form-group > .control-label').should('have.text', "Fim da Vigência do Contrato")
+        cy.get(':nth-child(10) > .form-group > .control-label').should('have.text', "Descrição do Objeto do Contrato")
+        cy.get("[onclick=\"toggleFormAccordion('os')\"] > b").should('have.text', "Dados da Ordem de Serviço da Empresa")
+        cy.get('#os_plus').click()
+        cy.get('#form_ordem_servico > :nth-child(4) > .form-group > .control-label').should('have.text', "Nota de Empenho (DOC SEI)")
+        cy.get(':nth-child(5) > label').should('have.text', "Entrega do Produto (Contratada)")
+        cy.get(':nth-child(6) > .control-label').should('have.text', "Data Limite (vide OS)")
+        cy.get(':nth-child(7) > .control-label').should('have.text', "Data de Recebimento")
+        cy.get(':nth-child(8) > label').should('have.text', "Solicitação de Correções (Fiscal)")
+        cy.get(':nth-child(9) > .control-label').should('have.text', "Data Limite (vide Contrato)")
+        cy.get(':nth-child(10) > .control-label').should('have.text', "Data de Envio")
+        cy.get(':nth-child(11) > label').should('have.text', "Entrega do Produto Corrigido (Contratada)")
+        cy.get(':nth-child(12) > .control-label').should('have.text', "Data Limite (vide Contrato)")
+        cy.get(':nth-child(13) > .control-label').should('have.text', "Data de Recebimento")
+        cy.get('#form_ordem_servico > :nth-child(15) > :nth-child(1)').should('have.text', "Ordens de Serviço Adicionadas")
+        cy.get('#tabela-estudo-ordem-servico > thead > tr > .sorting_desc').should('have.text', "N°")
+        cy.get('[aria-label="Ano: Ordenar colunas de forma ascendente"]').should('have.text', "Ano")
+        cy.get('[aria-label="Unidade Responsável: Ordenar colunas de forma ascendente"]').should('have.text', "Unidade Responsável")
+        cy.get('[aria-label="Nota de Empenho (DOC SEI): Ordenar colunas de forma ascendente"]').should('have.text', "Nota de Empenho (DOC SEI)")
+        cy.get('#tabela-estudo-ordem-servico > thead > tr > .text-center').should('have.text', "Ação")
+
+        //validação de novo cadastro
+        cy.get('#select2-cd_regiao_admin_req-container').click()
+        cy.get('.select2-results').find('li').contains('RA-I - BRASILIA').click({force: true})
+        cy.get('#select2-cd_empreendimento_req-container > .select2-selection__clear').click()
+        cy.wait(3000)
+        cy.get('.select2-results').find('li').contains('12 - Polos 06, 07, 08 - Projeto Orla - Beira Lago').click({force: true})
+        cy.get('#select2-tp_requerimento-container').click()
+        cy.get('.select2-results').find('li').contains('Nova Permissão').click({force: true})
+        cy.get('#select2-cd_requerimento-container > .select2-selection__clear').click()
+        cy.get('.select2-results').find('li').contains('88 - LP - Licença Prévia - Ofício nº 6/1565 - ACJUR p/ ADASA').click({force: true})
+        cy.get('#btnAdicionar_requerimento').click()
+        cy.get('#select2-cd_regiao_admin_exi-container').click()
+        cy.get('.select2-results').find('li').contains('RA-I - BRASILIA').click({force: true})
+        cy.get('#select2-cd_empreendimento_exi-container > .select2-selection__clear').click()
+        cy.get('.select2-results').find('li').contains('12 - Polos 06, 07, 08 - Projeto Orla - Beira Lago').click({force: true})
+        cy.get('#select2-cd_demanda-container > .select2-selection__clear').click()
+        cy.get('.select2-results').find('li').contains('LP nº 737/1998').click({force: true})
+        cy.get('#select2-cd_exigencia-container > .select2-selection__clear').click()
+        cy.get('.select2-results').find('li').contains('82|1|----------------- ÇÇÇ Â ÂÂ').click({force: true})
+        cy.get('#btnAdicionar_exigencia').click()
+        cy.get('#select2-tp_estudo-container').click()
+        cy.get('.select2-results').find('li').contains('Obra/Serviço').click({force: true})
+        cy.get('#select2-tp_natureza-container').click()
+        cy.get('.select2-results').find('li').contains('Licitação').click({force: true})
+        cy.get('#select2-tp_objeto-container').click()
+        cy.get('.select2-results').find('li').contains('Paisagismo').click({force: true})
+        cy.get('#select2-tp_status-container').click()
+        cy.get('.select2-results').find('li').contains('A licitar').click({force: true})
+        cy.get('#select2-cd_pessoa_titular-container').click()
+        cy.get('.select2-results').find('li').contains('PAULO CESAR COSTA').click({force: true})
+        cy.get('#select2-cd_pessoa_suplente-container').click()
+        cy.get('.select2-results').find('li').contains('LUCAS DIAS DE LIMA').click({force: true})
+        cy.get('#btnSalvar').click()
+        cy.get('.modal-footer > .btn-primary').click()
+        cy.get('.modal-footer > .btn-danger').click()
+        
+        //validação do botão voltar
+        cy.get('[onclick="window.history.back()"]').click()
+        cy.get('[onclick="window.history.back()"]').click()
+
+        //validação de salvamento
+        cy.get(':nth-child(6) > :nth-child(1) > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field').click()
+        cy.get('.select2-results').find('li').contains('PAULO CESAR COSTA').click({force: true})
+        cy.get(':nth-child(6) > :nth-child(2) > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field').click()
+        cy.get('.select2-results').find('li').contains('LUCAS DIAS DE LIMA').click({force: true})
+        cy.get('#pesquisar').click()
+        
+
+        //validação da tela de edição
+        cy.get('a[title="Editar"]').first().click()
+        cy.get('.box-title').should('have.text', "Editar")
+        cy.get('#tabela-estudo-requerimento > tbody > .odd > .text-center > .fas').click()
+        cy.get('.modal-footer > .btn-primary').click()
+        cy.get('#select2-cd_regiao_admin_req-container').click()
+        cy.get('.select2-results').find('li').contains('RA-II - GAMA').click({force: true})
+        cy.get('#select2-cd_empreendimento_req-container > .select2-selection__clear').click()
+        cy.get('.select2-results').find('li').contains('8 - FAZENDA VINICIUS').click({force: true})
+        cy.get('#select2-tp_requerimento-container').click()
+        cy.get('.select2-results').find('li').contains('Prorrogação / Renovação').click({force: true})
+        cy.get('#select2-cd_requerimento-container > .select2-selection__clear').click()
+        cy.get('.select2-results').find('li').contains('17 - LI - Licença de Instalação  - n° 300/2022 - Ofício nº 0/2022 - FUNTERRA p/ IBRAM').click({force: true})
+        cy.get('#btnAdicionar_requerimento').click()
+        cy.get('#btnSalvar').click()
+
+
+
+
+
+
+
+   })
+    
+
+
+    
+})
