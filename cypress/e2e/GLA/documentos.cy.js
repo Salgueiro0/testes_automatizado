@@ -45,7 +45,8 @@ describe('consultar_requerimentos', () => {
         //CRIAR NOVO DOCUMENTO
 
 
-        cy.contains('button', 'Novo Documento').click();
+        cy.contains('a', 'Novo Documento').click({ force: true });
+
 
         //testar botão limpar
         cy.get('#ds_documento').type('teste')
@@ -67,6 +68,95 @@ describe('consultar_requerimentos', () => {
         cy.get('#ds_documento').type('teste')
 
         cy.get('[type="submit"]').click()
+
+        cy.contains('button', 'OK').click()
+
+        //PESQUISAR DOCUMENTO
+
+        cy.get(':nth-child(5) > a > span').click()
+
+        //validando campos de texto
+        cy.get(':nth-child(1) > :nth-child(1) > .form-group > .control-label').should('contain', "Origem")
+        cy.get(':nth-child(2) > :nth-child(1) > .form-group > .control-label').should('contain', "Empreendimento")
+        cy.get(':nth-child(2) > :nth-child(3) > .form-group > .control-label').should('contain', "Exigência")
+        cy.get(':nth-child(5) > .col-md-6 > .form-group > .control-label').should('contain', "Tipo")
+        cy.get(':nth-child(6) > :nth-child(1) > .form-group > .control-label').should('contain', "Órgão Documento")
+        cy.get(':nth-child(7) > :nth-child(1) > .form-group > .control-label').should('contain', "Descrição")
+        cy.get(':nth-child(1) > :nth-child(2) > .form-group > .control-label').should('contain', "R.A")
+        cy.get(':nth-child(2) > :nth-child(2) > .form-group > .control-label').should('contain', "Demanda")
+        cy.get(':nth-child(4) > .form-group > .control-label').should('contain', "Requerimento")
+        cy.get(':nth-child(5) > :nth-child(2) > .form-group > .control-label').should('contain', "Número")
+        cy.get(':nth-child(6) > :nth-child(2) > .form-group > .control-label').should('contain', "Período de Data de Publicação")
+        cy.get(':nth-child(7) > :nth-child(2) > .form-group > label').should('contain', "Empreendedor Responsável")
+        cy.get(':nth-child(5) > :nth-child(3) > .form-group > .control-label').should('contain', "Arquivo Principal")
+        cy.get('.sorting_asc').should('contain', "Origem")
+        cy.get('[aria-label="RA: Ordenar colunas de forma ascendente"]').should('contain', "RA")
+        cy.get('[aria-label="Empreendimento: Ordenar colunas de forma ascendente"]').should('contain', "Empreendimento")
+        cy.get('[aria-label="Tipo: Ordenar colunas de forma ascendente"]').should('contain', "Tipo")
+        cy.get('[aria-label="Número: Ordenar colunas de forma ascendente"]').should('contain', "Número")
+        cy.get('[aria-label="Data: Ordenar colunas de forma ascendente"]').should('contain', "Data")
+        cy.get('[aria-label="Órgão: Ordenar colunas de forma ascendente"]').should('contain', "Órgão")
+        cy.get('[aria-label="Nº SEI Doc: Ordenar colunas de forma ascendente"]').should('contain', "Nº SEI Doc")
+        cy.get('[aria-label="Descrição: Ordenar colunas de forma ascendente"]').should('contain', "Descrição")
+        cy.get('[aria-label="Ação: Ordenar colunas de forma ascendente"]').should('contain', "Ação")
+
+        //Testando limpar campos
+        cy.get('#ds_documento').type('teste')
+
+        cy.get('[onclick="resetFields()"]').click()
+
+        //pesquisando documento
+
+        cy.wait(3000)
+
+        cy.get('#select2-combo_empreendimento-container').click()
+        cy.wait(1000)
+        cy.get('.select2-results').find('li').last().click()
+        cy.get('#pesquisarDocumentos').click()
+
+        //filtro de pesquisa
+        cy.get('#table-documento_filter > label > .form-control').type('engesoftware')
+
+        //VISUALIZAR DOCUMENTO
+        cy.get('a[title="Visualizar"]').first().click();
+
+        //ir para dados detalhados
+        cy.get('.col-md-12 > a').click()
+
+        //validar campos de texto
+        cy.get('[width="90"] > b').should('contain', "Tipo")
+        cy.get(':nth-child(2) > :nth-child(1) > b').should('contain', "Número")
+        cy.get(':nth-child(3) > :nth-child(1) > b').should('contain', "Data")
+        cy.get(':nth-child(4) > :nth-child(1) > b').should('contain', "Órgão")
+        cy.get(':nth-child(5) > :nth-child(1) > b').should('contain', "Nº SEI Doc")
+        cy.get(':nth-child(6) > :nth-child(1) > b').should('contain', "Descrição")
+
+        //EDITAR DOCUMENTO
+        cy.get('a.btn').click()
+
+        //validar campos de texto
+        cy.get(':nth-child(1) > .col-md-6 > .form-group > .control-label').should('contain', "Tipo")
+        cy.get(':nth-child(2) > :nth-child(1) > .form-group > .control-label').should('contain', "Órgão Documento")
+        cy.get(':nth-child(3) > .col-md-12 > .form-group > .control-label').should('contain', "Descrição")
+        cy.get(':nth-child(1) > :nth-child(2) > .form-group > .control-label').should('contain', "Número")
+        cy.get(':nth-child(2) > :nth-child(2) > .form-group > .control-label').should('contain', "Nº SEI Doc")
+        cy.get(':nth-child(3) > .form-group > .control-label').should('contain', "Data")
+
+
+        cy.get('#ds_documento').type('testando editar documento')
+        cy.get('[type="submit"]').click()
+        cy.contains('button',"OK").click()
+
+        //Excluir
+        cy.contains('button', "Excluir").click()
+        cy.contains('button', "Confirmar").click()
+        cy.contains('button',"OK").click()
+
+
+
+
+
+
 
     })
 })
