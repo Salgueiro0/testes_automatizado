@@ -22,6 +22,7 @@ describe('pagamento', () => {
         cy.get('.sidebar-menu > :nth-child(2) > a > span').click()
         cy.get('.btn-success').click()
         cy.get('#select2-cd_regiao_admin-container').click()
+        cy.wait(2000)
         cy.get('.select2-results').find('li').contains('RA-I - BRASILIA ').click({force: true})
         cy.get('#cd_orgao_processo_sei').type('11111')
         cy.get('#nr_processo_sei').type('11111111')
@@ -89,7 +90,7 @@ describe('pagamento', () => {
 
         cy.get('.exigencias-aba').click()
 
-        cy.get('#exigencia > .box > .box-body > .panel > .panel-body > .panel-footer > .btn-toolbar > a.btn').click()
+        cy.get(':nth-child(6) > .panel-footer > .btn-toolbar > a.btn').click()
 
         //validando campos de texto
         cy.get(':nth-child(3) > :nth-child(1) > .form-group > label').should('contain', "Empreendimento ")
@@ -164,7 +165,7 @@ describe('pagamento', () => {
         cy.get('#submit').click()
 
         cy.get('.modal-footer > .btn-primary').click()
-
+        cy.wait(2000)
         cy.contains('button', "Não").click()
 
         //PESQUISAR EXIGÊNCIA
@@ -178,11 +179,19 @@ describe('pagamento', () => {
         cy.get('.select2-results').find('li').contains('empreendimento-cerrado').click({force: true})
         cy.get('#pesquisarExigencia').click()
 
+
         //testando filtro pesquisar
         cy.get('#table-exigencia_filter > label > .form-control').type('descrição')
 
         //VISUALIZAR EXIGÊNCIA
         cy.get('a[title="Visualizar"]').first().click()
+
+        // //IR PARA DOCUMENTO
+        // cy.get('.documentos-aba').click()
+        // //IR PARA ESTUDOS
+        // cy.get('.novo-estudo-aba').click()
+        // //IR PARA DADOS DETALHADOS
+        // cy.get('.active > a').click()
 
         //adicionar Dilações de Prazos
         cy.contains('button', "Adicionar").click()
@@ -201,7 +210,7 @@ describe('pagamento', () => {
         cy.wait(3000)
 
         //alterar Dilações de Prazos
-        cy.get('a[title="Editar"]').first().click()
+        cy.get('[title="Editar"] > .fa').click()
         cy.get('#ds_observacao_sei_pedido').type('654')
         cy.contains('button', "Salvar").click()
         cy.wait(3000)
@@ -212,13 +221,42 @@ describe('pagamento', () => {
 
         //EDITAR EXIGÊNCIA
 
-        cy.contains('button', "Editar").click()
+        cy.get('#exigencia-aba > .panel-footer > :nth-child(1) > a.btn').click()
         cy.get('#qt_prazo_dias').type('80')
-        cy.contains('button', "Salvar").click()
+        cy.get('#submit').click()
         cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary').click()
         cy.contains('button', "OK").click()
 
 
+        //EXCLUIR EXIGÊNCIA
+        cy.get('#btn-delete-exigencia').click()
+        cy.contains('button',"Confirmar").click()
+        cy.contains('button',"OK").click()
+
+        //Gerar relatório de acompanhamento
+
+        //validando campos de texto de relatório de acompanhamento de exigências
+        cy.get('#modal-relatorio-pdf-personalizado > .modal-dialog > .modal-content > .modal-body > :nth-child(3) > :nth-child(1) > .form-group > .form-check-label').should('contain', "RA / EMPREENDIMENTO / DEMANDA")
+        cy.get(':nth-child(4) > :nth-child(1) > .form-group > .form-check-label').should('contain', "Nº")
+        cy.get(':nth-child(4) > :nth-child(4) > .form-group > .form-check-label').should('contain', "Unidades Responsáveis")
+        cy.get(':nth-child(4) > :nth-child(7) > .form-group > .form-check-label').should('contain', "Data Limite")
+        cy.get(':nth-child(6) > :nth-child(4) > .form-group > .form-check-label').should('contain', "Informativa")
+        cy.get(':nth-child(6) > :nth-child(7) > .form-group > .form-check-label').should('contain', "Dispensada")
+        cy.get('#modal-relatorio-pdf-personalizado > .modal-dialog > .modal-content > .modal-body > :nth-child(3) > :nth-child(2) > .form-group > .form-check-label').should('contain', "SEI da Dilação em Analise")
+        cy.get(':nth-child(4) > :nth-child(2) > .form-group > .form-check-label').should('contain', "Descrição Providência")
+        cy.get(':nth-child(4) > :nth-child(5) > .form-group > .form-check-label').should('contain', "Descrição Exigência")
+        cy.get(':nth-child(6) > :nth-child(5) > .form-group > .form-check-label').should('contain', "Cumprida")
+        cy.get(':nth-child(6) > :nth-child(8) > .form-group > .form-check-label').should('contain', "Em Execução")
+        cy.get(':nth-child(4) > :nth-child(3) > .form-group > .form-check-label').should('contain', "Tema")
+        cy.get(':nth-child(4) > :nth-child(6) > .form-group > .form-check-label').should('contain', "Estudos/Serv Relacionados")
+        cy.get(':nth-child(6) > :nth-child(6) > .form-group > .form-check-label').should('contain', "Pendente")
+
+
+        cy.get('#modalRelatorioPersonalizadoPDF').click()
+        cy.wait(2000)
+        cy.get('#gerarRelatorioPersonalizadoPDF').click()
+        cy.wait(2000)
+        cy.get('#modal-relatorio-pdf-personalizado > .modal-dialog > .modal-content > .modal-footer > .btn-form').click()
     })
 })
 
