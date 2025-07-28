@@ -41,7 +41,7 @@ describe('consultar_requerimentos', () => {
         cy.get('#aa_processo_sei').type('1111')
         cy.get('#select2-tp_empreendimento-container').click()
         cy.get('.select2-results').find('li').contains('Parcelamento de Solo Urbano - Novo').click({force: true})
-        cy.get('#ds_empreendimento').type('Ambiental41')
+        cy.get('#ds_empreendimento').type('ambiental')
         cy.get('#select2-tp_prioridade-container').click()
         cy.get('.select2-results').find('li').contains('Planejamento Estratégico ').click({force: true})
         cy.get('#select2-cd_pessoa_titular-container').click()
@@ -60,7 +60,7 @@ describe('consultar_requerimentos', () => {
         cy.get('.sidebar-menu > :nth-child(2) > a > span').click()
 
         cy.get('.col-md-6 > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field').click()
-        cy.get('.select2-results').find('li').contains('Ambiental41').click({ force: true })
+        cy.get('.select2-results').find('li').contains('ambiental').click({ force: true })
         cy.get('#pesquisar').click()
         cy.get('a[title="Visualizar"]').first().click();
 
@@ -119,7 +119,7 @@ describe('consultar_requerimentos', () => {
         cy.get('.sidebar-menu > :nth-child(2) > a > span').click()
 
         cy.get('.col-md-6 > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field').click()
-        cy.get('.select2-results').find('li').contains('Ambiental41').click({ force: true })
+        cy.get('.select2-results').find('li').contains('ambiental').click({ force: true })
         cy.get('#pesquisar').click()
         cy.wait(2000)
         cy.get('a[title="Visualizar"]').first().click();
@@ -195,7 +195,7 @@ describe('consultar_requerimentos', () => {
 
         cy.get('#select2-combo_empreendimento-container').click()
         cy.wait(2000)
-        cy.get('.select2-results').find('li').contains('Ambiental41').click({ force: true })
+        cy.get('.select2-results').find('li').contains('ambiental').click({ force: true })
 
         cy.wait(2000)
 
@@ -216,7 +216,7 @@ describe('consultar_requerimentos', () => {
         cy.wait(2000)
 
         cy.get('#select2-combo_empreendimento-container').click()
-        cy.get('.select2-results').find('li').contains('Ambiental41').click({ force: true })
+        cy.get('.select2-results').find('li').contains('ambiental').click({ force: true })
         cy.wait(2000)
         cy.get('#select2-combo_tipo_requerimento-container').click()
         cy.wait(2000)
@@ -255,7 +255,7 @@ describe('consultar_requerimentos', () => {
 
         cy.get('#pesquisar').click()
 
-        cy.get('#table-reiteracao_filter > label > .form-control').type('Ambiental41')
+        cy.get('#table-reiteracao_filter > label > .form-control').type('ambiental')
 
         cy.get('a[title="Visualizar"]').first().click()
 
@@ -311,7 +311,7 @@ describe('consultar_requerimentos', () => {
         cy.get('.sidebar-menu > :nth-child(2) > a > span').click()
 
         cy.get('.col-md-6 > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field').click()
-        cy.get('.select2-results').find('li').contains('Ambiental41').click({ force: true })
+        cy.get('.select2-results').find('li').contains('ambiental').click({ force: true })
         cy.get('#pesquisar').click()
         cy.wait(2000)
         cy.get('a[title="Visualizar"]').first().click();

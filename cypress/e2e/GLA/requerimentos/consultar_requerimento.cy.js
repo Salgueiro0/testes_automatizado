@@ -159,11 +159,14 @@ describe('consultar_requerimentos', () => {
                 const clean = text.replace(/\s+/g, ' ').trim();
                 expect(clean).to.include('Status Requerimento');
             })
-        cy.get(':nth-child(7) > :nth-child(2) > .form-group > label').should('contain',"Empreendedor Responsável")
-        cy.get(':nth-child(7) > :nth-child(3) > .form-group > label').should('contain',"Possui Reiterações?")
+        cy.get(':nth-child(7) > :nth-child(2) > :nth-child(1) > .form-group > label').should('contain',"SEI Processo Requerimento")
         cy.get(':nth-child(8) > .col-md-6 > .form-group > .control-label').should('contain',"Reserva Orçamentária enviada à DIPLA")
-        cy.get(':nth-child(8) > :nth-child(2) > .form-group > label').should('contain',"Status do Pagamento")
-        cy.get(':nth-child(8) > :nth-child(3) > .form-group > label').should('contain',"Prazo Máximo de Análise")
+        cy.get(':nth-child(8) > :nth-child(2) > .form-group > .control-label').should('contain',"Nº Doc SEI Despacho")
+        cy.get(':nth-child(8) > :nth-child(3) > .form-group > label').should('contain',"Empreendedor Responsável")
+        cy.get(':nth-child(9) > :nth-child(1) > .form-group > label').should('contain',"Status do Pagamento")
+        cy.get(':nth-child(9) > :nth-child(2) > .form-group > label').should('contain',"Prazo Máximo de Análise")
+        cy.get(':nth-child(9) > :nth-child(3) > .form-group > label').should('contain',"Estudo/Serviço")
+        cy.get(':nth-child(4) > .form-group > label').should('contain',"Possui Reiterações?")
         cy.get('.sorting_asc').should('contain',"RA")
         cy.get('[aria-label="Empreendimento: Ordenar colunas de forma ascendente"]').should('contain',"Empreendimento")
         cy.get('[aria-label="Requerimento: Ordenar colunas de forma ascendente"]').should('contain',"Requerimento")
@@ -173,7 +176,7 @@ describe('consultar_requerimentos', () => {
         cy.get('[aria-label="Emitente: Ordenar colunas de forma ascendente"]').should('contain',"Emitente")
         cy.get('[aria-label="Data de Publicação: Ordenar colunas de forma ascendente"]').should('contain',"Data de Publicação")
         cy.get('[aria-label="Ação: Ordenar colunas de forma ascendente"]').should('contain',"Ação")
-
+            .should('contain',"")
         //Pesquisar um requerimento
         cy.get('#select2-cd_empreendimento-container').should('be.visible').click();
         cy.get('.select2-results__option')
