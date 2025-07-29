@@ -439,5 +439,36 @@ describe('consultar_requerimentos', () => {
         cy.get('a[title="Excluir"]').first().click()
         
         cy.get('.modal-footer > .btn-primary').should('contain.text', 'Confirmar').click()
+
+        cy.contains('button','OK').click()
+
+        //APAGAR REQUERIMENTOS E EMPREENDIMENTO
+
+        cy.get('.sidebar-menu > :nth-child(2) > a > span').click()
+
+        cy.get('.col-md-6 > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field').click()
+        cy.get('.select2-results').find('li').contains('ambiental').click({ force: true })
+        cy.get('#pesquisar').click()
+
+        cy.get('a[title="Visualizar"]').first().click();
+        cy.get('.requerimentos-aba').click()
+
+        cy.get('a[title="Excluir"]').first().click();
+        cy.contains('button', 'Confirmar').click();
+        cy.contains('button', 'OK').click();
+
+        cy.get('a[title="Excluir"]').first().click();
+        cy.contains('button', 'Confirmar').click();
+        cy.contains('button', 'OK').click();
+
+        cy.get('a[title="Excluir"]').first().click();
+        cy.contains('button', 'Confirmar').click();
+        cy.contains('button', 'OK').click();
+
+
+        cy.get('.nav > :nth-child(6) > a').click()
+        cy.contains('button', 'Excluir').click();
+        cy.contains('button', 'Confirmar').click();
+
     })
 })

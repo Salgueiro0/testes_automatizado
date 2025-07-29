@@ -42,7 +42,7 @@ describe('consultar_requerimentos', () => {
         cy.get('#aa_processo_sei').type('1111')
         cy.get('#select2-tp_empreendimento-container').click()
         cy.get('.select2-results').find('li').contains('Parcelamento de Solo Urbano - Novo').click({force: true})
-        cy.get('#ds_empreendimento').type('teste-gla-requerimento')
+        cy.get('#ds_empreendimento').type('ambiental')
         cy.get('#select2-tp_prioridade-container').click()
         cy.get('.select2-results').find('li').contains('Planejamento Estratégico ').click({force: true})
         cy.get('#select2-cd_pessoa_titular-container').click()
@@ -167,16 +167,16 @@ describe('consultar_requerimentos', () => {
         cy.get(':nth-child(9) > :nth-child(2) > .form-group > label').should('contain',"Prazo Máximo de Análise")
         cy.get(':nth-child(9) > :nth-child(3) > .form-group > label').should('contain',"Estudo/Serviço")
         cy.get(':nth-child(4) > .form-group > label').should('contain',"Possui Reiterações?")
-        cy.get('.sorting_asc').should('contain',"RA")
-        cy.get('[aria-label="Empreendimento: Ordenar colunas de forma ascendente"]').should('contain',"Empreendimento")
-        cy.get('[aria-label="Requerimento: Ordenar colunas de forma ascendente"]').should('contain',"Requerimento")
-        cy.get('[aria-label="Órgão: Ordenar colunas de forma ascendente"]').should('contain',"Órgão")
-        cy.get('[aria-label="Nº Ofício: Ordenar colunas de forma ascendente"]').should('contain',"Nº Ofício")
-        cy.get('[aria-label="Ano: Ordenar colunas de forma ascendente"]').should('contain',"Ano")
-        cy.get('[aria-label="Emitente: Ordenar colunas de forma ascendente"]').should('contain',"Emitente")
-        cy.get('[aria-label="Data de Publicação: Ordenar colunas de forma ascendente"]').should('contain',"Data de Publicação")
-        cy.get('[aria-label="Ação: Ordenar colunas de forma ascendente"]').should('contain',"Ação")
-            .should('contain',"")
+        cy.get('tr > :nth-child(1)').should('contain',"RA")
+        cy.get('tr > :nth-child(2)').should('contain',"Empreendimento")
+        cy.get('tr > :nth-child(3)').should('contain',"Requerimento")
+        cy.get('tr > :nth-child(4)').should('contain',"Órgão")
+        cy.get('tr > :nth-child(5)').should('contain',"Nº Ofício")
+        cy.get('tr > :nth-child(6)').should('contain',"Ano")
+        cy.get('tr > :nth-child(7)').should('contain',"Emitente")
+        cy.get('tr > :nth-child(8)').should('contain',"Data de Publicação")
+        cy.get('tr > :nth-child(9)').should('contain',"Ação")
+
         //Pesquisar um requerimento
         cy.get('#select2-cd_empreendimento-container').should('be.visible').click();
         cy.get('.select2-results__option')
@@ -190,7 +190,7 @@ describe('consultar_requerimentos', () => {
         cy.get('#gerarRelatorioPDF').should('be.visible').click();
 
         //Filtrar por texto
-        cy.get('#table-requerimento_filter > label > .form-control').type('teste')
+        cy.get('#table-requerimento_filter > label > .form-control').type('ambiental')
 
         //Filtro visualizar empreendimento
         cy.get('a[title="Visualizar"]').first().click();
@@ -240,7 +240,7 @@ describe('consultar_requerimentos', () => {
         cy.get('#pesquisarRequerimento').click();
         cy.wait(2000);
 
-        cy.get('[href^="/requerimentos/"][href$="/edit"]')
+        cy.get('[href^="/requerimentos/"][href$="/edit"] > .fa')
             .first()
             .click({ force: true });
 
@@ -265,7 +265,7 @@ describe('consultar_requerimentos', () => {
 
         //editar
 
-        cy.get('#ds_requerimento').clear().type('teste')
+        cy.get('#ds_requerimento').clear().type('ambiental')
 
         cy.get('#submit').click()
         cy.get('.modal-footer > .btn-primary').should('have.text', 'Continuar').click();
@@ -303,5 +303,16 @@ describe('consultar_requerimentos', () => {
         cy.get('a[title="Excluir"]').first().click();
         cy.get('.modal-footer > .btn-primary').should('have.text', ' Confirmar').click();
         cy.get('.modal-footer > .btn').should('have.text', 'OK').click();
+
+        //EXCLUIR EMPREENDIMENTO
+        cy.get('.sidebar-menu > :nth-child(2) > a > span').click()
+
+        cy.get('.col-md-6 > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field').click()
+        cy.get('.select2-results').find('li').contains('ambiental').click({ force: true })
+        cy.get('#pesquisar').click()
+
+        cy.get('a[title="Excluir"]').first().click();
+        cy.contains('button', 'Confirmar').click();
+        cy.contains('button', 'OK').click();
     })
 })

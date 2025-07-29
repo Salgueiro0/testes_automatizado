@@ -28,7 +28,7 @@ describe('pagamento', () => {
         cy.get('#aa_processo_sei').type('1111')
         cy.get('#select2-tp_empreendimento-container').click()
         cy.get('.select2-results').find('li').contains('Parcelamento de Solo Urbano - Novo').click({force: true})
-        cy.get('#ds_empreendimento').type('engesoftware-teste-pagamentos')
+        cy.get('#ds_empreendimento').type('ambiental')
         cy.get('#select2-tp_prioridade-container').click()
         cy.get('.select2-results').find('li').contains('Planejamento Estratégico ').click({force: true})
         cy.get('#select2-cd_pessoa_titular-container').click()
@@ -170,6 +170,23 @@ describe('pagamento', () => {
         cy.wait(1000)
         cy.contains('button', "Confirmar").click()
         cy.contains('button', "OK").click()
+
+        //EXCLUIR REQUERIMENTO
+
+        cy.contains('button', "Excluir").click()
+        cy.contains('button', "Confirmar").click()
+        cy.contains('button', "OK").click()
+
+        //EXCLUIR EMPREENDIMENTO
+        cy.get('.sidebar-menu > :nth-child(2) > a > span').click()
+
+        cy.get('.col-md-6 > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field').click()
+        cy.get('.select2-results').find('li').contains('ambiental').click({ force: true })
+        cy.get('#pesquisar').click()
+
+        cy.get('a[title="Excluir"]').first().click();
+        cy.contains('button', 'Confirmar').click();
+        cy.contains('button', 'OK').click();
      })
 })
 
