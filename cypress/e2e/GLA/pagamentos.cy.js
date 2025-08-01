@@ -119,7 +119,7 @@ describe('pagamento', () => {
         cy.get('.panel-body > :nth-child(1) > :nth-child(2) > .form-group > .control-label').should('have.text', "Empreendimento")
         cy.get('.panel-body > :nth-child(2) > .col-md-4 > .form-group > .control-label').should('have.text', "Origem")
         cy.get(':nth-child(3) > :nth-child(1) > :nth-child(1) > :nth-child(1) > .control-label').should('have.text', "Data do Pagamento")
-        cy.get(':nth-child(3) > :nth-child(2) > :nth-child(1) > .control-label').should('have.text', "Valor do Pagamento (R$, ha, mudas)")
+        cy.get(':nth-child(3) > :nth-child(2) > :nth-child(1) > .control-label').should('have.text', "Valor do Pagamento (R$)")
         cy.get(':nth-child(4) > :nth-child(1) > .form-group > .control-label').should('have.text', "Status do Pagamento")
         cy.get(':nth-child(4) > :nth-child(2) > .form-group > .control-label').should('have.text', "Descrição do Pagamento")
         cy.get(':nth-child(4) > :nth-child(3) > .form-group > .control-label').should('have.text', "Empreendedor Responsável")
@@ -133,7 +133,7 @@ describe('pagamento', () => {
         cy.get('.sorting_asc').should('have.text', "R.A")
         cy.get('[aria-label="Empreendimento: Ordenar colunas de forma ascendente"]').should('have.text', "Empreendimento")
         cy.get('[aria-label="Origem: Ordenar colunas de forma ascendente"]').should('have.text', "Origem")
-        cy.get('[aria-label="Valor do Pagamento (R$, ha, mudas): Ordenar colunas de forma ascendente"]').should('have.text', "Valor do Pagamento (R$, ha, mudas)")
+        cy.get('[aria-label="Valor do Pagamento (R$): Ordenar colunas de forma ascendente"]').should('have.text', "Valor do Pagamento (R$)")
         cy.get('tr > .text-center').should('have.text', "Ação")
 
         //testando limpar campos

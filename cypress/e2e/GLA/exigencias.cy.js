@@ -90,7 +90,7 @@ describe('pagamento', () => {
 
         cy.get('.exigencias-aba').click()
 
-        cy.get(':nth-child(6) > .panel-footer > .btn-toolbar > a.btn').click()
+        cy.get('#exigencia > .box > .box-body > .panel > .panel-body > .panel-footer > .btn-toolbar > a.btn').click()
 
         //validando campos de texto
         cy.get(':nth-child(3) > :nth-child(1) > .form-group > label').should('contain', "Empreendimento ")
@@ -258,22 +258,23 @@ describe('pagamento', () => {
         cy.wait(2000)
         cy.get('#modal-relatorio-pdf-personalizado > .modal-dialog > .modal-content > .modal-footer > .btn-form').click()
 
-        //EXCLUIR DEMANDA E EMPREENDIMENTO
-        cy.get('.sidebar-menu > :nth-child(2) > a > span').click()
+        // //EXCLUIR DEMANDA E EMPREENDIMENTO
+        // cy.get('.sidebar-menu > :nth-child(2) > a > span').click()
+        //
+        // cy.get('.col-md-6 > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field').click()
+        // cy.get('.select2-results').find('li').contains('ambiental').click({ force: true })
+        // cy.get('#pesquisar').click()
+        // cy.get('a[title="Excluir"]').first().click();
 
-        cy.get('.col-md-6 > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field').click()
-        cy.get('.select2-results').find('li').contains('ambiental').click({ force: true })
-        cy.get('#pesquisar').click()
-
-        cy.get('a[title="Visualizar"]').first().click();
-        cy.get('.demandas-aba').click()
-        cy.get('#pesquisar').click()
-        cy.get('a[title="Excluir"]').first().click();
-        cy.contains('button', 'Confirmar').click();
-        cy.contains('button', 'OK').click();
-        cy.get('.nav > :nth-child(6) > a').click()
-        cy.contains('button', 'Excluir').click();
-        cy.contains('button', 'Confirmar').click();
+        // cy.get('a[title="Visualizar"]').first().click();
+        // cy.get('.demandas-aba').click()
+        // cy.get('#pesquisar').click()
+        // cy.get('a[title="Excluir"]').first().click();
+        // cy.contains('button', 'Confirmar').click();
+        // cy.contains('button', 'OK').click();
+        // cy.get('.nav > :nth-child(6) > a').click()
+        // cy.contains('button', 'Excluir').click();
+        // cy.contains('button', 'Confirmar').click();
 
     })
 })
