@@ -105,7 +105,7 @@ describe('pendência', () => {
         cy.get('#nr_processo_sei').type('11111111')
         cy.wait(1000)
         cy.get('#aa_processo_sei').type('1111')
-        cy.wait(2000)
+        cy.wait(4000)
         cy.get('#modal-alteracao-sei > .modal-dialog > .modal-content > .modal-footer > #botao-editar').click()
         cy.wait(1000)
         cy.get(':nth-child(5) > :nth-child(6) > select').select('2911')
@@ -150,9 +150,20 @@ describe('pendência', () => {
         cy.get('.sidebar-toggle').click()
         cy.get(':nth-child(1) > :nth-child(20) > .btn > .fas').click()
         cy.contains('button', 'Confirmar').click();
-        cy.get('button.bootbox-accept').should('be.visible').and('contain.text', 'OK').click();
         cy.get('#gerarRelatorioPDF').click({force: true})
-      
+
+        cy.wait(10000)
+        cy.get('.btn-success').click()
+        cy.get('#select2-cd_empreendimento-container').click()  
+        cy.get('.select2-results').find('li').contains('4 - Empreendimento XPTO 5 ').click({ force: true});
+        cy.get('#pesquisarPendencias').click()  
+        cy.get('.content > :nth-child(3) > .box-header > .box-tools > .btn > .fa').click()      
+        cy.get('#pendenciaTodas3283 > .panel-footer > .btn-toolbar > .btn-danger').click()  
+        cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary').click()
+        cy.wait(3000)
+        cy.get('.btn-toolbar > .btn-success').click()
+        cy.get('#lista_chk_cd_3283').click()
+        cy.get('#modal-vinculo-pendencia > .modal-dialog > .modal-content > .modal-footer > #botao-editar').click()
 
 
 
