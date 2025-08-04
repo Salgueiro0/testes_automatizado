@@ -375,17 +375,14 @@ describe('consultar_requerimentos', () => {
 
         //Editar Reiteração
 
-        cy.get('#requerimento-aba > .panel-footer > :nth-child(1) > a.btn').click()
+        cy.get('[onclick="window.history.back()"]').click()
 
-        cy.get(':nth-child(7) > [href="#"]').click()
-
-        cy.get('.menu-open > .treeview-menu > :nth-child(2) > a > span').click()
 
         cy.get('#select2-cd_regiao_admin-container').click()
         cy.get('.select2-results').find('li').contains('RA-I - BRASILIA ').click({ force: true })
 
         cy.get('#select2-tp_requerimento-container').click()
-        cy.get('.select2-results').find('li').contains('LP - Licença Prévia').click({ force: true })
+        cy.get('.select2-results').find('li').contains('Nova Permissão').click({ force: true })
 
         cy.get('#pesquisar').click()
 
@@ -405,7 +402,7 @@ describe('consultar_requerimentos', () => {
         //testando editar
         cy.get('#select2-combo_requerimento-container').click()
         cy.wait(1000)
-        cy.get('.select2-results').click({ force: true });
+        cy.get('.select2-results').find('li').contains('LP - Licença Prévia - Ofício nº 5155/2024 - ADNOV-DINOV/BIOTIC p/ ANEEL').click({ force: true })
 
         cy.get('.sidebar-toggle').click()
 
@@ -455,33 +452,33 @@ describe('consultar_requerimentos', () => {
 
         cy.contains('button','OK').click()
 
-        //APAGAR REQUERIMENTOS E EMPREENDIMENTO
-
-        cy.get('.sidebar-menu > :nth-child(2) > a > span').click()
-
-        cy.get('.col-md-6 > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field').click()
-        cy.get('.select2-results').find('li').contains('ambiental').click({ force: true })
-        cy.get('#pesquisar').click()
-
-        cy.get('a[title="Visualizar"]').first().click();
-        cy.get('.requerimentos-aba').click()
-
-        cy.get('a[title="Excluir"]').first().click();
-        cy.contains('button', 'Confirmar').click();
-        cy.contains('button', 'OK').click();
-
-        cy.get('a[title="Excluir"]').first().click();
-        cy.contains('button', 'Confirmar').click();
-        cy.contains('button', 'OK').click();
-
-        cy.get('a[title="Excluir"]').first().click();
-        cy.contains('button', 'Confirmar').click();
-        cy.contains('button', 'OK').click();
-
-
-        cy.get('.nav > :nth-child(6) > a').click()
-        cy.contains('button', 'Excluir').click();
-        cy.contains('button', 'Confirmar').click();
+        // //APAGAR REQUERIMENTOS E EMPREENDIMENTO
+        //
+        // cy.get('.sidebar-menu > :nth-child(2) > a > span').click()
+        //
+        // cy.get('.col-md-6 > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field').click()
+        // cy.get('.select2-results').find('li').contains('ambiental').click({ force: true })
+        // cy.get('#pesquisar').click()
+        //
+        // cy.get('a[title="Visualizar"]').first().click();
+        // cy.get('.requerimentos-aba').click()
+        //
+        // cy.get('a[title="Excluir"]').first().click();
+        // cy.contains('button', 'Confirmar').click();
+        // cy.contains('button', 'OK').click();
+        //
+        // cy.get('a[title="Excluir"]').first().click();
+        // cy.contains('button', 'Confirmar').click();
+        // cy.contains('button', 'OK').click();
+        //
+        // cy.get('a[title="Excluir"]').first().click();
+        // cy.contains('button', 'Confirmar').click();
+        // cy.contains('button', 'OK').click();
+        //
+        //
+        // cy.get('.nav > :nth-child(6) > a').click()
+        // cy.contains('button', 'Excluir').click();
+        // cy.contains('button', 'Confirmar').click();
 
     })
 })

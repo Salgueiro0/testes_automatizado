@@ -32,40 +32,51 @@ describe('consultar_requerimentos', () => {
 
     //CRIAR EMPREENDIMENTO PARA TESTE
 
-        cy.visit('http://gla-homol.terracapnet.local')
-        cy.get('.sidebar-menu > :nth-child(2) > a > span').click()
-        cy.get('.btn-success').click()
-        cy.get('#select2-cd_regiao_admin-container').click()
-        cy.get('.select2-results').find('li').contains('RA-I - BRASILIA ').click({force: true})
-        cy.get('#cd_orgao_processo_sei').type('11111')
-        cy.get('#nr_processo_sei').type('11111111')
-        cy.get('#aa_processo_sei').type('1111')
-        cy.get('#select2-tp_empreendimento-container').click()
-        cy.get('.select2-results').find('li').contains('Parcelamento de Solo Urbano - Novo').click({force: true})
-        cy.get('#ds_empreendimento').type('ambiental2050')
-        cy.get('#select2-tp_prioridade-container').click()
-        cy.get('.select2-results').find('li').contains('Planejamento Estratégico ').click({force: true})
-        cy.get('#select2-cd_pessoa_titular-container').click()
-        cy.get('.select2-results').find('li').contains('ALLAN GUIMARAES DIOGENES ').click({force: true})
-        cy.get('#select2-cd_pessoa_suplente-container').click()
-        cy.get('.select2-results').find('li').contains('ALLAN GUIMARAES DIOGENES ').click({force: true})
-        cy.get('#select2-cd_orgao_responsavel-container').click()
-        cy.get('.select2-results').find('li').contains('TERRACAP - COMPANHIA IMOBILIARIA DE BRASILIA ').click({force: true})
-        cy.get('#submit').click()
-        cy.get('.modal-footer > .btn-primary').click()
-        cy.get('button.bootbox-accept').should('have.text', 'OK').click();
-        cy.wait(2000)
+        // cy.visit('http://gla-homol.terracapnet.local')
+        // cy.get('.sidebar-menu > :nth-child(2) > a > span').click()
+        // cy.get('.btn-success').click()
+        // cy.get('#select2-cd_regiao_admin-container').click()
+        // cy.get('.select2-results').find('li').contains('RA-I - BRASILIA ').click({force: true})
+        // cy.get('#cd_orgao_processo_sei').type('11111')
+        // cy.get('#nr_processo_sei').type('11111111')
+        // cy.get('#aa_processo_sei').type('1111')
+        // cy.get('#select2-tp_empreendimento-container').click()
+        // cy.get('.select2-results').find('li').contains('Parcelamento de Solo Urbano - Novo').click({force: true})
+        // cy.get('#ds_empreendimento').type('Polos 06, 07, 08 - Projeto Orla - Beira Lago')
+        // cy.get('#select2-tp_prioridade-container').click()
+        // cy.get('.select2-results').find('li').contains('Planejamento Estratégico ').click({force: true})
+        // cy.get('#select2-cd_pessoa_titular-container').click()
+        // cy.get('.select2-results').find('li').contains('ALLAN GUIMARAES DIOGENES ').click({force: true})
+        // cy.get('#select2-cd_pessoa_suplente-container').click()
+        // cy.get('.select2-results').find('li').contains('ALLAN GUIMARAES DIOGENES ').click({force: true})
+        // cy.get('#select2-cd_orgao_responsavel-container').click()
+        // cy.get('.select2-results').find('li').contains('TERRACAP - COMPANHIA IMOBILIARIA DE BRASILIA ').click({force: true})
+        // cy.get('#submit').click()
+        // cy.get('.modal-footer > .btn-primary').click()
+        // cy.get('button.bootbox-accept').should('have.text', 'OK').click();
+        // cy.wait(2000)
 
 
     //TESTANDO OS CAMPOS DA PÁGINA DE REQUERIMENTO - NOVO CADASTRO
 
-        //CRIAR REQUERIMENTO PARA TESTE
+        //PESQUISAR EMPREENDIMENTO
+
+        cy.visit('http://gla-homol.terracapnet.local')
+
+        cy.get('.sidebar-menu > :nth-child(2) > a').click()
+
+        cy.get('.col-md-6 > .form-group > .select2-container > .selection > .select2-selection').click()
+        cy.get('.select2-results').find('li').contains('Polos 06, 07, 08 - Projeto Orla - Beira Lago').click()
+
+        cy.get('#pesquisar').click()
+        cy.wait(1000)
+        cy.get('a[title="Visualizar"]').first().click();
 
         cy.get('.requerimentos-aba').click()
 
-        //Cadastro
+        
+        //CADASTRAR REQUERIMENTO
         cy.get('#requerimento > .box > .box-body > .panel > .panel-body > .panel-footer > .btn-toolbar > .btn-success').click()
-
         //testando os campos de texto da página REQUERIMENTO - NOVO CADASTRO
         cy.get(':nth-child(3) > :nth-child(1) > .form-group > .control-label').should('contain',"Tipo Requerimento")
         cy.get(':nth-child(3) > :nth-child(2) > .form-group > .control-label').should('contain',"Tipo Demanda Permissão")
@@ -160,11 +171,12 @@ describe('consultar_requerimentos', () => {
                 expect(clean).to.include('Status Requerimento');
             })
 
-        cy.get(':nth-child(7) > :nth-child(2) > .form-group > label').should('contain',"Empreendedor Responsável")
-        cy.get(':nth-child(7) > :nth-child(3) > .form-group > label').should('contain',"Possui Reiterações?")
+        cy.get(':nth-child(8) > :nth-child(3) > .form-group > label').should('contain',"Empreendedor Responsável")
+        cy.get(':nth-child(4) > .form-group > label').should('contain',"Possui Reiterações?")
         cy.get(':nth-child(8) > .col-md-6 > .form-group > .control-label').should('contain',"Reserva Orçamentária enviada à DIPLA")
-        cy.get(':nth-child(8) > :nth-child(2) > .form-group > label').should('contain',"Status do Pagamento")
-        cy.get(':nth-child(8) > :nth-child(3) > .form-group > label').should('contain',"Prazo Máximo de Análise")
+        cy.get(':nth-child(9) > :nth-child(1) > .form-group > label').should('contain',"Status do Pagamento")
+        cy.get(':nth-child(9) > :nth-child(2) > .form-group > label').should('contain',"Prazo Máximo de Análise")
+        cy.get(':nth-child(9) > :nth-child(3) > .form-group > label').should('contain',"Estudo/Serviço")
         cy.get('tr > :nth-child(1)').should('contain',"RA")
         cy.get('tr > :nth-child(2)').should('contain',"Empreendimento")
         cy.get('tr > :nth-child(3)').should('contain',"Requerimento")
@@ -175,20 +187,16 @@ describe('consultar_requerimentos', () => {
         cy.get('tr > :nth-child(8)').should('contain',"Data de Publicação")
         cy.get('tr > :nth-child(9)').should('contain',"Ação")
 
-        //Pesquisar um requerimento
+        //PESQUISAR REQUERIMENTO
         cy.get('#select2-cd_empreendimento-container').should('be.visible').click();
-        cy.get('.select2-results__option')
-            .should('have.length.gt', 0)
-            .last()
-            .scrollIntoView()
-            .click({ force: true });
+        cy.get('.select2-results__option').contains('Polos 06, 07, 08 - Projeto Orla - Beira Lago').click({ force: true })
         cy.get('#pesquisarRequerimento').should('be.visible').click();
         cy.wait(1000)
         //Relatório Excel e PDF
         cy.get('#gerarRelatorioPDF').should('be.visible').click();
 
         //Filtrar por texto
-        cy.get('#table-requerimento_filter > label > .form-control').type('ambiental2050')
+        cy.get('#table-requerimento_filter > label > .form-control').type('Licença de Operação')
 
         //Filtro visualizar empreendimento
         cy.get('a[title="Visualizar"]').first().click();
@@ -252,7 +260,7 @@ describe('consultar_requerimentos', () => {
 
         //editar
 
-        cy.get('#ds_requerimento').clear().type('ambiental2050')
+        cy.get('#ds_requerimento').clear().type('Polos 06, 07, 08 - Projeto Orla - Beira Lago')
 
         cy.get('#submit').click()
         cy.get('.modal-footer > .btn-primary').should('have.text', 'Continuar').click();
@@ -264,11 +272,11 @@ describe('consultar_requerimentos', () => {
         cy.get('.menu-open > .treeview-menu > :nth-child(1) > a > span').click()
 
         cy.get('#select2-cd_empreendimento-container').should('be.visible').click();
-        // cy.get('.select2-results').find('li').contains('ambiental2050').click({ force: true }).click()
+        // cy.get('.select2-results').find('li').contains('Polos 06, 07, 08 - Projeto Orla - Beira Lago').click({ force: true }).click()
         cy.get('.select2-results__option')
             .should('have.length.gt', 0)
-            .contains('ambiental2050')
-            .click({ force: true });
+            .contains('Polos 06, 07, 08 - Projeto Orla - Beira Lago')
+            .click({ force: true })
 
         cy.get('#pesquisarRequerimento').click()
 
@@ -282,24 +290,24 @@ describe('consultar_requerimentos', () => {
         cy.get('#select2-cd_empreendimento-container').should('be.visible').click();
         cy.get('.select2-results__option')
             .should('have.length.gt', 0)
-            .contains('ambiental2050')
-            .last()
+            .contains('Polos 06, 07, 08 - Projeto Orla - Beira Lago')
             .click({ force: true });
 
         cy.get('#pesquisarRequerimento').click()
+        cy.get('#table-requerimento_filter > label > .form-control').type('Licença de Operação')
         cy.get('a[title="Excluir"]').first().click();
         cy.get('.modal-footer > .btn-primary').should('have.text', ' Confirmar').click();
         cy.get('.modal-footer > .btn').should('have.text', 'OK').click();
 
-        //EXCLUIR EMPREENDIMENTO
-        cy.get('.sidebar-menu > :nth-child(2) > a > span').click()
-
-        cy.get('.col-md-6 > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field').click()
-        cy.get('.select2-results').find('li').contains('ambiental2050').click({ force: true })
-        cy.get('#pesquisar').click()
-
-        cy.get('a[title="Excluir"]').first().click();
-        cy.contains('button', 'Confirmar').click();
-        cy.contains('button', 'OK').click();
+        // //EXCLUIR EMPREENDIMENTO
+        // cy.get('.sidebar-menu > :nth-child(2) > a > span').click()
+        //
+        // cy.get('.col-md-6 > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field').click()
+        // cy.get('.select2-results').find('li').contains('Polos 06, 07, 08 - Projeto Orla - Beira Lago').click({ force: true })
+        // cy.get('#pesquisar').click()
+        //
+        // cy.get('a[title="Excluir"]').first().click();
+        // cy.contains('button', 'Confirmar').click();
+        // cy.contains('button', 'OK').click();
     })
 })
