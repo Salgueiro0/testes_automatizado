@@ -164,11 +164,6 @@ describe('pendência', () => {
         cy.get('.btn-toolbar > .btn-success').click()
         cy.get('#lista_chk_cd_3283').click()
         cy.get('#modal-vinculo-pendencia > .modal-dialog > .modal-content > .modal-footer > #botao-editar').click()
-
-
-
-       
-
     })
     
 

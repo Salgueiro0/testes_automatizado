@@ -14,84 +14,106 @@ describe('pagamento', () => {
         cy.get('.btn').click()
         cy.get('h1').should('have.text', "Pendência")
 
-        //CRIAR EMPREENDIMENTO PARA TESTE
+        // //CRIAR EMPREENDIMENTO PARA TESTE
+        // cy.visit('http://gla-homol.terracapnet.local')
+        // cy.viewport(2000, 1200)
+        // cy.get('h1').should('have.text', "Pendência")
+        // cy.wait(2000)
+        // cy.get('.sidebar-menu > :nth-child(2) > a > span').click()
+        // cy.get('.btn-success').click()
+        // cy.get('#select2-cd_regiao_admin-container').click()
+        // cy.get('.select2-results').find('li').contains('RA-I - BRASILIA ').click({force: true})
+        // cy.get('#cd_orgao_processo_sei').type('11111')
+        // cy.get('#nr_processo_sei').type('11111111')
+        // cy.get('#aa_processo_sei').type('1111')
+        // cy.get('#select2-tp_empreendimento-container').click()
+        // cy.get('.select2-results').find('li').contains('Parcelamento de Solo Urbano - Novo').click({force: true})
+        // cy.get('#ds_empreendimento').type('ambiental')
+        // cy.get('#select2-tp_prioridade-container').click()
+        // cy.get('.select2-results').find('li').contains('Planejamento Estratégico ').click({force: true})
+        // cy.get('#select2-cd_pessoa_titular-container').click()
+        // cy.get('.select2-results').find('li').contains('ALLAN GUIMARAES DIOGENES ').click({force: true})
+        // cy.get('#select2-cd_pessoa_suplente-container').click()
+        // cy.get('.select2-results').find('li').contains('ALLAN GUIMARAES DIOGENES ').click({force: true})
+        // cy.get('#select2-cd_orgao_responsavel-container').click()
+        // cy.get('.select2-results').find('li').contains('TERRACAP - COMPANHIA IMOBILIARIA DE BRASILIA ').click({force: true})
+        // cy.get('#submit').click()
+        // cy.get('.modal-footer > .btn-primary').click()
+        // cy.get('button.bootbox-accept').should('have.text', 'OK').click();
+        // cy.wait(2000)
+
+        //PESQUISAR EMPREENDIMENTO
+
         cy.visit('http://gla-homol.terracapnet.local')
-        cy.viewport(2000, 1200)
-        cy.get('h1').should('have.text', "Pendência")
+
+        cy.get('.sidebar-menu > :nth-child(2) > a').click()
+
+        cy.get('.col-md-6 > .form-group > .select2-container > .selection > .select2-selection').click()
+        cy.get('.select2-results').find('li').contains('Polos 06, 07, 08 - Projeto Orla - Beira Lago').click()
+
+        cy.get('#pesquisar').click()
+        cy.wait(1000)
+        cy.get('a[title="Visualizar"]').first().click();
+
+        cy.get('.requerimentos-aba').click()
+
+
+        // //CRIAR REQUERIMENTO PARA TESTE
+        //
+        // cy.wait(2000)
+        // cy.get('.requerimentos-aba').should('contain.text', 'Requerimento').click()
+        //
+        // cy.get('#requerimento > .box > .box-body > .panel > .panel-body > .panel-footer > .btn-toolbar > .btn-success').click()
+        //
+        // cy.get('[id^="select2-tp_demanda_permissao-"][id$="-container"]').click();
+        // cy.get('.select2-results').should('be.visible').find('li.select2-results__option').should('have.length.gt', 0).contains('LP - Licença Prévia').click({ force: true });
+        //
+        // cy.get('#nr_oficio').type('2000')
+        //
+        // cy.get('#aa_oficio').type('2025')
+        //
+        // cy.get('[id^="select2-cd_orgao_oficio-"][id$="-container"]').click();
+        // cy.get('.select2-results').should('be.visible').find('li.select2-results__option').should('have.length.gt', 0).contains('ACJUR - ADVOCACIA E CONSULTORIA JURIDICA').click({ force: true });
+        //
+        // cy.get('#ds_observacao_doc_oficio').type('208')
+        //
+        // cy.get('#select2-cd_pessoa_titular-container').click()
+        // cy.get('.select2-results').find('li').contains('ALLAN GUIMARAES DIOGENES').click({ force: true })
+        //
+        // cy.get('#ds_requerimento').type('Fazenda Graça Esmeralda')
+        //
+        // cy.get('[id^="select2-cd_orgao_requerimento-"][id$="-container"]').click();
+        // cy.get('.select2-results').should('be.visible').find('li.select2-results__option').should('have.length.gt', 0).contains('ANATEL - AGÊNCIA NACIONAL DE TELECOMUNICAÇÕES').click({ force: true });
+        //
+        // cy.get('#dt_publicacao').type('2020-01-01')
+        //
+        // cy.get('[id^="select2-tp_status-"][id$="-container"]').click();
+        // cy.get('.select2-results').should('be.visible').find('li.select2-results__option').should('have.length.gt', 0).contains('Deferido').click({ force: true });
+        //
+        // cy.get('#cd_orgao_processo_sei').type('1')
+        // cy.get('#nr_processo_sei').type('1')
+        // cy.get('#aa_processo_sei').type('1')
+        //
+        // cy.get('#fl_reserva_orcamentaria').click()
+        // cy.wait(1000)
+        // cy.get('#nr_doc_sei_despacho').type('1111')
+        //
+        // cy.get('#submit').should('contain.text', 'Salvar').click()
+        // cy.wait(1000)
+        // cy.get('.modal-footer > .btn-primary').should('contain.text', 'Continuar').click()
+        // cy.wait(1000)
+        // cy.get('.modal-footer > .btn').should('contain.text', 'OK').click()
+        // cy.wait(1000)
+
+        //PESQUISAR REQUERIMENTO
+
+        cy.get('#pesquisarRequerimento').click()
+
         cy.wait(2000)
-        cy.get('.sidebar-menu > :nth-child(2) > a > span').click()
-        cy.get('.btn-success').click()
-        cy.get('#select2-cd_regiao_admin-container').click()
-        cy.get('.select2-results').find('li').contains('RA-I - BRASILIA ').click({force: true})
-        cy.get('#cd_orgao_processo_sei').type('11111')
-        cy.get('#nr_processo_sei').type('11111111')
-        cy.get('#aa_processo_sei').type('1111')
-        cy.get('#select2-tp_empreendimento-container').click()
-        cy.get('.select2-results').find('li').contains('Parcelamento de Solo Urbano - Novo').click({force: true})
-        cy.get('#ds_empreendimento').type('ambiental')
-        cy.get('#select2-tp_prioridade-container').click()
-        cy.get('.select2-results').find('li').contains('Planejamento Estratégico ').click({force: true})
-        cy.get('#select2-cd_pessoa_titular-container').click()
-        cy.get('.select2-results').find('li').contains('ALLAN GUIMARAES DIOGENES ').click({force: true})
-        cy.get('#select2-cd_pessoa_suplente-container').click()
-        cy.get('.select2-results').find('li').contains('ALLAN GUIMARAES DIOGENES ').click({force: true})
-        cy.get('#select2-cd_orgao_responsavel-container').click()
-        cy.get('.select2-results').find('li').contains('TERRACAP - COMPANHIA IMOBILIARIA DE BRASILIA ').click({force: true})
-        cy.get('#submit').click()
-        cy.get('.modal-footer > .btn-primary').click()
-        cy.get('button.bootbox-accept').should('have.text', 'OK').click();
-        cy.wait(2000)
 
-
-        //CRIAR REQUERIMENTO PARA TESTE
-
-        cy.wait(2000)
-        cy.get('.requerimentos-aba').should('contain.text', 'Requerimento').click()
-
-        cy.get('#requerimento > .box > .box-body > .panel > .panel-body > .panel-footer > .btn-toolbar > .btn-success').click()
-
-        cy.get('[id^="select2-tp_demanda_permissao-"][id$="-container"]').click();
-        cy.get('.select2-results').should('be.visible').find('li.select2-results__option').should('have.length.gt', 0).contains('LP - Licença Prévia').click({ force: true });
-
-        cy.get('#nr_oficio').type('2000')
-
-        cy.get('#aa_oficio').type('2025')
-
-        cy.get('[id^="select2-cd_orgao_oficio-"][id$="-container"]').click();
-        cy.get('.select2-results').should('be.visible').find('li.select2-results__option').should('have.length.gt', 0).contains('ACJUR - ADVOCACIA E CONSULTORIA JURIDICA').click({ force: true });
-
-        cy.get('#ds_observacao_doc_oficio').type('208')
-
-        cy.get('#select2-cd_pessoa_titular-container').click()
-        cy.get('.select2-results').find('li').contains('ALLAN GUIMARAES DIOGENES').click({ force: true })
-
-        cy.get('#ds_requerimento').type('Fazenda Graça Esmeralda')
-
-        cy.get('[id^="select2-cd_orgao_requerimento-"][id$="-container"]').click();
-        cy.get('.select2-results').should('be.visible').find('li.select2-results__option').should('have.length.gt', 0).contains('ANATEL - AGÊNCIA NACIONAL DE TELECOMUNICAÇÕES').click({ force: true });
-
-        cy.get('#dt_publicacao').type('2020-01-01')
-
-        cy.get('[id^="select2-tp_status-"][id$="-container"]').click();
-        cy.get('.select2-results').should('be.visible').find('li.select2-results__option').should('have.length.gt', 0).contains('Deferido').click({ force: true });
-
-        cy.get('#cd_orgao_processo_sei').type('1')
-        cy.get('#nr_processo_sei').type('1')
-        cy.get('#aa_processo_sei').type('1')
-
-        cy.get('#fl_reserva_orcamentaria').click()
-        cy.wait(1000)
-        cy.get('#nr_doc_sei_despacho').type('1111')
-
-        cy.get('#submit').should('contain.text', 'Salvar').click()
-        cy.wait(1000)
-        cy.get('.modal-footer > .btn-primary').should('contain.text', 'Continuar').click()
-        cy.wait(1000)
-        cy.get('.modal-footer > .btn').should('contain.text', 'OK').click()
-        cy.wait(1000)
+        cy.get('a[title="Visualizar"]').first().click();
 
         //ADICIONAR PAGAMENTO AO REQUERIMENTO
-        cy.get('a[title="Visualizar"]').first().click();
 
         cy.wait(2000)
 
@@ -108,6 +130,11 @@ describe('pagamento', () => {
         cy.contains("button","OK").click()
 
         cy.wait(1000)
+
+        cy.get('.btn-delete-pagamento > .fas').click()
+        cy.contains('button', "Confirmar").click()
+        cy.wait(1000)
+        cy.contains('button', "OK").click()
 
         //PESQUISAR PAGAMENTO
         cy.get('.sidebar-menu > :nth-child(8) > a > span').click()
@@ -141,52 +168,73 @@ describe('pagamento', () => {
         cy.contains('button',"Limpar").click()
 
         //pesquisando pagamento
+        cy.get(':nth-child(8) > a').click()
+
         cy.get(':nth-child(1) > :nth-child(1) > .form-group > .select2-container > .selection > .select2-selection').click()
         cy.get('.select2-results').find('li').contains('RA-I - BRASILIA ').click({force: true})
         cy.wait(2000)
         cy.get('#select2-cd_empreendimento-container').click()
-        cy.get('.select2-results').find('li').last().click()
+        cy.get('.select2-results').find('li').contains('Polos 06, 07, 08 - Projeto Orla - Beira Lago').click()
 
         cy.contains('button',"Pesquisar").click()
+
 
         cy.get('a[title="Visualizar"]').first().click()
         cy.wait(1000)
 
-        //filtro pesquisar pagamento em requerimento
-
-        cy.get('#table-pagamento_filter > label > .form-control').type('1')
-
         //EDITAR PAGAMENTO
-        cy.get('.btn-edit-pagamento > .fa').click()
+        cy.get(':nth-child(8) > a').click()
+
+        cy.get(':nth-child(1) > :nth-child(1) > .form-group > .select2-container > .selection > .select2-selection').click()
+        cy.get('.select2-results').find('li').contains('RA-I - BRASILIA ').click({force: true})
+        cy.wait(2000)
+        cy.get('#select2-cd_empreendimento-container').click()
+        cy.get('.select2-results').find('li').contains('Polos 06, 07, 08 - Projeto Orla - Beira Lago').click()
+
+        cy.contains('button',"Pesquisar").click()
+
+        cy.get(':nth-child(1) > .text-center > .btn-edit-pagamento > .fa').click()
+
+        cy.get('#modal_ds_sei_num_doc_pagamento').clear().type(1)
+
+        cy.get('#botao-editar').click()
+
+        cy.contains('button', "OK").click()
+
+        cy.get(':nth-child(8) > a > span').click()
+        cy.get(':nth-child(2) > .form-group > .select2-container > .selection > .select2-selection').click()
+        cy.get('.select2-results').find('li').contains('Polos 06, 07, 08 - Projeto Orla - Beira Lago').click()
+        cy.get('#pesquisarPagamento').click()
+        cy.get(':nth-child(1) > .text-center > .btn-edit-pagamento').click()
         cy.wait(1000)
-        cy.get('#ds_pagamento').type('descrição')
+        cy.get('#modal_vl_pagamento').clear().type('1111')
         cy.wait(1000)
         cy.contains('button', "Editar").click()
         cy.contains('button', "OK").click()
         cy.wait(2000)
 
-        //EXCLUIR PAGAMENTO
-        cy.get('.btn-delete-pagamento > .fas').click()
-        cy.wait(1000)
-        cy.contains('button', "Confirmar").click()
-        cy.contains('button', "OK").click()
+        // //EXCLUIR PAGAMENTO
+        // cy.get('.btn-delete-pagamento > .fas').click()
+        // cy.wait(1000)
+        // cy.contains('button', "Confirmar").click()
+        // cy.contains('button', "OK").click()
 
-        //EXCLUIR REQUERIMENTO
-
-        cy.contains('button', "Excluir").click()
-        cy.contains('button', "Confirmar").click()
-        cy.contains('button', "OK").click()
-
-        //EXCLUIR EMPREENDIMENTO
-        cy.get('.sidebar-menu > :nth-child(2) > a > span').click()
-
-        cy.get('.col-md-6 > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field').click()
-        cy.get('.select2-results').find('li').contains('ambiental').click({ force: true })
-        cy.get('#pesquisar').click()
-
-        cy.get('a[title="Excluir"]').first().click();
-        cy.contains('button', 'Confirmar').click();
-        cy.contains('button', 'OK').click();
+        // //EXCLUIR REQUERIMENTO
+        //
+        // cy.contains('button', "Excluir").click()
+        // cy.contains('button', "Confirmar").click()
+        // cy.contains('button', "OK").click()
+        //
+        // //EXCLUIR EMPREENDIMENTO
+        // cy.get('.sidebar-menu > :nth-child(2) > a > span').click()
+        //
+        // cy.get('.col-md-6 > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field').click()
+        // cy.get('.select2-results').find('li').contains('ambiental').click({ force: true })
+        // cy.get('#pesquisar').click()
+        //
+        // cy.get('a[title="Excluir"]').first().click();
+        // cy.contains('button', 'Confirmar').click();
+        // cy.contains('button', 'OK').click();
      })
 })
 
