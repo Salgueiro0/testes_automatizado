@@ -1,4 +1,5 @@
 import documentos from "../../../support/pages/documentos";
+import {ELEMENTS as el} from "../../../support/pages/documentos/elements";
 
 describe('consultar_requerimentos', () => {
 
@@ -50,7 +51,7 @@ describe('consultar_requerimentos', () => {
         documentos.clicarEmpreendimento()
         documentos.selecionarEmpreendimento()
         documentos.pesquisarEmpreendimento()
-        documentos.clicarVisualizarEmpreendimento()
+        documentos.clicarVisualizarPrimeiraOpcao()
 
 
         //CRIAR NOVO DOCUMENTO
@@ -69,69 +70,61 @@ describe('consultar_requerimentos', () => {
         documentos.digitarDataDocumento()
         documentos.selecionarOrgaoDocumento()
         documentos.digitarNumeroSeiDocumento()
+        documentos.digitarDescricaoDocumento()
+        documentos.clicarBotaoSalvar()
+        documentos.clicarModalBotaoOk()
 
-
-
-
-        cy.get('#ds_documento').type('teste')
-
-        cy.get('[type="submit"]').click()
-
-        cy.contains('button', 'OK').click()
 
         //PESQUISAR DOCUMENTO
 
-        cy.get(':nth-child(5) > a > span').click()
+        documentos.irAbaLateralDocumentos()
 
         //validando campos de texto
 
-        cy.get(':nth-child(2) > :nth-child(1) > .form-group > .control-label').should('contain', "Empreendimento")
-        cy.get(':nth-child(2) > :nth-child(3) > .form-group > .control-label').should('contain', "Exigência")
-        cy.get(':nth-child(5) > .col-md-6 > .form-group > .control-label').should('contain', "Tipo")
-        cy.get(':nth-child(6) > :nth-child(1) > .form-group > .control-label').should('contain', "Órgão Documento")
-        cy.get(':nth-child(7) > :nth-child(1) > .form-group > .control-label').should('contain', "Descrição")
-        cy.get(':nth-child(1) > .col-md-6 > .form-group > .control-label').should('contain', "R.A")
-        cy.get(':nth-child(2) > :nth-child(2) > .form-group > .control-label').should('contain', "Demanda")
-        cy.get(':nth-child(4) > .form-group > .control-label').should('contain', "Requerimento")
-        cy.get(':nth-child(5) > :nth-child(2) > .form-group > .control-label').should('contain', "Número")
-        cy.get(':nth-child(6) > :nth-child(3) > .form-group > .control-label').should('contain', "Arquivo Principal")
-        cy.get(':nth-child(5) > :nth-child(3) > .form-group > .control-label').should('contain', "Data")
-        cy.get(':nth-child(7) > :nth-child(2) > .form-group > label').should('contain', "Empreendedor Responsável")
-        cy.get(':nth-child(6) > :nth-child(2) > .form-group > .control-label').should('contain', "Nº SEI Doc")
-
-        cy.get('.sorting_asc').should('contain', "Origem")
-        cy.get('[aria-label="RA: Ordenar colunas de forma ascendente"]').should('contain', "RA")
-        cy.get('[aria-label="Empreendimento: Ordenar colunas de forma ascendente"]').should('contain', "Empreendimento")
-        cy.get('[aria-label="Tipo: Ordenar colunas de forma ascendente"]').should('contain', "Tipo")
-        cy.get('[aria-label="Número: Ordenar colunas de forma ascendente"]').should('contain', "Número")
-        cy.get('[aria-label="Data: Ordenar colunas de forma ascendente"]').should('contain', "Data")
-        cy.get('[aria-label="Órgão: Ordenar colunas de forma ascendente"]').should('contain', "Órgão")
-        cy.get('[aria-label="Nº SEI Doc: Ordenar colunas de forma ascendente"]').should('contain', "Nº SEI Doc")
-        cy.get('[aria-label="Descrição: Ordenar colunas de forma ascendente"]').should('contain', "Descrição")
-        cy.get('[aria-label="Ação: Ordenar colunas de forma ascendente"]').should('contain', "Ação")
+        documentos.validarLabelOrigem()
+        documentos.validarLabelExigencia()
+        documentos.validarLabelTipo()
+        documentos.validarLabelOrgaoDocumento()
+        documentos.validarLabelDescricao()
+        documentos.validarLabelRa()
+        documentos.validarLabelDemanda()
+        documentos.validarLabelRequerimento()
+        documentos.validarLabelNumero()
+        documentos.validarLabelArquivoPrincipal()
+        documentos.validarLabelPeriodoDataPublicacao()
+        documentos.validarLabelEmpreendedorResponsavel()
+        documentos.validarLabelEmpreendedorResponsavel()
+        documentos.validarRowOrigem()
+        documentos.validarRowRa()
+        documentos.validarRowEmpreendimento()
+        documentos.validarRowTipo()
+        documentos.validarRowNumero()
+        documentos.validarRowData()
+        documentos.validarRowOrgao()
+        documentos.validarRowNSeiDoc()
+        documentos.validarRowDescricao()
+        documentos.validarRowAcao()
 
         //Testando limpar campos
-        cy.get('#ds_documento').type('teste')
 
-        cy.get('[onclick="resetFields()"]').click()
+        documentos.digitarCampoDescricaoDocumento()
+        documentos.clicarBotaoLimparAbaDocumentos()
 
         //pesquisando documento
 
-        cy.wait(3000)
 
-        cy.get('#select2-combo_empreendimento-container').click()
-        cy.wait(1000)
-        cy.get('.select2-results').find('li').contains('Polos 06, 07, 08 - Projeto Orla - Beira Lago').click()
-        cy.get('#pesquisarDocumentos').click()
+        documentos.selecionarEmpreendimentoEmDocumentos()
+        documentos.clicarBotaoPesquisarDocumento()
 
         //filtro de pesquisa
-        cy.get('#table-documento_filter > label > .form-control').type('1245')
+
+        documentos.digitarCampoFiltro()
 
         //VISUALIZAR DOCUMENTO
-        cy.get('a[title="Visualizar"]').first().click();
+        documentos.clicarVisualizarPrimeiraOpcao()
 
         //ir para dados detalhados
-        cy.get('.col-md-12 > a').click()
+        documentos.irParaDadosDetalhados()
 
         //validar campos de texto
         cy.get('[width="90"] > b').should('contain', "Tipo")
