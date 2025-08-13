@@ -1,9 +1,11 @@
+import documentos from "../../../support/pages/documentos";
+
 describe('consultar_requerimentos', () => {
 
     beforeEach(() => {
 
         cy.session('loginSession', () => {
-            cy.visit('http://gla-homol.terracapnet.local')
+            cy.visit('/')
             cy.viewport(2000, 1200)
             cy.get(':nth-child(2) > .form-control').type('C9020840')
             cy.get(':nth-child(3) > .form-control').type('welcome_1')
@@ -43,40 +45,33 @@ describe('consultar_requerimentos', () => {
 
         //PESQUISAR EMPREENDIMENTO
 
-        cy.visit('http://gla-homol.terracapnet.local')
+        cy.visit('/')
 
-        cy.get('.sidebar-menu > :nth-child(2) > a').click()
-
-        cy.get('.col-md-6 > .form-group > .select2-container > .selection > .select2-selection').click()
-        cy.get('.select2-results').find('li').contains('Polos 06, 07, 08 - Projeto Orla - Beira Lago').click()
-
-        cy.get('#pesquisar').click()
-        cy.wait(1000)
-        cy.get('a[title="Visualizar"]').first().click();
+        documentos.clicarEmpreendimento()
+        documentos.selecionarEmpreendimento()
+        documentos.pesquisarEmpreendimento()
+        documentos.clicarVisualizarEmpreendimento()
 
 
         //CRIAR NOVO DOCUMENTO
 
-
-        cy.contains('a', 'Novo Documento').click({ force: true });
+        documentos.clicarBotaoNovoDocumento()
 
 
         //testar botão limpar
-        cy.get('#ds_documento').type('teste')
-        cy.contains('button', 'Limpar').click();
+        documentos.digitarCampoDescricaoDocumento()
+        documentos.clicarBotaoLimpar()
 
         //Cadastrar documento
-        cy.get('[id^="select2-tp_documento-"][id$="-container"]').click();
-        cy.get('.select2-results').find('li').contains('Outros').click({force: true})
 
-        cy.get('#nr_documento').type('1245')
+        documentos.selecionarTipoDocumento()
+        documentos.digitarNumeroDocumento()
+        documentos.digitarDataDocumento()
+        documentos.selecionarOrgaoDocumento()
+        documentos.digitarNumeroSeiDocumento()
 
-        cy.get('#dt_documento').type('2025-01-01')
 
-        cy.get('[id^="select2-cd_orgao_documento-"][id$="-container"]').click();
-        cy.get('.select2-results').find('li').contains('ADETUR - AGÊNCIA DE DESENVOLVIMENTO DO TURISMO DO DISTRITO FEDERAL').click({force: true})
 
-        cy.get('#nr_documento_sei').type('435456')
 
         cy.get('#ds_documento').type('teste')
 
