@@ -1,5 +1,10 @@
 export const ELEMENTS = {
 
+    //login
+    campoUsuario: ':nth-child(2) > .form-control',
+    campoSenha: ':nth-child(3) > .form-control',
+    botaoLogin: '.btn',
+
     botaoEmpreendimento: '.sidebar-menu > :nth-child(2) > a',
     campoEmpreendimento: '.col-md-6 > .form-group > .select2-container > .selection > .select2-selection',
     dropdwonGla: '.select2-results',
@@ -42,14 +47,27 @@ export const ELEMENTS = {
     botaoPesquisarDocumento: '#pesquisarDocumentos',
     campoFiltro: '#table-documento_filter > label > .form-control',
     selecionarEmpreendimentoEmDocumentos: '#select2-combo_empreendimento-container',
+    selecionarRAEmDocumentos: '#select2-regiao_adm-container',
     dadosDetalhados: '.col-md-12 > a',
 
 
     //validar campos de texto em visualizar documento
+    rowDadosDetalhadosTipo: '[width="90"] > b',
+    rowDadosDetalhadosNumero: ':nth-child(2) > :nth-child(1) > b',
+    rowDadosDetalhadosData: ':nth-child(3) > :nth-child(1) > b',
+    rowDadosDetalhadosOrgao:':nth-child(4) > :nth-child(1) > b',
+    rowDadosDetalhadosNSeiDoc:':nth-child(5) > :nth-child(1) > b',
+    rowDadosDetalhadosDescricao: ':nth-child(6) > :nth-child(1) > b',
 
 
+    //EDITAR DOCUMENTO
 
-
+    botaoEditarDocumento: 'a.btn',
+    labelEditarTipo: ':nth-child(1) > .col-md-6 > .form-group > .control-label',
+    labelEditarDocumento:':nth-child(2) > :nth-child(1) > .form-group > .control-label',
+    labelEditarDescricao:':nth-child(3) > .col-md-12 > .form-group > .control-label',
+    labelEditarNumero:':nth-child(1) > :nth-child(2) > .form-group > .control-label',
+    labelEditarNSeiDoc:':nth-child(3) > .form-group > .control-label',
 
 
 

@@ -14,6 +14,15 @@ class documentos{
         cy.get(el.botaoPesquisarEmpreendimento).click()
     }
 
+    irParaGLA(){
+        cy.visit('/')
+    }
+
+    login(){
+        cy.get(el.campoUsuario).type('C9020840')
+        cy.get(el.campoSenha).type('welcome_1')
+        cy.get(el.botaoLogin).click()
+    }
     clicarVisualizarPrimeiraOpcao(){
         cy.get(el.botaoVisualizar).first().click()
     }
@@ -169,12 +178,78 @@ class documentos{
     }
 
     selecionarEmpreendimentoEmDocumentos(){
+        cy.wait(2000)
         cy.get(el.selecionarEmpreendimentoEmDocumentos).click()
+        cy.wait(2000)
         cy.get(el.dropdwonGla).find('li').contains('Polos 06, 07, 08 - Projeto Orla - Beira Lago').click()
     }
 
+    selecionarRA(){
+        cy.get(el.selecionarRAEmDocumentos).click()
+        cy.get(el.dropdwonGla).find('li').contains('RA-I - BRASILIA ').click({force: true})
+    }
+
+    //DADOS DETALHADOS
     irParaDadosDetalhados(){
         cy.get(el.dadosDetalhados).click()
+    }
+
+    rowDadosDetalhadosTipo(){
+        cy.get(el.rowDadosDetalhadosTipo).should('contain', "Tipo")
+    }
+
+    rowDadosDetalhadosNumero(){
+        cy.get(el.rowDadosDetalhadosNumero).should('contain', "Número")
+    }
+
+    rowDadosDetalhadosData(){
+        cy.get(el.rowDadosDetalhadosData).should('contain', "Data")
+    }
+
+    rowDadosDetalhadosOrgao(){
+        cy.get(el.rowDadosDetalhadosOrgao).should('contain', "Órgão")
+    }
+
+    rowDadosDetalhadosNSeiDoc(){
+        cy.get(el.rowDadosDetalhadosNSeiDoc).should('contain', "Nº SEI Doc")
+    }
+
+    rowDadosDetalhadosDescricao(){
+        cy.get(el.rowDadosDetalhadosDescricao).should('contain', "Descrição")
+    }
+
+    //EDITAR DOCUMENTO
+
+    clicarBotaoEditarDocumento(){
+        cy.get(el.botaoEditarDocumento).click()
+    }
+
+    validarLabelEditarTipo(){
+        cy.get(el.labelEditarTipo).should('contain', "Tipo")
+    }
+
+    validarLabelEditarOrgaoDocumento(){
+        cy.get(el.labelEditarDocumento).should('contain', "Órgão Documento")
+    }
+
+    validarLabelEditarDescricao(){
+        cy.get(el.labelEditarDescricao).should('contain', "Descrição")
+    }
+
+    validarLabelEditarNumero(){
+        cy.get(el.labelEditarNumero).should('contain', "Número")
+    }
+
+    validarLabelEditarNSeiDoc(){
+        cy.get(el.labelEditarNSeiDoc).should('contain', "Data")
+    }
+
+    clicarBotaoExcluir(){
+        cy.contains('button', "Excluir").click()
+    }
+
+    clicarModalBotaoConfirmar(){
+        cy.contains('button', "Confirmar").click()
     }
 
 
