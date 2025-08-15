@@ -11,28 +11,28 @@ class exigencias{
     }
 
     irParaEmpreendimento() {
-        cy.get(':nth-child(1) > .form-group > .text-block > a').click()
+        cy.get(el.abaLateralEmpreendimento).click()
     }
 
     irParaDemanda() {
-        cy.get(':nth-child(2) > .form-group > .text-block > a').click()
+        cy.get(el.abaDemanda).click()
     }
 
     digitarNumeroExigencia() {
-        cy.get('#co_exigencia').type('34243')
+        cy.get(el.coExigencia).type('34243')
     }
 
     clicarBotaoLimpar() {
-        cy.get('[onclick="limpaExigencia()"]').click()
+        cy.get(el.botaoLimparExigencia).click()
     }
 
     selecionarTema() {
-        cy.get(':nth-child(4) > :nth-child(2) > .form-group > .select2-container > .selection > .select2-selection').click()
-        cy.get('.select2-results').find('li').contains('Outros').click({force: true})
+        cy.get(el.seletorTema).click()
+        cy.get(el.dropdownGla).find('li').contains('Outros').click({force: true})
     }
 
     digitarPrazoDias() {
-        cy.get('#qt_prazo_dias').type('10')
+        cy.get(el.campoPrazoDias).type('10')
     }
 
     digitarDescricaoExigencia() {
@@ -50,103 +50,98 @@ class exigencias{
         typeInCkeditor('#cke_2_contents > .cke_wysiwyg_frame', 'descrição2');
     }
 
-    digitarDescricaoProvidencia() {
-
-    }
-
     selecionarTitular() {
-        cy.get('#select2-cd_pessoa_titular-container').click()
-        cy.get('.select2-results').find('li').contains('Gabriel Tenorio Ramos').click({force: true})
+        cy.get(el.seletorPessoaTitular).click()
+        cy.get(el.dropdownGla).find('li').contains('Gabriel Tenorio Ramos').click({force: true})
     }
 
     selecionarSuplente() {
-        cy.get('#select2-cd_pessoa_suplente-container').click()
-        cy.get('.select2-results').find('li').contains('PAULO CESAR COSTA').click({force: true})
+        cy.get(el.seletorSuplente).click()
+        cy.get(el.dropdownGla).find('li').contains('PAULO CESAR COSTA').click({force: true})
     }
 
     selecionarStatus() {
-        cy.get(':nth-child(9) > :nth-child(1) > .form-group > .select2-container > .selection > .select2-selection').click()
-        cy.get('.select2-results').find('li').contains('Cumprida').click({force: true})
+        cy.get(el.seletorStatus).click()
+        cy.get(el.dropdownGla).find('li').contains('Cumprida').click({force: true})
     }
 
     digitarSeiProcAcompanhamento() {
-        cy.get('#cd_orgao_processo_sei').type('1')
-        cy.get('#nr_processo_sei').type('111')
-        cy.get('#aa_processo_sei').type('2025')
+        cy.get(el.orgaoProcessoSei).type('1')
+        cy.get(el.numeroProcessoSei).type('111')
+        cy.get(el.anoProcessoSei).type('2025')
     }
 
     adicionarUnidadeInterna() {
-        cy.get(':nth-child(10) > :nth-child(1) > .panel-border > .panel-body > .row > .col-md-10 > .form-group > .select2-container > .selection > .select2-selection').click()
-        cy.get('.select2-results').find('li').contains('ADHAR - ASSESSORIA DA DIRETORIA DE HABITAÇÃO E DE REGULARIZAÇÃO ').click({force: true})
-        cy.get('#add_unidade_interna').click()
+        cy.get(el.seletorUnidadeInterna).click()
+        cy.get(el.dropdownGla).find('li').contains('ADHAR - ASSESSORIA DA DIRETORIA DE HABITAÇÃO E DE REGULARIZAÇÃO ').click({force: true})
+        cy.get(el.adicionarUnidadeInterna).click()
 
-        cy.get('#submit').click()
+        cy.get(el.botaoSalvar).click()
     }
 
     clicarAbaDemanda() {
-        cy.get(':nth-child(3) > [href="#"] > :nth-child(2)').click()
+        cy.get(el.botaoDemanda).click()
     }
 
     clicarConsultarDemanda() {
-        cy.get('.menu-open > .treeview-menu > :nth-child(1) > a > span').click()
+        cy.get(el.botaoConsultaDemanda).click()
     }
 
     selecionarRA() {
-        cy.get('#form_geral > :nth-child(1) > :nth-child(1) > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field').click()
-        cy.get('.select2-results').find('li').contains('RA-I - BRASILIA ').click({ force: true })
+        cy.get(el.seletorRA).click()
+        cy.get(el.dropdownGla).find('li').contains('RA-I - BRASILIA ').click({ force: true })
         cy.wait(2000)
     }
 
     selecionarEmpreendimento() {
-        cy.get('#form_geral > :nth-child(1) > :nth-child(2) > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field').click()
-        cy.get('.select2-results').find('li').contains('Polos 06, 07, 08 - Projeto Orla - Beira Lago').click({ force: true })
+        cy.get(el.seletorEmpreendimento).click()
+        cy.get(el.dropdownGla).find('li').contains('Polos 06, 07, 08 - Projeto Orla - Beira Lago').click({ force: true })
     }
 
     clicarBotaoPesquisar() {
-        cy.get('#pesquisar').click()
+        cy.get(el.botaoPesquisar).click()
     }
 
     digitarFiltroPesquisarDemanda() {
-        cy.get('#table-demanda_filter > label > .form-control').type('12345454')
+        cy.get(el.filtroPesquisarDemanda).type('12345454')
     }
 
     clicarPrimeiroBotaoVisualizar() {
-        cy.get('a[title="Visualizar"]').first().click()
+        cy.get(el.primeiroBotaoVisualizar).first().click()
     }
 
     clicarAbaExigencia() {
-        cy.get('.exigencias-aba').click()
-
+        cy.get(el.abaExigencia).click()
         cy.wait(3000)
     }
 
     clicarBotaoNovaExigencia() {
-        cy.get('#exigencia > .box > .box-body > .panel > .panel-body > .panel-footer > .btn-toolbar > a.btn').click()
+        cy.get(el.botaoNovaExigencia).click()
     }
 
     selecionarAbaExigencias(){
-        cy.get(':nth-child(6) > a > span').click()
-        cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn').click()
+        cy.get(el.abaLateralExigencia).click()
+        cy.get(el.modalAvisoFiltros).click()
         cy.wait(1000)
     }
 
     selecionarRaPesquisarExigencias(){
-        cy.get('#select2-cd_regiao-container').click()
-        cy.get('.select2-results').find('li').contains('RA-I - BRASILIA ').click({force: true})
+        cy.get(el.seletorRegiao).click()
+        cy.get(el.dropdownGla).find('li').contains('RA-I - BRASILIA ').click({force: true})
         cy.wait(2000)
     }
 
     selecionarEmpreendimentoPesquisarExigencias(){
-        cy.get('#select2-cd_empreendimento-container').click()
-        cy.get('.select2-results').find('li').contains('Polos 06, 07, 08 - Projeto Orla - Beira Lago').click({force: true})
+        cy.get(el.seletorEmpreendimentoPesquisarExigencias).click()
+        cy.get(el.dropdownGla).find('li').contains('Polos 06, 07, 08 - Projeto Orla - Beira Lago').click({force: true})
     }
 
     botaoPesquisarExigencia(){
-        cy.get('#pesquisarExigencia').click()
+        cy.get(el.botaoPesquisarExigencia).click()
     }
 
     digitarFiltroPesquisar(){
-        cy.get('#table-exigencia_filter > label > .form-control').type('descrição')
+        cy.get(el.campoFiltroPesquisa).type('descrição')
     }
 
     adicionarDilacoesPrazos(){
@@ -156,7 +151,7 @@ class exigencias{
 
     digitarObservacaoSeiPedido(){
         cy.wait(1000)
-        cy.get('#ds_observacao_sei_pedido').type('6512154')
+        cy.get(el.descricaoObservacaoSeiPedido).type('6512154')
     }
 
     botaoSalvar(){
@@ -164,5 +159,196 @@ class exigencias{
         cy.wait(3000)
     }
 
+    confirmarExigencia(){
+        cy.get(el.botaoConfirmar).click()
+        cy.wait(2000)
+    }
+
+    clicarBotaoNao(){
+        cy.contains('button', "Não").click()
+    }
+
+    botaoEditarDilacaoPrazos(){
+        cy.get(el.botaoEditarDilacaoPrazos).click()
+    }
+    digitarObservacaoSeiPedido(){
+        cy.get('#ds_observacao_sei_pedido').type('654')
+    }
+
+    botaoExcluir(){
+        cy.get(el.botaoExcluir).click()
+    }
+
+    botaoModalSim(){
+        cy.contains('button', "Sim").click()
+    }
+
+    clicarBotaoEditarExigencia(){
+        cy.get(el.botaoLinkEditarExigencia).click()
+    }
+
+    digitarQuantidadePrazoDias(){
+        cy.get(el.campoPrazoDias).type('80')
+    }
+
+    salvarBotao(){
+        cy.get('#submit').click()
+    }
+
+    clicarModalSalvar(){
+        cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary').click()
+    }
+
+    clicarBotaoOK(){
+        cy.contains('button', "OK").click()
+    }
+
+    digitarCoExigencia(){
+        cy.get('#co_exigencia').type('34243')
+    }
+
+    // clicarBotaoPesquisarExigencia(){
+    //
+    // }
+
+    clicarBotaoExcluirExigencia(){
+        cy.get('.btn-delete-exigencia > .fas').click()
+    }
+
+    clicarModalConfirmar(){
+        cy.contains('button',"Confirmar").click()
+    }
+
+    clicarModalRelatorioPDF(){
+        cy.get('#modalRelatorioPersonalizadoPDF').click()
+    }
+
+    clicarGerarRelatorioPDF(){
+        cy.get('#gerarRelatorioPersonalizadoPDF').click()
+    }
+
+    fecharModalPDF(){
+        cy.get('#modal-relatorio-pdf-personalizado > .modal-dialog > .modal-content > .modal-footer > .btn-form').click()
+    }
+
+    //VALIDAR CAMPOS DE TEXTO
+    validarLabelEmpreendimento(){
+        cy.get(el.labelEmpreendimento).should('contain', "Empreendimento ")
+    }
+
+    validarLabelDemanda() {
+        cy.get(el.labelDemanda).should('contain', 'Demanda ')
+    }
+    validarLabelNumero() {
+        cy.get(el.labelNumero).should('contain', 'Número')
+    }
+    validarLabelTema() {
+        cy.get(el.labelTema).should('contain', 'Tema')
+    }
+    validarLabelPossuiPrazoExpresso() {
+        cy.get(el.labelPossuiPrazoExpresso).should('contain', 'Possui Prazo Expresso na Exigência')
+    }
+    validarLabelDias() {
+        cy.get(el.labelDias).should('contain', 'Dias')
+    }
+    validarLabelPrevisaoCumprimento() {
+        cy.get(el.labelPrevisaoCumprimento).should('contain', 'Previsão de Cumprimento')
+    }
+    validarLabelExigeContratacao() {
+        cy.get(el.labelExigeContratacao).should('contain', 'Exige Contratação')
+    }
+    validarLabelDescricaoExigencia() {
+        cy.get(el.labelDescricaoExigencia).should('contain', 'Descrição Exigência')
+    }
+    validarLabelDescricaoProvidencia() {
+        cy.get(el.labelDescricaoProvidencia).should('contain', 'Descrição Providência')
+    }
+    validarLabelTitular() {
+        cy.get(el.labelTitular).should('contain', 'Titular ')
+    }
+    validarLabelSuplente() {
+        cy.get(el.labelSuplente).should('contain', 'Suplente ')
+    }
+    validarLabelStatus() {
+        cy.get(el.labelStatus).should('contain', 'Status')
+    }
+    validarLabelSeiProcAcompanhamento() {
+        cy.get(el.labelSeiProcAcompanhamento).should('contain', 'SEI Proc. de Acompanhamento')
+    }
+
+    validarLabelUnidadeInterna() {
+        cy.get(el.labelUnidadeInterna).should('contain', 'Unidade Interna')
+    }
+    validarTabelaUnidadeInterna() {
+        cy.get(el.tabelaUnidadeInterna).should('contain', 'Unidade Interna')
+    }
+
+    validarLabelUnidadeExterna() {
+        cy.get(el.labelUnidadeExterna).should('contain', 'Unidade Externa')
+    }
+    validarTabelaUnidadeExterna() {
+        cy.get(el.tabelaUnidadeExterna).should('contain', 'Unidade Externa')
+    }
+
+    //validar campos de texto de Dilações de Prazos
+    validarLabelSeiRequerimento() {
+        cy.get(el.labelSeiRequerimento).should('contain', 'SEI do Requerimento')
+    }
+    validarLabelSeiDeferimentoIndeferimento() {
+        cy.get(el.labelSeiDeferimentoIndeferimento).should('contain', 'SEI do Deferimento/ Indeferimento')
+    }
+    validarLabelStatusModal() {
+        cy.get(el.labelStatusModal).should('contain', 'Status')
+    }
+    validarLabelDataLimiteDilacaoPrazo() {
+        cy.get(el.labelDataLimiteDilacaoPrazo).should('contain', 'Data Limite Após Dilação de Prazo')
+    }
+
+    //validando campos de texto de relatório de acompanhamento de exigências
+    validarLabelRaEmpreendimentoDemanda() {
+        cy.get(el.labelRaEmpreendimentoDemanda).should('contain', 'RA / EMPREENDIMENTO / DEMANDA')
+    }
+    validarLabelNumeroModal() {
+        cy.get(el.labelNumeroModal).should('contain', 'Nº')
+    }
+    validarLabelUnidadesResponsaveis() {
+        cy.get(el.labelUnidadesResponsaveis).should('contain', 'Unidades Responsáveis')
+    }
+    validarLabelDataLimiteModal() {
+        cy.get(el.labelDataLimiteModal).should('contain', 'Data Limite')
+    }
+    validarLabelInformativa() {
+        cy.get(el.labelInformativa).should('contain', 'Informativa')
+    }
+    validarLabelDispensada() {
+        cy.get(el.labelDispensada).should('contain', 'Dispensada')
+    }
+    validarLabelSeiDilacaoAnalise() {
+        cy.get(el.labelSeiDilacaoAnalise).should('contain', 'SEI da Dilação em Analise')
+    }
+    validarLabelDescricaoProvidenciaModal() {
+        cy.get(el.labelDescricaoProvidenciaModal).should('contain', 'Descrição Providência')
+    }
+    validarLabelDescricaoExigenciaModal() {
+        cy.get(el.labelDescricaoExigenciaModal).should('contain', 'Descrição Exigência')
+    }
+    validarLabelCumprida() {
+        cy.get(el.labelCumprida).should('contain', 'Cumprida')
+    }
+    validarLabelEmExecucao() {
+        cy.get(el.labelEmExecucao).should('contain', 'Em Execução')
+    }
+    validarLabelTemaModal() {
+        cy.get(el.labelTemaModal).should('contain', 'Tema')
+    }
+    validarLabelEstudosServRelacionados() {
+        cy.get(el.labelEstudosServRelacionados).should('contain', 'Estudos/Serv Relacionados')
+    }
+    validarLabelPendente() {
+        cy.get(el.labelPendente).should('contain', 'Pendente')
+    }
+
+
 }
 export default new exigencias()
+
