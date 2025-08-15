@@ -115,9 +115,9 @@ describe('pendência', () => {
         cy.get('#modal-alteracao-providencia > .modal-dialog > .modal-content > .modal-footer > #botao-editar').click()
 
         cy.get(':nth-child(7) > :nth-child(8) > select').select('1')
-        const dataBrasileira = '01/01/2024'; // Exemplo de data no formato brasileiro
-        const [dia, mes, ano] = dataBrasileira.split('/'); // Divide a string por "/"
-        const dataFormatoCypress = `${ano}-${mes}-${dia}`; // Monta no formato esperado
+        const dataBrasileira = '01/01/2024'; 
+        const [dia, mes, ano] = dataBrasileira.split('/'); 
+        const dataFormatoCypress = `${ano}-${mes}-${dia}`; 
 
         cy.get(':nth-child(8) > :nth-child(9) > a > .fa').click()
         cy.get('#dt_previsao_cumprimento').type(dataFormatoCypress)// Digita no campo
@@ -126,8 +126,8 @@ describe('pendência', () => {
         cy.on('uncaught:exception', (err, runnable) => {
             return false; // Ignora o erro para que o teste continue
           });
-        const DataBrasileira = '01/01/2026'; // Exemplo de data no formato brasileiro
-        const [Dia, Mes, Ano] = DataBrasileira.split('/'); // Divide a string por "/"
+        const DataBrasileira = '01/01/2026'; 
+        const [Dia, Mes, Ano] = DataBrasileira.split('/'); 
         const DataFormatoCypress = `${Ano}-${Mes}-${Dia}`;
 
         cy.get(':nth-child(9) > :nth-child(11) > a > .fa').click()
@@ -146,10 +146,10 @@ describe('pendência', () => {
         cy.wait(6000)
         cy.get('[onclick="limpaPesquisa()"]').click({force: true})
 
-        
-        cy.get('.sidebar-toggle').click()
-        cy.get(':nth-child(1) > :nth-child(20) > .btn > .fas').click()
-        cy.contains('button', 'Confirmar').click();
+        cy.get(':nth-child(1) > :nth-child(2) > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field').click()
+        cy.get('.select2-results').find('li').contains('4 - Empreendimento XPTO 5 ').click({ force: true});
+        cy.get('#pesquisar').click()
+        cy.wait(4000)
         cy.get('#gerarRelatorioPDF').click({force: true})
 
         cy.wait(10000)
