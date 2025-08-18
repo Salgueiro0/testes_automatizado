@@ -40,6 +40,13 @@ export const ELEMENTS = {
     botaoEditarDilacaoPrazos:'[title="Editar"] > .fa',
     botaoExcluir:'[title="Excluir"] > .fas',
     botaoLinkEditarExigencia: '#exigencia-aba > .panel-footer > :nth-child(1) > a.btn',
+    botaoModalSalvar: '.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary',
+    labelCoExigencia: '#co_exigencia',
+    botaoDeleteExigencia:'.btn-delete-exigencia > .fas',
+    modalRelatorioPDF:'#modalRelatorioPersonalizadoPDF',
+    gerarRelatorioPDF: '#gerarRelatorioPersonalizadoPDF',
+    botaoFecharModalPDF: '#modal-relatorio-pdf-personalizado > .modal-dialog > .modal-content > .modal-footer > .btn-form',
+
 
 
     labelEmpreendimento:':nth-child(3) > :nth-child(1) > .form-group > label',
@@ -84,6 +91,7 @@ export const ELEMENTS = {
     labelTemaModal: ':nth-child(4) > :nth-child(3) > .form-group > .form-check-label',
     labelEstudosServRelacionados: ':nth-child(4) > :nth-child(6) > .form-group > .form-check-label',
     labelPendente: ':nth-child(6) > :nth-child(6) > .form-group > .form-check-label',
+
 }
 
 

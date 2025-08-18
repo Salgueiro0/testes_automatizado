@@ -171,9 +171,6 @@ class exigencias{
     botaoEditarDilacaoPrazos(){
         cy.get(el.botaoEditarDilacaoPrazos).click()
     }
-    digitarObservacaoSeiPedido(){
-        cy.get('#ds_observacao_sei_pedido').type('654')
-    }
 
     botaoExcluir(){
         cy.get(el.botaoExcluir).click()
@@ -196,7 +193,7 @@ class exigencias{
     }
 
     clicarModalSalvar(){
-        cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary').click()
+        cy.get(el.botaoModalSalvar).click()
     }
 
     clicarBotaoOK(){
@@ -204,15 +201,11 @@ class exigencias{
     }
 
     digitarCoExigencia(){
-        cy.get('#co_exigencia').type('34243')
+        cy.get(el.labelCoExigencia).type('34243')
     }
 
-    // clicarBotaoPesquisarExigencia(){
-    //
-    // }
-
     clicarBotaoExcluirExigencia(){
-        cy.get('.btn-delete-exigencia > .fas').click()
+        cy.get(el.botaoDeleteExigencia).click()
     }
 
     clicarModalConfirmar(){
@@ -220,15 +213,15 @@ class exigencias{
     }
 
     clicarModalRelatorioPDF(){
-        cy.get('#modalRelatorioPersonalizadoPDF').click()
+        cy.get(el.modalRelatorioPDF).click()
     }
 
     clicarGerarRelatorioPDF(){
-        cy.get('#gerarRelatorioPersonalizadoPDF').click()
+        cy.get(el.gerarRelatorioPDF).click()
     }
 
     fecharModalPDF(){
-        cy.get('#modal-relatorio-pdf-personalizado > .modal-dialog > .modal-content > .modal-footer > .btn-form').click()
+        cy.get(el.botaoFecharModalPDF).click()
     }
 
     //VALIDAR CAMPOS DE TEXTO
@@ -347,8 +340,6 @@ class exigencias{
     validarLabelPendente() {
         cy.get(el.labelPendente).should('contain', 'Pendente')
     }
-
-
 }
 export default new exigencias()
 
