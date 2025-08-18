@@ -99,50 +99,32 @@ describe('pagamento', () => {
         exigencias.validarLabelSeiDeferimentoIndeferimento()
         exigencias.validarLabelStatusModal()
         exigencias.validarLabelDataLimiteDilacaoPrazo()
-
-
         exigencias.digitarObservacaoSeiPedido()
         exigencias.botaoSalvar()
 
         //alterar Dilações de Prazos
         exigencias.botaoEditarDilacaoPrazos()
-
         exigencias.digitarObservacaoSeiPedido()
-
         exigencias.botaoSalvar()
-        //cy.contains('button', "Salvar").click()
-
         exigencias.botaoExcluir()
-
         exigencias.botaoModalSim()
 
 
         //EDITAR EXIGÊNCIA
         exigencias.clicarBotaoEditarExigencia()
-
         exigencias.digitarQuantidadePrazoDias()
-
         exigencias.salvarBotao()
-
-
         exigencias.clicarModalSalvar()
-
         exigencias.clicarBotaoOK()
-
-
 
         //EXCLUIR EXIGÊNCIA
         exigencias.selecionarAbaExigencias()
         exigencias.selecionarEmpreendimentoPesquisarExigencias()
         exigencias.digitarCoExigencia()
-
         exigencias.botaoPesquisarExigencia()
         cy.wait(2000)
-
         exigencias.clicarBotaoExcluirExigencia()
-
         exigencias.clicarModalConfirmar()
-
         exigencias.clicarBotaoOK()
 
         //Gerar relatório de acompanhamento
