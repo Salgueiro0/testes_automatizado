@@ -69,7 +69,7 @@ describe('pagamento', () => {
         exigencias.digitarPrazoDias()
         exigencias.digitarDescricaoExigencia()
         exigencias.selecionarTitular()
-        exigencias.selecionarSuplente
+        exigencias.selecionarSuplente()
         exigencias.selecionarStatus()
         exigencias.digitarSeiProcAcompanhamento()
         exigencias.adicionarUnidadeInterna()
