@@ -13,220 +13,218 @@ class consultar_requerimento{
 
     //PESQUISAR EMPREENDIMENTO
     irParaEmpreendimento(){
-        cy.get('.sidebar-menu > :nth-child(2) > a').click()
+        cy.get(el.abaEmpreendimento).click()
     }
 
     seletorEmpreendimento(){
-        cy.get('.col-md-6 > .form-group > .select2-container > .selection > .select2-selection').click()
+        cy.get(el.campoSeletorEmpreendimento).click()
     }
 
     selecionarEmpreendimento(){
-        cy.get('.select2-results').find('li').contains('Polos 06, 07, 08 - Projeto Orla - Beira Lago').click()
+        cy.get(el.dropdwonGLA).find('li').contains('Polos 06, 07, 08 - Projeto Orla - Beira Lago').click()
     }
 
     clicarPesquisar(){
-        cy.get('#pesquisar').click()
+        cy.get(el.botaoPesquisar).click()
         cy.wait(1000)
     }
 
     clicarPrimeiroBotaoVisualizar(){
-        cy.get('a[title="Visualizar"]').first().click();
+        cy.get(el.botaoVisualizar).first().click();
     }
 
     clicarAbaRequerimento(){
-        cy.get('.requerimentos-aba').click()
+        cy.get(el.abaRequerimentos).click()
     }
 
     digitarDescricaoRequerimento(){
-        cy.get('#ds_requerimento').type('testetestetestetesteteste')
+        cy.get(el.campoDescricaoRequerimento).type('testetestetestetesteteste')
     }
 
     clicarBotaoLimpar(){
-        cy.get('.btn-toolbar > [type="button"]').click()
+        cy.get(el.botaoLimpar).click()
     }
 
     irParaAbaEmpreendimento(){
-        cy.get('.text-block > a').click()
+        cy.get(el.linkEmpreendimento).click()
     }
 
     clicarBotaoVoltar(){
-        cy.get('[onclick="window.history.back()"]').should('be.visible').and('contain.text', 'Voltar').click();
+        cy.get(el.botaoVoltar).should('be.visible').and('contain.text', 'Voltar').click();
     }
 
     seletorDemandaPermissao(){
-        cy.get('[id^="select2-tp_demanda_permissao-"][id$="-container"]').click();
-        cy.get('.select2-results').should('be.visible').find('li.select2-results__option').should('have.length.gt', 0).contains('LO - Licença de Operação ').click({ force: true });
+        cy.get(el.campoSeletorTpDemandaPermissao).click();
+        cy.get(el.dropdwonGLA).should('be.visible').find('li.select2-results__option').should('have.length.gt', 0).contains('LO - Licença de Operação ').click({ force: true });
     }
 
     digitarNumeroOficio(){
-        cy.get('#nr_oficio').type('2000')
+        cy.get(el.campoNumeroOficio).type('2000')
     }
 
     digitarAnoOficio(){
-        cy.get('#aa_oficio').type('2025')
+        cy.get(el.campoAnoOficio).type('2025')
     }
 
     selecionarOrgaoOficio(){
-        cy.get('[id^="select2-cd_orgao_oficio-"][id$="-container"]').click();
-        cy.get('.select2-results').should('be.visible').find('li.select2-results__option').should('have.length.gt', 0).contains('ACJUR - ADVOCACIA E CONSULTORIA JURIDICA').click({ force: true });
+        cy.get(el.campoSeletorOrgaoOficio).click();
+        cy.get(el.dropdwonGLA).should('be.visible').find('li.select2-results__option').should('have.length.gt', 0).contains('ACJUR - ADVOCACIA E CONSULTORIA JURIDICA').click({ force: true });
     }
 
     digitarDescricaoObservacaoDocOficio(){
-        cy.get('#ds_observacao_doc_oficio').type('208')
+        cy.get(el.campoDescricaoObservacaoDocOficio).type('208')
     }
 
     selecionarPessoaTitular(){
-        cy.get('#select2-cd_pessoa_titular-container').click()
-        cy.get('.select2-results').find('li').contains('ALLAN GUIMARAES DIOGENES').click({ force: true })
+        cy.get(el.campoSeletorPessoaTitular).click()
+        cy.get(el.dropdwonGLA).find('li').contains('ALLAN GUIMARAES DIOGENES').click({ force: true })
     }
 
     seletorOrgaoRequerimento(){
-        cy.get('[id^="select2-cd_orgao_requerimento-"][id$="-container"]').click();
-        cy.get('.select2-results').should('be.visible').find('li.select2-results__option').should('have.length.gt', 0).contains('ANATEL - AGÊNCIA NACIONAL DE TELECOMUNICAÇÕES').click({ force: true });
+        cy.get(el.campoSeletorOrgaoRequerimento).click();
+        cy.get(el.dropdwonGLA).should('be.visible').find('li.select2-results__option').should('have.length.gt', 0).contains('ANATEL - AGÊNCIA NACIONAL DE TELECOMUNICAÇÕES').click({ force: true });
     }
 
     selecionarDataPublicacao(){
-        cy.get('#dt_publicacao').type('2020-01-01')
+        cy.get(el.campoDataPublicacao).type('2020-01-01')
     }
 
     seletorTpStatus(){
-        cy.get('[id^="select2-tp_status-"][id$="-container"]').click();
-        cy.get('.select2-results').should('be.visible').find('li.select2-results__option').should('have.length.gt', 0).contains('Deferido').click({ force: true });
+        cy.get(el.campoSeletorTpStatus).click();
+        cy.get(el.dropdwonGLA).should('be.visible').find('li.select2-results__option').should('have.length.gt', 0).contains('Deferido').click({ force: true });
     }
 
     digitarOrgaoProcesso(){
-        cy.get('#cd_orgao_processo_sei').type('1')
+        cy.get(el.campoOrgaoProcessoSei).type('1')
     }
 
     digitarNumeroProcessoSei(){
-        cy.get('#nr_processo_sei').type('1')
+        cy.get(el.campoNumeroProcessoSei).type('1')
     }
 
     digitarAnoProcessoSei(){
-        cy.get('#aa_processo_sei').type('1')
+        cy.get(el.campoAnoProcessoSei).type('1')
     }
 
     selecionarReservaOrcamentaria(){
-        cy.get('#fl_reserva_orcamentaria').click()
+        cy.get(el.campoReservaOrcamentaria).click()
         cy.wait(1000)
     }
 
     digitarNumeroDocSeiDespacho(){
-        cy.get('#nr_doc_sei_despacho').type('1111')
+        cy.get(el.campoNrDocSeiDespacho).type('1111')
     }
 
     clicarBotaoSalvar(){
-        cy.get('#submit').click()
+        cy.get(el.botaoSalvar).click()
     }
 
     clicarContinuar(){
-        cy.get('.modal-footer > .btn-primary').should('be.visible').and('contain.text', 'Continuar').click()
+        cy.get(el.botaoContinuar).should('be.visible').and('contain.text', 'Continuar').click()
     }
 
     clicarOk(){
-        cy.get('.modal-footer > .btn').should('be.visible').and('contain.text', 'OK').click()
+        cy.get(el.botaoOk).should('be.visible').and('contain.text', 'OK').click()
     }
 
     irParaRequerimento(){
-        cy.get(':nth-child(7) > [href="#"]').click()
+        cy.get(el.abaRequerimento).click()
     }
 
     clicarConsultarRequerimentos(){
-        cy.get('.menu-open > .treeview-menu > :nth-child(1) > a > span').should('be.visible').and('contain.text', 'Consultar - Requerimentos').click();
+        cy.get(el.abaConsultarRequerimento).should('be.visible').and('contain.text', 'Consultar - Requerimentos').click();
     }
 
     limparCampoRequerimento(){
-        cy.get('[onclick="resetFieldsRequerimento()"]').click()
+        cy.get(el.botaoLimparCampoRequerimento).click()
     }
 
     selecionarEmpreendimenot(){
-        cy.get('#select2-cd_empreendimento-container').should('be.visible').click();
+        cy.get(el.seletorEmpreendimento).should('be.visible').click();
         cy.wait(1000)
-        cy.get('.select2-results__option')
+        cy.get(el.dropdownGLAOptions)
             .filter(':contains("Polos 06, 07, 08 - Projeto Orla - Beira Lago")')
             .first()
             .click();
-
-
     }
 
     pesquisarRequerimento(){
-        cy.get('#pesquisarRequerimento').should('be.visible').click();
+        cy.get(el.botaoPesquisarRequerimento).should('be.visible').click();
         cy.wait(1000)
     }
 
     gerarRelatorioPDF(){
-        cy.get('#gerarRelatorioPDF').should('be.visible').click();
+        cy.get(el.botaoGerarRelatorioPDF).should('be.visible').click();
     }
 
     digitarFiltroRequerimento(){
-        cy.get('#table-requerimento_filter > label > .form-control').type('Licença de Operação')
+        cy.get(el.filtroRequerimento).type('Licença de Operação')
     }
 
     clicarVisualizarPrimeiro(){
-        cy.get('a[title="Visualizar"]').first().click();
+        cy.get(el.botaoVisualizar).first().click();
     }
 
     irParaAbaRequerimento(){
-        cy.get('#requerimento-aba > .panel-footer > :nth-child(1) > a.btn').click()
+        cy.get(el.botaoLinkRequerimento).click()
     }
 
     irParaAbaRequerimentos(){
-        cy.get(':nth-child(7) > [href="#"]').click()
+        cy.get(el.abaRequerimento).click()
     }
 
     irParaAbaConsultarRequerimentos(){
-        cy.get('.menu-open > .treeview-menu > :nth-child(1) > a > span').click()
+        cy.get(el.abaConsultarRequerimento).click()
     }
 
     selecionarEmpreendimentoContainer(){
-        cy.get('#select2-cd_empreendimento-container').should('be.visible').click();
-        cy.get('.select2-results__option')
+        cy.get(el.seletorEmpreendimento).should('be.visible').click();
+        cy.get(el.dropdownGLAOptions)
             .should('have.length.gt', 0)
             .contains('Polos 06, 07, 08 - Projeto Orla - Beira Lago')
             .click({ force: true })
     }
 
     clicarPrimeiroBotaoEditar(){
-        cy.get('a[title="Editar"]').first().click();
+        cy.get(el.botaoEditar).first().click();
     }
 
     filtrarRequerimento(){
-        cy.get('#table-requerimento_filter > label > .form-control').type('Licença de Operação')
+        cy.get(el.filtroRequerimento).type('Licença de Operação')
     }
 
     clicarPrimeiroBotaoExcluir(){
-        cy.get('a[title="Excluir"]').first().click();
+        cy.get(el.botaoExcluir).first().click();
     }
 
     clicarBotaoConfirmar(){
-        cy.get('.modal-footer > .btn-primary').should('have.text', ' Confirmar').click();
+        cy.get(el.botaoContinuar).should('have.text', ' Confirmar').click();
     }
 
     //VALIDAR CAMPOS DE TEXTO
 
     validarLabelTipoRequerimento(){
-        cy.get('#requerimento-aba > :nth-child(3) > :nth-child(1) > .form-group > label').should('contain',"Tipo Requerimento")
+        cy.get(el.labelTipoRequerimento).should('contain',"Tipo Requerimento")
     }
 
     validarLabelDemanda(){
-        cy.get('#requerimento-aba > :nth-child(3) > :nth-child(2) > .form-group > label').should('contain',"Demanda")
+        cy.get(el.labelDemanda).should('contain',"Demanda")
     }
 
     validarLabelNumeroOficio(){
-        cy.get('#requerimento-aba > :nth-child(4) > :nth-child(1) > .form-group > label').should('contain',"Número Ofício")
+        cy.get(el.labelNumeroOficio).should('contain',"Número Ofício")
     }
 
     validarLabelAnoOficio(){
-        cy.get('#requerimento-aba > :nth-child(4) > :nth-child(2) > .form-group > label').should('contain',"Ano Ofício")
+        cy.get(el.labelAnoOficio).should('contain',"Ano Ofício")
     }
 
     validarLabelEmitenteOficio(){
-        cy.get(':nth-child(4) > :nth-child(3) > .form-group > label').should('contain',"Emitente Ofício")
+        cy.get(el.labelEmitenteOficio).should('contain',"Emitente Ofício")
     }
 
     validarLabelNSeiDocRequerimento(){
-        cy.get(':nth-child(4) > label').should('contain',"Nº SEI Doc Requerimento")
+        cy.get(el.labelNSeiDocRequerimento).should('contain',"Nº SEI Doc Requerimento")
     }
 
     validarLabelTitular(){
