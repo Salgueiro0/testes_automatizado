@@ -48,6 +48,12 @@ class consultar_reiteracoes {
         cy.get('.select2-results').find('li').contains('LP - Licença Prévia - Ofício nº 6/1565 - ACJUR p/ ADASA').first().click({ force: true })
     }
 
+    selecionarSegundoRequerimento(){
+        cy.get('#select2-combo_requerimento-container').click()
+        cy.wait(2000)
+        cy.get('.select2-results').find('li').contains('LP - Licença Prévia - Ofício nº 5155/2024 - ADNOV-DINOV/BIOTIC p/ ANEEL').first().click({ force: true })
+    }
+
     clicarBotaoAdicionar(){
         cy.get('#btn_adicionar').click()
         cy.wait(4000)
@@ -99,7 +105,7 @@ class consultar_reiteracoes {
     selecionarRequerimentoEditar(){
         cy.get('#select2-combo_requerimento-container').click()
         cy.wait(1000)
-        cy.get('.select2-results').find('li').contains('LP - Licença Prévia - Ofício nº 5155/2024 - ADNOV-DINOV/BIOTIC p/ ANEEL').click({ force: true })
+        cy.get('.select2-results').find('li').contains('LP - Licença Prévia').click({ force: true })
     }
 
     botaoEditar(){

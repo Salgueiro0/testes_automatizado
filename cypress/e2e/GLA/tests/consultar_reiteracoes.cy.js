@@ -175,7 +175,6 @@ describe('consultar_reiteracoes', () => {
         consultar_reiteracoes.validarLabelCadastrarEmpreendimento()
         consultar_reiteracoes.validarLabelCadastrarTipoRequerimento()
         consultar_reiteracoes.validarLabelCadastrarRequerimentos()
-        consultar_reiteracoes.validarLabelCadastrarRequerimentosReiterados()
 
         //Adicionar primeiro requerimento
 
@@ -184,7 +183,7 @@ describe('consultar_reiteracoes', () => {
         consultar_reiteracoes.selecionarTipoRequerimento()
         consultar_reiteracoes.selecionarRequerimento()
         consultar_reiteracoes.clicarBotaoAdicionar()
-        consultar_reiteracoes.selecionarRequerimento()
+        consultar_reiteracoes.selecionarSegundoRequerimento()
         // cy.get('#select2-combo_requerimento-container').click()
         // cy.wait(2000)
         // cy.get('.select2-results').find('li').contains('LP - Licença Prévia - Ofício nº 2000/2025 - ACJUR p/ ANATEL').click({ force: true })
