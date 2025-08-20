@@ -168,202 +168,201 @@ class empreendimento {
     }
 
     clicarBotaoLimpar(){
-        cy.get('[onclick="limpaPesquisa()"]').click({force: true})
+        cy.get(el.botaoLimpar).click({force: true})
     }
 
     clicarBotaoNovoCadastro(){
-        cy.get('.btn-success').click()
+        cy.get(el.botaoNovoCadastro).click()
     }
 
     validarLabelCadastroNovo(){
-        cy.get('.box-title').should('have.text', 'Novo')
+        cy.get(el.labelCadastroNovo).should('have.text', 'Novo')
     }
 
     validarLabelCadastroRA(){
-        cy.get(':nth-child(5) > :nth-child(1) > .form-group > label').should('have.text', 'R.A. *')
+        cy.get(el.labelCadastroRA).should('have.text', 'R.A. *')
     }
 
     validarLabelCadastroProcessoSEIEmpreendimento(){
-        cy.get(':nth-child(5) > :nth-child(2) > .form-group > label').should('have.text', 'Processo SEI Empreendimento *')
+        cy.get(el.labelCadastroProcesSEIEmpreend).should('have.text', 'Processo SEI Empreendimento *')
     }
 
     validarLabelCadastroTipo(){
-        cy.get(':nth-child(5) > :nth-child(3) > .form-group > label').should('have.text', 'Tipo *')
+        cy.get(el.labelCadastroTipo).should('have.text', 'Tipo *')
     }
 
     validarLabelCadastroEmpreendimento(){
-        cy.get(':nth-child(6) > .col-md-8 > .form-group > label').should('have.text', 'Empreendimento *')
+        cy.get(el.labelCadastroEmpreend).should('have.text', 'Empreendimento *')
     }
     validarLabelCadastroPrioridade(){
-        cy.get(':nth-child(6) > .col-md-4 > .form-group > label').should('have.text', 'Prioridade *')
+        cy.get(el.labelCadastroPrioridade).should('have.text', 'Prioridade *')
     }
     validarLabelCadastroNumeroURB(){
-        cy.get(':nth-child(7) > :nth-child(1) > .form-group > label').should('have.text', 'Número URB')
+        cy.get(el.labelCadastroNumeroURB).should('have.text', 'Número URB')
     }
     validarLabelCadastroNumeroNGB(){
-        cy.get(':nth-child(7) > :nth-child(2) > .form-group > label').should('have.text', 'Número NGB')
+        cy.get(el.labelCadastroNumeroNGB).should('have.text', 'Número NGB')
     }
     validarLabelCadastroNumeroMDE(){
-        cy.get(':nth-child(7) > :nth-child(3) > .form-group > label').should('have.text', 'Número MDE')
+        cy.get(el.labelCadastroNumeroMDE).should('have.text', 'Número MDE')
     }
     validarLabelCadastroTitular(){
-        cy.get(':nth-child(8) > .col-md-8 > .form-group > label').should('have.text', 'Titular *')
+        cy.get(el.labelCadastroTitular).should('have.text', 'Titular *')
     }
     validarLabelCadastroArquivado(){
-        cy.get('input[name="fl_arquivado"]').parent('label').invoke('text').then((text) => {expect(text.trim()).to.eq('Arquivado');});
+        cy.get(el.labelCadastroArquivado).parent('label').invoke('text').then((text) => {expect(text.trim()).to.eq('Arquivado');});
     }
     validarLabelCadastroConcluido(){
-        cy.get('input[name="fl_concluido"]').parent('label').invoke('text').then((text) => {expect(text.trim()).to.eq('Concluído');})
+        cy.get(el.labelCadastroConcluido).parent('label').invoke('text').then((text) => {expect(text.trim()).to.eq('Concluído');})
     }
     validarLabelCadastroSuplente(){
-        cy.get(':nth-child(9) > :nth-child(1) > .form-group > label').should('have.text', 'Suplente *')
+        cy.get(el.labelCadastroSuplente).should('have.text', 'Suplente *')
     }
     validarLabelCadastroEmpreendedorResponsavel(){
-        cy.get(':nth-child(9) > :nth-child(2) > .form-group > label').should('have.text', 'Empreendedor Responsável *')
+        cy.get(el.labelCadastroEmpreendedorResponsavel).should('have.text', 'Empreendedor Responsável *')
     }
     validarLabelCadastroNLotes(){
-        cy.get(':nth-child(10) > :nth-child(1) > .form-group > label').should('have.text', 'Número de lotes')
+        cy.get(el.labelCadastroNLotes).should('have.text', 'Número de lotes')
     }
     validarLabelCadastroAreaTotal(){
-        cy.get(':nth-child(10) > :nth-child(2) > .form-group > label').should('have.text', 'Área Total (ha)')
+        cy.get(el.labelCadastroAreaTotal).should('have.text', 'Área Total (ha)')
     }
     validarLabelCadastroResumoStatus(){
-        cy.get('.control-label').should('have.text', 'Resumo do status')
+        cy.get(el.labelCadastroResumoStatus).should('have.text', 'Resumo do status')
     }
     selecionarRegiaoAdminContainer(){
-        cy.get('#select2-cd_regiao_admin-container').click()
-        cy.get('.select2-results').find('li').contains('RA-I - BRASILIA ').click({force: true})
+        cy.get(el.regiaoAdminContainer).click()
+        cy.get(el.dropdownGLA).find('li').contains('RA-I - BRASILIA ').click({force: true})
     }
     botaoLimpar(){
-        cy.get('#reset').click()
+        cy.get(el.botaoReset).click()
     }
     digitarOrgaoProcessoSei(){
-        cy.get('#cd_orgao_processo_sei').type('11111')
+        cy.get(el.orgaoProcessoSei).type('11111')
     }
     digitarNumeroProcessoSei(){
-        cy.get('#nr_processo_sei').type('11111111')
+        cy.get(el.nrProcessoSei).type('11111111')
     }
     digitarAnoProcessoSei(){
-        cy.get('#aa_processo_sei').type('1111')
+        cy.get(el.anoProcessoSei).type('1111')
     }
     selecionarTpEmpreendimento(empreendimento){
-        cy.get('#select2-tp_empreendimento-container').click()
-        cy.get('.select2-results').find('li').contains(empreendimento).click({force: true})
+        cy.get(el.tpEmpreendimentoContainer).click()
+        cy.get(el.dropdownGLA).find('li').contains(empreendimento).click({force: true})
     }
     digitarDescricaoEmpreendimento(){
-        cy.get('#ds_empreendimento').type('teste')
+        cy.get(el.dsEmpreendimento).type('teste')
     }
     selecionarTpPrioridade(){
-        cy.get('#select2-tp_prioridade-container').click()
-        cy.get('.select2-results').find('li').contains('Planejamento Estratégico ').click({force: true})
+        cy.get(el.tpPrioridadeContainer).click()
+        cy.get(el.dropdownGLA).find('li').contains('Planejamento Estratégico ').click({force: true})
     }
     selecionarPessoaTitular(){
-        cy.get('#select2-cd_pessoa_titular-container').click()
-        cy.get('.select2-results').find('li').contains('ALLAN GUIMARAES DIOGENES ').click({force: true})
+        cy.get(el.pessoaTitularContainer).click()
+        cy.get(el.dropdownGLA).find('li').contains('ALLAN GUIMARAES DIOGENES ').click({force: true})
     }
     selecionarPessoaSuplente(){
-        cy.get('#select2-cd_pessoa_suplente-container').click()
-        cy.get('.select2-results').find('li').contains('ALLAN GUIMARAES DIOGENES ').click({force: true})
+        cy.get(el.pessoaSuplenteContainer).click()
+        cy.get(el.dropdownGLA).find('li').contains('ALLAN GUIMARAES DIOGENES ').click({force: true})
     }
     selecionarOrgaoResponsavel(){
-        cy.get('#select2-cd_orgao_responsavel-container').click()
-        cy.get('.select2-results').find('li').contains('TERRACAP - COMPANHIA IMOBILIARIA DE BRASILIA ').click({force: true})
+        cy.get(el.orgaoResponsavelContainer).click()
+        cy.get(el.dropdownGLA).find('li').contains('TERRACAP - COMPANHIA IMOBILIARIA DE BRASILIA ').click({force: true})
     }
     clicarBotaoSalvar(){
-        cy.get('#submit').click()
+        cy.get(el.botaoSalvar).click()
     }
     clicarModalConfirmar(){
-        cy.get('.modal-footer > .btn-primary').click()
+        cy.get(el.modalConfirmar).click()
     }
     clicarModalOk(){
-        cy.get('button.bootbox-accept').should('have.text', 'OK').click()
+        cy.get(el.modalOk).should('have.text', 'OK').click()
     }
 
     validarCampoEmpreendimentoRA(){
-        cy.get(':nth-child(1) > [whidth="350px"] > b').should('have.text', 'RA:')
+        cy.get(el.campoEmpreendimentoRA).should('have.text', 'RA:')
     }
     validarCampoEmpreendimentoEmpreendimento(){
-        cy.get(':nth-child(2) > [whidth="350px"] > b').should('have.text', 'Empreendimento:')
+        cy.get(el.campoEmpreendimentoEmpreendimento).should('have.text', 'Empreendimento:')
     }
     validarCampoEmpreendimentoEmpreendedorResponsavel(){
-        cy.get(':nth-child(3) > [whidth="350px"] > b').should('have.text', 'Empreendedor Responsável:')
+        cy.get(el.campoEmpreendimentoEmpreendedorResponsavel).should('have.text', 'Empreendedor Responsável:')
     }
     validarCampoEmpreendimentoTipo(){
-        cy.get(':nth-child(4) > [whidth="350px"] > b').should('have.text', 'Tipo:')
+        cy.get(el.campoEmpreendimentoTipo).should('have.text', 'Tipo:')
     }
     validarCampoEmpreendimentoSEI(){
-        cy.get(':nth-child(5) > [whidth="350px"] > b').should('have.text', 'SEI Empreendimento:')
+        cy.get(el.campoEmpreendimentoSEI).should('have.text', 'SEI Empreendimento:')
     }
     validarCampoEmpreendimentoPrioridade(){
-        cy.get(':nth-child(6) > [whidth="350px"] > b').should('have.text', 'Prioridade:')
+        cy.get(el.campoEmpreendimentoPrioridade).should('have.text', 'Prioridade:')
     }
     validarCampoEmpreendimentoAreaTotal(){
-        cy.get(':nth-child(7) > [whidth="350px"] > b').should('have.text', 'Área Total (ha):')
+        cy.get(el.campoEmpreendimentoAreaTotal).should('have.text', 'Área Total (ha):')
     }
     validarCampoEmpreendimentoNLotes(){
-        cy.get(':nth-child(8) > [whidth="350px"] > b').should('have.text', 'Número de lotes:')
+        cy.get(el.campoEmpreendimentoNLotes).should('have.text', 'Número de lotes:')
     }
     validarCampoEmpreendimentoNURB(){
-        cy.get(':nth-child(9) > [whidth="350px"] > b').should('have.text', 'Número URB:')
+        cy.get(el.campoEmpreendimentoNURB).should('have.text', 'Número URB:')
     }
     validarCampoEmpreendimentoNNGB(){
-        cy.get(':nth-child(10) > [whidth="350px"] > b').should('have.text', 'Número NGB:')
+        cy.get(el.campoEmpreendimentoNNGB).should('have.text', 'Número NGB:')
     }
     validarCampoEmpreendimentoNMDE(){
-        cy.get(':nth-child(11) > [whidth="350px"] > b').should('have.text', 'Número MDE:')
+        cy.get(el.campoEmpreendimentoNMDE).should('have.text', 'Número MDE:')
     }
     validarCampoEmpreendimentoTitular(){
-        cy.get(':nth-child(12) > [whidth="350px"] > b').should('have.text', 'Titular:')
+        cy.get(el.campoEmpreendimentoTitular).should('have.text', 'Titular:')
     }
     validarCampoEmpreendimentoSuplente(){
-        cy.get(':nth-child(13) > [whidth="350px"] > b').should('have.text', 'Suplente:')
+        cy.get(el.campoEmpreendimentoSuplente).should('have.text', 'Suplente:')
     }
     validarCampoEmpreendimentoArquivado(){
-        cy.get(':nth-child(14) > [whidth="350px"] > b').should('have.text', 'Arquivado:')
+        cy.get(el.campoEmpreendimentoArquivado).should('have.text', 'Arquivado:')
     }
     validarCampoEmpreendimentoConcluido(){
-        cy.get(':nth-child(15) > [whidth="350px"] > b').should('have.text', 'Concluído:')
+        cy.get(el.campoEmpreendimentoConcluido).should('have.text', 'Concluído:')
     }
     validarCampoEmpreendimentoResumoStatus(){
-        cy.get(':nth-child(16) > [whidth="350px"] > b').should('have.text', 'Resumo do Status:')
+        cy.get(el.campoEmpreendimentoResumoStatus).should('have.text', 'Resumo do Status:')
     }
     validarCampoEmpreendimentoObservacao(){
-        cy.get(':nth-child(17) > [whidth="350px"] > b').should('have.text', 'Observação (processos):')
+        cy.get(el.campoEmpreendimentoObservacao).should('have.text', 'Observação (processos):')
     }
     clicarBotaoVoltar(){
-        cy.get('[onclick="window.history.back()"]').click()
-        cy.get('[onclick="window.history.back()"]').click()
+        cy.get(el.botaoVoltar).click()
+        cy.get(el.botaoVoltar).click()
     }
     clicarBotaoPesquisar(){
-        cy.get('#pesquisar').click()
+        cy.get(el.botaoPesquisar).click()
     }
 
     clicarPrimeiroBotaoVisualizar(){
-        cy.get('a[title="Visualizar"]').first().click();
+        cy.get(el.primeiroBotaoVisualizar).first().click();
     }
     irAbaEmpreendimento(){
-        cy.get('#emprendimento-aba > .panel-footer > :nth-child(1) > a.btn').click()
+        cy.get(el.botaoEmpreendimento).click()
     }
     selecionarRegiaoAdmin(){
-        cy.get('#select2-cd_regiao_admin-container').click()
-        cy.get('.select2-results').find('li').contains('RA-III - TAGUATINGA ').click({force: true})
+        cy.get(el.regiaoAdminContainer).click()
+        cy.get(el.dropdownGLA).find('li').contains('RA-III - TAGUATINGA ').click({force: true})
     }
     limparOrgaoProcessoSei(){
-        cy.get('#cd_orgao_processo_sei').clear();
+        cy.get(el.orgaoProcessoSei).clear();
     }
     limparNrProcessoSei(){
-        cy.get('#nr_processo_sei').clear();
+        cy.get(el.nrProcessoSei).clear();
     }
     limparProcessoSei(){
-        cy.get('#aa_processo_sei').clear();
+        cy.get(el.anoProcessoSei).clear();
     }
     clicarBotaoDeleteEmpreendimento(){
-        cy.get('#btn-delete-empreendimento').click()
+        cy.get(el.botaoDeletarEmpreendimento).click()
     }
     confirmar(){
-        cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary').click()
+        cy.get(el.modalDialogConfirmar).click()
     }
-
 }
 
 
