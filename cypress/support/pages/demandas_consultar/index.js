@@ -1,24 +1,70 @@
 const el = require('./elements').ELEMENTS
 class demandas_consultar {
 
-    irParaGLA() {
-        cy.visit('/');
-    }
-    login() {
-        cy.get(el.campoUsuario).type('C9020840');
-        cy.get(el.campoSenha).type('welcome_1');
-        cy.get(el.botaoLogin).click();
-    }
-    validarTextoPendencia(){
-        cy.get('h1').should('have.text', "Pendência")
-    }
-    irAbaDemanda(){
-        cy.get(':nth-child(3) > [href="#"]').click()
-    }
-    irAbaDemandaConsultar(){
-        cy.get('.menu-open > .treeview-menu > :nth-child(1) > a > span').click()
-    }
+    irParaGLA() { cy.visit('/'); }
+    login() { cy.get(el.campoUsuario).type('C9020840'); cy.get(el.campoSenha).type('welcome_1'); cy.get(el.botaoLogin).click(); }
+    validarTextoPendencia() { cy.get(el.titulo).should('have.text', "Pendência"); }
+    irAbaDemanda() { cy.get(el.abaDemanda).click(); }
+    irAbaDemandaConsultar() { cy.get(el.abaDemandaConsultar).click(); }
+    validarTituloDemanda() { cy.get(el.tituloDemanda).should('have.text', "Demanda"); }
+    validarTituloDados() { cy.get(el.tituloDados).should('have.text', "Dados Gerais"); }
+    validarFormRA() { cy.get(el.formRA).should('have.text', "R.A"); }
+    validarFormEmpreendimento() { cy.get(el.formEmpreendimento).should('have.text', "Empreendimento"); }
+    validarFormPossuiExigencia() { cy.get(el.formPossuiExigencia).should('have.text', "Possui Exigência a cumprir e próxima de expirar/expirada? "); }
+    validarFormTipo() { cy.get(el.formTipo).should('have.text', "Tipo"); }
+    validarFormNumero() { cy.get(el.formNumero).should('have.text', "Número"); }
+    validarFormAno() { cy.get(el.formAno).should('have.text', "Ano"); }
+    validarLabelPossuiReq() { cy.get(el.labelPossuiReq).should('have.text', "Possui Requerimento em Análise? "); }
+    validarLabelOrgaoDemanda() { cy.get(el.labelOrgaoDemanda).should('have.text', "Órgão Demanda"); }
+    validarLabelDescricao() { cy.get(el.labelDescricao).should('have.text', "Descrição"); }
+    validarLabelPeriodoData() { cy.get(el.labelPeriodoData).should('have.text', "Período de Data de Publicação "); }
+    validarLabelPeriodoVig() { cy.get(el.labelPeriodoVig).should('have.text', "Período de Vigência (em dias)"); }
+    validarLabelStatus() { cy.get(el.labelStatus).should('have.text', "Status"); }
+    validarLabelAlerta() { cy.get(el.labelAlerta).should('have.text', "Alerta"); }
+    validarLabelPeriodoDias() { cy.get(el.labelPeriodoDias).should('have.text', "Período de Dias Restantes para vencimento"); }
+    validarLabelTitular() { cy.get(el.labelTitular).should('have.text', "Titular "); }
+    validarLabelSuplente() { cy.get(el.labelSuplente).should('have.text', "Suplente "); }
+    validarLabelEmpreenResp() { cy.get(el.labelEmpreenResp).should('have.text', "Empreendedor Responsável "); }
+    validarLabelPeriodoRestante() { cy.get(el.labelPeriodoRestante).should('have.text', "Período Dias Restantes "); }
+    validarFormAmbValTotal() { cy.get(el.formAmbValTotal).should('have.text', "Valor Total Compensação Ambiental (R$)"); }
+    validarFormAmbVR() { cy.get(el.formAmbVR).should('have.text', "Valor de Referência - VR (R$)"); }
+    validarFormAmbGrauImpacto() { cy.get(el.formAmbGrauImpacto).should('have.text', "Grau de Impacto (GI) (%)"); }
+    validarFormAmbPrazoLimite() { cy.get(el.formAmbPrazoLimite).should('have.text', "Possui Prazo Limite para Cumprimento da CA? "); }
+    validarFormAmbArquivada() { cy.get(el.formAmbArquivada).should('have.text', "Arquivada "); }
+    validarFormAmbDescricao() { cy.get(el.formAmbDescricao).should('have.text', "Descrição Compensação Ambiental"); }
+    validarFormAmbStatusRecurso() { cy.get(el.formAmbStatusRecurso).should('have.text', "Status do Recurso Administrativo"); }
+    validarFormAmbDataLimite() { cy.get(el.formAmbDataLimite).should('have.text', "Data Limite para Cumprimento da CA"); }
+    validarFormAmbDiasRestantes() { cy.get(el.formAmbDiasRestantes).should('have.text', "Dias Restantes para Cumprimento da CA"); }
+    validarFormAmbSaldoDevedor() { cy.get(el.formAmbSaldoDevedor).should('have.text', "Saldo devedor da CA"); }
 
+    validarFormFlorestLegRef() { cy.get(el.formFlorestLegRef).should('have.text', "Legislação de Referência"); }
+    validarFormFlorestTipoVeg() { cy.get(el.formFlorestTipoVeg).should('have.text', "Tipo de Vegetação"); }
+    validarFormFlorestModalPag() { cy.get(el.formFlorestModalPag).should('have.text', "Modalidade de Pagamento"); }
+    validarFormFlorestQtdMudasEst() { cy.get(el.formFlorestQtdMudasEst).should('have.text', "Quantidade de Mudas Estimadas"); }
+    validarFormFlorestQtdMudasDef() { cy.get(el.formFlorestQtdMudasDef).should('have.text', "Quantidade de Mudas Definitivas"); }
+    validarFormFlorestValorTotal() { cy.get(el.formFlorestValorTotal).should('have.text', "Valor Total da CF (R$)"); }
+    validarFormFlorestAreaTotal() { cy.get(el.formFlorestAreaTotal).should('have.text', "Área Total (ha)"); }
+    validarFormFlorestDataLimite() { cy.get(el.formFlorestDataLimite).should('have.text', "Data Limite Cumprimento da CF"); }
+    validarFormFlorestDiasRestantes() { cy.get(el.formFlorestDiasRestantes).should('have.text', "Dias Restantes Cumprimento da CF"); }
+    validarFormFlorestArquivada() { cy.get(el.formFlorestArquivada).should('have.text', "Arquivada "); }
+    validarFormFlorestDescricao() { cy.get(el.formFlorestDescricao).should('have.text', "Descrição Compensação Florestal"); }
+    validarFormFlorestStatusRecurso() { cy.get(el.formFlorestStatusRecurso).should('have.text', "Status do Recurso Administrativo"); }
+    validarFormFlorestSaldoDevedor() { cy.get(el.formFlorestSaldoDevedor).should('have.text', "Saldo devedor da CF"); }
+    validarFormAIDataReceb() { cy.get(el.formAIDataReceb).should('have.text', "Data de Recebimento do AI "); }
+    validarFormAITipoSancao() { cy.get(el.formAITipoSancao).should('have.text', "Tipo de Sanção"); }
+    validarFormAIValorMulta() { cy.get(el.formAIValorMulta).should('have.text', "Valor da Multa (R$)"); }
+    validarFormAITipoAtividade() { cy.get(el.formAITipoAtividade).should('have.text', "Tipo de Atividade"); }
+    validarFormAIOrgaoDescricao() { cy.get(el.formAIOrgaoDescricao).should('have.text', "Órgão DemandaDescrição do AI (motivo)"); }
+    validarFormAIStatus() { cy.get(el.formAIStatus).should('have.text', "Status do AI"); }
+    validarFormAIInstancia() { cy.get(el.formAIInstancia).should('have.text', "Instância Recursal"); }
+    validarFormAIDescricaoStatus() { cy.get(el.formAIDescricaoStatus).should('have.text', "Descrição do Status do AI"); }
+    validarFormAITituloPrazos() { cy.get(el.formAITituloPrazos).should('have.text', "Controle dos Prazos de Defesa e dos Recursos Administrativos"); }
+    validarFormAIPeriodosInstancia() { cy.get(el.formAIPeriodosInstancia).should('have.text', "Períodos da Instância"); }
+    validarFormAIDataEnvio() { cy.get(el.formAIDataEnvio).should('have.text', "Data Envio do Recurso da Instância "); }
+    validarFormAIDataCiencia() { cy.get(el.formAIDataCiencia).should('have.text', "Data de Ciência Decisão da Instância"); }
+    validarFormAIValorAtual() { cy.get(el.formAIValorAtual).should('have.text', "Valor da Multa Atualizada da Instância (R$)"); }
+    validarFormAIDataLimiteEnvio() { cy.get(el.formAIDataLimiteEnvio).should('have.text', "Data Limite de Envio do Recurso da Instância"); }
+    validarFormAIDataLimitePagamento() { cy.get(el.formAIDataLimitePagamento).should('have.text', "Data Limite para Pagamento da Multa"); }
 
 
 
@@ -48,262 +94,6 @@ class demandas_consultar {
 
 
 
-    validarTituloDemanda(){
-        cy.get('h1').should('have.text', "Demanda")
-    }
-
-    validarTituloDados(){
-        cy.get(':nth-child(1) > .box-header > .box-title').should('have.text', "Dados Gerais")
-    }
-
-    validarFormRA(){
-        cy.get('#form_geral > :nth-child(1) > :nth-child(1) > .form-group > .control-label').should('have.text', "R.A")
-    }
-
-    validarFormEmpreendimento(){
-        cy.get('#form_geral > :nth-child(1) > :nth-child(2) > .form-group > .control-label').should('have.text', "Empreendimento")
-    }
-
-    validarFormPossuiExigencia(){
-        cy.get('#form_geral > :nth-child(1) > :nth-child(3) > .form-group > label').should('have.text', "Possui Exigência a cumprir e próxima de expirar/expirada? ")
-    }
-
-    validarFormTipo(){
-        cy.get('#form_geral > :nth-child(2) > :nth-child(1) > .form-group > .control-label').should('have.text', "Tipo")
-    }
-
-    validarFormNumero(){
-        cy.get('#form_geral > :nth-child(2) > :nth-child(2) > .form-group > .control-label').should('have.text', "Número")
-    }
-
-    validarFormAno(){
-        cy.get('#form_geral > :nth-child(2) > :nth-child(3) > .form-group > .control-label').should('have.text', "Ano")
-    }
-
-    validarLabelPossuiReq(){
-        cy.get(':nth-child(2) > :nth-child(4) > .form-group > label').should('have.text', "Possui Requerimento em Análise? ")
-    }
-
-    validarLabelOrgaoDemanda(){
-        cy.get(':nth-child(3) > .col-md-12 > .form-group > .control-label').should('have.text', "Órgão Demanda")
-    }
-
-    validarLabelDescricao(){
-        cy.get(':nth-child(4) > .col-md-8 > .form-group > .control-label').should('have.text', "Descrição")
-    }
-
-    validarLabelPeriodoData(){
-        cy.get(':nth-child(5) > :nth-child(1) > :nth-child(1) > :nth-child(1) > .control-label').should('have.text', "Período de Data de Publicação ")
-    }
-
-    validarLabelPeriodoVig(){
-        cy.get(':nth-child(5) > :nth-child(2) > :nth-child(1) > .control-label').should('have.text', "Período de Vigência (em dias)")
-    }
-
-    validarLabelStatus(){
-        cy.get(':nth-child(5) > :nth-child(3) > .form-group > .control-label').should('have.text', "Status")
-    }
-
-    validarLabelAlerta(){
-        cy.get('#form_geral > :nth-child(6) > :nth-child(1) > .form-group > .control-label').should('have.text', "Alerta")
-    }
-
-    validarLabelPeriodoDias(){
-        cy.get(':nth-child(6) > :nth-child(3) > .form-group > .control-label').should('have.text', "Período de Dias Restantes para vencimento")
-    }
-
-    validarLabelTitular(){
-        cy.get(':nth-child(7) > :nth-child(1) > .form-group > label').should('have.text', "Titular ")
-    }
-
-    validarLabelSuplente(){
-        cy.get(':nth-child(7) > :nth-child(2) > .form-group > label').should('have.text', "Suplente ")
-    }
-
-    validarLabelEmpreenResp(){
-        cy.get(':nth-child(7) > :nth-child(3) > .form-group > label').should('have.text', "Empreendedor Responsável ")
-    }
-
-    validarLabelPeriodoRestante(){
-        cy.get(':nth-child(6) > :nth-child(4) > label').should('have.text', "Período Dias Restantes ")
-    }
-    validarFormAmbValTotal(){
-        cy.get('#form_ambiental > :nth-child(1) > :nth-child(1) > :nth-child(1) > label').should('have.text', "Valor Total Compensação Ambiental (R$)")
-    }
-
-    validarFormAmbVR(){
-        cy.get('#form_ambiental > :nth-child(1) > :nth-child(2) > :nth-child(1) > label').should('have.text', "Valor de Referência - VR (R$)")
-    }
-
-    validarFormAmbGrauImpacto(){
-        cy.get('#form_ambiental > :nth-child(1) > :nth-child(3) > :nth-child(1) > label').should('have.text', "Grau de Impacto (GI) (%)")
-    }
-
-    validarFormAmbPrazoLimite(){
-        cy.get('#form_ambiental > :nth-child(1) > :nth-child(4) > .form-group > label').should('have.text', "Possui Prazo Limite para Cumprimento da CA? ")
-    }
-
-    validarFormAmbArquivada(){
-        cy.get('#form_ambiental > :nth-child(2) > .col-md-2 > .form-group > label').should('have.text', "Arquivada ")
-    }
-
-    validarFormAmbDescricao(){
-        cy.get(':nth-child(2) > .col-md-10 > .form-group > .control-label').should('have.text', "Descrição Compensação Ambiental")
-    }
-
-    validarFormAmbStatusRecurso(){
-        cy.get('#form_ambiental > :nth-child(3) > :nth-child(1) > .form-group > .control-label').should('have.text', "Status do Recurso Administrativo")
-    }
-
-    validarFormAmbDataLimite(){
-        cy.get('#form_ambiental > :nth-child(3) > :nth-child(2) > :nth-child(1) > label').should('have.text', "Data Limite para Cumprimento da CA")
-    }
-
-    validarFormAmbDiasRestantes(){
-        cy.get('#form_ambiental > :nth-child(3) > :nth-child(3) > :nth-child(1) > label').should('have.text', "Dias Restantes para Cumprimento da CA")
-    }
-
-    validarFormAmbSaldoDevedor(){
-        cy.get(':nth-child(4) > .col-md-4 > :nth-child(1) > .control-label').should('have.text', "Saldo devedor da CA")
-    }
-    validarFormFlorestLegRef(){
-        cy.get('#form_florestal > :nth-child(1) > :nth-child(1) > .form-group > .control-label')
-            .should('have.text', "Legislação de Referência")
-    }
-
-    validarFormFlorestTipoVeg(){
-        cy.get('#form_florestal > :nth-child(1) > :nth-child(2) > .form-group > .control-label')
-            .should('have.text', "Tipo de Vegetação")
-    }
-
-    validarFormFlorestModalPag(){
-        cy.get('#form_florestal > :nth-child(1) > :nth-child(3) > .form-group > .control-label')
-            .should('have.text', "Modalidade de Pagamento")
-    }
-
-    validarFormFlorestQtdMudasEst(){
-        cy.get('#form_florestal > :nth-child(2) > :nth-child(1) > :nth-child(1) > label')
-            .should('have.text', "Quantidade de Mudas Estimadas")
-    }
-
-    validarFormFlorestQtdMudasDef(){
-        cy.get('#form_florestal > :nth-child(2) > :nth-child(2) > :nth-child(1) > label')
-            .should('have.text', "Quantidade de Mudas Definitivas")
-    }
-
-    validarFormFlorestValorTotal(){
-        cy.get('#form_florestal > :nth-child(2) > :nth-child(3) > :nth-child(1) > label')
-            .should('have.text', "Valor Total da CF (R$)")
-    }
-
-    validarFormFlorestAreaTotal(){
-        cy.get('#form_florestal > :nth-child(3) > :nth-child(1) > :nth-child(1) > label')
-            .should('have.text', "Área Total (ha)")
-    }
-
-    validarFormFlorestDataLimite(){
-        cy.get('#form_florestal > :nth-child(3) > :nth-child(2) > :nth-child(1) > label')
-            .should('have.text', "Data Limite Cumprimento da CF")
-    }
-
-    validarFormFlorestDiasRestantes(){
-        cy.get('#form_florestal > :nth-child(3) > :nth-child(3) > :nth-child(1) > .control-label')
-            .should('have.text', "Dias Restantes Cumprimento da CF")
-    }
-
-    validarFormFlorestArquivada(){
-        cy.get(':nth-child(4) > .col-md-2 > .form-group > label')
-            .should('have.text', "Arquivada ")
-    }
-
-    validarFormFlorestDescricao(){
-        cy.get(':nth-child(4) > .col-md-10 > .form-group > .control-label')
-            .should('have.text', "Descrição Compensação Florestal")
-    }
-
-    validarFormFlorestStatusRecurso(){
-        cy.get('#form_florestal > :nth-child(5) > .col-md-4 > .form-group > .control-label')
-            .should('have.text', "Status do Recurso Administrativo")
-    }
-
-    validarFormFlorestSaldoDevedor(){
-        cy.get(':nth-child(6) > .col-md-4 > :nth-child(1) > .control-label')
-            .should('have.text', "Saldo devedor da CF")
-    }
-    validarFormAIDataReceb(){
-        cy.get('#form_auto_infracao > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > .control-label')
-            .should('have.text', "Data de Recebimento do AI ")
-    }
-
-    validarFormAITipoSancao(){
-        cy.get('#form_auto_infracao > :nth-child(1) > :nth-child(2) > .form-group > .control-label')
-            .should('have.text', "Tipo de Sanção")
-    }
-
-    validarFormAIValorMulta(){
-        cy.get('#form_auto_infracao > :nth-child(1) > :nth-child(3) > :nth-child(1) > label')
-            .should('have.text', "Valor da Multa (R$)")
-    }
-
-    validarFormAITipoAtividade(){
-        cy.get(':nth-child(1) > :nth-child(4) > .form-group > .control-label')
-            .should('have.text', "Tipo de Atividade")
-    }
-
-    validarFormAIOrgaoDescricao(){
-        cy.get('.col-md-12 > .form-group > .control-label')
-            .should('have.text', "Órgão DemandaDescrição do AI (motivo)")
-    }
-
-    validarFormAIStatus(){
-        cy.get('#form_auto_infracao > :nth-child(3) > :nth-child(1) > .form-group > .control-label')
-            .should('have.text', "Status do AI")
-    }
-
-    validarFormAIInstancia(){
-        cy.get(':nth-child(3) > :nth-child(2) > .form-group > .control-label')
-            .should('have.text', "Instância Recursal")
-    }
-
-    validarFormAIDescricaoStatus(){
-        cy.get('.col-md-6 > .form-group > .control-label')
-            .should('have.text', "Descrição do Status do AI")
-    }
-
-    validarFormAITituloPrazos(){
-        cy.get('.box-title > b')
-            .should('have.text', "Controle dos Prazos de Defesa e dos Recursos Administrativos")
-    }
-
-    validarFormAIPeriodosInstancia(){
-        cy.get('#form_auto_infracao > :nth-child(5) > .col-md-4 > .form-group > .control-label')
-            .should('have.text', "Períodos da Instância")
-    }
-
-    validarFormAIDataEnvio(){
-        cy.get(':nth-child(6) > :nth-child(1) > :nth-child(1) > :nth-child(1) > .control-label')
-            .should('have.text', "Data Envio do Recurso da Instância ")
-    }
-
-    validarFormAIDataCiencia(){
-        cy.get(':nth-child(6) > :nth-child(2) > :nth-child(1) > :nth-child(1) > .control-label')
-            .should('have.text', "Data de Ciência Decisão da Instância")
-    }
-
-    validarFormAIValorAtual(){
-        cy.get('#form_auto_infracao > :nth-child(6) > :nth-child(3) > :nth-child(1) > label')
-            .should('have.text', "Valor da Multa Atualizada da Instância (R$)")
-    }
-
-    validarFormAIDataLimiteEnvio(){
-        cy.get(':nth-child(7) > :nth-child(1) > :nth-child(1) > :nth-child(1) > .control-label')
-            .should('have.text', "Data Limite de Envio do Recurso da Instância")
-    }
-
-    validarFormAIDataLimitePagamento(){
-        cy.get(':nth-child(7) > :nth-child(2) > :nth-child(1) > :nth-child(1) > .control-label')
-            .should('have.text', "Data Limite para Pagamento da Multa")
-    }
     validarLabelDadosCA(){
         cy.contains('label', 'Dados da CA').invoke('text').then((text) => { expect(text.trim()).to.eq('Dados da CA'); });
     }

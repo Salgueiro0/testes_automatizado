@@ -4,7 +4,6 @@ import demandas_consultar from "../../../support/pages/demandas_consultar";
 
 describe('pendência', () => {
     beforeEach(() => {
-        //cy.visit('http://gla-homol.terracapnet.local')
         cy.viewport(1980, 1200)
        
           
