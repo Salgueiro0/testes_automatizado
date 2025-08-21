@@ -39,6 +39,11 @@ class demandas_associacao {
     }
     seletorDropdown(opcao) {
         cy.get('.select2-results').find('li').contains(opcao).click({force: true})
+        // cy.get('.select2-results')
+        //     .should('be.visible')          // espera até aparecer
+        //     .find('li')
+        //     .contains(opcao)
+        //     .click({force: true})
     }
     seletorRegiaoAdmin() {
         cy.get('#select2-cd_regiao_admin-container').click()
@@ -82,7 +87,11 @@ class demandas_associacao {
     validarNovoCadasTabelaAcao(){
         cy.get('.text-center').should('have.text', "Ação")
     }
+    selecionarTpAssociacao(){
+        cy.get('#select2-tp_associacao-container').click()
+    }
     seletorDemanda(){
+        cy.wait(2000)
         cy.get('#select2-cd_demanda-container').click()
     }
     clicarBotaoAdicionar(){
@@ -97,6 +106,9 @@ class demandas_associacao {
     }
     seletorCdEmpreendimento(){
         cy.get('#select2-cd_empreendimento-container').click()
+        cy.wait(2000)
+        cy.get('#select2-cd_empreendimento-container').click()
+        cy.wait(2000)
     }
     botaoSalvar(){
         cy.get('#btnSalvar').click()
@@ -109,6 +121,9 @@ class demandas_associacao {
     }
     clicarBotaoVoltar(){
         cy.get('[onclick="window.history.back()"]').click()
+    }
+    clicarBotaoSalvar(){
+        cy.get('#btnSalvar').click()
     }
     clicarBotaoPesquisar(){
         cy.get('#pesquisar').click()

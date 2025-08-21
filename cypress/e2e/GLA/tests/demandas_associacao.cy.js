@@ -77,14 +77,14 @@ describe('pendência', () => {
         //cy.get('.text-center').should('have.text', "Ação")
 
         //validação de novo cadastro
-        demandas_associacao.
-        cy.get('#select2-tp_associacao-container').click()
+        demandas_associacao.selecionarTpAssociacao()
+        //cy.get('#select2-tp_associacao-container').click()
         demandas_associacao.seletorDropdown('Geral')
-        cy.get('.select2-results').find('li').contains('Geral').click({force: true})
+        //cy.get('.select2-results').find('li').contains('Geral').click({force: true})
         demandas_associacao.seletorRegiaoAdmin()
         //cy.get('#select2-cd_regiao_admin-container').click()
         demandas_associacao.seletorDropdown('RA-I - BRASILIA')
-        cy.get('.select2-results').find('li').contains('RA-I - BRASILIA').click({force: true})
+        //cy.get('.select2-results').find('li').contains('RA-I - BRASILIA').click({force: true})
         demandas_associacao.seletorEmpreendimento()
         //cy.get('#select2-cd_empreendimento-container > .select2-selection__clear').click()
         demandas_associacao.seletorDropdown('103 - Estagio de produção')
@@ -92,7 +92,7 @@ describe('pendência', () => {
         demandas_associacao.seletorDemanda()
         //cy.get('#select2-cd_demanda-container').click()
         demandas_associacao.seletorDropdown('LOC - Licença de Operação Corretiva nº 07/04/2025')
-        //cy.get('.select2-results').find('li').contains('LOC - Licença de Operação Corretiva nº 07/04/2025').click({force: true})
+        // cy.get('.select2-results').find('li').contains('LOC - Licença de Operação Corretiva nº 07/04/2025').click({force: true})
         demandas_associacao.clicarBotaoAdicionar()
         //cy.get('#btnAdicionar').click()
         demandas_associacao.clicarExcluir()
@@ -156,7 +156,8 @@ describe('pendência', () => {
         //cy.get('#select2-cd_empreendimento-container').click()
         demandas_associacao.seletorDropdown('103 - Estagio de produção')
         //cy.get('.select2-results').find('li').contains('103 - Estagio de produção').click({force: true})
-        demandas_associacao.clicarBotaoPesquisar()
+        demandas_associacao.clicarBotaoSalvar()
+        //demandas_associacao.clicarBotaoPesquisar()
         //cy.get('#pesquisar').click()
 
         //validação da edição
