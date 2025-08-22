@@ -65,6 +65,115 @@ class demandas_consultar {
     validarFormAIValorAtual() { cy.get(el.formAIValorAtual).should('have.text', "Valor da Multa Atualizada da Instância (R$)"); }
     validarFormAIDataLimiteEnvio() { cy.get(el.formAIDataLimiteEnvio).should('have.text', "Data Limite de Envio do Recurso da Instância"); }
     validarFormAIDataLimitePagamento() { cy.get(el.formAIDataLimitePagamento).should('have.text', "Data Limite para Pagamento da Multa"); }
+    validarLabelDadosCA(){cy.contains('label', 'Dados da CA').invoke('text').then((text) => { expect(text.trim()).to.eq('Dados da CA'); });}
+    validarLabelDadosCF(){cy.contains('label', 'Dados da CF').invoke('text').then((text) => { expect(text.trim()).to.eq('Dados da CF'); });}
+    validarLabelDadosAI(){cy.contains('label', 'Dados do AI').invoke('text').then((text) => { expect(text.trim()).to.eq('Dados do AI'); });}
+    validarLabelValorCA(){cy.contains('label', 'Valor da CA').invoke('text').then((text) => { expect(text.trim()).to.eq('Valor da CA'); });}
+    validarLabelLegRef(){cy.contains('label', 'Legislação de Referência').invoke('text').then((text) => { expect(text.trim()).to.eq('Legislação de Referência'); });}
+    validarLabelDataRecebAI(){cy.contains('label', 'Data de Recebimento do AI').invoke('text').then((text) => { expect(text.trim()).to.eq('Data de Recebimento do AI'); });}
+    validarLabelDiasRestCA(){cy.contains('label', 'Dias Restantes da CA').invoke('text').then((text) => { expect(text.trim()).to.eq('Dias Restantes da CA'); });}
+    validarLabelValorCF(){cy.contains('label', 'Valor da CF').invoke('text').then((text) => { expect(text.trim()).to.eq('Valor da CF'); });}
+    validarLabelTipoSancao(){cy.contains('label', 'Tipo de Sanção').invoke('text').then((text) => { expect(text.trim()).to.eq('Tipo de Sanção'); });}
+    validarLabelSubtotalCA(){cy.contains('label', 'Subtotal da CA').invoke('text').then((text) => { expect(text.trim()).to.eq('Subtotal da CA'); });}
+    validarLabelDiasRestCF(){cy.contains('label', 'Dias Restantes da CF').invoke('text').then((text) => { expect(text.trim()).to.eq('Dias Restantes da CF'); });}
+    validarLabelTipoVegetacao(){cy.contains('label', 'Tipo Vegetação').invoke('text').then((text) => { expect(text.trim()).to.eq('Tipo Vegetação'); });}
+    validarLabelModPagamento(){cy.contains('label', 'Mod. Pagamento').invoke('text').then((text) => { expect(text.trim()).to.eq('Mod. Pagamento'); });}
+    validarLabelSubtotalMultaAI(){cy.contains('label', 'Subtotal da Multa AI').invoke('text').then((text) => { expect(text.trim()).to.eq('Subtotal da Multa AI'); });}validarTabelaRA(){cy.get('.sorting_asc').should('have.text', "R.A");}
+
+
+
+
+
+    validarTabelaEmpreendimento(){cy.get(el.tabelaEmpreendimento).should('have.text', "Empreendimento");}
+    validarTabelaTipo(){cy.get(el.tabelaTipo).should('have.text', "Tipo");}
+    validarTabelaNumero(){cy.get(el.tabelaNumero).should('have.text', "Nº");}
+    validarTabelaAno(){cy.get(el.tabelaAno).should('have.text', "Ano");}
+    validarTabelaOrgao(){cy.get(el.tabelaOrgao).should('have.text', "Órgão");}
+    validarTabelaDiasRest(){cy.get(el.tabelaDiasRest).should('have.text', "Dias Rest");}
+    validarTabelaAlerta(){cy.get(el.tabelaAlerta).should('have.text', "Alerta");}
+    validarTabelaTitular(){cy.get(el.tabelaTitular).should('have.text', "Titular");}
+    validarTabelaAcao(){cy.get(el.tabelaAcao).should('have.text', "Ação");}
+    validarTituloNovaDemanda(){cy.get(el.tituloNovaDemanda).should('have.text', "Nova Demanda");}
+    validarAccordionDadosGerais(){cy.get(el.accordionDadosGerais).should('contain', "Dados Gerais");}
+    validarAccordionDadosCA(){cy.get(el.accordionDadosCA).should('contain', "Dados Específicos da Compensação Ambiental");}
+    validarAccordionDadosCF(){cy.get(el.accordionDadosCF).should('contain', "Dados Específicos da Compensação Florestal");}
+    validarAccordionDadosAI(){cy.get(el.accordionDadosAI).should('contain', "Dados Específicos do Auto de Infração");}
+    validarFormRA_Especifico(){cy.get(el.formRA_Especifico).should('have.text', "R.A");}
+    validarFormEmpreendimento_Especifico(){cy.get(el.formEmpreendimento_Especifico).should('have.text', "Empreendimento");}
+    validarFormTipo_Especifico(){cy.get(el.formTipo_Especifico).should('have.text', "Tipo");}
+    validarFormNumero_Especifico(){cy.get(el.formNumero_Especifico).should('have.text', "Número");}
+    validarFormAno_Especifico(){cy.get(el.formAno_Especifico).should('have.text', "Ano");}
+    validarFormOrgaoDemanda_Especifico(){cy.get(el.formOrgaoDemanda_Especifico).should('have.text', "Órgão Demanda");}
+    validarFormProcessoSEI_Especifico(){cy.get(el.formProcessoSEI_Especifico).should('have.text', "Processo SEI Demanda *");}
+    validarFormDataPublicacao_Especifico(){cy.get(el.formDataPublicacao_Especifico).should('have.text', "Data Publicação");}
+    validarFormVigenciaDias_Especifico(){cy.get(el.formVigenciaDias_Especifico).should('have.text', "Vigência em Dias");}
+    validarFormTitular_Especifico(){cy.get(el.formTitular_Especifico).should('have.text', "Titular *");}
+    validarFormSuplente_Especifico(){cy.get(el.formSuplente_Especifico).should('have.text', "Suplente *");}
+    validarFormDescricao_Especifico(){cy.get(el.formDescricao_Especifico).should('have.text', "Descrição");}
+    validarVisualizarTituloDemanda(){cy.get('h1').should('have.text', "Demanda");}
+    validarVisualizarInfoEmpreendimentos(){cy.get(el.infoEmpreendimentos).should('have.text', "Informações dos Empreendimentos");}
+    validarVisualizarDadosGerais(){cy.get(el.dadosGerais).should('have.text', "Dados Gerais");}
+    validarVisualizarInfoDocumento(){cy.get(el.infoDocumento).should('have.text', "Informações do Documento");}
+    validarVisualizarCompensacaoAmbiental(){cy.get(el.compensacaoAmbiental).should('have.text', "Dados Específicos da Compensação Ambiental");}
+    validarVisualizarCompensacaoFlorestal(){cy.get(el.compensacaoFlorestal).should('have.text', "Dados Específicos da Compensação Florestal");}
+    validarVisualizarAutoInfracao(){cy.get(el.autoInfracao).should('have.text', "Dados Específicos do Auto de Infração");}
+    validarWhidthTipo(){cy.get(el.whidthTipo).should('have.text', "Tipo");}
+    validarWhidthNumero(){cy.get(el.whidthNumero).should('have.text', "Número");}
+    validarWhidthAno(){cy.get(el.whidthAno).should('have.text', "Ano");}
+    validarWhidthOrgao(){cy.get(el.whidthOrgao).should('have.text', "Órgão");}
+    validarWhidthNumeroSei(){cy.get(el.whidthNumeroSei).should('have.text', "Nº SEI Doc Demanda");}
+    validarWhidthProcesso(){cy.get(el.whidthProcesso).should('have.text', "Processo");}
+    validarWhidthDataPublicacao(){cy.get(el.whidthDataPublicacao).should('have.text', "Data Publicação");}
+    validarWhidthVigenciaDias(){cy.get(el.whidthVigenciaDias).should('have.text', "Vigência em Dias");}
+    validarWhidthDiasRestantes(){cy.get(el.whidthDiasRestantes).should('have.text', "Dias Restantes");}
+    validarWhidthStatus(){cy.get(el.whidthStatus).should('have.text', "Status");}
+    validarWhidthAlertaPrazo(){cy.get(el.whidthAlertaPrazo).should('have.text', "Alerta de Prazo");}
+    validarWhidthTitular(){cy.get(el.whidthTitular).should('have.text', "Titular");}
+    validarWhidthSuplente(){cy.get(el.whidthSuplente).should('have.text', "Suplente");}
+    validarWhidthArquivadaSuspensaCancelada(){cy.get(el.whidthArquivadaSuspensaCancelada).should('have.text', "Arquivada/Suspensa/Cancelada");}
+    validarWhidthDataVencimento(){cy.get(el.whidthDataVencimento).should('have.text', "Data de Vencimento");}
+    validarWhidthEstudoServicosRelacionados(){cy.get(el.whidthEstudoServicosRelacionados).should('have.text', "Estudo/Serviços Relacionados");}
+    validarWhidthObservacaoProcessos(){cy.get(el.whidthObservacaoProcessos).should('have.text', "Observação (Processos)");}
+    validarWhidthDescricao(){cy.get(el.whidthDescricao).should('have.text', "Descrição");}
+    validarWhidthRa(){cy.get(el.whidthRa).should('have.text', "RA");}
+    validarWhidthEmpreendimento(){cy.get(el.whidthEmpreendimento).should('have.text', "Empreendimento");}
+
+
+
+
+
+
+
+
+
+
+
+
+
+    clicarBotao1(){cy.get(el.botao1).click();}
+    clicarBotao2(){cy.get(el.botao2).click();}
+    clicarBotao3(){cy.get(el.botao3).click();}
+    seletorRAForm(){cy.get(el.seletorRAForm).click();}
+    seletorRAFormGeral(){cy.get(el.seletorRAFormGeral).click();}
+    seletorDropdown(select){cy.get(el.seletorDropdown).contains(select).click({force:true});}
+    clicarBotao(){cy.get(el.botaoPanel).click();}
+    digitarValorComp(valor){cy.get(el.valorComp).type(valor);}
+    clicarBotaoPanel(){cy.get(el.botaoPanelBody).click();}
+    digitarDataRecebInicio(valor){cy.get(el.dataRecebInicio).type(valor);}
+    limparPesquisa(){cy.get(el.limparPesquisa).click();}
+    selecionarRA(){cy.get(el.seletorRAFormGeral).click();}
+    clicarBotaoPesquisar(){cy.get(el.botaoPesquisar).click();}
+    clicarBotaoCadastro(){cy.get(el.botaoCadastro).click();}
+    clicarAcordeaoCompAmb(){cy.contains('div.accordion.float-style','Dados Específicos da Compensação Ambiental').click();}
+    clicarAcordeaoCompFlo(){cy.contains('div.accordion.float-style','Dados Específicos da Compensação Florestal').click();}
+    clicarAcordeaoComInf(){cy.contains('div.accordion.float-style','Dados Específicos do Auto de Infração').click();}
+    selecionarReg(){cy.get(el.seletorReg).click();}
+    seletorEmpreendimento(){cy.get(el.seletorEmpreendimento).click();}
+    adicionarEmpreendimento(){cy.contains('button','Adicionar').click();}
+    selecionarLicenca(){cy.get(el.selecionarLicenca).click();}
+    digitarNumDemanda(valor){cy.get(el.numDemanda).type(valor);}
+    digitarAnoDemanda(valor){cy.get(el.anoDemanda).type(valor);}
+    selecionarOrgao(){cy.get(el.selecionarOrgao).click();}
 
 
 
@@ -76,390 +185,6 @@ class demandas_consultar {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    validarLabelDadosCA(){
-        cy.contains('label', 'Dados da CA').invoke('text').then((text) => { expect(text.trim()).to.eq('Dados da CA'); });
-    }
-
-    validarLabelDadosCF(){
-        cy.contains('label', 'Dados da CF').invoke('text').then((text) => { expect(text.trim()).to.eq('Dados da CF'); });
-    }
-
-    validarLabelDadosAI(){
-        cy.contains('label', 'Dados do AI').invoke('text').then((text) => { expect(text.trim()).to.eq('Dados do AI'); });
-    }
-
-    validarLabelValorCA(){
-        cy.contains('label', 'Valor da CA').invoke('text').then((text) => { expect(text.trim()).to.eq('Valor da CA'); });
-    }
-
-    validarLabelLegRef(){
-        cy.contains('label', 'Legislação de Referência').invoke('text').then((text) => { expect(text.trim()).to.eq('Legislação de Referência'); });
-    }
-
-    validarLabelDataRecebAI(){
-        cy.contains('label', 'Data de Recebimento do AI').invoke('text').then((text) => { expect(text.trim()).to.eq('Data de Recebimento do AI'); });
-    }
-
-    validarLabelDiasRestCA(){
-        cy.contains('label', 'Dias Restantes da CA').invoke('text').then((text) => { expect(text.trim()).to.eq('Dias Restantes da CA'); });
-    }
-
-    validarLabelValorCF(){
-        cy.contains('label', 'Valor da CF').invoke('text').then((text) => { expect(text.trim()).to.eq('Valor da CF'); });
-    }
-
-    validarLabelTipoSancao(){
-        cy.contains('label', 'Tipo de Sanção').invoke('text').then((text) => { expect(text.trim()).to.eq('Tipo de Sanção'); });
-    }
-
-    validarLabelSubtotalCA(){
-        cy.contains('label', 'Subtotal da CA').invoke('text').then((text) => { expect(text.trim()).to.eq('Subtotal da CA'); });
-    }
-
-    validarLabelDiasRestCF(){
-        cy.contains('label', 'Dias Restantes da CF').invoke('text').then((text) => { expect(text.trim()).to.eq('Dias Restantes da CF'); });
-    }
-
-    validarLabelTipoVegetacao(){
-        cy.contains('label', 'Tipo Vegetação').invoke('text').then((text) => { expect(text.trim()).to.eq('Tipo Vegetação'); });
-    }
-
-    validarLabelModPagamento(){
-        cy.contains('label', 'Mod. Pagamento').invoke('text').then((text) => { expect(text.trim()).to.eq('Mod. Pagamento'); });
-    }
-
-    validarLabelSubtotalMultaAI(){
-        cy.contains('label', 'Subtotal da Multa AI').invoke('text').then((text) => { expect(text.trim()).to.eq('Subtotal da Multa AI'); });
-    }
-    validarTabelaRA(){
-        cy.get('.sorting_asc').should('have.text', "R.A");
-    }
-
-    validarTabelaEmpreendimento(){
-        cy.get('[aria-label="Empreendimento: Ordenar colunas de forma ascendente"]').should('have.text', "Empreendimento");
-    }
-
-    validarTabelaTipo(){
-        cy.get('[aria-label="Tipo: Ordenar colunas de forma ascendente"]').should('have.text', "Tipo");
-    }
-
-    validarTabelaNumero(){
-        cy.get('[aria-label="Nº: Ordenar colunas de forma ascendente"]').should('have.text', "Nº");
-    }
-
-    validarTabelaAno(){
-        cy.get('[aria-label="Ano: Ordenar colunas de forma ascendente"]').should('have.text', "Ano");
-    }
-
-    validarTabelaOrgao(){
-        cy.get('[aria-label="Órgão: Ordenar colunas de forma ascendente"]').should('have.text', "Órgão");
-    }
-
-    validarTabelaDiasRest(){
-        cy.get('[aria-label="Dias Rest: Ordenar colunas de forma ascendente"]').should('have.text', "Dias Rest");
-    }
-
-    validarTabelaAlerta(){
-        cy.get('[aria-label="Alerta: Ordenar colunas de forma ascendente"]').should('have.text', "Alerta");
-    }
-
-    validarTabelaTitular(){
-        cy.get('[aria-label="Titular: Ordenar colunas de forma ascendente"]').should('have.text', "Titular");
-    }
-
-    validarTabelaAcao(){
-        cy.get('[aria-label="Ação: Ordenar colunas de forma ascendente"]').should('have.text', "Ação");
-    }
-    validarTituloNovaDemanda(){
-        cy.get('.box-title').should('have.text', "Nova Demanda");
-    }
-
-    validarAccordionDadosGerais(){
-        cy.get('div.accordion.float-style').should('contain', 'Dados Gerais');
-    }
-
-    validarAccordionDadosCA(){
-        cy.get('div.accordion.float-style').should('contain', 'Dados Específicos da Compensação Ambiental');
-    }
-
-    validarAccordionDadosCF(){
-        cy.get('div.accordion.float-style').should('contain', 'Dados Específicos da Compensação Florestal');
-    }
-
-    validarAccordionDadosAI(){
-        cy.get('div.accordion.float-style').should('contain', 'Dados Específicos do Auto de Infração');
-    }
-    validarFormRA_Especifico(){
-        cy.get(':nth-child(1) > .col-md-4 > .form-group > .control-label').should('have.text', "R.A");
-    }
-
-    validarFormEmpreendimento_Especifico(){
-        cy.get(':nth-child(1) > .col-md-6 > .form-group > .control-label').should('have.text', "Empreendimento");
-    }
-
-    validarFormTipo_Especifico(){
-        cy.get(':nth-child(2) > :nth-child(1) > .form-group > .control-label').should('have.text', "Tipo");
-    }
-
-    validarFormNumero_Especifico(){
-        cy.get(':nth-child(2) > :nth-child(2) > .form-group > .control-label').should('have.text', "Número");
-    }
-
-    validarFormAno_Especifico(){
-        cy.get(':nth-child(2) > :nth-child(3) > .form-group > .control-label').should('have.text', "Ano");
-    }
-
-    validarFormOrgaoDemanda_Especifico(){
-        cy.get(':nth-child(2) > :nth-child(3) > :nth-child(1) > .form-group > .control-label').should('have.text', "Órgão Demanda");
-    }
-
-    validarFormProcessoSEI_Especifico(){
-        cy.get(':nth-child(3) > :nth-child(3) > :nth-child(1) > .form-group > label').should('have.text', "Processo SEI Demanda *");
-    }
-
-    validarFormDataPublicacao_Especifico(){
-        cy.get(':nth-child(2) > :nth-child(4) > :nth-child(1) > .form-group > .control-label').should('have.text', "Data Publicação");
-    }
-
-    validarFormVigenciaDias_Especifico(){
-        cy.get(':nth-child(4) > :nth-child(2) > .form-group > .control-label').should('have.text', "Vigência em Dias");
-    }
-
-    validarFormTitular_Especifico(){
-        cy.get(':nth-child(2) > :nth-child(6) > :nth-child(1) > .form-group > label').should('have.text', "Titular *");
-    }
-
-    validarFormSuplente_Especifico(){
-        cy.get(':nth-child(2) > :nth-child(6) > :nth-child(2) > .form-group > label').should('have.text', "Suplente *");
-    }
-
-    validarFormDescricao_Especifico(){
-        cy.get(':nth-child(5) > .col-md-12 > .form-group > .control-label').should('have.text', "Descrição");
-    }
-    validarVisualizarTituloDemanda(){
-        cy.get('h1').should('have.text', "Demanda");
-    }
-
-    validarVisualizarInfoEmpreendimentos(){
-        cy.get(':nth-child(1) > .col-md-12 > .accordion > b')
-            .should('have.text', "Informações dos Empreendimentos");
-    }
-
-    validarVisualizarDadosGerais(){
-        cy.get(':nth-child(1) > :nth-child(1) > :nth-child(2) > .col-md-12 > .accordion > b')
-            .should('have.text', "Dados Gerais");
-    }
-
-    validarVisualizarInfoDocumento(){
-        cy.get(':nth-child(1) > :nth-child(1) > :nth-child(3) > .col-md-12 > .accordion > b')
-            .should('have.text', "Informações do Documento");
-    }
-
-    validarVisualizarCompensacaoAmbiental(){
-        cy.get('.panel-body > :nth-child(2) > .col-md-12 > .accordion > b')
-            .should('have.text', "Dados Específicos da Compensação Ambiental");
-    }
-
-    validarVisualizarCompensacaoFlorestal(){
-        cy.get('.panel-body > :nth-child(3) > .col-md-12 > .accordion > b')
-            .should('have.text', "Dados Específicos da Compensação Florestal");
-    }
-
-    validarVisualizarAutoInfracao(){
-        cy.get(':nth-child(4) > .col-md-12 > .accordion > b')
-            .should('have.text', "Dados Específicos do Auto de Infração");
-    }
-    validarWhidthTipo(){
-        cy.get(':nth-child(1) > [whidth="350px"] > b').should('have.text', "Tipo");
-    }
-
-    validarWhidthNumero(){
-        cy.get(':nth-child(2) > [whidth="350px"] > b').should('have.text', "Número");
-    }
-
-    validarWhidthAno(){
-        cy.get(':nth-child(3) > [whidth="350px"] > b').should('have.text', "Ano");
-    }
-
-    validarWhidthOrgao(){
-        cy.get(':nth-child(4) > [whidth="350px"] > b').should('have.text', "Órgão");
-    }
-
-    validarWhidthNumeroSei(){
-        cy.get(':nth-child(5) > [whidth="350px"] > b').should('have.text', "Nº SEI Doc Demanda");
-    }
-
-    validarWhidthProcesso(){
-        cy.get(':nth-child(6) > [whidth="350px"] > b').should('have.text', "Processo");
-    }
-
-    validarWhidthDataPublicacao(){
-        cy.get(':nth-child(7) > [whidth="350px"] > b').should('have.text', "Data Publicação");
-    }
-
-    validarWhidthVigenciaDias(){
-        cy.get(':nth-child(8) > [whidth="350px"] > b').should('have.text', "Vigência em Dias");
-    }
-
-    validarWhidthDiasRestantes(){
-        cy.get(':nth-child(9) > [whidth="350px"] > b').should('have.text', "Dias Restantes");
-    }
-
-    validarWhidthStatus(){
-        cy.get(':nth-child(10) > [whidth="350px"] > b').should('have.text', "Status");
-    }
-
-    validarWhidthAlertaPrazo(){
-        cy.get(':nth-child(11) > [whidth="350px"] > b').should('have.text', "Alerta de Prazo");
-    }
-
-    validarWhidthTitular(){
-        cy.get(':nth-child(12) > [whidth="350px"] > b').should('have.text', "Titular");
-    }
-
-    validarWhidthSuplente(){
-        cy.get(':nth-child(13) > [whidth="350px"] > b').should('have.text', "Suplente");
-    }
-
-    validarWhidthArquivadaSuspensaCancelada(){
-        cy.get(':nth-child(14) > [whidth="350px"] > b').should('have.text', "Arquivada/Suspensa/Cancelada");
-    }
-
-    validarWhidthDataVencimento(){
-        cy.get(':nth-child(15) > [whidth="350px"] > b').should('have.text', "Data de Vencimento");
-    }
-
-    validarWhidthEstudoServicosRelacionados(){
-        cy.get(':nth-child(16) > [whidth="350px"] > b').should('have.text', "Estudo/Serviços Relacionados");
-    }
-
-    validarWhidthObservacaoProcessos(){
-        cy.get(':nth-child(17) > [whidth="350px"] > b').should('have.text', "Observação (Processos)");
-    }
-
-    validarWhidthDescricao(){
-        cy.get(':nth-child(18) > [whidth="350px"] > b').should('have.text', "Descrição");
-    }
-
-    validarWhidthRa(){
-        cy.get('.panel-border > .table > tbody > :nth-child(1) > :nth-child(1) > b')
-            .should('have.text', "RA");
-    }
-
-    validarWhidthEmpreendimento(){
-        cy.get('.panel-border > .table > tbody > :nth-child(2) > :nth-child(1) > b')
-            .should('have.text', "Empreendimento");
-    }
-
-    clicarBotao1(){
-        cy.get(':nth-child(4) > .box-header > .box-tools > .btn > .fa').click()
-    }
-    clicarBotao2(){
-        cy.get(':nth-child(3) > .box-header > .box-tools > .btn > .fa').click()
-    }
-    clicarBotao3(){
-        cy.get(':nth-child(2) > .box-header > .box-tools > .btn > .fa').click()
-    }
-    seletorRAForm(){
-        cy.get('#form_geral > :nth-child(1) > :nth-child(1) > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field').click()
-    }
-    seletorRAFormGeral(){
-        cy.get('#form_geral > :nth-child(1) > :nth-child(1) .select2-selection').click()
-    }
-
-    seletorDropdown(select){
-            cy.get('.select2-results').find('li').contains(select).click({force: true})
-    }
-
-    clicarBotao(){
-        cy.get('.panel > :nth-child(2) > .col-md-4 > .btn').click()
-    }
-
-    digitarValorComp(valor){
-        cy.get('#vl_valor_compensacao_ambiental_inicial').type(valor)
-    }
-
-    clicarBotaoPanel(){
-        cy.get('.panel-body > :nth-child(2) > .col-md-4 > .btn').click()
-    }
-
-    digitarDataRecebInicio(valor){
-        cy.get('#dt_recebimento_ai_inicio').type(valor)
-    }
-
-    limparPesquisa(){
-        cy.get('[onclick="limpaPesquisa()"]').click()
-    }
-
-    selecionarRA(){
-        cy.get('#form_geral > :nth-child(1) > :nth-child(1) .select2-selection').click()
-    }
-
-    clicarBotaoPesquisar(){
-        cy.get('#pesquisar').click()
-    }
-
-    clicarBotaoCadastro(){
-        cy.get('.btn-success').click()
-    }
-    clicarAcordeaoCompAmb(){
-        cy.contains('div.accordion.float-style', 'Dados Específicos da Compensação Ambiental').click()
-    }
-
-    clicarAcordeaoCompFlo(){
-        cy.contains('div.accordion.float-style', 'Dados Específicos da Compensação Florestal').click()
-    }
-
-    clicarAcordeaoComInf(){
-        cy.contains('div.accordion.float-style', 'Dados Específicos do Auto de Infração').click()
-    }
-
-    selecionarReg(){
-        cy.get('#select2-regiao-container').click()
-    }
-
-    seletorEmpreendimento(){
-        cy.get('#select2-cd_empreendimento-container > .select2-selection__clear').click()
-    }
-
-    adicionarEmpreendimento(){
-        //cy.get('#add_empreendimento').click()
-        cy.contains('button','Adicionar').click()
-    }
-
-    selecionarLicenca(){
-        cy.get(':nth-child(2) > :nth-child(1) > .form-group > .select2-container > .selection > .select2-selection').click()
-    }
-
-    digitarNumDemanda(valor){
-        cy.get('#nr_demanda').type(valor)
-    }
-
-    digitarAnoDemanda(valor){
-        cy.get('#aa_demanda').type(valor)
-    }
-
-    selecionarOrgao(){
-        cy.get(':nth-child(3) > :nth-child(1) > .form-group > .select2-container > .selection > .select2-selection').click()
-    }
 
     digitarData(valor){
         cy.get('div[style="display: block;"] > :nth-child(4) > :nth-child(1) > .form-group > .control-label').type(valor)
@@ -580,6 +305,21 @@ class demandas_consultar {
     clicarPrimeiroBotaoVisualizar(){
         cy.get('a[title="Visualizar"]').first().click()
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     clicarBotaoVoltar(){
         cy.get('[onclick="window.history.back()"]').click()
