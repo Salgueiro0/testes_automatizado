@@ -37,7 +37,6 @@ export const ELEMENTS = {
     formAmbDataLimite: '#form_ambiental > :nth-child(3) > :nth-child(2) > :nth-child(1) > label',
     formAmbDiasRestantes: '#form_ambiental > :nth-child(3) > :nth-child(3) > :nth-child(1) > label',
     formAmbSaldoDevedor: ':nth-child(4) > .col-md-4 > :nth-child(1) > .control-label',
-
     // Florestal
     formFlorestLegRef: '#form_florestal > :nth-child(1) > :nth-child(1) > .form-group > .control-label',
     formFlorestTipoVeg: '#form_florestal > :nth-child(1) > :nth-child(2) > .form-group > .control-label',
@@ -52,7 +51,6 @@ export const ELEMENTS = {
     formFlorestDescricao: ':nth-child(4) > .col-md-10 > .form-group > .control-label',
     formFlorestStatusRecurso: '#form_florestal > :nth-child(5) > .col-md-4 > .form-group > .control-label',
     formFlorestSaldoDevedor: ':nth-child(6) > .col-md-4 > :nth-child(1) > .control-label',
-
     // Auto Infração
     formAIDataReceb: '#form_auto_infracao > :nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(1) > .control-label',
     formAITipoSancao: '#form_auto_infracao > :nth-child(1) > :nth-child(2) > .form-group > .control-label',
@@ -69,7 +67,6 @@ export const ELEMENTS = {
     formAIValorAtual: '#form_auto_infracao > :nth-child(6) > :nth-child(3) > :nth-child(1) > label',
     formAIDataLimiteEnvio: ':nth-child(7) > :nth-child(1) > :nth-child(1) > :nth-child(1) > .control-label',
     formAIDataLimitePagamento: ':nth-child(7) > :nth-child(2) > :nth-child(1) > :nth-child(1) > .control-label',
-
     // Tabela Nova Demanda
     tabelaEmpreendimento: '[aria-label="Empreendimento: Ordenar colunas de forma ascendente"]',
     tabelaTipo: '[aria-label="Tipo: Ordenar colunas de forma ascendente"]',
@@ -100,8 +97,6 @@ export const ELEMENTS = {
     formTitular_Especifico: ':nth-child(2) > :nth-child(6) > :nth-child(1) > .form-group > label',
     formSuplente_Especifico: ':nth-child(2) > :nth-child(6) > :nth-child(2) > .form-group > label',
     formDescricao_Especifico: ':nth-child(5) > .col-md-12 > .form-group > .control-label',
-
-
     infoEmpreendimentos: ':nth-child(1) > .col-md-12 > .accordion > b',
     dadosGerais: ':nth-child(1) > :nth-child(1) > :nth-child(2) > .col-md-12 > .accordion > b',
     infoDocumento: ':nth-child(1) > :nth-child(1) > :nth-child(3) > .col-md-12 > .accordion > b',
@@ -128,7 +123,6 @@ export const ELEMENTS = {
     whidthDescricao: ':nth-child(18) > [whidth="350px"] > b',
     whidthRa: '.panel-border > .table > tbody > :nth-child(1) > :nth-child(1) > b',
     whidthEmpreendimento: '.panel-border > .table > tbody > :nth-child(2) > :nth-child(1) > b',
-
     botao1: ':nth-child(4) > .box-header > .box-tools > .btn > .fa',
     botao2: ':nth-child(3) > .box-header > .box-tools > .btn > .fa',
     botao3: ':nth-child(2) > .box-header > .box-tools > .btn > .fa',
@@ -151,5 +145,23 @@ export const ELEMENTS = {
     selecionarLicenca: ':nth-child(2) > :nth-child(1) > .form-group > .select2-container > .selection > .select2-selection',
     numDemanda: '#nr_demanda',
     anoDemanda: '#aa_demanda',
-    selecionarOrgao: ':nth-child(3) > :nth-child(1) > .form-group > .select2-container > .selection > .select2-selection'
+    selecionarOrgao: ':nth-child(3) > :nth-child(1) > .form-group > .select2-container > .selection > .select2-selection',
+    digitarDtPub: '#dt_publicacao',
+    digitarQtDias: '#qt_dias_vigencia',
+    digitarDesDemanda: '#ds_demanda',
+    botaoSalvar: '#submit',
+    botaoContinuar: '.modal-footer > .btn-primary',
+    modalOk: 'button:contains("OK")',
+    irLink: ':nth-child(3) > [href="#"]',
+    irLink2: '.menu-open > .treeview-menu > :nth-child(1) > a > span',
+    clicarBotaoPesquisar: '#pesquisar',
+    clicarPrimeiroBotaoVisualizar: 'a[title="Visualizar"]',
+    clicarBotaoVoltar: '[onclick="window.history.back()"]',
+    clicarLink3: '.menu-open > .treeview-menu > :nth-child(1) > a > span',
+    digitarDtPubInicio: '#dt_publicacao_inicio',
+    gerarRelDemandaPDF: '#gerarRelatorioDemandaPDF',
+    clicarExcluirDemanda: '#btn-delete-demanda',
+    clicarConfirmar: '.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary',
+
+
 }

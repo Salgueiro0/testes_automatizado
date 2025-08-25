@@ -137,19 +137,6 @@ class demandas_consultar {
     validarWhidthDescricao(){cy.get(el.whidthDescricao).should('have.text', "Descrição");}
     validarWhidthRa(){cy.get(el.whidthRa).should('have.text', "RA");}
     validarWhidthEmpreendimento(){cy.get(el.whidthEmpreendimento).should('have.text', "Empreendimento");}
-
-
-
-
-
-
-
-
-
-
-
-
-
     clicarBotao1(){cy.get(el.botao1).click();}
     clicarBotao2(){cy.get(el.botao2).click();}
     clicarBotao3(){cy.get(el.botao3).click();}
@@ -174,176 +161,41 @@ class demandas_consultar {
     digitarNumDemanda(valor){cy.get(el.numDemanda).type(valor);}
     digitarAnoDemanda(valor){cy.get(el.anoDemanda).type(valor);}
     selecionarOrgao(){cy.get(el.selecionarOrgao).click();}
-
-
-
-
-
-
-
-
-
-
-
-
-    digitarData(valor){
-        cy.get('div[style="display: block;"] > :nth-child(4) > :nth-child(1) > .form-group > .control-label').type(valor)
-    }
-
-    digitar1(valor){
-        cy.get(':nth-child(4) > :nth-child(2) > .form-group > .control-label').type(valor)
-    }
-
-    digitar2(valor){
-        cy.get(':nth-child(5) > .col-md-12 > .form-group > .control-label').type(valor)
-    }
-
-    digitar(valor){
-        cy.get('#cd_orgao_processo_sei').type(valor)
-    }
-
-    digitarNRProcesso(valor){
-        cy.get('#nr_processo_sei').type(valor)
-    }
-
-    digitarAnoProcesso(valor){
-        cy.get('#aa_processo_sei').type(valor)
-    }
-
-    botaoSalvar(){
-        cy.get('#submit').click()
-    }
-
-    botaoContinuar(){
-        cy.get('.modal-footer > .btn-primary').click()
-    }
-
-    botaoOk(){
-        cy.get('.modal-footer > .btn-danger').click()
-    }
-    clicarAdicionar1(){
-        cy.get('#ep_plus').click()
-    }
-
-    clicarAdicionar2(){
-        cy.get('#id_plus').click()
-    }
-
-    clicarAdicionar3(){
-        cy.get('#ca_plus').click()
-    }
-
-    clicarAdicionar4(){
-        cy.get('#cf_plus').click()
-    }
-
-    clicarAdicionar5(){
-        cy.get('#ai_plus').click()
-    }
-    clicarAbaDoc(){
-        cy.get('.documentos-aba').click()
-    }
-
-    clicarExigAba(){
-        cy.get('.exigencias-aba').click()
-    }
-
-    clicarReqAba(){
-        cy.get('.requerimentos-aba').click()
-    }
-
-    clicarNovoEstudoAba(){
-        cy.get('.novo-estudo-aba').click()
-    }
-
-    clicarDemandaAba(){
-        cy.get('.demanda-aba').click()
-    }
-
+    digitarData(valor){cy.get('div[style="display: block;"] > :nth-child(4) > :nth-child(1) > .form-group > .control-label').type(valor)}
+    digitar1(valor){cy.get(':nth-child(4) > :nth-child(2) > .form-group > .control-label').type(valor)}
+    digitar2(valor){cy.get(':nth-child(5) > .col-md-12 > .form-group > .control-label').type(valor)}
+    digitar(valor){cy.get('#cd_orgao_processo_sei').type(valor)}
+    digitarNRProcesso(valor){cy.get('#nr_processo_sei').type(valor)}
+    digitarAnoProcesso(valor){cy.get('#aa_processo_sei').type(valor)}
+    botaoSalvar(){cy.get('#submit').click()}
+    botaoContinuar(){cy.get('.modal-footer > .btn-primary').click()}
+    botaoOk(){cy.get('.modal-footer > .btn-danger').click()}
+    clicarAdicionar1(){cy.get('#ep_plus').click()}
+    clicarAdicionar2(){cy.get('#id_plus').click()}
+    clicarAdicionar3(){cy.get('#ca_plus').click()}
+    clicarAdicionar4(){cy.get('#cf_plus').click()}
+    clicarAdicionar5(){cy.get('#ai_plus').click()}clicarAbaDoc(){cy.get('.documentos-aba').click()}
+    clicarExigAba(){cy.get('.exigencias-aba').click()}
+    clicarReqAba(){cy.get('.requerimentos-aba').click()}
+    clicarNovoEstudoAba(){cy.get('.novo-estudo-aba').click()}
+    clicarDemandaAba(){cy.get('.demanda-aba').click()}
     clicarBotaoEditar(){
         cy.get('.col-md-12 > :nth-child(1) > a.btn').click()
         cy.wait(4000)
     }
-
-    digitarDtPub(valor){
-        cy.get('#dt_publicacao').clear().type(valor)
-    }
-
-    digitarQtDias(valor){
-        cy.get('#qt_dias_vigencia').type(valor)
-    }
-
-    digitarDesDemanda(valor){
-        cy.get('#ds_demanda').type(valor)
-    }
-
-    botaoSalvar(){
-        cy.get('#submit').click()
-    }
-
-    botaoContinuar(){
-        cy.get('.modal-footer > .btn-primary').click()
-    }
-
-    modalOk(){
-        cy.wait(2000)
-        cy.contains('button','OK').click()
-    }
-
-    irLink(){
-        cy.get(':nth-child(3) > [href="#"]').click()
-    }
-
-    irLink2(){
-        cy.get('.menu-open > .treeview-menu > :nth-child(1) > a > span').click()
-    }
-
-    clicarBotaoPesquisar(){
-        cy.get('#pesquisar').click()
-    }
-
-    clicarPrimeiroBotaoVisualizar(){
-        cy.get('a[title="Visualizar"]').first().click()
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    clicarBotaoVoltar(){
-        cy.get('[onclick="window.history.back()"]').click()
-    }
-
-    clicarLink3(){
-        cy.get('.menu-open > .treeview-menu > :nth-child(1) > a > span').click()
-    }
-
-    digitarDtPubInicio(valor){
-        cy.get('#dt_publicacao_inicio').type(valor)
-    }
-
-    gerarRelDemandaPDF(){
-        cy.get('#gerarRelatorioDemandaPDF').click()
-    }
-
-    clicarExcluirDemanda(){
-        cy.get('#btn-delete-demanda').click()
-    }
-
-    clicarConfirmar(){
-        cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary').click()
-    }
+    digitarDtPub(valor){cy.get('#dt_publicacao').clear().type(valor)}
+    digitarQtDias(valor){cy.get('#qt_dias_vigencia').type(valor)}
+    digitarDesDemanda(valor){cy.get('#ds_demanda').type(valor)}
+    modalOk(){cy.wait(2000); cy.contains('button','OK').click()}
+    irLink(){cy.get(':nth-child(3) > [href="#"]').click()}
+    irLink2(){cy.get('.menu-open > .treeview-menu > :nth-child(1) > a > span').click()}
+    clicarPrimeiroBotaoVisualizar(){cy.get('a[title="Visualizar"]').first().click()}
+    clicarBotaoVoltar(){cy.get('[onclick="window.history.back()"]').click()}
+    clicarLink3(){cy.get('.menu-open > .treeview-menu > :nth-child(1) > a > span').click()}
+    digitarDtPubInicio(valor){cy.get('#dt_publicacao_inicio').type(valor)}
+    gerarRelDemandaPDF(){cy.get('#gerarRelatorioDemandaPDF').click()}
+    clicarExcluirDemanda(){cy.get('#btn-delete-demanda').click()}
+    clicarConfirmar(){cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary').click()}
 }
 
 export default new demandas_consultar ()
