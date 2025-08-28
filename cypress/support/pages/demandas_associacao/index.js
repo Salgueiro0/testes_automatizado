@@ -47,6 +47,9 @@ class demandas_associacao {
     clicarPrimeiroBotaoEditar(){cy.get(el.primeiroBotaoEditar).first().click()}
     clicarPrimeiroBotaoVisualizar(){cy.get(el.primeiroBotaoVisualizar).first().click()}
     botaoExcluirAssocDemand(){cy.get(el.botaoExcluirAssocDemand).click()}
+
+    selecionarCdEmpreendCont(){cy.get(el.selectCdEmpreendimento).click()}
+    selecionarPrimeiroDropdown(){cy.get(el.listaSelect2).find('li').first().click({force: true})}
 }
 
 export default new demandas_associacao ()

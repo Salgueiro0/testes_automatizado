@@ -23,7 +23,6 @@ describe('pendência', () => {
 
         //teste do botão limpar da aba da associação
         demandas_associacao.seletorTipo()
-        //demandas_associacao.seletorDropdown('Geral')
         demandas_associacao.seletorRegiaoAdmin()
         demandas_associacao.seletorDropdown('RA-I - BRASILIA')
         demandas_associacao.seletorEmpreendimento()
@@ -77,7 +76,7 @@ describe('pendência', () => {
         cy.wait(1000)
         demandas_associacao.seletorDropdown('RA-II - GAMA')
         cy.wait(2000)
-        cy.get('#select2-cd_empreendimento-container').click()
+        demandas_associacao.selecionarCdEmpreendCont()
         demandas_associacao.seletorDropdown('8 - FAZENDA VINICIUS')
         cy.wait(2000)
         demandas_associacao.seletorDemanda()
@@ -96,7 +95,6 @@ describe('pendência', () => {
 
         //validação da edição
         demandas_associacao.clicarPrimeiroBotaoEditar()
-        //demandas_associacao.clicarAba()
         demandas_associacao.seletorRegiaoAdmin()
         demandas_associacao.seletorDropdown('RA-II - GAMA')
         cy.wait(2000)
@@ -104,8 +102,7 @@ describe('pendência', () => {
         demandas_associacao.seletorDropdown('5 - Empreendimento XPTO 1')
         cy.wait(2000)
         demandas_associacao.seletorDemanda()
-        //demandas_associacao.seletorDropdown('LI - Licença de Instalação  nº 100/1990')
-        cy.get('.select2-results').find('li').first().click({force: true})
+        demandas_associacao.selecionarPrimeiroDropdown()
         demandas_associacao.clicarBotaoAdicionar()
 
         //validação de visualização
