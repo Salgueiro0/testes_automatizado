@@ -17,7 +17,7 @@ export const ELEMENTS = {
     botaoPesquisarRequerimento: '#pesquisarRequerimento',
     campoDataPagamento: '#dt_pagamento',
     campoValorPagamento: '#vl_pagamento',
-    botaoDeletarPagamento: '.btn-delete-pagamento > .fas',
+    botaoDeletarPagamento: '.odd > .text-center > .btn-delete-pagamento > .fas',
 
     // Labels
     labelPesquisar: ':nth-child(1) > .box-header > .box-title',

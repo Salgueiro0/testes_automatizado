@@ -53,6 +53,7 @@ class pendencias {
     clicarExigencia(){cy.get(el.btnExigencia).click()}
     clicarSegBotaoEditar(){cy.get(el.btnSegEditar).click()}
     adicionar5Dado(){cy.get(el.btnAdicionar5Dado).click()}
+    adicionar9Dado(){cy.get(el.btnAdicionar9Dado).click()}
     selecionarOrgaoUnidadeInterna(){cy.get(el.cdOrgaoUnidadeInternaContainer).click()}
     adicionarUnidadeInterna(){cy.get(el.btnAdicionarUnidadeInterna).click();cy.wait(1000)}
     clicarPrimeiroBotao(){cy.get(el.btnPrimeiro).click();cy.wait(1000)}
@@ -65,16 +66,19 @@ class pendencias {
     digitarEmParagrafo(texto){cy.get(el.iframeDigitarParagrafo).its('0.contentDocument.body').should('not.be.empty').then(cy.wrap).find('p').click().type(texto)}
     alterarModalProvidencia(){cy.get(el.btnAlterarModalProvidencia).click()}
     adicionar7Dado(){cy.get(el.select1).select('1')}
-    digitarDataPrevisaoCumprimento(){cy.get(el.inputDataPrevisaoCumprimento).type(dataFormatoCypress)}
+    digitarDataPrevisaoCumprimento(){cy.get(el.inputDataPrevisaoCumprimento).type("2025-01-01")}
     alterarModalCumprimento(){cy.get(el.btnAlterarModalCumprimento).click()}
     ignorarErroFalse(){cy.on('uncaught:exception',(err,runnable)=>{return false})}
     adicionar8Dado(){cy.get(el.btnAdicionar8Dado).click()}
+
+
     digitarDataLimite(){cy.get(el.inputDataLimite).type(DataFormatoCypress)}
     alterarModalLimite(){cy.get(el.btnAlterarModalLimite).click()}
     ignorarErroTrue(){cy.on('uncaught:exception',(err,runnable)=>{return true})}
     irAba(){cy.get(el.abaPendencia2).click()}
     seletorEmpreendimento(){cy.get(el.inputSeletorEmpreendimento).click()}
-    dropdownGLA(){cy.get('.select2-results').find('li').contains('4 - Empreendimento XPTO 5 ').click({force:true})}
+    // dropdownGLA(texto){cy.get('.select2-results').find('li').contains(texto).click({force:true})}
+    // '4 - Empreendimento XPTO 5 '
     clicarBotaoPesquisar(){cy.get(el.btnPesquisar).click();cy.wait(6000)}
     clicarLimparPesquisa(){cy.get(el.btnLimparPesquisa).click({force:true})}
     gerarRelatorioPDF(){cy.get(el.btnGerarRelatorioPDF).click({force:true});cy.wait(10000)}
