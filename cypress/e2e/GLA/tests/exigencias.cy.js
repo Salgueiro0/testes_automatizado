@@ -10,7 +10,6 @@ describe('pagamento', () => {
 
     it('teste tela de exigências', () => {
 
-        //LOGIN
 
         exigencias.irParaGLA()
         exigencias.login()

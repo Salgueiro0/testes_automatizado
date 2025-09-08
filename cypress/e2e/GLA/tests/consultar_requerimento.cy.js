@@ -71,7 +71,6 @@ describe('consultar_requerimentos', () => {
         consultar_requerimento.digitarDescricaoObservacaoDocOficio()
         consultar_requerimento.selecionarPessoaTitular()
         consultar_requerimento.digitarDescricaoRequerimento()
-        //cy.get('#ds_requerimento').type('teste')
         consultar_requerimento.seletorOrgaoRequerimento()
         consultar_requerimento.selecionarDataPublicacao()
         consultar_requerimento.seletorTpStatus()

@@ -1,6 +1,5 @@
 export const ELEMENTS = {
 
-    // Login
     campoUsuario: ':nth-child(2) > .form-control',
     campoSenha: ':nth-child(3) > .form-control',
     botaoLogin: '.btn',
@@ -46,9 +45,6 @@ export const ELEMENTS = {
     modalRelatorioPDF:'#modalRelatorioPersonalizadoPDF',
     gerarRelatorioPDF: '#gerarRelatorioPersonalizadoPDF',
     botaoFecharModalPDF: '#modal-relatorio-pdf-personalizado > .modal-dialog > .modal-content > .modal-footer > .btn-form',
-
-
-
     labelEmpreendimento:':nth-child(3) > :nth-child(1) > .form-group > label',
     labelDemanda: ':nth-child(3) > :nth-child(2) > .form-group > label',
     labelNumero: ':nth-child(4) > :nth-child(1) > .form-group > .control-label',
@@ -63,10 +59,8 @@ export const ELEMENTS = {
     labelSuplente: ':nth-child(8) > :nth-child(2) > .form-group > label',
     labelStatus: ':nth-child(9) > :nth-child(1) > .form-group > .control-label',
     labelSeiProcAcompanhamento: ':nth-child(2) > :nth-child(1) > .form-group > label',
-
     labelUnidadeInterna: ':nth-child(10) > :nth-child(1) > .panel-border > .panel-body > .row > .col-md-10 > .form-group > .control-label',
     tabelaUnidadeInterna: ':nth-child(10) > :nth-child(1) > .panel-border > .panel-body > .row > .col-md-12 > :nth-child(1) > tbody > tr > th',
-
     labelUnidadeExterna: ':nth-child(11) > :nth-child(1) > .panel-border > .panel-body > .row > .col-md-10 > .form-group > .control-label',
     tabelaUnidadeExterna: ':nth-child(11) > :nth-child(1) > .panel-border > .panel-body > .row > .col-md-12 > :nth-child(1) > tbody > tr > th',
 
@@ -91,7 +85,6 @@ export const ELEMENTS = {
     labelTemaModal: ':nth-child(4) > :nth-child(3) > .form-group > .form-check-label',
     labelEstudosServRelacionados: ':nth-child(4) > :nth-child(6) > .form-group > .form-check-label',
     labelPendente: ':nth-child(6) > :nth-child(6) > .form-group > .form-check-label',
-
 }
 
 

@@ -1,6 +1,5 @@
 export const ELEMENTS = {
 
-    //login
     campoUsuario: ':nth-child(2) > .form-control',
     campoSenha: ':nth-child(3) > .form-control',
     botaoLogin: '.btn',
@@ -95,8 +94,4 @@ export const ELEMENTS = {
     botaoEmpreendimento:'#emprendimento-aba > .panel-footer > :nth-child(1) > a.btn',
     botaoDeletarEmpreendimento:'#btn-delete-empreendimento',
     modalDialogConfirmar:'.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary',
-
-
-
-
 }

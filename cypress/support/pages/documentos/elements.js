@@ -1,6 +1,5 @@
 export const ELEMENTS = {
 
-    //login
     campoUsuario: ':nth-child(2) > .form-control',
     campoSenha: ':nth-child(3) > .form-control',
     botaoLogin: '.btn',
@@ -68,8 +67,4 @@ export const ELEMENTS = {
     labelEditarDescricao:':nth-child(3) > .col-md-12 > .form-group > .control-label',
     labelEditarNumero:':nth-child(1) > :nth-child(2) > .form-group > .control-label',
     labelEditarNSeiDoc:':nth-child(3) > .form-group > .control-label',
-
-
-
-
 }

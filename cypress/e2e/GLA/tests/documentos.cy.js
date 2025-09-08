@@ -5,7 +5,6 @@ describe('Documentos', () => {
 
     it('Documentos', () => {
 
-        //Login
 
         documentos.irParaGLA()
         documentos.login()

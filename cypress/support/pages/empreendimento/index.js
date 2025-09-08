@@ -364,8 +364,4 @@ class empreendimento {
         cy.get(el.modalDialogConfirmar).click()
     }
 }
-
-
-
-
 export default new empreendimento()

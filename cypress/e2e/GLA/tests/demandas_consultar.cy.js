@@ -195,8 +195,6 @@ describe('pendência', () => {
         demandas_consultar.validarWhidthDescricao()
         demandas_consultar.validarWhidthRa()
         demandas_consultar.validarWhidthEmpreendimento()
-
-        // abas
         demandas_consultar.clicarAbaDoc()
         cy.wait(3000)
         demandas_consultar.clicarExigAba()

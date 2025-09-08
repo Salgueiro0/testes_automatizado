@@ -79,11 +79,6 @@ class demandas_consultar {
     validarLabelTipoVegetacao(){cy.contains('label', 'Tipo Vegetação').invoke('text').then((text) => { expect(text.trim()).to.eq('Tipo Vegetação'); });}
     validarLabelModPagamento(){cy.contains('label', 'Mod. Pagamento').invoke('text').then((text) => { expect(text.trim()).to.eq('Mod. Pagamento'); });}
     validarLabelSubtotalMultaAI(){cy.contains('label', 'Subtotal da Multa AI').invoke('text').then((text) => { expect(text.trim()).to.eq('Subtotal da Multa AI'); });}validarTabelaRA(){cy.get('.sorting_asc').should('have.text', "R.A");}
-
-
-
-
-
     validarTabelaEmpreendimento(){cy.get(el.tabelaEmpreendimento).should('have.text', "Empreendimento");}
     validarTabelaTipo(){cy.get(el.tabelaTipo).should('have.text', "Tipo");}
     validarTabelaNumero(){cy.get(el.tabelaNumero).should('have.text', "Nº");}

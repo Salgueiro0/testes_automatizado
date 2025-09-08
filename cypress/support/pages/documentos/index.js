@@ -251,9 +251,6 @@ class documentos{
     clicarModalBotaoConfirmar(){
         cy.contains('button', "Confirmar").click()
     }
-
-
-
 }
 
 

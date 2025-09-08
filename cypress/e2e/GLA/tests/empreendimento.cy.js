@@ -84,8 +84,6 @@ describe('pendência', () => {
 
         //validando o salvamento de empreencimento
         empreendimento.selecionarRegiaoAdminContainer()
-        // cy.get('#select2-cd_regiao_admin-container').click()
-        // cy.get('.select2-results').find('li').contains('RA-I - BRASILIA ').click({force: true})
         empreendimento.digitarOrgaoProcessoSei()
         empreendimento.digitarNumeroProcessoSei()
         empreendimento.digitarAnoProcessoSei()
@@ -123,7 +121,7 @@ describe('pendência', () => {
         empreendimento.validarCampoEmpreendimentoResumoStatus()
         empreendimento.validarCampoEmpreendimentoObservacao()
 
-        // voltando para a tela de empreencimento, para a validação do salvamento
+        // voltando para a tela de empreendimento, para a validação do salvamento
         empreendimento.clicarBotaoVoltar()
 
         empreendimento.selecionarRA()

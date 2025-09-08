@@ -84,8 +84,7 @@ describe('pagamento', () => {
         pagamentos.digitarModalCampoDescricao()
         pagamentos.clicarBotaoEditar()
         pagamentos.clicarModalOk()
-
-     })
+    })
 })
 
 
