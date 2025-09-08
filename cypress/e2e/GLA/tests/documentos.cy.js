@@ -106,7 +106,7 @@ describe('Documentos', () => {
         documentos.validarLabelEditarNumero()
         documentos.validarLabelEditarNSeiDoc()
 
-        documentos.digitarCampoDescricaoDocumento
+        documentos.digitarCampoDescricaoDocumento()
         documentos.clicarBotaoSalvar()
         documentos.clicarModalBotaoOk()
 
