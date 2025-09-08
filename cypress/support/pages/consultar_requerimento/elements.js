@@ -69,7 +69,7 @@ export const ELEMENTS = {
     ariaLabelStatusPagamento:'[aria-label="Status do Pagamento: Ordenar colunas de forma ascendente"]',
     labelSeiCertidaoQuitacao:'[aria-label="SEI da Certidão de Quitação: Ordenar colunas de forma ascendente"]',
     labelDescricaoPagamento:'[aria-label="Descrição do Pagamento: Ordenar colunas de forma ascendente"]',
-    labelAcao: 'thead > tr > .text-center',
+    labelAcao: '#table-pagamento > thead > tr > [aria-label="Ação: Ordenar colunas de forma ascendente"]',
     botaoCadastrarRequerimento:'#requerimento > .box > .box-body > .panel > .panel-body > .panel-footer > .btn-toolbar > .btn-success',
     cadastroControlLabelTipoRequerimento:':nth-child(3) > :nth-child(1) > .form-group > .control-label',
     cadastroControlLabelTipoDemandaPermissao: ':nth-child(3) > :nth-child(2) > .form-group > .control-label',
