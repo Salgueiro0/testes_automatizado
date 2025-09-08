@@ -32,7 +32,11 @@ class consultar_requerimento {
     irParaRequerimento(){ cy.get(el.abaRequerimento).click() }
     clicarConsultarRequerimentos(){ cy.get(el.abaConsultarRequerimento).should('be.visible').and('contain.text', 'Consultar - Requerimentos').click() }
     limparCampoRequerimento(){ cy.get(el.botaoLimparCampoRequerimento).click() }
-    selecionarEmpreendimenot(){ cy.get(el.seletorEmpreendimento).should('be.visible').click(); cy.wait(1000); cy.get(el.dropdownGLAOptions).filter(':contains("Polos 06, 07, 08 - Projeto Orla - Beira Lago")').first().click() }
+    selecionarEmpreendimenot(){
+        cy.wait(6000);
+        cy.get(el.seletorEmpreendimento).should('be.visible').click();
+        cy.wait(1000);
+        cy.get(el.dropdownGLAOptions).filter(':contains("Polos 06, 07, 08 - Projeto Orla - Beira Lago")').first().click() }
     pesquisarRequerimento(){ cy.get(el.botaoPesquisarRequerimento).should('be.visible').click(); cy.wait(1000) }
     gerarRelatorioPDF(){ cy.get(el.botaoGerarRelatorioPDF).should('be.visible').click() }
     digitarFiltroRequerimento(){ cy.get(el.filtroRequerimento).type('Licença de Operação') }

@@ -88,6 +88,7 @@ class exigencias{
         cy.wait(2000)
     }
     selecionarEmpreendimentoPesquisarExigencias(){
+        cy.wait(5000)
         cy.get(el.seletorEmpreendimentoPesquisarExigencias).click()
         cy.get(el.dropdownGla).find('li').contains('Polos 06, 07, 08 - Projeto Orla - Beira Lago').click({force: true})
     }
