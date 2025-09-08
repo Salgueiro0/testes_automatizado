@@ -178,9 +178,9 @@ class documentos{
     }
 
     selecionarEmpreendimentoEmDocumentos(){
-        cy.wait(2000)
-        cy.get(el.selecionarEmpreendimentoEmDocumentos).click()
-        cy.wait(2000)
+        cy.wait(6000)
+        cy.get(el.selecionarEmpreendimentoEmDocumentos).click({force: true})
+        cy.wait(4000)
         cy.get(el.dropdwonGla).find('li').contains('Polos 06, 07, 08 - Projeto Orla - Beira Lago').click()
     }
 
