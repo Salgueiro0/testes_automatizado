@@ -60,7 +60,7 @@ class pendencias {
     digitarOrgaoProcessoSei(texto){cy.get(el.inputOrgaoProcessoSei).type(texto);cy.wait(1000)}
     DigitarNumeroProcessoSei(texto){cy.get(el.inputNumeroProcessoSei).type(texto);cy.wait(1000)}
     digitarAnoProcessoSei(texto){cy.get(el.inputAnoProcessoSei).type(texto);cy.wait(4000)}
-    modalEditar(){cy.get(el.btnModalEditar).click();cy.wait(1000)}
+    modalEditar(){cy.get('#modal-alteracao-sei > .modal-dialog > .modal-content > .modal-footer > #botao-editar').click();cy.wait(1000)}
     selecionar(){cy.get(el.select2911).select('2911')}
     adicionar6Dado(){cy.get(el.btnAdicionar6Dado).click()}
     digitarEmParagrafo(texto){cy.get(el.iframeDigitarParagrafo).its('0.contentDocument.body').should('not.be.empty').then(cy.wrap).find('p').click().type(texto)}
