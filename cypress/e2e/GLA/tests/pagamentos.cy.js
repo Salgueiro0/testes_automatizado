@@ -24,17 +24,54 @@ describe('pagamento', () => {
 
         pagamentos.clicarBotaoPesquisarRequerimento()
         pagamentos.clicarPrimeiroBotaoVisualizar()
+        cy.wait(2000)                                                // -- US064 - RN127 -sem pagamento --
 
-        //ADICIONAR PAGAMENTO AO REQUERIMENTO
+        //ADICIONAR VÁRIOS PAGAMENTOS
+
 
         pagamentos.clicarBotaoAdicionarPagamento()
-        pagamentos.digitarDataPagamento()
-        pagamentos.digitarValorPagamento()
+        pagamentos.digitarDataPagamento('2025-01-01')
+        pagamentos.digitarValorPagamento('500')
         pagamentos.clicarBotaoSalvar()
+        pagamentos.clicarModalOk()                                      //-- US064 - (08) valida que inserção do SEI é opcional--
+
+
+        pagamentos.clicarBotaoAdicionarPagamento()
+        pagamentos.digitarDataPagamento('2024-01-01')
+        pagamentos.digitarValorPagamento('500')
+        pagamentos.clicarBotaoSalvar()
+        pagamentos.validarMsgMesmoValor()                               // -- US064 - RN128 --
+        pagamentos.clicarModalSalvar()
         pagamentos.clicarModalOk()
-        pagamentos.clicarBotaoDeletar()
-        pagamentos.clicarModalBotaoConfirmar()
+
+        pagamentos.clicarBotaoAdicionarPagamento()
+        pagamentos.digitarDataPagamento('2025-01-01')
+        pagamentos.digitarValorPagamento('1565665565657835')      // -- US064 - valida limite de 12 caracteres --
+        cy.wait(2000)
+        pagamentos.clicarStatusPagamento('Quitado')              // --  US064 - RN129 --
+        cy.wait(3000)
+        pagamentos.digitarSei('teste')
+        pagamentos.clicarBotaoSalvar()                                  // -- US064 - (13) Valida que descrição é opcional --
         pagamentos.clicarModalOk()
+
+
+        //ORDENAR PAGAMENTOS
+        pagamentos.ordenarDataPagamento()                               // -- US064 - RN127 - com pagamento --
+
+        //VALIDAR MENSAGENS CAMPOS OBRIGATÓRIOS
+
+        pagamentos.clicarBotaoAdicionarPagamento()
+        pagamentos.digitarDataPagamento('2025-01-01')
+        pagamentos.clicarBotaoSalvar()
+        pagamentos.validarMsgCamposObrigatorio()                        //-- US064 - (10) sem valor pagamento --
+        pagamentos.clicarModalOk()
+
+        pagamentos.digitarValorPagamento('1565665565657835')
+        pagamentos.limparDataPagamento()
+        pagamentos.clicarBotaoSalvar()
+        pagamentos.validarMsgCamposObrigatorio()                        //-- US064- (09) sem data pagamento --
+        pagamentos.clicarModalOk()
+        pagamentos.clicarModalFechar()
 
         //PESQUISAR PAGAMENTO
         pagamentos.irAbaPagamentos()
@@ -67,22 +104,42 @@ describe('pagamento', () => {
         pagamentos.digitarDescricaoPagamento()
         pagamentos.clicarBotaoLimpar()
 
-        //pesquisando pagamento
-        pagamentos.irAbaPagamentos()
-        pagamentos.selecionarRA()
-        pagamentos.selecionarEmpreendimento()
-        pagamentos.pesquisarPagamento()
-        pagamentos.clicarPrimeiroBotaoVisualizar()
 
         //EDITAR PAGAMENTO
 
         pagamentos.irAbaPagamentos()
         pagamentos.selecionarRA()
+        pagamentos.seletorDropdown('RA-I - BRASILIA ')
         pagamentos.selecionarEmpreendimentoPesquisarPagamento()
+        pagamentos.seletorDropdown('Polos 06, 07, 08 - Projeto Orla - Beira Lago')
         pagamentos.pesquisarPagamento()
-        pagamentos.clicarBotaoEditarPagamento()
-        pagamentos.digitarModalCampoDescricao()
+        pagamentos.filtrarPagamento('1565')
+        pagamentos.clicarPrimeiroBotaoEditarPagamento()
+        pagamentos.digitarModalValor('222')
         pagamentos.clicarBotaoEditar()
+        pagamentos.clicarModalOk()
+
+        //Visualizar pagamento
+        pagamentos.irAbaPagamentos()
+        pagamentos.selecionarRA()
+        pagamentos.seletorDropdown('RA-I - BRASILIA ')
+        pagamentos.selecionarEmpreendimento()
+        pagamentos.seletorDropdown('Polos 06, 07, 08 - Projeto Orla - Beira Lago')
+        pagamentos.pesquisarPagamento()
+        pagamentos.filtrarPagamento('1565')
+        pagamentos.clicarPrimeiroBotaoVisualizar()
+
+        //APAGAR
+
+        pagamentos.clicarBotaoDeletar()
+        pagamentos.clicarModalBotaoConfirmar()
+        pagamentos.clicarModalOk()
+        cy.wait(4000)
+        pagamentos.clicarBotaoDeletar()
+        pagamentos.clicarModalBotaoConfirmar()
+        pagamentos.clicarModalOk()
+        pagamentos.clicarBotaoDeletar()
+        pagamentos.clicarModalBotaoConfirmar()
         pagamentos.clicarModalOk()
     })
 })
