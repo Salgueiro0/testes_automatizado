@@ -184,6 +184,10 @@ class Pagamentos {
     digitarModalCampoDescricao(texto) {cy.get(el.modalDescricaoNumDoc).clear().type(texto);}
     clicarBotaoEditar() {cy.get(el.botaoEditarPagamentoModal).click();}
     digitarModalValor(valor){cy.get('#modal_vl_pagamento').type(valor)}
+    selecionarOrigem(){cy.get(':nth-child(2) > .col-md-4 > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field').click()}
+    clicarBotaoVoltar(){cy.get('[onclick="window.history.back()"]').click()}
+    clicarBotaoFechar(){cy.get('.btn-secondary').click()}
+
 }
 
 export default new Pagamentos();

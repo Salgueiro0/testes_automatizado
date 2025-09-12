@@ -114,12 +114,12 @@ describe('pagamento', () => {
         pagamentos.seletorDropdown('Polos 06, 07, 08 - Projeto Orla - Beira Lago')
         pagamentos.pesquisarPagamento()
         pagamentos.filtrarPagamento('1565')
-        pagamentos.clicarPrimeiroBotaoEditarPagamento()
+        pagamentos.clicarPrimeiroBotaoEditarPagamento()             //-- US078 - botão editar requerimento --
         pagamentos.digitarModalValor('222')
         pagamentos.clicarBotaoEditar()
         pagamentos.clicarModalOk()
 
-        //Visualizar pagamento
+        //Visualizar pagamento                                      // -- US078 - visualizar requerimento --
         pagamentos.irAbaPagamentos()
         pagamentos.selecionarRA()
         pagamentos.seletorDropdown('RA-I - BRASILIA ')
@@ -141,6 +141,30 @@ describe('pagamento', () => {
         pagamentos.clicarBotaoDeletar()
         pagamentos.clicarModalBotaoConfirmar()
         pagamentos.clicarModalOk()
+
+        function visualizarDemandaPorOrigem(origem) {
+            pagamentos.irAbaPagamentos();
+            pagamentos.selecionarRA();
+            pagamentos.seletorDropdown('RA-I - BRASILIA ');
+            pagamentos.selecionarEmpreendimento();
+            pagamentos.seletorDropdown('Polos 06, 07, 08 - Projeto Orla - Beira Lago');
+            pagamentos.selecionarOrigem();
+            pagamentos.seletorDropdown(origem);
+            pagamentos.pesquisarPagamento();
+            pagamentos.clicarPrimeiroBotaoEditarPagamento();
+            pagamentos.clicarBotaoFechar();
+            pagamentos.clicarPrimeiroBotaoVisualizar();
+            pagamentos.clicarBotaoVoltar();
+        }
+
+
+        visualizarDemandaPorOrigem('Auto de infração');           // -- US078 - visualizar demanda e botao editar --
+        visualizarDemandaPorOrigem('Compensação ambiental');      // -- US078 - visualizar demanda e botao editar--
+        visualizarDemandaPorOrigem('Compensação florestal');      // -- US078 - visualizar demanda e botao editar--
+        visualizarDemandaPorOrigem('Estudos');                    // -- US078 - visualizar estudo/serviço e botao editar--
+
+        // GLA - EU031 - US064 - PAGAMENTO - VISUALIZAR DADOS DETALHADOS DE REQUERIMENTO
+        // GLA - EU046 - US078 - PAGAMENTOS - VIZUALIZAR PAGAMENTOS
     })
 })
 
