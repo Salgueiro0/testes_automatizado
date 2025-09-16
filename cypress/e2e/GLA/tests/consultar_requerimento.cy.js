@@ -80,10 +80,10 @@ describe('consultar_requerimentos', () => {
         consultar_requerimento.digitarAnoProcessoSei()
         consultar_requerimento.selecionarReservaOrcamentaria()
         consultar_requerimento.digitarNumeroDocSeiDespacho()
-        consultar_requerimento.digitarLetraNSeiDoc('teste')                  //-- EU088 - US022.1 - campo numérico --
-        consultar_requerimento.digitarLetraSeiProcesso('teste')              //-- EU088 - US022.1 - campo numérico --
-        consultar_requerimento.digitarLetraTaxaLicenc('teste108070')         //-- EU088 - US022.2 - campo numérico, opcional e editável--
-        consultar_requerimento.digitarLetraEstudosServicos('teste108070')    //-- EU088 - US022.2 - campo numérico, opcional e editável--
+        consultar_requerimento.digitarNSeiDoc('teste')                  //-- EU088 - US022.1 - campo numérico --
+        consultar_requerimento.digitarSeiProcesso('teste')              //-- EU088 - US022.1 - campo numérico --
+        consultar_requerimento.digitarTaxaLicenc('teste200000')         //-- EU088 - US022.2 - campo numérico, opcional e editável--
+        consultar_requerimento.digitarEstudosServicos('teste200000')    //-- EU088 - US022.2 - campo numérico, opcional e editável--
         consultar_requerimento.clicarBotaoSalvar()
         consultar_requerimento.clicarContinuar()
         consultar_requerimento.clicarOk()
@@ -175,6 +175,26 @@ describe('consultar_requerimentos', () => {
         consultar_requerimento.validarLabelDescricaoPagamento()
         consultar_requerimento.validarLabelAcao()
 
+        //ADICIONAR PAGAMENTO
+        consultar_requerimento.botaoAdicionar()
+        consultar_requerimento.digitarDataPagamento('2020-01-01')
+        consultar_requerimento.digitarValorPagamento(100000)
+        consultar_requerimento.clicarBotaoSalvarPagamento()
+        consultar_requerimento.clicarModalOk()
+
+        // -- EU094 - US024 - RN239 --
+        consultar_requerimento.validarValorLicenciamento()
+        consultar_requerimento.validarValorEstudosServicos()
+        consultar_requerimento.validarValorTotalRequerimento()
+        consultar_requerimento.validarValorSaldoRequerimento()
+
+        //APAGAR PAGAMENTO
+        consultar_requerimento.deletarPagamento()
+        consultar_requerimento.clicarConfirmar()
+        cy.wait(1000)
+        consultar_requerimento.clicarModalOk()
+
+
         //EDITAR REQUERIMENTO
         consultar_requerimento.irParaAbaRequerimento()
 
@@ -199,10 +219,10 @@ describe('consultar_requerimentos', () => {
         //editar
 
         consultar_requerimento.digitarDescricaoRequerimento()
-        consultar_requerimento.digitarLetraNSeiDoc('teste')                  //-- EU088 - US022.1 - campo numérico --
-        consultar_requerimento.digitarLetraSeiProcesso('teste')              //-- EU088 - US022.1 - campo numérico --
-        consultar_requerimento.digitarLetraTaxaLicenc('teste108070')         //-- EU088 - US023 - campo numérico, opcional e editavel--
-        consultar_requerimento.digitarLetraEstudosServicos('teste108070')    //-- EU088 - US023 - campo numérico, opcional e editavel--
+        consultar_requerimento.digitarNSeiDoc('teste')                  //-- EU088 - US022.1 - campo numérico --
+        consultar_requerimento.digitarSeiProcesso('teste')              //-- EU088 - US022.1 - campo numérico --
+        consultar_requerimento.digitarTaxaLicenc('teste108070')         //-- EU088 - US023 - campo numérico, opcional e editavel--
+        consultar_requerimento.digitarEstudosServicos('teste108070')    //-- EU088 - US023 - campo numérico, opcional e editavel--
         consultar_requerimento.clicarBotaoSalvar()
         consultar_requerimento.clicarContinuar()
         consultar_requerimento.clicarOk()

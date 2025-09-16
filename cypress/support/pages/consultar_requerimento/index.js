@@ -28,8 +28,10 @@ class consultar_requerimento {
     selecionarReservaOrcamentaria(){ cy.get(el.campoReservaOrcamentaria).click(); cy.wait(1000) }
     digitarNumeroDocSeiDespacho(){ cy.get(el.campoNrDocSeiDespacho).type('1111') }
     clicarBotaoSalvar(){ cy.get(el.botaoSalvar).click() }
+    clicarBotaoSalvarPagamento(){cy.get('#botao-salvar').click()}
     clicarContinuar(){ cy.wait(1000); cy.get(el.botaoContinuar).should('be.visible').and('contain.text', 'Continuar').click() }
-    clicarOk(){ cy.get(el.botaoOk).should('be.visible').and('contain.text', 'OK').click() }
+    clicarOk(){ cy.get(el.botaoOk).should('be.visible').and('contain.text', 'OK').click({ multiple: true }) }
+    clicarModalOk(){cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn').click()}
     irParaRequerimento(){ cy.get(el.abaRequerimento).click() }
     clicarConsultarRequerimentos(){ cy.get(el.abaConsultarRequerimento).should('be.visible').and('contain.text', 'Consultar - Requerimentos').click() }
     limparCampoRequerimento(){ cy.get(el.botaoLimparCampoRequerimento).click() }
@@ -137,14 +139,25 @@ class consultar_requerimento {
     validarControlLabelSeiProcessoRequerimentoEditar(){ cy.get(el.controlLabelSeiProcessoRequerimentoEditar).should('contain',"SEI Processo Requerimento") }
     validarControlLabelReservaOrcamentariaDiplaEditar(){ cy.get(el.controlLabelReservaOrcamentariaDiplaEditar).should('contain',"Reserva Orçamentária enviada à DIPLA") }
     validarControlLabelNDocSeiDespachoEditar(){ cy.get(el.controlLabelNDocSeiDespachoEditar).should('contain',"Nº Doc SEI Despacho") }
-    digitarLetraNSeiDoc(texto){cy.get('#ds_observacao_doc_oficio').type(texto)}
-    digitarLetraSeiProcesso(texto){
+    digitarNSeiDoc(texto){cy.get('#ds_observacao_doc_oficio').type(texto)}
+    digitarSeiProcesso(texto){
         cy.get('#cd_orgao_processo_sei').type(texto)
         cy.get('#nr_processo_sei').type(texto)
         cy.get('#aa_processo_sei').type(texto)
     }
-    digitarLetraTaxaLicenc(texto){cy.get('#vl_previsto_tx_licenciamento').type(texto).clear()}
-    digitarLetraEstudosServicos(texto){cy.get('#vl_previsto_estudos_servicos').type(texto).clear()}
+    digitarTaxaLicenc(texto){cy.get('#vl_previsto_tx_licenciamento').type(texto)}
+    digitarEstudosServicos(texto){cy.get('#vl_previsto_estudos_servicos').type(texto)}
+    botaoAdicionar(){cy.get('.col-md-12 > .btn').click()}
+    digitarDataPagamento(data){cy.get('#dt_pagamento').type(data)}
+    digitarValorPagamento(valor){cy.get('#vl_pagamento').type(valor)}
+    validarValorLicenciamento(){cy.get(':nth-child(11) > :nth-child(1) > .form-group > .text-block').should('contain','R$ 2.000,00')}
+    validarValorEstudosServicos(){cy.get(':nth-child(11) > :nth-child(2) > .form-group > .text-block').should('contain','R$ 2.000,00')}
+    validarValorTotalRequerimento(){cy.get(':nth-child(11) > :nth-child(3) > .form-group > .text-block').should('contain','R$ 4.000,00')}
+    validarValorSaldoRequerimento(){cy.get('#saldo_requerimento').should('contain','R$ 3.000,00')}
+    deletarPagamento(){cy.get('.btn-delete-pagamento > .fas').click()}
+    clicarConfirmar(){cy.contains('button','Confirmar').click({ multiple: true })}
+
+
 }
 
 export default new consultar_requerimento()
