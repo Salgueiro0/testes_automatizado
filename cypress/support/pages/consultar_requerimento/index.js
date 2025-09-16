@@ -156,6 +156,8 @@ class consultar_requerimento {
     validarValorSaldoRequerimento(){cy.get('#saldo_requerimento').should('contain','R$ 3.000,00')}
     deletarPagamento(){cy.get('.btn-delete-pagamento > .fas').click()}
     clicarConfirmar(){cy.contains('button','Confirmar').click({ multiple: true })}
+    clicarOkDeletar(){cy.get('.modal-footer > .btn').click()}
+    clicarEditarOk(){cy.get('.modal-footer > .btn').click()}
 
 
 }

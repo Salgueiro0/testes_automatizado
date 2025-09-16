@@ -221,11 +221,11 @@ describe('consultar_requerimentos', () => {
         consultar_requerimento.digitarDescricaoRequerimento()
         consultar_requerimento.digitarNSeiDoc('teste')                  //-- EU088 - US022.1 - campo numérico --
         consultar_requerimento.digitarSeiProcesso('teste')              //-- EU088 - US022.1 - campo numérico --
-        consultar_requerimento.digitarTaxaLicenc('teste108070')         //-- EU088 - US023 - campo numérico, opcional e editavel--
-        consultar_requerimento.digitarEstudosServicos('teste108070')    //-- EU088 - US023 - campo numérico, opcional e editavel--
+        consultar_requerimento.digitarTaxaLicenc('teste10')         //-- EU088 - US023 - campo numérico, opcional e editavel--
+        consultar_requerimento.digitarEstudosServicos('teste10')    //-- EU088 - US023 - campo numérico, opcional e editavel--
         consultar_requerimento.clicarBotaoSalvar()
         consultar_requerimento.clicarContinuar()
-        consultar_requerimento.clicarOk()
+        consultar_requerimento.clicarEditarOk()
 
         //Limpar campos de texto
         consultar_requerimento.irParaAbaRequerimentos()
@@ -242,6 +242,6 @@ describe('consultar_requerimentos', () => {
         consultar_requerimento.filtrarRequerimento()
         consultar_requerimento.clicarPrimeiroBotaoExcluir()
         consultar_requerimento.clicarBotaoConfirmar()
-        consultar_requerimento.clicarOk()
+        consultar_requerimento.clicarOkDeletar()
     })
 })
