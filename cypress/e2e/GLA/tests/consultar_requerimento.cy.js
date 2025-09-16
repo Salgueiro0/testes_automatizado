@@ -33,7 +33,7 @@ describe('consultar_requerimentos', () => {
 
         consultar_requerimento.irParaEmpreendimento()
         consultar_requerimento.seletorEmpreendimento()
-        consultar_requerimento.selecionarEmpreendimento()
+        consultar_requerimento.seletorDropdown('Polos 06, 07, 08 - Projeto Orla - Beira Lago')
         consultar_requerimento.clicarPesquisar()
         consultar_requerimento.clicarPrimeiroBotaoVisualizar()
         consultar_requerimento.clicarAbaRequerimento()
@@ -70,6 +70,7 @@ describe('consultar_requerimentos', () => {
         consultar_requerimento.selecionarOrgaoOficio()
         consultar_requerimento.digitarDescricaoObservacaoDocOficio()
         consultar_requerimento.selecionarPessoaTitular()
+        consultar_requerimento.seletorDropdown('ALLAN GUIMARAES DIOGENES')
         consultar_requerimento.digitarDescricaoRequerimento()
         consultar_requerimento.seletorOrgaoRequerimento()
         consultar_requerimento.selecionarDataPublicacao()
@@ -79,6 +80,10 @@ describe('consultar_requerimentos', () => {
         consultar_requerimento.digitarAnoProcessoSei()
         consultar_requerimento.selecionarReservaOrcamentaria()
         consultar_requerimento.digitarNumeroDocSeiDespacho()
+        consultar_requerimento.digitarLetraNSeiDoc('teste')                  //-- EU088 - US022.1 - campo numérico --
+        consultar_requerimento.digitarLetraSeiProcesso('teste')              //-- EU088 - US022.1 - campo numérico --
+        consultar_requerimento.digitarLetraTaxaLicenc('teste108070')         //-- EU088 - US022.2 - campo numérico, opcional e editável--
+        consultar_requerimento.digitarLetraEstudosServicos('teste108070')    //-- EU088 - US022.2 - campo numérico, opcional e editável--
         consultar_requerimento.clicarBotaoSalvar()
         consultar_requerimento.clicarContinuar()
         consultar_requerimento.clicarOk()
@@ -194,6 +199,10 @@ describe('consultar_requerimentos', () => {
         //editar
 
         consultar_requerimento.digitarDescricaoRequerimento()
+        consultar_requerimento.digitarLetraNSeiDoc('teste')                  //-- EU088 - US022.1 - campo numérico --
+        consultar_requerimento.digitarLetraSeiProcesso('teste')              //-- EU088 - US022.1 - campo numérico --
+        consultar_requerimento.digitarLetraTaxaLicenc('teste108070')         //-- EU088 - US023 - campo numérico, opcional e editavel--
+        consultar_requerimento.digitarLetraEstudosServicos('teste108070')    //-- EU088 - US023 - campo numérico, opcional e editavel--
         consultar_requerimento.clicarBotaoSalvar()
         consultar_requerimento.clicarContinuar()
         consultar_requerimento.clicarOk()

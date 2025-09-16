@@ -2,9 +2,9 @@ const el = require('./elements').ELEMENTS
 class consultar_requerimento {
     irParaGLA(){ cy.visit('/') }
     login(){ cy.get(el.campoUsuario).type('C9020840'); cy.get(el.campoSenha).type('welcome_1'); cy.get(el.botaoLogin).click() }
+    seletorDropdown(selecao){cy.get(el.dropdwonGLA).find('li').contains(selecao).click({force:true})}
     irParaEmpreendimento(){ cy.get(el.abaEmpreendimento).click() }
     seletorEmpreendimento(){ cy.get(el.campoSeletorEmpreendimento).click() }
-    selecionarEmpreendimento(){ cy.get(el.dropdwonGLA).find('li').contains('Polos 06, 07, 08 - Projeto Orla - Beira Lago').click() }
     clicarPesquisar(){ cy.get(el.botaoPesquisar).click(); cy.wait(1000) }
     clicarPrimeiroBotaoVisualizar(){ cy.get(el.botaoVisualizar).first().click() }
     clicarAbaRequerimento(){ cy.get(el.abaRequerimentos).click() }
@@ -12,12 +12,13 @@ class consultar_requerimento {
     clicarBotaoLimpar(){ cy.get(el.botaoLimpar).click() }
     irParaAbaEmpreendimento(){ cy.get(el.linkEmpreendimento).click() }
     clicarBotaoVoltar(){ cy.get(el.botaoVoltar).should('be.visible').and('contain.text', 'Voltar').click() }
-    seletorDemandaPermissao(){ cy.get(el.campoSeletorTpDemandaPermissao).click(); cy.get(el.dropdwonGLA).should('be.visible').find('li.select2-results__option').should('have.length.gt', 0).contains('LO - Licença de Operação ').click({ force: true }) }
+    seletorDemandaPermissao(){ cy.get(el.campoSeletorTpDemandaPermissao).click();
+        cy.get(el.dropdwonGLA).should('be.visible').find('li.select2-results__option').should('have.length.gt', 0).contains('LO - Licença de Operação ').click({ force: true }) }
     digitarNumeroOficio(){ cy.get(el.campoNumeroOficio).type('2000') }
     digitarAnoOficio(){ cy.get(el.campoAnoOficio).type('2025') }
     selecionarOrgaoOficio(){ cy.get(el.campoSeletorOrgaoOficio).click(); cy.get(el.dropdwonGLA).should('be.visible').find('li.select2-results__option').should('have.length.gt', 0).contains('ACJUR - ADVOCACIA E CONSULTORIA JURIDICA').click({ force: true }) }
     digitarDescricaoObservacaoDocOficio(){ cy.get(el.campoDescricaoObservacaoDocOficio).type('208') }
-    selecionarPessoaTitular(){ cy.get(el.campoSeletorPessoaTitular).click(); cy.get(el.dropdwonGLA).find('li').contains('ALLAN GUIMARAES DIOGENES').click({ force: true }) }
+    selecionarPessoaTitular(){ cy.get(el.campoSeletorPessoaTitular).click()}
     seletorOrgaoRequerimento(){ cy.get(el.campoSeletorOrgaoRequerimento).click(); cy.get(el.dropdwonGLA).should('be.visible').find('li.select2-results__option').should('have.length.gt', 0).contains('ANATEL - AGÊNCIA NACIONAL DE TELECOMUNICAÇÕES').click({ force: true }) }
     selecionarDataPublicacao(){ cy.get(el.campoDataPublicacao).type('2020-01-01') }
     seletorTpStatus(){ cy.get(el.campoSeletorTpStatus).click(); cy.get(el.dropdwonGLA).should('be.visible').find('li.select2-results__option').should('have.length.gt', 0).contains('Deferido').click({ force: true }) }
@@ -136,6 +137,14 @@ class consultar_requerimento {
     validarControlLabelSeiProcessoRequerimentoEditar(){ cy.get(el.controlLabelSeiProcessoRequerimentoEditar).should('contain',"SEI Processo Requerimento") }
     validarControlLabelReservaOrcamentariaDiplaEditar(){ cy.get(el.controlLabelReservaOrcamentariaDiplaEditar).should('contain',"Reserva Orçamentária enviada à DIPLA") }
     validarControlLabelNDocSeiDespachoEditar(){ cy.get(el.controlLabelNDocSeiDespachoEditar).should('contain',"Nº Doc SEI Despacho") }
+    digitarLetraNSeiDoc(texto){cy.get('#ds_observacao_doc_oficio').type(texto)}
+    digitarLetraSeiProcesso(texto){
+        cy.get('#cd_orgao_processo_sei').type(texto)
+        cy.get('#nr_processo_sei').type(texto)
+        cy.get('#aa_processo_sei').type(texto)
+    }
+    digitarLetraTaxaLicenc(texto){cy.get('#vl_previsto_tx_licenciamento').type(texto).clear()}
+    digitarLetraEstudosServicos(texto){cy.get('#vl_previsto_estudos_servicos').type(texto).clear()}
 }
 
 export default new consultar_requerimento()
