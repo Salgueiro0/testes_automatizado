@@ -150,6 +150,44 @@ class exigencias{
     selecionarStatusPesq(){cy.get(':nth-child(4) > .col-md-4 > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field').click()}
     selecionarExigContrat(){cy.get(':nth-child(9) > :nth-child(4) > .form-group > .select2-container > .selection > .select2-selection').click()}
     limparExigContrat(){cy.get('#select2-fl_exige_contratacao-container > .select2-selection__clear').click()}
+    validarModalRelatorio(){cy.get('#modalRelatorioPersonalizadoPDF').should('contain','Relatório de Acompanhamento')}
+    validarRA(){cy.get(':nth-child(1) > :nth-child(1) > .form-group > .control-label')}
+    validarEmpreendimento() {cy.get(':nth-child(1) > :nth-child(2) > .form-group > .control-label')}
+    validarDemanda() {cy.get(':nth-child(1) > :nth-child(3) > .form-group > .control-label')}
+    validarNumero() {cy.get('.panel-body > :nth-child(3) > :nth-child(1) > .form-group > .control-label')}
+    validarTema() {cy.get(':nth-child(2) > :nth-child(1) > .form-group > .control-label')}
+    validarPossuiPrazo() {cy.get(':nth-child(3) > :nth-child(3) > :nth-child(1) > .form-group > .control-label')}
+    validarDescExig() {cy.get(':nth-child(4) > .col-md-8 > .form-group > .control-label')}
+    validarStatus() {cy.get(':nth-child(4) > .col-md-4 > .form-group > .control-label')}
+    validarDescProv() {cy.get(':nth-child(5) > .col-md-8 > .form-group > .control-label')}
+    validarSeiProcAcompan() {cy.get(':nth-child(5) > .col-md-4 > .form-group > div > .control-label')}
+    validarUnidadeInterna() {cy.get(':nth-child(6) > .col-md-8 > .form-group > label')}
+    validarPerDataLim() {cy.get('.col-md-4 > label')}
+    validarUnidadeExterna() {cy.get(':nth-child(7) > .col-md-8 > .form-group > label')}
+    validarVerifBimestral() {cy.get(':nth-child(7) > .col-md-4 > .form-group > label')}
+    validarTitular() {cy.get(':nth-child(8) > :nth-child(1) > .form-group > label')}
+    validarSuplente() {cy.get(':nth-child(8) > :nth-child(2) > .form-group > label')}
+    validarStatusDilPrazos() {cy.get(':nth-child(8) > :nth-child(3) > .form-group > .control-label')}
+    validarPossuiPendVinculada() {cy.get(':nth-child(8) > :nth-child(4) > .form-group > .control-label')}
+    validarEmprRespon() {cy.get(':nth-child(9) > .col-md-4 > .form-group > label')}
+    validarPossuiEstudosServRel() {cy.get(':nth-child(9) > :nth-child(2) > .form-group > .control-label')}
+    validarPeriodoDiasRestantes() {cy.get(':nth-child(3) > label')}
+    validarExigeContratacao() {cy.get(':nth-child(9) > :nth-child(4) > .form-group > .control-label')}
+    validarEmpreendimentoDemanda() {cy.get('[aria-label="Empreendimento / Demanda: Ordenar colunas de forma ascendente"]')}
+    validarAriaLabelNumero(){cy.get('[aria-label="Nº: Ordenar colunas de forma ascendente"]')}
+    validarDescricaoExigencia() {cy.get('[aria-label="Descrição Exigência: Ordenar colunas de forma ascendente"]')}
+    validarDiasRestantes() {cy.get('[aria-label="Descrição Exigência: Ordenar colunas de forma ascendente"]')}
+    validarDescricaoProvidencia() {cy.get('[aria-label="Descrição Providência: Ordenar colunas de forma ascendente"]')}
+    validarAriaLabelStatus(){cy.get('[aria-label="Status: Ordenar colunas de forma ascendente"]')}
+    validarUnidadesResponsaveis() {cy.get('[aria-label="Unidades Responsáveis: Ordenar colunas de forma ascendente"]')}
+    validarEstadosVinculados(){cy.get('[aria-label="Estudos Vinculados: Ordenar colunas de forma ascendente"]')}
+    validarPendenciasVinculadas() {cy.get('[aria-label="Pendências Vinculadas: Ordenar colunas de forma ascendente"]')}
+    validarAcao() {cy.get('[aria-label="Ação: Ordenar colunas de forma ascendente"]')}
+    possuiPendenciaVinculada(){cy.get(':nth-child(8) > :nth-child(4) > .form-group > .select2-container > .selection > .select2-selection').click()}
+    possuiEstudoServicoRelacionado(){cy.get(':nth-child(9) > :nth-child(2) > .form-group > .select2-container > .selection > .select2-selection').click()}
+
+
+
 }
 export default new exigencias()
 

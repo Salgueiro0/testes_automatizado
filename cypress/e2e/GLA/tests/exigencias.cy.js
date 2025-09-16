@@ -45,7 +45,7 @@ describe('pagamento', () => {
         exigencias.validarLabelDias()
         exigencias.validarLabelPrevisaoCumprimento()
         exigencias.validarLabelExigeContratacao()
-        exigencias.validarExigeContratacaoNoCheck()               //US087 - RN181 - valida se exige contratacao não está marcado e é opcional
+        exigencias.validarExigeContratacaoNoCheck()               //-- US087 - RN181 - valida se exige contratacao não está marcado e é opcional --
         exigencias.validarLabelDescricaoExigencia()
         exigencias.validarLabelDescricaoProvidencia()
         exigencias.validarLabelTitular()
@@ -88,6 +88,19 @@ describe('pagamento', () => {
 
         exigencias.clicarBotaoNao()
 
+        // -- EU86 -US017.1 --
+        function pesquisarPendenciaEstudo(sim,nao){
+            exigencias.selecionarAbaExigencias()
+            exigencias.possuiPendenciaVinculada()
+            exigencias.selecionarDropdown(sim)
+            exigencias.possuiEstudoServicoRelacionado()
+            exigencias.selecionarDropdown(nao)
+            exigencias.botaoPesquisarExigencia()
+            cy.wait(3000)
+        }
+        pesquisarPendenciaEstudo('Sim','Não')            //Pendencia vinculada
+        pesquisarPendenciaEstudo('Não','Sim')            //Estudo vinculado
+
 
         //PESQUISAR EXIGÊNCIA
         function pesquisarStatusExigencia(status){
@@ -109,6 +122,40 @@ describe('pagamento', () => {
         pesquisarStatusExigencia('Informativo')  // -- US073 -nulidade em dias restantes da exigência status informativo--
         pesquisarStatusExigencia('Cumprida')     // -- US073 -nulidade em dias restantes da exigência status cumprida--
 
+
+        //VALIDAR CAMPOS DE TEXTO PESQUISAR
+        exigencias.validarRA()
+        exigencias.validarEmpreendimento()
+        exigencias.validarDemanda()
+        exigencias.validarNumero()
+        exigencias.validarTema()
+        exigencias.validarPossuiPrazo()
+        exigencias.validarDescExig()
+        exigencias.validarStatus()
+        exigencias.validarDescProv()
+        exigencias.validarSeiProcAcompan()
+        exigencias.validarUnidadeInterna()
+        exigencias.validarPerDataLim()
+        exigencias.validarUnidadeExterna()
+        exigencias.validarVerifBimestral()
+        exigencias.validarTitular()
+        exigencias.validarSuplente()
+        exigencias.validarStatusDilPrazos()
+        exigencias.validarPossuiPendVinculada()
+        exigencias.validarEmprRespon()
+        exigencias.validarPossuiEstudosServRel()
+        exigencias.validarPeriodoDiasRestantes()
+        exigencias.validarExigeContratacao()
+        exigencias.validarEmpreendimentoDemanda()
+        exigencias.validarAriaLabelNumero()
+        exigencias.validarDescricaoExigencia()
+        exigencias.validarDiasRestantes()
+        exigencias.validarDescricaoProvidencia()
+        exigencias.validarAriaLabelStatus()
+        exigencias.validarUnidadesResponsaveis()
+        exigencias.validarEstadosVinculados()
+        exigencias.validarPendenciasVinculadas()
+        exigencias.validarAcao()
 
         //testando filtro pesquisar
         exigencias.digitarFiltroPesquisar('descrição')
@@ -171,6 +218,7 @@ describe('pagamento', () => {
         exigencias.validarLabelTemaModal()
         exigencias.validarLabelEstudosServRelacionados()
         exigencias.validarLabelPendente()
+        exigencias.validarModalRelatorio()                       // -- US026.1 - valida botão de relatório Excel --
         exigencias.clicarModalRelatorioPDF()
 
         cy.wait(2000)
