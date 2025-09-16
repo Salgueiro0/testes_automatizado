@@ -27,9 +27,10 @@ class consultar_requerimento {
     digitarAnoProcessoSei(){ cy.get(el.campoAnoProcessoSei).type('1') }
     selecionarReservaOrcamentaria(){ cy.get(el.campoReservaOrcamentaria).click(); cy.wait(1000) }
     digitarNumeroDocSeiDespacho(){ cy.get(el.campoNrDocSeiDespacho).type('1111') }
-    clicarBotaoSalvar(){ cy.get(el.botaoSalvar).click() }
+    clicarBotaoSalvar(){ cy.get(el.botaoSalvar).first().click() }
     clicarBotaoSalvarPagamento(){cy.get('#botao-salvar').click()}
-    clicarContinuar(){ cy.wait(1000); cy.get(el.botaoContinuar).should('be.visible').and('contain.text', 'Continuar').click() }
+    clicarContinuar(){ cy.wait(1000);
+        cy.get(el.botaoContinuar).should('be.visible').and('contain.text', 'Continuar').click() }
     clicarOk(){ cy.get(el.botaoOk).should('be.visible').and('contain.text', 'OK').click({ multiple: true }) }
     clicarModalOk(){cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn').click()}
     irParaRequerimento(){ cy.get(el.abaRequerimento).click() }
@@ -51,7 +52,7 @@ class consultar_requerimento {
     clicarPrimeiroBotaoEditar(){ cy.get(el.botaoEditar).first().click() }
     filtrarRequerimento(){ cy.get(el.filtroRequerimento).type('Licença de Operação') }
     clicarPrimeiroBotaoExcluir(){ cy.get(el.botaoExcluir).first().click() }
-    clicarBotaoConfirmar(){ cy.get(el.botaoContinuar).should('have.text', ' Confirmar').click() }
+    clicarBotaoConfirmar(){ cy.get(el.botaoContinuar).should('have.text', ' Confirmar').first().click() }
     validarLabelTipoRequerimento(){ cy.get(el.labelTipoRequerimento).should('contain',"Tipo Requerimento") }
     validarLabelDemanda(){ cy.get(el.labelDemanda).should('contain',"Demanda") }
     validarLabelNumeroOficio(){ cy.get(el.labelNumeroOficio).should('contain',"Número Ofício") }
@@ -156,8 +157,8 @@ class consultar_requerimento {
     validarValorSaldoRequerimento(){cy.get('#saldo_requerimento').should('contain','R$ 3.000,00')}
     deletarPagamento(){cy.get('.btn-delete-pagamento > .fas').click()}
     clicarConfirmar(){cy.contains('button','Confirmar').click({ multiple: true })}
-    clicarOkDeletar(){cy.get('.modal-footer > .btn').click()}
-    clicarEditarOk(){cy.get('.modal-footer > .btn').click()}
+    clicarOkDeletar(){cy.get('.modal-footer > .btn').first().click()}
+    clicarEditarOk(){cy.get('.modal-footer > .btn').first().click()}
 
 
 }
