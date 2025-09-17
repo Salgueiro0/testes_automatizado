@@ -14,7 +14,7 @@ describe('pendência', () => {
 
      pendencias.irParaGLA()
      pendencias.login()
-     pendencias.validarTituloPendencia()
+     pendencias.validarTituloPendencia()          // -- US033 - RN015 identificação/título--
      pendencias.clicarAbaPendencia()
      pendencias.validarLabelEmpreendedorResponsavel()
      pendencias.validarLabelEmpreendimento()

@@ -34,7 +34,7 @@ describe('pagamento', () => {
 
         exigencias.clicarAbaExigencia()
         exigencias.clicarBotaoNovaExigencia()
-
+        exigencias.validarTitulo()                // -- US033 - RN015 identificação/título--
 
         //validando campos de texto
         exigencias.validarLabelEmpreendimento()

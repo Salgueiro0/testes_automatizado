@@ -19,6 +19,7 @@ describe('Documentos', () => {
         //CRIAR NOVO DOCUMENTO
 
         documentos.clicarBotaoNovoDocumento()
+        documentos.validarTitulo()                // -- US033 - RN015 identificação/título--
 
         //testar botão limpar
         documentos.digitarCampoDescricaoDocumento()

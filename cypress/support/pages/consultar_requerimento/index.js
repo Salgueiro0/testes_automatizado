@@ -82,6 +82,7 @@ class consultar_requerimento {
     validarLabelDescricaoPagamento(){ cy.get(el.labelDescricaoPagamento).should('contain',"Descrição do Pagamento") }
     validarLabelAcao(){ cy.get(el.labelAcao).should('contain',"Ação") }
     irParaCadastrarRequerimento(){ cy.get(el.botaoCadastrarRequerimento).click() }
+    validarTitulo(){cy.get('h1').should('contain','Requerimento')}
     validarCadastroControlLabelTipoRequerimento(){ cy.get(el.cadastroControlLabelTipoRequerimento).should('contain',"Tipo Requerimento") }
     validarCadastroControlLabelTipoDemandaPermissao(){ cy.get(el.cadastroControlLabelTipoDemandaPermissao).should('contain',"Tipo Demanda Permissão") }
     validarCadastroControlLabelNumeroOficio(){ cy.get(el.cadastroControlLabelNumeroOficio).should('contain',"Número Ofício") }

@@ -22,6 +22,7 @@ class demandas_associacao {
     seletorEmpreendimento(){cy.get(el.limparEmpreendimento).click()}
     limparFormularioPesquisa(){cy.get(el.botaoLimparForm).click()}
     clicarBotaoNovoCadastro(){cy.get(el.botaoNovoCadastro).click()}
+    validarTitulo(){cy.get('h1').should('contain','Associação de Demanda')}
     validarNovoCadasLabelNovoCadas(){cy.get(el.tituloAssocPesquisar).should('have.text', "Novo Cadastro")}
     validarNovoCadasLabelTipoAssoc(){cy.get(el.labelNovoTipoAssoc).should('have.text',"Tipo de Associação *")}
     validarNovoCadasLabelRA(){cy.get(el.labelNovoRA).should('have.text',"R.A")}

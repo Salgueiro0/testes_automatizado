@@ -59,6 +59,7 @@ class exigencias{
         cy.wait(3000)
     }
     clicarBotaoNovaExigencia() {cy.get(el.botaoNovaExigencia).click()}
+    validarTitulo(){cy.get('h1').should('contain','Exigência')}
     selecionarAbaExigencias(){
         cy.get(el.abaLateralExigencia).click()
         cy.get(el.modalAvisoFiltros).click()

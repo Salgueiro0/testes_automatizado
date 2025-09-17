@@ -30,6 +30,7 @@ class documentos{
     clicarBotaoNovoDocumento(){
         cy.contains('a', 'Novo Documento').click({ force: true });
     }
+    validarTitulo(){cy.get('h1').should('contain','Documento')}
 
     digitarCampoDescricaoDocumento(){
         cy.get(el.campoDescricaoDocumento).type('teste')

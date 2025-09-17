@@ -363,5 +363,8 @@ class empreendimento {
     confirmar(){
         cy.get(el.modalDialogConfirmar).click()
     }
+    clicarAbaDemanda(){cy.get('.demandas-aba').click()}
+    clicarNovaDemanda(){cy.get(':nth-child(1) > .box-body > .panel > .panel-body > .panel-footer > .btn-toolbar > .btn-success').click()}
+    clicarVoltar(){cy.get('[onclick="window.history.back()"]').click()}
 }
 export default new empreendimento()

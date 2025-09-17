@@ -146,13 +146,14 @@ class demandas_consultar {
     selecionarRA(){cy.get(el.seletorRAFormGeral).click();}
     clicarBotaoPesquisar(){cy.get(el.botaoPesquisar).click();}
     clicarBotaoCadastro(){cy.get(el.botaoCadastro).click();}
+    validarTitulo(){cy.get('h1').should('contain','Demanda')}
     clicarAcordeaoCompAmb(){cy.contains('div.accordion.float-style','Dados Específicos da Compensação Ambiental').click();}
     clicarAcordeaoCompFlo(){cy.contains('div.accordion.float-style','Dados Específicos da Compensação Florestal').click();}
     clicarAcordeaoComInf(){cy.contains('div.accordion.float-style','Dados Específicos do Auto de Infração').click();}
     selecionarReg(){cy.get(el.seletorReg).click();}
     seletorEmpreendimento(){cy.get(el.seletorEmpreendimento).click();}
     adicionarEmpreendimento(){cy.contains('button','Adicionar').click();}
-    selecionarLicenca(){cy.get(el.selecionarLicenca).click();}
+    selecionarTipo(){cy.get(el.selecionarLicenca).click();}
     digitarNumDemanda(valor){cy.get(el.numDemanda).type(valor);}
     digitarAnoDemanda(valor){cy.get(el.anoDemanda).type(valor);}
     selecionarOrgao(){cy.get(el.selecionarOrgao).click();}
@@ -191,6 +192,13 @@ class demandas_consultar {
     gerarRelDemandaPDF(){cy.get('#gerarRelatorioDemandaPDF').click()}
     clicarExcluirDemanda(){cy.get('#btn-delete-demanda').click()}
     clicarConfirmar(){cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary').click()}
+    validaCompenAmbNotCheck(){cy.get('#fl_compensacao_ambiental').should('be.disabled')}
+    validaCompenFloNotCheck(){cy.get('#fl_compensacao_florestal').should('be.disabled')}
+    validaCompenAmbCheck(){cy.get('#fl_compensacao_ambiental').should('not.be.disabled')}
+    validaCompenFloCheck(){cy.get('#fl_compensacao_florestal').should('not.be.disabled')}
+    clicarPrimeiroBotaoEditar(){cy.get('a[title="Editar"]').first().click()}
+
+
 }
 
 export default new demandas_consultar ()

@@ -38,8 +38,10 @@ describe('consultar_requerimentos', () => {
         consultar_requerimento.clicarPrimeiroBotaoVisualizar()
         consultar_requerimento.clicarAbaRequerimento()
 
+
         //CADASTRAR REQUERIMENTO
         consultar_requerimento.irParaCadastrarRequerimento()
+        consultar_requerimento.validarTitulo()                // -- US033 - RN015 identificação/título--
 
         //testando os campos de texto da página REQUERIMENTO - NOVO CADASTRO
         consultar_requerimento.validarCadastroControlLabelTipoRequerimento()

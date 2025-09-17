@@ -31,6 +31,7 @@ class Pagamentos {
     clicarPrimeiroBotaoVisualizar() {
         cy.get(el.botaoVisualizar).first().click();
     }
+    validarTitulo(){cy.get('h1').should('contain','Pagamento')}
 
     clicarAbaRequerimentos() {
         cy.get(el.abaRequerimento).click();

@@ -49,6 +49,7 @@ class consultar_reiteracoes {
     validarWidthDataPublicacao(){ cy.get(el.widthDataPublicacao).should('contain',"Data de Publicação") }
     validarWidthAcaoRequerimento(){ cy.get(el.widthAcaoRequerimento).should('contain',"Ação Requerimento") }
     clicarBotaoVoltar(){ cy.get(el.botaoVoltar).click() }
+    validarTitulo(){cy.get('h1').should('contain','Reiteração de Requerimento')}
 }
 
 export default new consultar_reiteracoes()

@@ -15,7 +15,7 @@ describe('pendência', () => {
         empreendimento.login()
         empreendimento.validarTituloPendencia()
         empreendimento.irParaEmpreendimento()
-        empreendimento.validarTituloEmpreendimento()
+        empreendimento.validarTituloEmpreendimento()          // -- US033 - RN015 identificação/título--
         empreendimento.validarTextoPesquisar()
 
         //validação da escrita
@@ -135,6 +135,11 @@ describe('pendência', () => {
         //teste da tela de visualizar
         empreendimento.clicarPrimeiroBotaoVisualizar()
 
+        // -- US033 - RN015 Caminhos ABA Nova Demanda --
+        empreendimento.clicarAbaDemanda()
+        empreendimento.clicarNovaDemanda()
+        empreendimento.clicarVoltar()
+
         //teste da tela de edição
         empreendimento.irAbaEmpreendimento()
         empreendimento.selecionarRegiaoAdmin()
@@ -152,5 +157,6 @@ describe('pendência', () => {
         //validação do campo excluir
         empreendimento.clicarBotaoDeleteEmpreendimento()
         empreendimento.confirmar()
+
     })
 });

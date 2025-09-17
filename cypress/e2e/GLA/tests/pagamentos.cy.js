@@ -75,6 +75,7 @@ describe('pagamento', () => {
 
         //PESQUISAR PAGAMENTO
         pagamentos.irAbaPagamentos()
+        pagamentos.validarTitulo()                // -- US033 - RN015 identificação/título--
 
         //validando campos de texto
         pagamentos.validarLabelPagamento()

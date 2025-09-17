@@ -121,7 +121,8 @@ describe('pendência', () => {
         demandas_consultar.clicarBotaoPesquisar()
 
         //testando o cadastro de uma nova demanda
-        demandas_consultar.clicarBotaoCadastro()
+        demandas_consultar.clicarBotaoCadastro()         // -- US033 - RN015 Caminhos ABA Nova Demanda --
+        demandas_consultar.validarTitulo()                // -- US033 - RN015 identificação/título--
         demandas_consultar.validarTituloNovaDemanda()
         demandas_consultar.validarAccordionDadosGerais()
         demandas_consultar.validarAccordionDadosCA()
@@ -148,8 +149,17 @@ describe('pendência', () => {
         cy.wait(2000)
         demandas_consultar.seletorDropdown('103 - Estagio de produção ')
         demandas_consultar.adicionarEmpreendimento()
-        demandas_consultar.selecionarLicenca()
+
+        //-- EU001 - US033 - RN019 - RN021 --
+        demandas_consultar.selecionarTipo()
+        demandas_consultar.seletorDropdown('AA - Autorização Ambiental ')
+        demandas_consultar.validaCompenAmbNotCheck()
+        demandas_consultar.validaCompenFloNotCheck()
+        demandas_consultar.selecionarTipo()
         demandas_consultar.seletorDropdown('LP - Licença Prévia')
+        demandas_consultar.validaCompenAmbCheck()
+        demandas_consultar.validaCompenFloCheck()
+
         demandas_consultar.digitarNumDemanda('10000')
         demandas_consultar.digitarAnoDemanda(2026)
         demandas_consultar.selecionarOrgao()
@@ -204,7 +214,9 @@ describe('pendência', () => {
         demandas_consultar.clicarNovoEstudoAba()
         cy.wait(3000)
         demandas_consultar.clicarDemandaAba()
-        demandas_consultar.clicarBotaoEditar()
+
+        //EDITAR DEMANDA
+        demandas_consultar.clicarBotaoEditar()               // -- US033 - RN015 Caminhos Editar Demanda --
         cy.wait(4000)
         demandas_consultar.digitarDtPub('2025-01-01')
         demandas_consultar.digitarQtDias('9')
@@ -218,7 +230,7 @@ describe('pendência', () => {
         demandas_consultar.irLink2()
         cy.wait(2000)
         demandas_consultar.clicarBotaoPesquisar()
-        demandas_consultar.clicarPrimeiroBotaoVisualizar()
+        demandas_consultar.clicarPrimeiroBotaoVisualizar()     // -- US033 - RN015 Caminhos Aba visualizar Demanda --
         demandas_consultar.clicarBotaoVoltar()
         demandas_consultar.irLink()
         demandas_consultar.clicarLink3()

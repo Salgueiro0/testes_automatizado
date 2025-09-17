@@ -16,7 +16,7 @@ describe('estudos', () => {
         estudos.irAbaEstudos()
 
         //validação dos campos na tela de estudos
-        estudos.validarLabelEstudo()
+        estudos.validarLabelEstudo()      // -- US033 - RN015 identificação/título--
         estudos.validarLabelRA()
         estudos.validarLabelEmpreendimento()
         estudos.validarLabelDemanda()

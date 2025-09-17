@@ -30,7 +30,8 @@ describe('pendência', () => {
         demandas_associacao.limparFormularioPesquisa()
 
         //validação de novo cadastro
-        demandas_associacao.clicarBotaoNovoCadastro()
+        demandas_associacao.clicarBotaoNovoCadastro()    // -- US033 - RN015 Caminhos Cadastro demanda associação --
+        demandas_associacao.validarTitulo()              // -- US033 - RN015 identificação/título--
         demandas_associacao.validarNovoCadasLabelNovoCadas()
         demandas_associacao.validarNovoCadasLabelTipoAssoc()
         demandas_associacao.validarNovoCadasLabelRA()
@@ -94,7 +95,7 @@ describe('pendência', () => {
         demandas_associacao.clicarBotaoPesquisar()
 
         //validação da edição
-        demandas_associacao.clicarPrimeiroBotaoEditar()
+        demandas_associacao.clicarPrimeiroBotaoEditar()        // -- US033 - RN015 Caminho Editar Associação de Demanda --
         demandas_associacao.seletorRegiaoAdmin()
         demandas_associacao.seletorDropdown('RA-II - GAMA')
         cy.wait(2000)
@@ -122,7 +123,7 @@ describe('pendência', () => {
         demandas_associacao.seletorEmpreendimento()
         demandas_associacao.seletorDropdown('103 - Estagio de produção')
         demandas_associacao.clicarBotaoPesquisar()
-        demandas_associacao.clicarPrimeiroBotaoVisualizar()
+        demandas_associacao.clicarPrimeiroBotaoVisualizar()         // -- US033 - RN015  Visualizar Associação de Demanda (por meio do Ícone do Olho). --
         demandas_associacao.botaoExcluirAssocDemand()
 
         //validação para excluir a associação

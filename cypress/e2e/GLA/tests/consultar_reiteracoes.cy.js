@@ -19,6 +19,7 @@ describe('consultar_reiteracoes', () => {
         //CADASTRAR REITERAÇÃO
         consultar_reiteracoes.irParaRequerimentos()
         consultar_reiteracoes.irParaConsultarReiteracoes()
+        consultar_reiteracoes.validarTitulo()         // -- US033 - RN015 identificação/título--
         consultar_reiteracoes.irParaCadastrarReiteracoes()
 
         //Validar campos de texto
