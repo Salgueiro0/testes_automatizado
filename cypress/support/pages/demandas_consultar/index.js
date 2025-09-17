@@ -207,7 +207,17 @@ class demandas_consultar {
     clicarStatusRecAdm(){cy.get(':nth-child(4) > :nth-child(1) > .form-group > .select2-container > .selection > .select2-selection').click()}
     validarSeiDocRecAdmHabilitado(){cy.get('#ds_sei_doc_recurso_adm').should('not.be.disabled')}
     validarSeiDocRecAdmDesabilitado(){cy.get('#ds_sei_doc_recurso_adm').should('be.disabled')}
-
+    digitarValorTotalCompAmb(valor){cy.get('#vl_valor_compensacao_ambiental').type(valor)}
+    digitarValorRef(valor){cy.get('#form_ambiental > :nth-child(1) > :nth-child(2) > .form-group > .form-control').type(valor).clear()}
+    digitarGrauImpacto(valor){cy.get('#form_ambiental > :nth-child(1) > :nth-child(3) > .form-group > .form-control').type(valor).clear()}
+    digitarSeiDoc(valor){cy.get('#form_ambiental > :nth-child(2) > :nth-child(1) > .form-group > .form-control').type(valor).clear()}
+    digitarPrazoDias(valor){cy.get('#ds_sei_doc_recurso_adm').type(valor)}
+    dgitarDescrCompAmb(texto){cy.get('#ds_compensacao_ambiental').type(texto).clear()}
+    selecionarStatusRecAdm(){cy.get(':nth-child(4) > :nth-child(1) > .form-group > .select2-container > .selection > .select2-selection').click()}
+    digitarNSeiDocRecAdm(valor){cy.get('#ds_sei_doc_recurso_adm').type(valor)}
+    abrirCompAmb(){cy.get('#fl_compensacao_ambiental').click()}
+    limparDadosCompAmb(){cy.get('#bt_clear_form_ca').click()}
+    clicarCheckCompAmb(){cy.get('#fl_compensacao_ambiental').click()}
 }
 
 export default new demandas_consultar ()
