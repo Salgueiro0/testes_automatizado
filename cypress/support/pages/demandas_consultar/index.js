@@ -197,7 +197,16 @@ class demandas_consultar {
     validaCompenAmbCheck(){cy.get('#fl_compensacao_ambiental').should('not.be.disabled')}
     validaCompenFloCheck(){cy.get('#fl_compensacao_florestal').should('not.be.disabled')}
     clicarPrimeiroBotaoEditar(){cy.get('a[title="Editar"]').first().click()}
-
+    marcarCompensAmb(){cy.get('#fl_compensacao_ambiental').click()}
+    checkPossuiPrazo(){
+        cy.get('#fl_prazo_cumprimento').click()
+        cy.wait(2000)
+    }
+    validarPrazoDesabilitado(){cy.get('#qt_dias_prazo_limite_cf').should('be.disabled')}
+    validarPrazoHabilitado(){cy.get('#qt_dias_prazo_pagamento').should('not.be.disabled')}
+    clicarStatusRecAdm(){cy.get(':nth-child(4) > :nth-child(1) > .form-group > .select2-container > .selection > .select2-selection').click()}
+    validarSeiDocRecAdmHabilitado(){cy.get('#ds_sei_doc_recurso_adm').should('not.be.disabled')}
+    validarSeiDocRecAdmDesabilitado(){cy.get('#ds_sei_doc_recurso_adm').should('be.disabled')}
 
 }
 

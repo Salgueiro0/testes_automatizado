@@ -170,6 +170,23 @@ describe('pendência', () => {
         demandas_consultar.digitar('111111')
         demandas_consultar.digitarNRProcesso('11111111')
         demandas_consultar.digitarAnoProcesso('2025')
+
+        // -- EU001 - US033 - RN063 - PRAZOS EM DIAS --
+        demandas_consultar.marcarCompensAmb()
+        demandas_consultar.validarPrazoHabilitado()
+        demandas_consultar.checkPossuiPrazo()
+        demandas_consultar.validarPrazoDesabilitado()
+
+        // -- EU001 - US033 - RN064 - SEI DOC DO RECURSO ADMINISTRATIVO --
+        demandas_consultar.clicarStatusRecAdm()
+        demandas_consultar.seletorDropdown('Deferido')
+        demandas_consultar.validarSeiDocRecAdmHabilitado()
+        demandas_consultar.clicarStatusRecAdm()
+        demandas_consultar.seletorDropdown('A protocolar')
+        demandas_consultar.validarSeiDocRecAdmDesabilitado()
+        demandas_consultar.marcarCompensAmb()
+
+
         demandas_consultar.botaoSalvar()
         demandas_consultar.botaoContinuar()
         demandas_consultar.botaoOk()
