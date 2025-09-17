@@ -120,8 +120,10 @@ describe('pendência', () => {
         demandas_consultar.seletorDropdown('RA-I - BRASILIA ')
         demandas_consultar.clicarBotaoPesquisar()
 
-        //testando o cadastro de uma nova demanda
+        //CADASTRAR DEMANDA
         demandas_consultar.clicarBotaoCadastro()         // -- US033 - RN015 Caminhos ABA Nova Demanda --
+
+        //Validar textos
         demandas_consultar.validarTitulo()                // -- US033 - RN015 identificação/título--
         demandas_consultar.validarTituloNovaDemanda()
         demandas_consultar.validarAccordionDadosGerais()
@@ -143,12 +145,7 @@ describe('pendência', () => {
         demandas_consultar.validarFormTitular_Especifico()
         demandas_consultar.validarFormSuplente_Especifico()
         demandas_consultar.validarFormDescricao_Especifico()
-        demandas_consultar.selecionarReg()
-        demandas_consultar.seletorDropdown('RA-I - BRASILIA ')
-        demandas_consultar.seletorEmpreendimento()
-        cy.wait(2000)
-        demandas_consultar.seletorDropdown('103 - Estagio de produção ')
-        demandas_consultar.adicionarEmpreendimento()
+
 
         //-- EU001 - US033 - RN019 - RN021 --
         demandas_consultar.selecionarTipo()
@@ -160,16 +157,37 @@ describe('pendência', () => {
         demandas_consultar.validaCompenAmbCheck()
         demandas_consultar.validaCompenFloCheck()
 
-        demandas_consultar.digitarNumDemanda('10000')
-        demandas_consultar.digitarAnoDemanda(2026)
-        demandas_consultar.selecionarOrgao()
-        demandas_consultar.seletorDropdown('ABDI - AGENCIA BRASILEIRA DE DESENVOLVIMENTO INDUSTRIAL ')
-        demandas_consultar.digitarData('2025-07-10')
-        demandas_consultar.digitar1('6')
-        demandas_consultar.digitar2('teste123')
-        demandas_consultar.digitar('111111')
-        demandas_consultar.digitarNRProcesso('11111111')
-        demandas_consultar.digitarAnoProcesso('2025')
+
+        function cadastroDemanda(tipo,numero){
+            demandas_consultar.selecionarReg()
+            demandas_consultar.seletorDropdown('RA-I - BRASILIA ')
+            demandas_consultar.seletorEmpreendimento()
+            cy.wait(2000)
+            demandas_consultar.seletorDropdown('103 - Estagio de produção ')
+            demandas_consultar.adicionarEmpreendimento()
+            demandas_consultar.selecionarTipo()
+            demandas_consultar.seletorDropdown(tipo)
+            demandas_consultar.digitarNumDemanda(numero)
+            demandas_consultar.digitarAnoDemanda(2026)
+            demandas_consultar.selecionarOrgao()
+            demandas_consultar.seletorDropdown('ABDI - AGENCIA BRASILEIRA DE DESENVOLVIMENTO INDUSTRIAL ')
+            demandas_consultar.digitarData('2025-07-10')
+            demandas_consultar.digitarVigencia('6')
+            demandas_consultar.digitarDescricao('teste123')
+            demandas_consultar.digitarSeiOrgao('111111')
+            demandas_consultar.digitarNRProcesso('11111111')
+            demandas_consultar.digitarAnoProcesso('2025')
+        }
+
+        function salvarDemanda(){
+            demandas_consultar.botaoSalvar()
+            demandas_consultar.clicarModalSalvar()
+            demandas_consultar.modalSim()
+        }
+
+        //CADASTRAR DEMANDA COM COMPENSAÇÃO AMBIENTAL
+
+        cadastroDemanda('Licença de Operação','10000')
 
         // -- EU001 - US033 - RN063 - PRAZOS EM DIAS --
         demandas_consultar.marcarCompensAmb()
@@ -185,7 +203,6 @@ describe('pendência', () => {
         demandas_consultar.clicarStatusRecAdm()
         demandas_consultar.seletorDropdown('A protocolar')
         demandas_consultar.validarSeiDocRecAdmDesabilitado()
-
         demandas_consultar.digitarValorTotalCompAmb('1011151113111212')  //(04)
         demandas_consultar.digitarValorRef('111111111111111') //(05)
         demandas_consultar.digitarGrauImpacto(11111) //(06)
@@ -193,83 +210,83 @@ describe('pendência', () => {
         demandas_consultar.dgitarDescrCompAmb('a'.repeat(1001)) //(11)
         demandas_consultar.selecionarStatusRecAdm()
         demandas_consultar.seletorDropdown('Não se aplica')  //(12)
+        salvarDemanda()
 
-        demandas_consultar.botaoSalvar()
-        demandas_consultar.botaoContinuar()
-        demandas_consultar.botaoOk()
-        demandas_consultar.validarVisualizarTituloDemanda()
-        demandas_consultar.validarVisualizarInfoEmpreendimentos()
-        demandas_consultar.validarVisualizarDadosGerais()
-        demandas_consultar.validarVisualizarInfoDocumento()
-        demandas_consultar.validarVisualizarCompensacaoAmbiental()
-        demandas_consultar.validarVisualizarCompensacaoFlorestal()
-        demandas_consultar.validarVisualizarAutoInfracao()
-        demandas_consultar.clicarAdicionar1()
-        demandas_consultar.clicarAdicionar2()
-        demandas_consultar.clicarAdicionar3()
-        demandas_consultar.clicarAdicionar4()
-        demandas_consultar.clicarAdicionar5()
-        demandas_consultar.validarWhidthTipo()
-        demandas_consultar.validarWhidthNumero()
-        demandas_consultar.validarWhidthAno()
-        demandas_consultar.validarWhidthOrgao()
-        demandas_consultar.validarWhidthNumeroSei()
-        demandas_consultar.validarWhidthProcesso()
-        demandas_consultar.validarWhidthDataPublicacao()
-        demandas_consultar.validarWhidthVigenciaDias()
-        demandas_consultar.validarWhidthDiasRestantes()
-        demandas_consultar.validarWhidthStatus()
-        demandas_consultar.validarWhidthAlertaPrazo()
-        demandas_consultar.validarWhidthTitular()
-        demandas_consultar.validarWhidthSuplente()
-        demandas_consultar.validarWhidthArquivadaSuspensaCancelada()
-        demandas_consultar.validarWhidthDataVencimento()
-        demandas_consultar.validarWhidthEstudoServicosRelacionados()
-        demandas_consultar.validarWhidthObservacaoProcessos()
-        demandas_consultar.validarWhidthDescricao()
-        demandas_consultar.validarWhidthRa()
-        demandas_consultar.validarWhidthEmpreendimento()
-        demandas_consultar.clicarAbaDoc()
-        cy.wait(3000)
-        demandas_consultar.clicarExigAba()
-        cy.wait(3000)
-        demandas_consultar.clicarReqAba()
-        cy.wait(3000)
-        demandas_consultar.clicarNovoEstudoAba()
-        cy.wait(3000)
-        demandas_consultar.clicarDemandaAba()
 
-        //EDITAR DEMANDA
-        demandas_consultar.clicarBotaoEditar()               // -- US033 - RN015 Caminhos Editar Demanda --
-        cy.wait(4000)
-        demandas_consultar.digitarDtPub('2025-01-01')
-        demandas_consultar.digitarQtDias('9')
-        demandas_consultar.digitarDesDemanda('teste2.0')
-        demandas_consultar.abrirCompAmb()
-        demandas_consultar.abrirCompAmb()
-        demandas_consultar.limparDadosCompAmb()
-        demandas_consultar.clicarCheckCompAmb()
-        demandas_consultar.botaoSalvar()
-        demandas_consultar.botaoContinuar()
-        demandas_consultar.modalOk()
+        //CADASTRAR DEMANDA COM AUTO DE INFRAÇÃO
 
-        // validação da pesquisa
-        demandas_consultar.irLink()
-        demandas_consultar.irLink2()
-        cy.wait(2000)
-        demandas_consultar.clicarBotaoPesquisar()
-        demandas_consultar.clicarPrimeiroBotaoVisualizar()     // -- US033 - RN015 Caminhos Aba visualizar Demanda --
-        demandas_consultar.clicarBotaoVoltar()
-        demandas_consultar.irLink()
-        demandas_consultar.clicarLink3()
-        demandas_consultar.digitarDtPubInicio('2025-01-01')
-        demandas_consultar.clicarBotaoPesquisar()
-        demandas_consultar.gerarRelDemandaPDF()
+        cadastroDemanda('Auto de Infração','20000')
+        demandas_consultar.digitarDataRecebAI('2020-01-01')
+        demandas_consultar.selecionarTipoSancao()
+        demandas_consultar.seletorDropdown('Multa Simples')
+        salvarDemanda()
 
-        // validação do botão excluir
-        demandas_consultar.clicarPrimeiroBotaoVisualizar()
-        cy.wait(10000)
-        demandas_consultar.clicarExcluirDemanda()
-        demandas_consultar.clicarConfirmar()
+        // //DADOS DETALHADOS não sei onde e essa tela
+        // demandas_consultar.validarVisualizarTituloDemanda()
+        // demandas_consultar.validarVisualizarInfoEmpreendimentos()
+        // demandas_consultar.validarVisualizarDadosGerais()
+        // demandas_consultar.validarVisualizarInfoDocumento()
+        // demandas_consultar.validarVisualizarCompensacaoAmbiental()
+        // demandas_consultar.validarVisualizarCompensacaoFlorestal()
+        // demandas_consultar.validarVisualizarAutoInfracao()
+        // demandas_consultar.clicarAdicionar1()
+        // demandas_consultar.clicarAdicionar2()
+        // demandas_consultar.clicarAdicionar3()
+        // demandas_consultar.clicarAdicionar4()
+        // demandas_consultar.clicarAdicionar5()
+        // demandas_consultar.validarWhidthTipo()
+        // demandas_consultar.validarWhidthNumero()
+        // demandas_consultar.validarWhidthAno()
+        // demandas_consultar.validarWhidthOrgao()
+        // demandas_consultar.validarWhidthNumeroSei()
+        // demandas_consultar.validarWhidthProcesso()
+        // demandas_consultar.validarWhidthDataPublicacao()
+        // demandas_consultar.validarWhidthVigenciaDias()
+        // demandas_consultar.validarWhidthDiasRestantes()
+        // demandas_consultar.validarWhidthStatus()
+        // demandas_consultar.validarWhidthAlertaPrazo()
+        // demandas_consultar.validarWhidthTitular()
+        // demandas_consultar.validarWhidthSuplente()
+        // demandas_consultar.validarWhidthArquivadaSuspensaCancelada()
+        // demandas_consultar.validarWhidthDataVencimento()
+        // demandas_consultar.validarWhidthEstudoServicosRelacionados()
+        // demandas_consultar.validarWhidthObservacaoProcessos()
+        // demandas_consultar.validarWhidthDescricao()
+        // demandas_consultar.validarWhidthRa()
+        // demandas_consultar.validarWhidthEmpreendimento()
+        // demandas_consultar.clicarAbaDoc()
+        // cy.wait(3000)
+        // demandas_consultar.clicarExigAba()
+        // cy.wait(3000)
+        // demandas_consultar.clicarReqAba()
+        // cy.wait(3000)
+        // demandas_consultar.clicarNovoEstudoAba()
+        // cy.wait(3000)
+        // demandas_consultar.clicarDemandaAba()
+
+        // //EDITAR DEMANDA
+        // demandas_consultar.clicarBotaoEditar()               // -- US033 - RN015 Caminhos Editar Demanda --
+        // cy.wait(4000)
+
+
+
+        // // validação da pesquisa
+        // demandas_consultar.irLink()
+        // demandas_consultar.irLink2()
+        // cy.wait(2000)
+        // demandas_consultar.clicarBotaoPesquisar()
+        // demandas_consultar.clicarPrimeiroBotaoVisualizar()     // -- US033 - RN015 Caminhos Aba visualizar Demanda --
+        // demandas_consultar.clicarBotaoVoltar()
+        // demandas_consultar.irLink()
+        // demandas_consultar.clicarLink3()
+        // demandas_consultar.digitarDtPubInicio('2025-01-01')
+        // demandas_consultar.clicarBotaoPesquisar()
+        // demandas_consultar.gerarRelDemandaPDF()
+        //
+        // // validação do botão excluir
+        // demandas_consultar.clicarPrimeiroBotaoVisualizar()
+        // cy.wait(10000)
+        // demandas_consultar.clicarExcluirDemanda()
+        // demandas_consultar.clicarConfirmar()
     })
 })

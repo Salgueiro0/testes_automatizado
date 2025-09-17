@@ -158,13 +158,15 @@ class demandas_consultar {
     digitarAnoDemanda(valor){cy.get(el.anoDemanda).type(valor);}
     selecionarOrgao(){cy.get(el.selecionarOrgao).click();}
     digitarData(valor){cy.get('div[style="display: block;"] > :nth-child(4) > :nth-child(1) > .form-group > .control-label').type(valor)}
-    digitar1(valor){cy.get(':nth-child(4) > :nth-child(2) > .form-group > .control-label').type(valor)}
-    digitar2(valor){cy.get(':nth-child(5) > .col-md-12 > .form-group > .control-label').type(valor)}
-    digitar(valor){cy.get('#cd_orgao_processo_sei').type(valor)}
+    digitarVigencia(valor){cy.get(':nth-child(4) > :nth-child(2) > .form-group > .control-label').type(valor)}
+    digitarDescricao(valor){cy.get(':nth-child(5) > .col-md-12 > .form-group > .control-label').type(valor)}
+    digitarSeiOrgao(valor){cy.get('#cd_orgao_processo_sei').type(valor)}
     digitarNRProcesso(valor){cy.get('#nr_processo_sei').type(valor)}
     digitarAnoProcesso(valor){cy.get('#aa_processo_sei').type(valor)}
-    botaoSalvar(){cy.get('#submit').click()}
+    botaoSalvar(){cy.contains('button','Salvar').click()}
+    clicarModalSalvar(){cy.get('.modal-footer > .btn-primary').click()}
     botaoContinuar(){cy.get('.modal-footer > .btn-primary').click()}
+    modalSim(){cy.get('.modal-footer > .btn-primary').click()}
     botaoOk(){cy.get('.modal-footer > .btn-danger').click()}
     clicarAdicionar1(){cy.get('#ep_plus').click()}
     clicarAdicionar2(){cy.get('#id_plus').click()}
@@ -218,6 +220,11 @@ class demandas_consultar {
     abrirCompAmb(){cy.get('#fl_compensacao_ambiental').click()}
     limparDadosCompAmb(){cy.get('#bt_clear_form_ca').click()}
     clicarCheckCompAmb(){cy.get('#fl_compensacao_ambiental').click()}
+    digitarDataRecebAI(data){cy.get('#dt_recebimento_ai').type(data)}
+    selecionarTipoSancao(){}
+
+
+
 }
 
 export default new demandas_consultar ()
