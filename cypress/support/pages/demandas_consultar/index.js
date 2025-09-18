@@ -138,6 +138,19 @@ class demandas_consultar {
     seletorRAForm(){cy.get(el.seletorRAForm).click();}
     seletorRAFormGeral(){cy.get(el.seletorRAFormGeral).click();}
     seletorDropdown(select){cy.get(el.seletorDropdown).contains(select).click({force:true});}
+
+    validaOpcoesDropdown(opcao1, opcao2, opcao3,opcao4) {
+        cy.get(el.seletorDropdown)
+            .should('contain', opcao1)
+            .and('contain', opcao2)
+            .and('contain', opcao3)
+            .and('contain', opcao4)
+    }
+    validaModPagamentoDesab(){cy.get('#form_florestal > :nth-child(1) > :nth-child(3) > .form-group')
+        .should('contain','Pecúnia')
+    }
+    validarQuantMudasDesab(){cy.get('#qt_definitiva_mudas').should('be.disabled')}
+    validarQuantMudasHab(){cy.get('#qt_definitiva_mudas').should('not.be.disabled')}
     clicarBotao(){cy.get(el.botaoPanel).click();}
     digitarValorComp(valor){cy.get(el.valorComp).type(valor);}
     clicarBotaoPanel(){cy.get(el.botaoPanelBody).click();}
@@ -221,10 +234,21 @@ class demandas_consultar {
     limparDadosCompAmb(){cy.get('#bt_clear_form_ca').click()}
     clicarCheckCompAmb(){cy.get('#fl_compensacao_ambiental').click()}
     digitarDataRecebAI(data){cy.get('#dt_recebimento_ai').type(data)}
-    selecionarTipoSancao(){}
-
-
-
+    selecionarTipoSancao(){cy.get('#form_auto_infracao > :nth-child(3) > .col-md-4 > .form-group > .select2-container > .selection > .select2-selection').click()}
+    digitarValorMulta(valor){cy.get('#vl_multa_ai').type(valor)}
+    selecionarTipoAtividade(){cy.get(':nth-child(4) > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field').click()}
+    digitarMotivo(motivo){cy.get('#ds_auto_infracao_ai').type(motivo)}
+    selecionarStatusAI(){cy.get('#form_auto_infracao > :nth-child(6) > :nth-child(1) > .form-group > .select2-container > .selection > .select2-selection').click()}
+    selecionarInstanciaRecursal(){cy.get('#form_auto_infracao > :nth-child(6) > :nth-child(2) > .form-group > .select2-container > .selection > .select2-selection').click()}
+    selecionarLegislacaoReferencia(){cy.get('#form_florestal > :nth-child(1) > :nth-child(1) > .form-group > .select2-container > .selection > .select2-selection').click()}
+    validaTipoVegetacaoDesab(){cy.get('#form_florestal > :nth-child(1) > :nth-child(2) > .form-group > .select2-container > .selection > .select2-selection').should('have.attr', 'tabindex', '-1')}
+    validaTipoVegetacaoHab(){cy.get('#form_florestal > :nth-child(1) > :nth-child(2) > .form-group > .select2-container > .selection > .select2-selection').should('not.be.disabled')}
+    selecionarModalidadePagamento(){cy.get(':nth-child(3) > .form-group > .select2-container > .selection > .select2-selection').click()}
+    selecionarTipoVegetacao(){cy.get('#form_florestal > :nth-child(1) > :nth-child(2) > .form-group > .select2-container > .selection > .select2-selection').click()}
+    marcarCompensFlorestal(){cy.get('#fl_compensacao_florestal').click()}
+    prazoEmDiasHab(){cy.get('#qt_dias_prazo_limite_cf').should('not.be.disabled')}
+    marcarPossuiPrazo(){cy.get('#fl_prazo_cumprimento_cf').click()}
+    prazoEmDiasDesab(){cy.get('#qt_dias_prazo_limite_cf').should('be.disabled')}
 }
 
 export default new demandas_consultar ()

@@ -186,7 +186,7 @@ describe('pendência', () => {
         }
 
         //CADASTRAR DEMANDA COM COMPENSAÇÃO AMBIENTAL
-
+        cy.reload(true)
         cadastroDemanda('Licença de Operação','10000')
 
         // -- EU001 - US033 - RN063 - PRAZOS EM DIAS --
@@ -213,13 +213,80 @@ describe('pendência', () => {
         salvarDemanda()
 
 
-        //CADASTRAR DEMANDA COM AUTO DE INFRAÇÃO
 
+        //CADASTRAR DEMANDA COM AUTO DE INFRAÇÃO
+        cy.reload(true)
         cadastroDemanda('Auto de Infração','20000')
         demandas_consultar.digitarDataRecebAI('2020-01-01')
         demandas_consultar.selecionarTipoSancao()
-        demandas_consultar.seletorDropdown('Multa Simples')
+        demandas_consultar.seletorDropdown('Multa Simples')  //RN240
+        demandas_consultar.digitarValorMulta(10000)
+        demandas_consultar.selecionarTipoAtividade()
+        demandas_consultar.seletorDropdown('Obra de Infraestrutura')
+        demandas_consultar.digitarMotivo('motivo')
+        demandas_consultar.selecionarStatusAI()
+        demandas_consultar.seletorDropdown('Recurso deferido')
+        demandas_consultar.selecionarInstanciaRecursal()
+        demandas_consultar.seletorDropdown('1ª instância')
+
+
+        //CADASTRAR DEMANDA COM COMPENSAÇÃO FLORESTAL
+        //EU002 - US036 -
+
+        function selecionarLegislacaoRef(legislacao){
+            demandas_consultar.selecionarLegislacaoReferencia()
+            demandas_consultar.seletorDropdown(legislacao)
+        }
+        function selecionarTipoVegetacao(tipo){
+            demandas_consultar.selecionarTipoVegetacao()
+            demandas_consultar.seletorDropdown(tipo)
+        }
+        cy.reload(true)
+        cadastroDemanda('Licença de Operação','3000')
+
+        demandas_consultar.marcarCompensFlorestal()
+        selecionarLegislacaoRef('Decreto 39.469/2018')
+        demandas_consultar.validaTipoVegetacaoHab()                       //RN065 - TIPO DE VEGETAÇÃO HABILITADO
+        selecionarLegislacaoRef('Decreto 14.783/1993')
+        demandas_consultar.validaTipoVegetacaoDesab()                     //RN065 - TIPO DE VEGETAÇÃO DESABILITADO
+        // selecionarModPag(['Mudas 14.783/1993','Pecúnia'])      //RN066
+        selecionarLegislacaoRef('Decreto 39.469/2018')
+        selecionarTipoVegetacao('Remanescentes')
+        demandas_consultar.selecionarModalidadePagamento()
+        demandas_consultar.validaOpcoesDropdown('Pecúnia','Recomposição (Decreto 39.469/2018, plantio) ','Serviços em UC ','Servidão Ambiental ','Dação em Pagamento ')
+        selecionarTipoVegetacao('Árvores Isoladas')
+        demandas_consultar.validaModPagamentoDesab()                     // RN066 - PECÚNIA/DESABILITAOO
+        demandas_consultar.validarQuantMudasDesab()                      // RN067 - DESABILITADO
+        demandas_consultar.selecionarModalidadePagamento()
+        selecionarTipoVegetacao('Mudas 14.783/1993')
+        demandas_consultar.validarQuantMudasHab()                       // RN067 - HABILITADO
+        demandas_consultar.prazoEmDiasHab()                             // RN071 - HABILITADO
+        demandas_consultar.marcarPossuiPrazo()
+        demandas_consultar.prazoEmDiasDesab()                           // RN071 - DESABILITADO
         salvarDemanda()
+
+
+
+
+
+
+        // //CADASTRAR DEMANDA COM AUTO DE INFRAÇÃO
+        //
+        // cadastroDemanda('Auto de Infração','20000')
+        // demandas_consultar.digitarDataRecebAI('2020-01-01')
+        // demandas_consultar.selecionarTipoSancao()
+        // demandas_consultar.seletorDropdown('Multa Simples')
+        // demandas_consultar.digitarValorMulta(10000)
+        // demandas_consultar.selecionarTipoAtividade()
+        // demandas_consultar.seletorDropdown('Obra de Infraestrutura')
+        // demandas_consultar.digitarMotivo('motivo')
+        // demandas_consultar.selecionarStatusAI()
+        // demandas_consultar.seletorDropdown('Recurso deferido')
+        // demandas_consultar.selecionarInstanciaRecursal()
+        // demandas_consultar.seletorDropdown('1ª instância')
+        // salvarDemanda()
+
+
 
         // //DADOS DETALHADOS não sei onde e essa tela
         // demandas_consultar.validarVisualizarTituloDemanda()
