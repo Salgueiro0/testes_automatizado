@@ -159,32 +159,32 @@ describe('pendência', () => {
         // demandas_consultar.validaCompenFloCheck()
         //
         //
-        // function cadastroDemanda(tipo,numero){
-        //     demandas_consultar.selecionarReg()
-        //     demandas_consultar.seletorDropdown('RA-I - BRASILIA ')
-        //     demandas_consultar.seletorEmpreendimento()
-        //     cy.wait(2000)
-        //     demandas_consultar.seletorDropdown('103 - Estagio de produção ')
-        //     demandas_consultar.adicionarEmpreendimento()
-        //     demandas_consultar.selecionarTipo()
-        //     demandas_consultar.seletorDropdown(tipo)
-        //     demandas_consultar.digitarNumDemanda(numero)
-        //     demandas_consultar.digitarAnoDemanda(2026)
-        //     demandas_consultar.selecionarOrgao()
-        //     demandas_consultar.seletorDropdown('ABDI - AGENCIA BRASILEIRA DE DESENVOLVIMENTO INDUSTRIAL ')
-        //     demandas_consultar.digitarData('2025-07-10')
-        //     demandas_consultar.digitarVigencia('6')
-        //     demandas_consultar.digitarDescricao('teste123')
-        //     demandas_consultar.digitarSeiOrgao('111111')
-        //     demandas_consultar.digitarNRProcesso('11111111')
-        //     demandas_consultar.digitarAnoProcesso('2025')
-        // }
-        //
-        // function salvarDemanda(){
-        //     demandas_consultar.botaoSalvar()
-        //     demandas_consultar.clicarModalSalvar()
-        //     demandas_consultar.modalSim()
-        // }
+        function cadastroDemanda(tipo,numero){
+            demandas_consultar.selecionarReg()
+            demandas_consultar.seletorDropdown('RA-I - BRASILIA ')
+            demandas_consultar.seletorEmpreendimento()
+            cy.wait(2000)
+            demandas_consultar.seletorDropdown('103 - Estagio de produção ')
+            demandas_consultar.adicionarEmpreendimento()
+            demandas_consultar.selecionarTipo()
+            demandas_consultar.seletorDropdown(tipo)
+            demandas_consultar.digitarNumDemanda(numero)
+            demandas_consultar.digitarAnoDemanda(2026)
+            demandas_consultar.selecionarOrgao()
+            demandas_consultar.seletorDropdown('ABDI - AGENCIA BRASILEIRA DE DESENVOLVIMENTO INDUSTRIAL ')
+            demandas_consultar.digitarData('2025-07-10')
+            demandas_consultar.digitarVigencia('6')
+            demandas_consultar.digitarDescricao('teste123')
+            demandas_consultar.digitarSeiOrgao('111111')
+            demandas_consultar.digitarNRProcesso('11111111')
+            demandas_consultar.digitarAnoProcesso('2025')
+        }
+
+        function salvarDemanda(){
+            demandas_consultar.botaoSalvar()
+            demandas_consultar.clicarModalSalvar()
+            demandas_consultar.modalSim()
+        }
         //
         // //CADASTRAR DEMANDA COM COMPENSAÇÃO AMBIENTAL
         // cy.reload(true)
@@ -213,21 +213,25 @@ describe('pendência', () => {
         //
         //
         // //CADASTRAR DEMANDA COM AUTO DE INFRAÇÃO
-        // cy.reload(true)
-        // cadastroDemanda('Auto de Infração','20000')
-        // demandas_consultar.digitarDataRecebAI('2020-01-01')
-        // demandas_consultar.selecionarTipoSancao()
-        // demandas_consultar.seletorDropdown('Multa Simples')  //RN240
-        // demandas_consultar.digitarValorMulta(10000)
-        // demandas_consultar.selecionarTipoAtividade()
-        // demandas_consultar.seletorDropdown('Obra de Infraestrutura')
-        // demandas_consultar.digitarDataRecebimentoAI('2020-01-01')
-        // demandas_consultar.digitarMotivo('motivo')
-        // demandas_consultar.selecionarStatusAI()
-        // demandas_consultar.seletorDropdown('Recurso deferido')
-        // demandas_consultar.selecionarInstanciaRecursal()
-        // demandas_consultar.seletorDropdown('1ª instância')
-        // salvarDemanda()
+        cy.reload(true)
+        cadastroDemanda('Auto de Infração','20000')
+        demandas_consultar.valorMultaDesabilitado()                //US043 - RN073 - VALOR DA MULTA DESABILITADO
+        demandas_consultar.digitarDataRecebAI('2020-01-01')
+        demandas_consultar.selecionarTipoSancao()
+        demandas_consultar.seletorDropdown('Multa Simples')  //RN240
+        demandas_consultar.valorMultaHabilitado()                  //US043 - RN073 - VALOR DA MULTA HABILITADO
+        demandas_consultar.digitarValorMulta(10000)
+        demandas_consultar.selecionarTipoAtividade()
+        demandas_consultar.seletorDropdown('Obra de Infraestrutura')
+        demandas_consultar.digitarDataRecebimentoAI('2020-01-01')
+        demandas_consultar.digitarMotivo('motivo')
+        demandas_consultar.selecionarStatusAI()
+        demandas_consultar.seletorDropdown('Em análise inicial pela GEMAM')     //US043 - RN074 - INSTÂNCIA RECURSAL
+        demandas_consultar.selecionarInstanciaRecursal()
+        demandas_consultar.seletorDropdown('1ª instância')
+
+
+
         //
         //
         // //CADASTRAR DEMANDA COM COMPENSAÇÃO FLORESTAL  //EU002 - US036 -

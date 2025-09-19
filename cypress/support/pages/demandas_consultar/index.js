@@ -283,6 +283,8 @@ class demandas_consultar {
         cy.get('.btn-toolbar > button.btn-success').should('contain','Vincular Exigência')
     }
     validarStatusExigencia(){cy.get('#table-exigencia > tbody > :nth-child(1) > :nth-child(6)').should('contain','Em Execução')}
+    valorMultaDesabilitado(){cy.get('#vl_multa_ai').should('be.disabled')}
+    valorMultaHabilitado(){cy.get('#vl_multa_ai').should('not.be.disabled')}
 
 }
 
