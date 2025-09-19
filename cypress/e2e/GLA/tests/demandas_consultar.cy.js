@@ -188,13 +188,11 @@ describe('pendência', () => {
         //CADASTRAR DEMANDA COM COMPENSAÇÃO AMBIENTAL
         cy.reload(true)
         cadastroDemanda('Licença de Operação','10000')
-
         // -- EU001 - US033 - RN063 - PRAZOS EM DIAS --
         demandas_consultar.marcarCompensAmb()
         demandas_consultar.validarPrazoHabilitado()
         demandas_consultar.checkPossuiPrazo()
         demandas_consultar.validarPrazoDesabilitado()
-
         // -- EU001 - US033 - RN064 - SEI DOC DO RECURSO ADMINISTRATIVO --
         demandas_consultar.clicarStatusRecAdm()
         demandas_consultar.seletorDropdown('Deferido')
@@ -213,7 +211,6 @@ describe('pendência', () => {
         salvarDemanda()
 
 
-
         //CADASTRAR DEMANDA COM AUTO DE INFRAÇÃO
         cy.reload(true)
         cadastroDemanda('Auto de Infração','20000')
@@ -223,16 +220,16 @@ describe('pendência', () => {
         demandas_consultar.digitarValorMulta(10000)
         demandas_consultar.selecionarTipoAtividade()
         demandas_consultar.seletorDropdown('Obra de Infraestrutura')
+        demandas_consultar.digitarDataRecebimentoAI('2020-01-01')
         demandas_consultar.digitarMotivo('motivo')
         demandas_consultar.selecionarStatusAI()
         demandas_consultar.seletorDropdown('Recurso deferido')
         demandas_consultar.selecionarInstanciaRecursal()
         demandas_consultar.seletorDropdown('1ª instância')
+        salvarDemanda()
 
 
-        //CADASTRAR DEMANDA COM COMPENSAÇÃO FLORESTAL
-        //EU002 - US036 -
-
+        //CADASTRAR DEMANDA COM COMPENSAÇÃO FLORESTAL  //EU002 - US036 -
         function selecionarLegislacaoRef(legislacao){
             demandas_consultar.selecionarLegislacaoReferencia()
             demandas_consultar.seletorDropdown(legislacao)
@@ -241,28 +238,49 @@ describe('pendência', () => {
             demandas_consultar.selecionarTipoVegetacao()
             demandas_consultar.seletorDropdown(tipo)
         }
+        function selecionarModalidadePagamento(modalidade){
+            demandas_consultar.selecionarModalidadePagamento()
+            demandas_consultar.seletorDropdown(modalidade)
+        }
         cy.reload(true)
         cadastroDemanda('Licença de Operação','3000')
-
         demandas_consultar.marcarCompensFlorestal()
         selecionarLegislacaoRef('Decreto 39.469/2018')
         demandas_consultar.validaTipoVegetacaoHab()                       //RN065 - TIPO DE VEGETAÇÃO HABILITADO
         selecionarLegislacaoRef('Decreto 14.783/1993')
         demandas_consultar.validaTipoVegetacaoDesab()                     //RN065 - TIPO DE VEGETAÇÃO DESABILITADO
-        // selecionarModPag(['Mudas 14.783/1993','Pecúnia'])      //RN066
         selecionarLegislacaoRef('Decreto 39.469/2018')
         selecionarTipoVegetacao('Remanescentes')
-        demandas_consultar.selecionarModalidadePagamento()
+        selecionarModalidadePagamento('Pecúnia')
+        demandas_consultar.areaTotalDesabilitada()                       //RN070 - ÁREA TOTAL DESABILITADA(HA)
+        selecionarModalidadePagamento('Servidão Ambiental')
+        demandas_consultar.areaTotalHabilitada()                         //RN070 - ÁREA TOTAL HABILITADA(HA)
         demandas_consultar.validaOpcoesDropdown('Pecúnia','Recomposição (Decreto 39.469/2018, plantio) ','Serviços em UC ','Servidão Ambiental ','Dação em Pagamento ')
         selecionarTipoVegetacao('Árvores Isoladas')
         demandas_consultar.validaModPagamentoDesab()                     // RN066 - PECÚNIA/DESABILITAOO
         demandas_consultar.validarQuantMudasDesab()                      // RN067 - DESABILITADO
-        demandas_consultar.selecionarModalidadePagamento()
-        selecionarTipoVegetacao('Mudas 14.783/1993')
-        demandas_consultar.validarQuantMudasHab()                       // RN067 - HABILITADO
+        selecionarLegislacaoRef('Decreto 14.783/1993')
+        selecionarModalidadePagamento('Mudas 14.783/1993')
+        demandas_consultar.validarQuantMudasHab()                      // RN067 - HABILITADO
         demandas_consultar.prazoEmDiasHab()                             // RN071 - HABILITADO
         demandas_consultar.marcarPossuiPrazo()
         demandas_consultar.prazoEmDiasDesab()                           // RN071 - DESABILITADO
+        demandas_consultar.selecionarStatusRecAdmCF()
+        demandas_consultar.seletorDropdown('Deferido')
+        demandas_consultar.validarSeiDOCRecADMHabilitado()              //RN072 - SEI DOC DO RECURSO ADMINISTRATIVO
+        demandas_consultar.selecionarStatusRecAdmCF()
+        demandas_consultar.seletorDropdown('A protocolar')
+        demandas_consultar.validarSeiDOCRecADMDesabilitado()            //RN072 - SEI DOC DO RECURSO ADMINISTRATIVO
+        //RN090 - ADIÇÃO DE MÚLTIPLAS CF
+        demandas_consultar.digitarQuantMudasEstimadas(1)
+        demandas_consultar.digitarQuantMudasDefinitivas(1)
+        demandas_consultar.digitarValorCF(1)
+        demandas_consultar.clicarBotaoAdicionar()
+        selecionarLegislacaoRef('Decreto 14.783/1993')
+        demandas_consultar.marcarPossuiPrazo()
+        demandas_consultar.selecionarStatusRecAdmCF()
+        demandas_consultar.seletorDropdown('A protocolar')
+        demandas_consultar.clicarBotaoAdicionar()
         salvarDemanda()
 
 

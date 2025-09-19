@@ -249,6 +249,17 @@ class demandas_consultar {
     prazoEmDiasHab(){cy.get('#qt_dias_prazo_limite_cf').should('not.be.disabled')}
     marcarPossuiPrazo(){cy.get('#fl_prazo_cumprimento_cf').click()}
     prazoEmDiasDesab(){cy.get('#qt_dias_prazo_limite_cf').should('be.disabled')}
+    selecionarStatusRecAdmCF(){cy.get(':nth-child(5) > :nth-child(1) > .form-group > .select2-container > .selection > .select2-selection').click()}
+    validarSeiDOCRecADMHabilitado(){cy.get('#ds_sei_doc_recurso_adm_cf').should('not.be.disabled')}
+    validarSeiDOCRecADMDesabilitado(){cy.get('#ds_sei_doc_recurso_adm_cf').should('be.disabled')}
+    adicionarCF(){cy.get('#add_compensao_florestal').click()}
+    digitarQuantMudasEstimadas(mudas){cy.get('#qt_estimada_mudas').type(mudas)}
+    digitarQuantMudasDefinitivas(mudas){cy.get('#qt_definitiva_mudas').type(mudas)}
+    digitarValorCF(valor){cy.get('#vl_compensacao_florestal').type(valor)}
+    clicarBotaoAdicionar(){cy.get('#add_compensao_florestal').click()}
+    digitarDataRecebimentoAI(data){cy.get('#dt_recebimento_ai').type(data)}
+    areaTotalDesabilitada(){cy.get('#nr_area_total').should('be.disabled')}
+    areaTotalHabilitada(){cy.get('#nr_area_total').should('not.be.disabled')}
 }
 
 export default new demandas_consultar ()
