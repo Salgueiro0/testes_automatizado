@@ -78,7 +78,8 @@ class demandas_consultar {
     validarLabelDiasRestCF(){cy.contains('label', 'Dias Restantes da CF').invoke('text').then((text) => { expect(text.trim()).to.eq('Dias Restantes da CF'); });}
     validarLabelTipoVegetacao(){cy.contains('label', 'Tipo Vegetação').invoke('text').then((text) => { expect(text.trim()).to.eq('Tipo Vegetação'); });}
     validarLabelModPagamento(){cy.contains('label', 'Mod. Pagamento').invoke('text').then((text) => { expect(text.trim()).to.eq('Mod. Pagamento'); });}
-    validarLabelSubtotalMultaAI(){cy.contains('label', 'Subtotal da Multa AI').invoke('text').then((text) => { expect(text.trim()).to.eq('Subtotal da Multa AI'); });}validarTabelaRA(){cy.get('.sorting_asc').should('have.text', "R.A");}
+    validarLabelSubtotalMultaAI(){cy.contains('label', 'Subtotal da Multa AI').invoke('text').then((text) => { expect(text.trim()).to.eq('Subtotal da Multa AI'); });}
+    validarTabelaRA(){cy.get('.sorting_asc').should('have.text', "R.A");}
     validarTabelaEmpreendimento(){cy.get(el.tabelaEmpreendimento).should('have.text', "Empreendimento");}
     validarTabelaTipo(){cy.get(el.tabelaTipo).should('have.text', "Tipo");}
     validarTabelaNumero(){cy.get(el.tabelaNumero).should('have.text', "Nº");}
@@ -198,11 +199,11 @@ class demandas_consultar {
     digitarQtDias(valor){cy.get('#qt_dias_vigencia').type(valor)}
     digitarDesDemanda(valor){cy.get('#ds_demanda').type(valor)}
     modalOk(){cy.wait(2000); cy.contains('button','OK').click()}
-    irLink(){cy.get(':nth-child(3) > [href="#"]').click()}
+    clicarAbaDemandas(){cy.get(':nth-child(3) > [href="#"]').click()}
     irLink2(){cy.get('.menu-open > .treeview-menu > :nth-child(1) > a > span').click()}
     clicarPrimeiroBotaoVisualizar(){cy.get('a[title="Visualizar"]').first().click()}
     clicarBotaoVoltar(){cy.get('[onclick="window.history.back()"]').click()}
-    clicarLink3(){cy.get('.menu-open > .treeview-menu > :nth-child(1) > a > span').click()}
+    clicarConsultarDemanda(){cy.get('.menu-open > .treeview-menu > :nth-child(1) > a > span').click()}
     digitarDtPubInicio(valor){cy.get('#dt_publicacao_inicio').type(valor)}
     gerarRelDemandaPDF(){cy.get('#gerarRelatorioDemandaPDF').click()}
     clicarExcluirDemanda(){cy.get('#btn-delete-demanda').click()}
@@ -260,6 +261,29 @@ class demandas_consultar {
     digitarDataRecebimentoAI(data){cy.get('#dt_recebimento_ai').type(data)}
     areaTotalDesabilitada(){cy.get('#nr_area_total').should('be.disabled')}
     areaTotalHabilitada(){cy.get('#nr_area_total').should('not.be.disabled')}
+    filtrarDemandaPesquisa(pesquisa){cy.get('#table-demanda_filter > label > .form-control').type(pesquisa)}
+    selecionarDadosEspecificosCA(){cy.get('.panel-body > :nth-child(2) > :nth-child(1) > .accordion').click()}
+    subtrairData(data){
+        const dataAlvo = new Date(data)
+        const hoje = new Date()
+        hoje.setHours(0, 0, 0, 0);
+        const diffMs = hoje - dataAlvo;
+        const dias = Math.floor(diffMs / (1000 * 60 * 60 * 24))
+
+
+        if(data === '2025-07-16'){
+            cy.get('.panel-body > :nth-child(2) > :nth-child(1) > .panel-accordion > :nth-child(1) > tbody > :nth-child(6) > :nth-child(2)').should('contain', dias)
+        }
+
+    }
+    selecionarEmpreendimentoPesquisa(){cy.get('#form_geral > :nth-child(1) > :nth-child(2) > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered').click()}
+    selecionarDadosEspecificosCF(){cy.get('.panel-body > :nth-child(3) > :nth-child(1) > .accordion').click()}
+    validarDemandaVinculaExigencia(){
+        cy.get('.exigencias-aba').click()
+        cy.get('.btn-toolbar > button.btn-success').should('contain','Vincular Exigência')
+    }
+    validarStatusExigencia(){cy.get('#table-exigencia > tbody > :nth-child(1) > :nth-child(6)').should('contain','Em Execução')}
+
 }
 
 export default new demandas_consultar ()
