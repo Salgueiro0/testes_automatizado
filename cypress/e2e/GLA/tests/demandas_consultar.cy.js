@@ -212,23 +212,31 @@ describe('pendência', () => {
         // salvarDemanda()
         //
         //
-        // //CADASTRAR DEMANDA COM AUTO DE INFRAÇÃO
-        cy.reload(true)
-        cadastroDemanda('Auto de Infração','20000')
-        demandas_consultar.valorMultaDesabilitado()                //US043 - RN073 - VALOR DA MULTA DESABILITADO
-        demandas_consultar.digitarDataRecebAI('2020-01-01')
-        demandas_consultar.selecionarTipoSancao()
-        demandas_consultar.seletorDropdown('Multa Simples')  //RN240
-        demandas_consultar.valorMultaHabilitado()                  //US043 - RN073 - VALOR DA MULTA HABILITADO
-        demandas_consultar.digitarValorMulta(10000)
-        demandas_consultar.selecionarTipoAtividade()
-        demandas_consultar.seletorDropdown('Obra de Infraestrutura')
-        demandas_consultar.digitarDataRecebimentoAI('2020-01-01')
-        demandas_consultar.digitarMotivo('motivo')
-        demandas_consultar.selecionarStatusAI()
-        demandas_consultar.seletorDropdown('Em análise inicial pela GEMAM')     //US043 - RN074 - INSTÂNCIA RECURSAL
-        demandas_consultar.selecionarInstanciaRecursal()
-        demandas_consultar.seletorDropdown('1ª instância')
+        // // //CADASTRAR DEMANDA COM AUTO DE INFRAÇÃO
+        // cy.reload(true)
+        // cadastroDemanda('Auto de Infração','20000')
+        // demandas_consultar.valorMultaDesabilitado()                //US043 - RN073 - VALOR DA MULTA DESABILITADO
+        // demandas_consultar.digitarDataRecebAI('2020-01-01')
+        // demandas_consultar.selecionarTipoSancao()
+        // demandas_consultar.seletorDropdown('Multa Simples')  //RN240
+        // demandas_consultar.valorMultaHabilitado()                  //US043 - RN073 - VALOR DA MULTA HABILITADO
+        // demandas_consultar.digitarValorMulta(10000)
+        // demandas_consultar.selecionarTipoAtividade()
+        // demandas_consultar.seletorDropdown('Obra de Infraestrutura')
+        // demandas_consultar.digitarDataRecebimentoAI('2020-01-01')
+        // demandas_consultar.digitarMotivo('motivo')
+        // demandas_consultar.selecionarStatusAI()
+        // demandas_consultar.seletorDropdown('Em análise inicial pela GEMAM')
+        // demandas_consultar.instanciaRecDesab()                  //US043 - RN074 - INSTÂNCIA RECURSAL DESABILITADA
+        // demandas_consultar.digitarDataDecisao('2000-01-01')
+        // demandas_consultar.salvarAutoInfracao()
+        // demandas_consultar.mensagemAlertaEmail()               //US043 - RN017 - Mensagem de alerta de e-mail quando salvar
+        // demandas_consultar.clicarModalSalvar()
+        // demandas_consultar.modalOk()
+        // demandas_consultar.validarMSGObrigatoriaValorMulta() //US043 - RN075,RN076 E RN077  - VALOR DA MULTA OBRIGATÓRIO
+        // demandas_consultar.digitarValorMultaInstancia(1000)
+        // salvarDemanda()
+
 
 
 
@@ -304,24 +312,33 @@ describe('pendência', () => {
             demandas_consultar.clicarPrimeiroBotaoVisualizar()
         }
 
-        pesquisarDemanda('Produção')                              //US039 - RN089 - PESQUISA SEM CASE SENSISTIVE E DIFERENCIAÇÃO
+        // pesquisarDemanda('Produção')                              //US039 - RN089, RN095, RN096 - PESQUISA SEM CASE SENSISTIVE E DIFERENCIAÇÃO
+        //GLA - EU087 - US007.1 - Botão Download Poligonal
+        demandas_consultar.clicarBotaoPesquisar()
+        demandas_consultar.filtrarDemandaPesquisa('sos Chamado 4924')
+        demandas_consultar.clicarPrimeiroBotaoVisualizar()
+        demandas_consultar.validarBotaoDownload()
 
-        //VISUALIZAR DEMANDA COMPENSAÇÃO AMBIENTAL
-        pesquisarDemanda(10000)
-        demandas_consultar.selecionarDadosEspecificosCA()
-        demandas_consultar.subtrairData('2025-07-16')               //US038 - R0079 - DIAS RESTANTES
+        // //VISUALIZAR DEMANDA COMPENSAÇÃO AMBIENTAL
+        // pesquisarDemanda(10000)
+        // demandas_consultar.selecionarDadosEspecificosCA()
+        // demandas_consultar.subtrairData('2025-07-16')               //US038 - R0079 - DIAS RESTANTES
+        //
+        // //VISUALIZAR DEMANDA COMPENSAÇÃO FLORESTAL
+        // pesquisarDemanda(3000)
+        // demandas_consultar.selecionarDadosEspecificosCF()
+        // demandas_consultar.subtrairData('2025-07-10')              //US038 - RN081 - DIAS RESTANTES
+        // //EXIGENCIAS
+        // pesquisarDemanda('aero')
+        // demandas_consultar.validarDemandaVinculaExigencia()             //US039 - RN224 - Módulo Demandas - Botão Vincular Exigências
+        // demandas_consultar.validarStatusExigencia()                     //US039 - RN225 - Filtrar Demandas - Botão Vincular Exigências
 
-        //VISUALIZAR DEMANDA COMPENSAÇÃO FLORESTAL
-        pesquisarDemanda(3000)
-        demandas_consultar.selecionarDadosEspecificosCF()
-        demandas_consultar.subtrairData('2025-07-10')              //US038 - RN081 - DIAS RESTANTES
-        //EXIGENCIAS
-        pesquisarDemanda('aero')
-        demandas_consultar.validarDemandaVinculaExigencia()             //US039 - RN224 - Módulo Demandas - Botão Vincular Exigências
-        demandas_consultar.validarStatusExigencia()                     //US039 - RN225 - Filtrar Demandas - Botão Vincular Exigências
-        
-        
-        
+        //VISUALIZAR DEMANDA AUTO DE INFRAÇÃO
+        pesquisarDemanda(20000)
+        demandas_consultar.selecionarDadosEspecificosAI()
+        demandas_consultar.validarDataLimite() // EU011 - US041 - RN082, RN083, RN084 E RN085
+
+        demandas_consultar.irParaRequerimentos() // EU087 - US007.2
         
         
         

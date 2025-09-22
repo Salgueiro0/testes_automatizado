@@ -165,6 +165,14 @@ class demandas_consultar {
     clicarAcordeaoCompFlo(){cy.contains('div.accordion.float-style','Dados Específicos da Compensação Florestal').click();}
     clicarAcordeaoComInf(){cy.contains('div.accordion.float-style','Dados Específicos do Auto de Infração').click();}
     selecionarReg(){cy.get(el.seletorReg).click();}
+    instanciaRecDesab(){cy.get('#form_auto_infracao > :nth-child(6) > :nth-child(2) > .form-group > .select2-container > .selection > .select2-selection').should('have.attr', 'tabindex', '-1')}
+    digitarDataDecisao(data){
+        cy.get('#dt_ciencia_instancia_um_ai').type(data)
+        cy.get('#dt_ciencia_instancia_dois_ai').type(data)
+        cy.get('#dt_ciencia_instancia_tres_ai').type(data)
+    }
+    mensagemAlertaEmail(){cy.get('.bootbox-body').should('contain','Atenção, antes de salvar o registro, atualize os campos "Status do AI" e "Instância recursal" para que os alertas por e-mail aos usuários sejam emitidos corretamente. Deseja salvar mesmo assim?')}
+    salvarAutoInfracao(){cy.get('#submit').click()}
     seletorEmpreendimento(){cy.get(el.seletorEmpreendimento).click();}
     adicionarEmpreendimento(){cy.contains('button','Adicionar').click();}
     selecionarTipo(){cy.get(el.selecionarLicenca).click();}
@@ -178,7 +186,7 @@ class demandas_consultar {
     digitarNRProcesso(valor){cy.get('#nr_processo_sei').type(valor)}
     digitarAnoProcesso(valor){cy.get('#aa_processo_sei').type(valor)}
     botaoSalvar(){cy.contains('button','Salvar').click()}
-    clicarModalSalvar(){cy.get('.modal-footer > .btn-primary').click()}
+    clicarModalSalvar(){cy.get('.modal-footer > .btn-primary').click({force:true})}
     botaoContinuar(){cy.get('.modal-footer > .btn-primary').click()}
     modalSim(){cy.get('.modal-footer > .btn-primary').click()}
     botaoOk(){cy.get('.modal-footer > .btn-danger').click()}
@@ -199,6 +207,70 @@ class demandas_consultar {
     digitarQtDias(valor){cy.get('#qt_dias_vigencia').type(valor)}
     digitarDesDemanda(valor){cy.get('#ds_demanda').type(valor)}
     modalOk(){cy.wait(2000); cy.contains('button','OK').click()}
+    validarMSGObrigatoriaValorMulta(){
+        cy.get('#error_vl_multa_instancia_um').should('contain','O campo Valor da Multa Atualizado em 1ª Instância é obrigatória!')
+        cy.get('#error_vl_multa_instancia_dois').should('contain','O campo Valor da Multa Atualizado em 2ª Instância é obrigatória!')
+        cy.get('#error_vl_multa_instancia_tres').should('contain','O campo Valor da Multa Atualizado em 3ª Instância é obrigatória!')
+    }
+    digitarValorMultaInstancia(valor){
+        cy.get('#vl_multa_instancia_um_ai').type(valor)
+        cy.get('#vl_multa_instancia_dois_ai').type(valor)
+        cy.get('#vl_multa_instancia_tres_ai').type(valor)
+    }
+    limparDataDecisao(){
+        cy.get('#dt_ciencia_instancia_um_ai').clear()
+        cy.get('#dt_ciencia_instancia_dois_ai').clear()
+        cy.get('#dt_ciencia_instancia_tres_ai').clear()
+    }
+    validarDataLimite() {
+
+        const casos = [
+            {
+                origem: ':nth-child(4) > :nth-child(1) > .panel-accordion > :nth-child(1) > tbody > :nth-child(1) > :nth-child(2)',
+                destino: ':nth-child(5) > tbody > :nth-child(5) > :nth-child(2)',
+                dias: 9
+            },
+            {
+                origem: ':nth-child(5) > tbody > :nth-child(3) > :nth-child(2)',
+                destino: ':nth-child(7) > tbody > :nth-child(5) > :nth-child(2)',
+                dias: 4
+            },
+            {
+                origem: ':nth-child(7) > tbody > :nth-child(3) > :nth-child(2)',
+                destino: ':nth-child(9) > tbody > :nth-child(5) > :nth-child(2)',
+                dias: 4
+            },
+            {
+                origem: ':nth-child(9) > tbody > :nth-child(3) > :nth-child(2)',
+                destino: ':nth-child(9) > tbody > :nth-child(6) > :nth-child(2)',
+                dias: 4
+            }
+        ];
+
+        casos.forEach(({ origem, destino, dias }) => {
+            cy.get(origem)
+                .invoke('text')
+                .then((texto) => {
+                    const [d, m, a] = texto.trim().split('/');
+                    const data = new Date(a, m - 1, d);
+                    data.setDate(data.getDate() + dias);
+
+                    const dd = String(data.getDate()).padStart(2, '0');
+                    const mm = String(data.getMonth() + 1).padStart(2, '0');
+                    const yyyy = data.getFullYear();
+                    const formatada = `${dd}/${mm}/${yyyy}`;
+
+                    cy.get(destino).should('contain', formatada);
+                });
+        });
+
+    }
+
+    irParaRequerimentos(){
+        cy.get('.requerimentos-aba').click()
+    }
+
+
     clicarAbaDemandas(){cy.get(':nth-child(3) > [href="#"]').click()}
     irLink2(){cy.get('.menu-open > .treeview-menu > :nth-child(1) > a > span').click()}
     clicarPrimeiroBotaoVisualizar(){cy.get('a[title="Visualizar"]').first().click()}
@@ -278,6 +350,7 @@ class demandas_consultar {
     }
     selecionarEmpreendimentoPesquisa(){cy.get('#form_geral > :nth-child(1) > :nth-child(2) > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered').click()}
     selecionarDadosEspecificosCF(){cy.get('.panel-body > :nth-child(3) > :nth-child(1) > .accordion').click()}
+    selecionarDadosEspecificosAI(){cy.get(':nth-child(4) > :nth-child(1) > .accordion').click()}
     validarDemandaVinculaExigencia(){
         cy.get('.exigencias-aba').click()
         cy.get('.btn-toolbar > button.btn-success').should('contain','Vincular Exigência')
@@ -285,6 +358,9 @@ class demandas_consultar {
     validarStatusExigencia(){cy.get('#table-exigencia > tbody > :nth-child(1) > :nth-child(6)').should('contain','Em Execução')}
     valorMultaDesabilitado(){cy.get('#vl_multa_ai').should('be.disabled')}
     valorMultaHabilitado(){cy.get('#vl_multa_ai').should('not.be.disabled')}
+    validarBotaoDownload(){
+        cy.get('#btn_download_poligonal').should('contain','Download do .Kml')
+    }
 
 }
 
