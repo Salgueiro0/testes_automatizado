@@ -275,7 +275,7 @@ describe('pendência', () => {
         demandas_consultar.seletorDropdown('A protocolar')
         demandas_consultar.clicarBotaoAdicionar()
         salvarDemanda()
-
+        // cy.contains('buuton','Sim').click()
         //GLA - EU009 - US047 - MENSAGEM EXCLUIR DEMANDA COM / CA- CF- AI
         excluirDemanda(3000)
         demandas_consultar.clicarConfirmar()
@@ -284,44 +284,71 @@ describe('pendência', () => {
 
         //PESQUISAR DEMANDA
 
-        function visualizarDemanda(numero){
-            demandas_consultar.clicarAbaDemandas()
-            demandas_consultar.clicarConsultarDemanda()
-            demandas_consultar.seletorRAForm()
-            demandas_consultar.seletorDropdown('RA-I - BRASILIA ')
-            cy.wait(2000)
-            demandas_consultar.selecionarEmpreendimentoPesquisa()
-            demandas_consultar.seletorDropdown('103 - Estagio de produção ')
-            demandas_consultar.clicarBotaoPesquisar()
-            demandas_consultar.filtrarDemandaPesquisa(numero)
-            demandas_consultar.clicarPrimeiroBotaoVisualizar()
+        // function visualizarDemanda(numero){
+        //     demandas_consultar.clicarAbaDemandas()
+        //     demandas_consultar.clicarConsultarDemanda()
+        //     demandas_consultar.seletorRAForm()
+        //     demandas_consultar.seletorDropdown('RA-I - BRASILIA ')
+        //     cy.wait(2000)
+        //     demandas_consultar.selecionarEmpreendimentoPesquisa()
+        //     demandas_consultar.seletorDropdown('103 - Estagio de produção ')
+        //     demandas_consultar.clicarBotaoPesquisar()
+        //     demandas_consultar.filtrarDemandaPesquisa(numero)
+        //     demandas_consultar.clicarPrimeiroBotaoVisualizar()
+        // }
+        //
+        // function editarDemanda(numero){
+        //     demandas_consultar.clicarAbaDemandas()
+        //     demandas_consultar.clicarConsultarDemanda()
+        //     demandas_consultar.seletorRAForm()
+        //     demandas_consultar.seletorDropdown('RA-I - BRASILIA ')
+        //     cy.wait(2000)
+        //     demandas_consultar.selecionarEmpreendimentoPesquisa()
+        //     demandas_consultar.seletorDropdown('103 - Estagio de produção ')
+        //     demandas_consultar.clicarBotaoPesquisar()
+        //     demandas_consultar.filtrarDemandaPesquisa(numero)
+        //     demandas_consultar.clicarPrimeiroBotaoEditar()
+        // }
+        //
+        // function excluirDemanda(numero){
+        //     demandas_consultar.clicarAbaDemandas()
+        //     demandas_consultar.clicarConsultarDemanda()
+        //     demandas_consultar.seletorRAForm()
+        //     demandas_consultar.seletorDropdown('RA-I - BRASILIA ')
+        //     cy.wait(2000)
+        //     demandas_consultar.selecionarEmpreendimentoPesquisa()
+        //     demandas_consultar.seletorDropdown('103 - Estagio de produção ')
+        //     demandas_consultar.clicarBotaoPesquisar()
+        //     demandas_consultar.filtrarDemandaPesquisa(numero)
+        //     demandas_consultar.clicarPrimeiroBotaoExcluir()
+        // }
+        function acessarDemanda(numero, acaoFinal) {
+            demandas_consultar.clicarAbaDemandas();
+            demandas_consultar.clicarConsultarDemanda();
+            demandas_consultar.seletorRAForm();
+            demandas_consultar.seletorDropdown('RA-I - BRASILIA ');
+            cy.wait(2000);
+            demandas_consultar.selecionarEmpreendimentoPesquisa();
+            demandas_consultar.seletorDropdown('103 - Estagio de produção ');
+            demandas_consultar.clicarBotaoPesquisar();
+            demandas_consultar.filtrarDemandaPesquisa(numero);
+
+            // acaoFinal é uma função que chama o botão certo
+            acaoFinal();
         }
 
-        function editarDemanda(numero){
-            demandas_consultar.clicarAbaDemandas()
-            demandas_consultar.clicarConsultarDemanda()
-            demandas_consultar.seletorRAForm()
-            demandas_consultar.seletorDropdown('RA-I - BRASILIA ')
-            cy.wait(2000)
-            demandas_consultar.selecionarEmpreendimentoPesquisa()
-            demandas_consultar.seletorDropdown('103 - Estagio de produção ')
-            demandas_consultar.clicarBotaoPesquisar()
-            demandas_consultar.filtrarDemandaPesquisa(numero)
-            demandas_consultar.clicarPrimeiroBotaoEditar()
+        function visualizarDemanda(numero) {
+            acessarDemanda(numero, () => demandas_consultar.clicarPrimeiroBotaoVisualizar());
         }
 
-        function excluirDemanda(numero){
-            demandas_consultar.clicarAbaDemandas()
-            demandas_consultar.clicarConsultarDemanda()
-            demandas_consultar.seletorRAForm()
-            demandas_consultar.seletorDropdown('RA-I - BRASILIA ')
-            cy.wait(2000)
-            demandas_consultar.selecionarEmpreendimentoPesquisa()
-            demandas_consultar.seletorDropdown('103 - Estagio de produção ')
-            demandas_consultar.clicarBotaoPesquisar()
-            demandas_consultar.filtrarDemandaPesquisa(numero)
-            demandas_consultar.clicarPrimeiroBotaoExcluir()
+        function editarDemanda(numero) {
+            acessarDemanda(numero, () => demandas_consultar.clicarPrimeiroBotaoEditar());
         }
+
+        function excluirDemanda(numero) {
+            acessarDemanda(numero, () => demandas_consultar.clicarPrimeiroBotaoExcluir());
+        }
+
 
         visualizarDemanda('Produção')                              //US039 - RN089, RN095, RN096 - PESQUISA SEM CASE SENSISTIVE E DIFERENCIAÇÃO
 
@@ -400,7 +427,6 @@ describe('pendência', () => {
         demandas_consultar.editarSalvar()
         demandas_consultar.clicarExcluirDemanda()
         demandas_consultar.clicarConfirmar()
-
 
         editarDemanda(20000)
         demandas_consultar.selecionarTipo()
