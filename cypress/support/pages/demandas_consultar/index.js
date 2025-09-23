@@ -172,7 +172,7 @@ class demandas_consultar {
         cy.get('#dt_ciencia_instancia_tres_ai').type(data)
     }
     mensagemAlertaEmail(){cy.get('.bootbox-body').should('contain','Atenção, antes de salvar o registro, atualize os campos "Status do AI" e "Instância recursal" para que os alertas por e-mail aos usuários sejam emitidos corretamente. Deseja salvar mesmo assim?')}
-    salvarAutoInfracao(){cy.get('#submit').click()}
+    botaoSubmit(){cy.get('#submit').click()}
     seletorEmpreendimento(){cy.get(el.seletorEmpreendimento).click();}
     adicionarEmpreendimento(){cy.contains('button','Adicionar').click();}
     selecionarTipo(){cy.get(el.selecionarLicenca).click();}
@@ -206,7 +206,7 @@ class demandas_consultar {
     digitarDtPub(valor){cy.get('#dt_publicacao').clear().type(valor)}
     digitarQtDias(valor){cy.get('#qt_dias_vigencia').type(valor)}
     digitarDesDemanda(valor){cy.get('#ds_demanda').type(valor)}
-    modalOk(){cy.wait(2000); cy.contains('button','OK').click()}
+    modalOk(){cy.wait(1000); cy.contains('button','OK').click()}
     validarMSGObrigatoriaValorMulta(){
         cy.get('#error_vl_multa_instancia_um').should('contain','O campo Valor da Multa Atualizado em 1ª Instância é obrigatória!')
         cy.get('#error_vl_multa_instancia_dois').should('contain','O campo Valor da Multa Atualizado em 2ª Instância é obrigatória!')
@@ -271,7 +271,9 @@ class demandas_consultar {
     }
 
 
-    clicarAbaDemandas(){cy.get(':nth-child(3) > [href="#"]').click()}
+    clicarAbaDemandas(){
+        cy.wait(1000)
+        cy.get(':nth-child(3) > [href="#"]').first().click()}
     irLink2(){cy.get('.menu-open > .treeview-menu > :nth-child(1) > a > span').click()}
     clicarPrimeiroBotaoVisualizar(){cy.get('a[title="Visualizar"]').first().click()}
     clicarBotaoVoltar(){cy.get('[onclick="window.history.back()"]').click()}
@@ -279,12 +281,16 @@ class demandas_consultar {
     digitarDtPubInicio(valor){cy.get('#dt_publicacao_inicio').type(valor)}
     gerarRelDemandaPDF(){cy.get('#gerarRelatorioDemandaPDF').click()}
     clicarExcluirDemanda(){cy.get('#btn-delete-demanda').click()}
-    clicarConfirmar(){cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary').click()}
+    clicarConfirmar(){
+        cy.wait(1000)
+        cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary').click()}
+    validarMSGExclusao(){cy.get('.bootbox > .modal-dialog > .modal-content > .modal-body').should('contain','Existem (Compensação Florestal) associados')}
     validaCompenAmbNotCheck(){cy.get('#fl_compensacao_ambiental').should('be.disabled')}
     validaCompenFloNotCheck(){cy.get('#fl_compensacao_florestal').should('be.disabled')}
     validaCompenAmbCheck(){cy.get('#fl_compensacao_ambiental').should('not.be.disabled')}
     validaCompenFloCheck(){cy.get('#fl_compensacao_florestal').should('not.be.disabled')}
     clicarPrimeiroBotaoEditar(){cy.get('a[title="Editar"]').first().click()}
+    clicarPrimeiroBotaoExcluir(){cy.get('a[title="Excluir"]').first().click()}
     marcarCompensAmb(){cy.get('#fl_compensacao_ambiental').click()}
     checkPossuiPrazo(){
         cy.get('#fl_prazo_cumprimento').click()
@@ -360,6 +366,17 @@ class demandas_consultar {
     valorMultaHabilitado(){cy.get('#vl_multa_ai').should('not.be.disabled')}
     validarBotaoDownload(){
         cy.get('#btn_download_poligonal').should('contain','Download do .Kml')
+    }
+    editarSalvar(){
+        cy.get('#submit').click()
+        cy.wait(1000)
+        cy.get('.modal-footer > .btn-primary').click()
+        cy.wait(1000)
+        cy.contains('button','OK').click()
+    }
+    excluirSalvar(){
+        cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary').first().click()
+        cy.contains('button','OK')
     }
 
 }
