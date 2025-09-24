@@ -277,7 +277,7 @@ class demandas_consultar {
     irLink2(){cy.get('.menu-open > .treeview-menu > :nth-child(1) > a > span').click()}
     clicarPrimeiroBotaoVisualizar(){cy.get('a[title="Visualizar"]').first().click()}
     clicarBotaoVoltar(){cy.get('[onclick="window.history.back()"]').click()}
-    clicarConsultarDemanda(){cy.get('.menu-open > .treeview-menu > :nth-child(1) > a > span').click()}
+    clicarConsultarDemanda(){cy.get('.menu-open > .treeview-menu > :nth-child(1) > a').click()}
     digitarDtPubInicio(valor){cy.get('#dt_publicacao_inicio').type(valor)}
     gerarRelDemandaPDF(){cy.get('#gerarRelatorioDemandaPDF').click()}
     clicarExcluirDemanda(){cy.get('#btn-delete-demanda').click()}
@@ -341,6 +341,19 @@ class demandas_consultar {
     areaTotalHabilitada(){cy.get('#nr_area_total').should('not.be.disabled')}
     filtrarDemandaPesquisa(pesquisa){cy.get('#table-demanda_filter > label > .form-control').type(pesquisa)}
     selecionarDadosEspecificosCA(){cy.get('.panel-body > :nth-child(2) > :nth-child(1) > .accordion').click()}
+    validarSaldoPagoAMais(){cy.get('.panel-body > :nth-child(2) > :nth-child(1) > .panel-accordion > :nth-child(1) > tbody > :nth-child(12) > :nth-child(2)').should('contain','valor pago a mais, crédito')}
+    excluirPagamentos(){
+        cy.get('.odd > .text-center > .btn-delete-pagamento-CA').first().click()
+        cy.wait(1000)
+        cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary').click()
+        cy.wait(1000)
+        cy.contains('button','OK').click()
+        cy.get('.btn-delete-pagamento-CA > .fas').click()
+        cy.wait(1000)
+        cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary').click()
+        cy.wait(1000)
+        cy.contains('button','OK').click()
+    }
     subtrairData(data){
         const dataAlvo = new Date(data)
         const hoje = new Date()
@@ -354,6 +367,17 @@ class demandas_consultar {
         }
 
     }
+    adicionarPagamento(data,valor,select){
+        cy.get('.col-md-12 > .btn').click()
+        cy.get('#dt_pagamento').type(data)
+        cy.get('#vl_pagamento').type(valor)
+        cy.get('#tp_situacao').select(select)
+        //cy.get(el.seletorDropdown).contains(select).click({force:true})
+        cy.get('#botao-salvar').click()
+        cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn').click()
+    }
+    validarSaldoPositivo(){cy.get('.panel-body > :nth-child(2) > :nth-child(1) > .panel-accordion > :nth-child(1) > tbody > :nth-child(12) > :nth-child(2)').should('contain','a pagar')}
+    validarSaldo0(){cy.get('.panel-body > :nth-child(2) > :nth-child(1) > .panel-accordion > :nth-child(1) > tbody > :nth-child(12) > :nth-child(2)').should('contain','0,00')}
     selecionarEmpreendimentoPesquisa(){cy.get('#form_geral > :nth-child(1) > :nth-child(2) > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered').click()}
     selecionarDadosEspecificosCF(){cy.get('.panel-body > :nth-child(3) > :nth-child(1) > .accordion').click()}
     selecionarDadosEspecificosAI(){cy.get(':nth-child(4) > :nth-child(1) > .accordion').click()}
