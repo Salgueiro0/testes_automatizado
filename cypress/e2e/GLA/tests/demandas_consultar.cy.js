@@ -388,40 +388,46 @@ describe('pendência', () => {
         //COM MUDAS
         demandas_consultar.selecionarDadosEspecificosCF()
         demandas_consultar.subtrairData('2025-07-10')                     //US038 - RN081 - DIAS RESTANTES
-        demandas_consultar.validarSaldoPositivoCFMudas()                       //EU038 - US070 - RN134
+        demandas_consultar.validarSaldoPositivoCFMudas()                       //EU038 - US070 - RN134 - RN138
         demandas_consultar.adicionarPagamentoCAMudas('2020-01-01','100','Quitado')
-        cy.reload(true)
+        demandas_consultar.clicarBotaoVoltar()
+        visualizarDemanda(3000)
         demandas_consultar.selecionarDadosEspecificosCF()
-        demandas_consultar.validarSaldo0CFMudas()                              //EU038 - US070 - RN134
+        demandas_consultar.validarSaldo0CFMudas()                              //EU038 - US070 - RN134 - RN138
         demandas_consultar.adicionarPagamentoCAMudas('2020-01-01','2000','Quitado')
-        cy.reload(true)
+        demandas_consultar.clicarBotaoVoltar()
+        visualizarDemanda(3000)
         demandas_consultar.selecionarDadosEspecificosCF()
-        demandas_consultar.validarSaldoPagoAMaisCFMudas()                      //EU038 - US070 - RN134
+        demandas_consultar.validarSaldoPagoAMaisCFMudas()                      //EU038 - US070 - RN134 - RN138
         demandas_consultar.excluirPagamentosCF()
 
         //COM ha
-        demandas_consultar.validarSaldoPositivoCFha()                          //EU038 - US070 - RN134
+        demandas_consultar.validarSaldoPositivoCFha()                          //EU038 - US070 - RN134 - RN138
         demandas_consultar.adicionarPagamentoCAha('2020-01-01','100','Quitado')
-        cy.reload(true)
+        demandas_consultar.clicarBotaoVoltar()
+        visualizarDemanda(3000)
         demandas_consultar.selecionarDadosEspecificosCF()
-        demandas_consultar.validarSaldo0CFha()                                //EU038 - US070 - RN134
+        demandas_consultar.validarSaldo0CFha()                                //EU038 - US070 - RN134 - RN138
         demandas_consultar.adicionarPagamentoCAha('2020-01-01','200','Quitado')
-        cy.reload(true)
+        demandas_consultar.clicarBotaoVoltar()
+        visualizarDemanda(3000)
         demandas_consultar.selecionarDadosEspecificosCF()
-        demandas_consultar.validarSaldoPagoAMaisCFha()                        //EU038 - US070 - RN134
+        demandas_consultar.validarSaldoPagoAMaisCFha()                        //EU038 - US070 - RN134 - RN138
         demandas_consultar.excluirPagamentosCF()
 
         //SEM ha E MUDAS
 
-        demandas_consultar.validarSaldoPositivoCF()                          //EU038 - US070 - RN134
+        demandas_consultar.validarSaldoPositivoCF()                          //EU038 - US070 - RN134 - RN138
         demandas_consultar.adicionarPagamentoCA('2020-01-01','1000','Quitado')
-        cy.reload(true)
+        demandas_consultar.clicarBotaoVoltar()
+        visualizarDemanda(3000)
         demandas_consultar.selecionarDadosEspecificosCF()
-        demandas_consultar.validarSaldo0CF()                                //EU038 - US070 - RN134
+        demandas_consultar.validarSaldo0CF()                                //EU038 - US070 - RN134 - RN138
         demandas_consultar.adicionarPagamentoCA('2020-01-01','2000','Quitado')
-        cy.reload(true)
+        demandas_consultar.clicarBotaoVoltar()
+        visualizarDemanda(3000)
         demandas_consultar.selecionarDadosEspecificosCF()
-        demandas_consultar.validarSaldoPagoAMaisCF()                        //EU038 - US070 - RN134
+        demandas_consultar.validarSaldoPagoAMaisCF()                        //EU038 - US070 - RN134 - RN138
         demandas_consultar.excluirPagamentosCF()
 
         // //EXIGENCIAS

@@ -346,19 +346,20 @@ class demandas_consultar {
     validarSaldoPagoAMais(){cy.get('.panel-body > :nth-child(2) > :nth-child(1) > .panel-accordion > :nth-child(1) > tbody > :nth-child(12) > :nth-child(2)').should('contain','valor pago a mais, crédito')}
     validarSaldo0CFMudas(){cy.get(':nth-child(3) > :nth-child(1) > .panel-accordion > :nth-child(1) > tbody > :nth-child(16) > :nth-child(2)').should('contain','0,00 mudas')}
     validarSaldo0CFha(){cy.get(':nth-child(5) > tbody > :nth-child(16) > :nth-child(2)').should('contain','0,00 ha')}
-    validarSaldo0CF(){cy.get(':nth-child(9) > tbody > :nth-child(16) > :nth-child(2)').should('contain','0,00')}
+    validarSaldo0CF(){cy.get(':nth-child(9) > tbody > :nth-child(16) > :nth-child(2)').should('contain','R$ 0,00')}
     validarSaldoPagoAMaisCFMudas(){cy.get(':nth-child(3) > :nth-child(1) > .panel-accordion > :nth-child(1) > tbody > :nth-child(16) > :nth-child(2)').should('contain','mudas (valor pago a mais, crédito)')}
     validarSaldoPagoAMaisCFha(){cy.get(':nth-child(5) > tbody > :nth-child(16) > :nth-child(2)').should('contain',' ha (valor pago a mais, crédito)')}
-    validarSaldoPagoAMaisCF(){cy.get(':nth-child(9) > tbody > :nth-child(16) > :nth-child(2)').should('contain','(valor pago a mais, crédito)')}
+    validarSaldoPagoAMaisCF(){cy.get(':nth-child(9) > tbody > :nth-child(16) > :nth-child(2)').should('contain','R$ 20,00 (valor pago a mais, crédito)')}
     validarSaldoPositivoCFMudas(){cy.get(':nth-child(3) > :nth-child(1) > .panel-accordion > :nth-child(1) > tbody > :nth-child(16) > :nth-child(2)').should('contain','mudas (a pagar)')}
     validarSaldoPositivoCFha(){cy.get(':nth-child(5) > tbody > :nth-child(16) > :nth-child(2)').should('contain',' ha (a pagar)')}
-    validarSaldoPositivoCF(){cy.get(':nth-child(9) > tbody > :nth-child(16) > :nth-child(2)').should('contain','(a pagar)')}
+    validarSaldoPositivoCF(){cy.get(':nth-child(9) > tbody > :nth-child(16) > :nth-child(2)').should('contain','R$ 10,00 (a pagar)')}
     excluirPagamentos(){
         cy.get('.odd > .text-center > .btn-delete-pagamento-CA').first().click()
         cy.wait(1000)
         cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary').click()
         cy.wait(1000)
         cy.contains('button','OK').click()
+        cy.wait(1000)
         cy.get('.btn-delete-pagamento-CA > .fas').click()
         cy.wait(1000)
         cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary').click()
@@ -394,6 +395,7 @@ class demandas_consultar {
     adicionarPagamentoCAMudas(data,valor,select){
         //cy.get('.col-md-12 > .btn').click()
         cy.get(':nth-child(2) > .col-md-12 > .btn').first().click()
+        cy.wait(1000)
         cy.get('#dt_pagamento').type(data)
         cy.get('#vl_pagamento').type(valor)
         cy.get('#tp_situacao').select(select)
@@ -402,6 +404,7 @@ class demandas_consultar {
     }
     adicionarPagamentoCAha(data,valor,select){
         cy.get(':nth-child(6) > .col-md-12 > .btn').first().click()
+        cy.wait(1000)
         cy.get('#dt_pagamento').type(data)
         cy.get('#vl_pagamento').type(valor)
         cy.get('#tp_situacao').select(select)
@@ -410,6 +413,7 @@ class demandas_consultar {
     }
     adicionarPagamentoCA(data,valor,select){
         cy.get(':nth-child(10) > .col-md-12 > .btn').first().click()
+        cy.wait(1000)
         cy.get('#dt_pagamento').type(data)
         cy.get('#vl_pagamento').type(valor)
         cy.get('#tp_situacao').select(select)
