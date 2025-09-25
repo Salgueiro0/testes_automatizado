@@ -193,8 +193,8 @@ describe('pendência', () => {
         // demandas_consultar.selecionarStatusRecAdm()
         // demandas_consultar.seletorDropdown('Não se aplica')  //(12)
         // salvarDemanda()
-
-
+        //
+        //
         // //CADASTRAR DEMANDA COM AUTO DE INFRAÇÃO
         // cy.reload(true)
         // cadastroDemanda('Auto de Infração','20000')
@@ -267,12 +267,22 @@ describe('pendência', () => {
         // //RN090 - ADIÇÃO DE MÚLTIPLAS CF
         // demandas_consultar.digitarQuantMudasEstimadas(1)
         // demandas_consultar.digitarQuantMudasDefinitivas(1)
-        // demandas_consultar.digitarValorCF(1)
+        // //demandas_consultar.digitarValorCF(1)
         // demandas_consultar.clicarBotaoAdicionar()
-        // selecionarLegislacaoRef('Decreto 14.783/1993')
+        // selecionarLegislacaoRef('Decreto 39.469/2018')
+        // selecionarTipoVegetacao('Remanescentes')
+        // selecionarModalidadePagamento('Dação em Pagamento ')
+        // demandas_consultar.digitarAreaTotal()
         // demandas_consultar.marcarPossuiPrazo()
         // demandas_consultar.selecionarStatusRecAdmCF()
         // demandas_consultar.seletorDropdown('A protocolar')
+        // demandas_consultar.clicarBotaoAdicionar()
+        // selecionarLegislacaoRef('Decreto 14.783/1993')
+        // selecionarModalidadePagamento('Pecúnia')
+        // demandas_consultar.digitarValorCF(1000)
+        // demandas_consultar.selecionarStatusRecAdmCF()
+        // demandas_consultar.seletorDropdown('A protocolar')
+        // demandas_consultar.marcarPossuiPrazo()
         // demandas_consultar.clicarBotaoAdicionar()
         // salvarDemanda()
         // // cy.contains('buuton','Sim').click()
@@ -358,38 +368,72 @@ describe('pendência', () => {
         // demandas_consultar.clicarPrimeiroBotaoVisualizar()              // -- US033 - RN015 Caminhos Aba visualizar Demanda --
         // demandas_consultar.validarBotaoDownload()
         //
-        //VISUALIZAR DEMANDA COMPENSAÇÃO AMBIENTAL
-        visualizarDemanda(10000)
-        demandas_consultar.selecionarDadosEspecificosCA()
-        demandas_consultar.subtrairData('2025-07-16')               //US038 - R0079 - DIAS RESTANTES
-
-        //ADICIONAR PAGAMENTO
-        demandas_consultar.validarSaldoPositivo()                        // EU037 - US069 - RN130
-        demandas_consultar.adicionarPagamento('2020-01-01','1000','Quitado')
-        cy.reload(true)
-        demandas_consultar.selecionarDadosEspecificosCA()
-        demandas_consultar.validarSaldo0()                              // EU037 - US069 - RN130
-        demandas_consultar.adicionarPagamento('2020-01-01','2000','Quitado')
-        cy.reload(true)
-        demandas_consultar.selecionarDadosEspecificosCA()
-        demandas_consultar.validarSaldoPagoAMais()                      // EU037 - US069 - RN130
-        demandas_consultar.excluirPagamentos()
-
+        // // //VISUALIZAR DEMANDA COMPENSAÇÃO AMBIENTAL
+        // visualizarDemanda(10000)
+        // demandas_consultar.selecionarDadosEspecificosCA()
+        // demandas_consultar.subtrairData('2025-07-16')               //US038 - R0079 - DIAS RESTANTES
+        // demandas_consultar.validarSaldoPositivo()                        // EU037 - US069 - RN130
+        // demandas_consultar.adicionarPagamentoCA('2020-01-01','1000','Quitado')
+        // cy.reload(true)
+        // demandas_consultar.selecionarDadosEspecificosCA()
+        // demandas_consultar.validarSaldo0()                              // EU037 - US069 - RN130
+        // demandas_consultar.adicionarPagamentoCA('2020-01-01','2000','Quitado')
+        // cy.reload(true)
+        // demandas_consultar.selecionarDadosEspecificosCA()
+        // demandas_consultar.validarSaldoPagoAMais()                      // EU037 - US069 - RN130
+        // demandas_consultar.excluirPagamentos()
+        //
         //VISUALIZAR DEMANDA COMPENSAÇÃO FLORESTAL
         visualizarDemanda(3000)
+        //COM MUDAS
         demandas_consultar.selecionarDadosEspecificosCF()
-        demandas_consultar.subtrairData('2025-07-10')              //US038 - RN081 - DIAS RESTANTES
+        demandas_consultar.subtrairData('2025-07-10')                     //US038 - RN081 - DIAS RESTANTES
+        demandas_consultar.validarSaldoPositivoCFMudas()                       //EU038 - US070 - RN134
+        demandas_consultar.adicionarPagamentoCAMudas('2020-01-01','100','Quitado')
+        cy.reload(true)
+        demandas_consultar.selecionarDadosEspecificosCF()
+        demandas_consultar.validarSaldo0CFMudas()                              //EU038 - US070 - RN134
+        demandas_consultar.adicionarPagamentoCAMudas('2020-01-01','2000','Quitado')
+        cy.reload(true)
+        demandas_consultar.selecionarDadosEspecificosCF()
+        demandas_consultar.validarSaldoPagoAMaisCFMudas()                      //EU038 - US070 - RN134
+        demandas_consultar.excluirPagamentosCF()
 
-        //EXIGENCIAS
-        visualizarDemanda('aero')
-        demandas_consultar.validarDemandaVinculaExigencia()             //US039 - RN224 - Módulo Demandas - Botão Vincular Exigências
-        demandas_consultar.validarStatusExigencia()                     //US039 - RN225 - Filtrar Demandas - Botão Vincular Exigências
+        //COM ha
+        demandas_consultar.validarSaldoPositivoCFha()                          //EU038 - US070 - RN134
+        demandas_consultar.adicionarPagamentoCAha('2020-01-01','100','Quitado')
+        cy.reload(true)
+        demandas_consultar.selecionarDadosEspecificosCF()
+        demandas_consultar.validarSaldo0CFha()                                //EU038 - US070 - RN134
+        demandas_consultar.adicionarPagamentoCAha('2020-01-01','200','Quitado')
+        cy.reload(true)
+        demandas_consultar.selecionarDadosEspecificosCF()
+        demandas_consultar.validarSaldoPagoAMaisCFha()                        //EU038 - US070 - RN134
+        demandas_consultar.excluirPagamentosCF()
 
-        //VISUALIZAR DEMANDA AUTO DE INFRAÇÃO
-        visualizarDemanda(20000)
-        demandas_consultar.selecionarDadosEspecificosAI()
-        demandas_consultar.validarDataLimite() // EU011 - US041 - RN082, RN083, RN084 E RN085
-        demandas_consultar.irParaRequerimentos() // EU087 - US007.2
+        //SEM ha E MUDAS
+
+        demandas_consultar.validarSaldoPositivoCF()                          //EU038 - US070 - RN134
+        demandas_consultar.adicionarPagamentoCA('2020-01-01','1000','Quitado')
+        cy.reload(true)
+        demandas_consultar.selecionarDadosEspecificosCF()
+        demandas_consultar.validarSaldo0CF()                                //EU038 - US070 - RN134
+        demandas_consultar.adicionarPagamentoCA('2020-01-01','2000','Quitado')
+        cy.reload(true)
+        demandas_consultar.selecionarDadosEspecificosCF()
+        demandas_consultar.validarSaldoPagoAMaisCF()                        //EU038 - US070 - RN134
+        demandas_consultar.excluirPagamentosCF()
+
+        // //EXIGENCIAS
+        // visualizarDemanda('aero')
+        // demandas_consultar.validarDemandaVinculaExigencia()             //US039 - RN224 - Módulo Demandas - Botão Vincular Exigências
+        // demandas_consultar.validarStatusExigencia()                     //US039 - RN225 - Filtrar Demandas - Botão Vincular Exigências
+        //
+        // //VISUALIZAR DEMANDA AUTO DE INFRAÇÃO
+        // visualizarDemanda(20000)
+        // demandas_consultar.selecionarDadosEspecificosAI()
+        // demandas_consultar.validarDataLimite() // EU011 - US041 - RN082, RN083, RN084 E RN085
+        // demandas_consultar.irParaRequerimentos() // EU087 - US007.2
 
         //EDITAR DEMANDA - EXCLUIR DEMANDA // -- US033 - RN015 Caminhos Editar Demanda --
 
