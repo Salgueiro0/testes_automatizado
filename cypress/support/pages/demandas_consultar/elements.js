@@ -162,6 +162,6 @@ export const ELEMENTS = {
     gerarRelDemandaPDF: '#gerarRelatorioDemandaPDF',
     clicarExcluirDemanda: '#btn-delete-demanda',
     clicarConfirmar: '.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary',
-
-
+    checkPossuiPrazo:'#fl_prazo_cumprimento_cf',
+    checkArquivadoCF:'#fl_arquivado_cf',
 }

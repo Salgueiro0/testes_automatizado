@@ -298,6 +298,7 @@ class demandas_consultar {
     }
     validarPrazoDesabilitado(){cy.get('#qt_dias_prazo_limite_cf').should('be.disabled')}
     validarPrazoHabilitado(){cy.get('#qt_dias_prazo_pagamento').should('not.be.disabled')}
+    digitarPrazoDiasCA(dias){cy.get('#qt_dias_prazo_pagamento').type(dias)}
     clicarStatusRecAdm(){cy.get(':nth-child(4) > :nth-child(1) > .form-group > .select2-container > .selection > .select2-selection').click()}
     validarSeiDocRecAdmHabilitado(){cy.get('#ds_sei_doc_recurso_adm').should('not.be.disabled')}
     validarSeiDocRecAdmDesabilitado(){cy.get('#ds_sei_doc_recurso_adm').should('be.disabled')}
@@ -326,7 +327,9 @@ class demandas_consultar {
     selecionarTipoVegetacao(){cy.get('#form_florestal > :nth-child(1) > :nth-child(2) > .form-group > .select2-container > .selection > .select2-selection').click()}
     marcarCompensFlorestal(){cy.get('#fl_compensacao_florestal').click()}
     prazoEmDiasHab(){cy.get('#qt_dias_prazo_limite_cf').should('not.be.disabled')}
-    marcarPossuiPrazo(){cy.get('#fl_prazo_cumprimento_cf').click()}
+    marcarPossuiPrazo(){cy.get(el.checkPossuiPrazo).click()}
+    checkPossuiPrazoMarcado(){cy.get(el.checkPossuiPrazo).should('have.attr', 'tabindex', '1')}
+    checkArquivado(){cy.get(el.checkArquivadoCF).should('not.have.attr', 'tabindex', '1')}
     prazoEmDiasDesab(){cy.get('#qt_dias_prazo_limite_cf').should('be.disabled')}
     selecionarStatusRecAdmCF(){cy.get(':nth-child(5) > :nth-child(1) > .form-group > .select2-container > .selection > .select2-selection').click()}
     validarSeiDOCRecADMHabilitado(){cy.get('#ds_sei_doc_recurso_adm_cf').should('not.be.disabled')}
@@ -343,6 +346,7 @@ class demandas_consultar {
         '')}
     filtrarDemandaPesquisa(pesquisa){cy.get('#table-demanda_filter > label > .form-control').type(pesquisa)}
     selecionarDadosEspecificosCA(){cy.get('.panel-body > :nth-child(2) > :nth-child(1) > .accordion').click()}
+
     validarSaldoPagoAMais(){cy.get('.panel-body > :nth-child(2) > :nth-child(1) > .panel-accordion > :nth-child(1) > tbody > :nth-child(12) > :nth-child(2)').should('contain','valor pago a mais, crédito')}
     validarSaldo0CFMudas(){cy.get(':nth-child(3) > :nth-child(1) > .panel-accordion > :nth-child(1) > tbody > :nth-child(16) > :nth-child(2)').should('contain','0,00 mudas')}
     validarSaldo0CFha(){cy.get(':nth-child(5) > tbody > :nth-child(16) > :nth-child(2)').should('contain','0,00 ha')}
@@ -385,13 +389,55 @@ class demandas_consultar {
         hoje.setHours(0, 0, 0, 0);
         const diffMs = hoje - dataAlvo;
         const dias = Math.floor(diffMs / (1000 * 60 * 60 * 24))
-
-
-        if(data === '2025-07-16'){
+         if(data === '2025-07-16'){
             cy.get('.panel-body > :nth-child(2) > :nth-child(1) > .panel-accordion > :nth-child(1) > tbody > :nth-child(6) > :nth-child(2)').should('contain', dias)
         }
-
     }
+    dataPubVigenciaDias() {
+        cy.get(':nth-child(1) > :nth-child(1) > :nth-child(2) > .col-md-12 > .panel-accordion > .table > tbody > :nth-child(7) > :nth-child(2)')
+            .invoke('text')
+            .then((data) => {
+                const partes = data.trim().split('/')
+                const dataObj = new Date(partes[2], partes[1] - 1, partes[0]) // ano, mês, dia
+
+                // agora pega a vigência
+                cy.get(':nth-child(1) > :nth-child(1) > :nth-child(2) > .col-md-12 > .panel-accordion > .table > tbody > :nth-child(8) > :nth-child(2)')
+                    .invoke('text')
+                    .then((vigencia) => {
+                        const dias = parseInt(vigencia.trim(), 10) || 0
+
+                        // somar os dias
+                        dataObj.setDate(dataObj.getDate() + dias)
+
+                        // formatar de volta em dd/mm/yyyy
+                        const novaData = dataObj.toLocaleDateString('pt-BR')
+
+                        // validação
+                        cy.get('.panel-body > :nth-child(2) > :nth-child(1) > .panel-accordion > :nth-child(1) > tbody > :nth-child(5) > :nth-child(2)')
+                            .should('contain', novaData)
+                    })
+            })
+    }
+    dataPubPrazoDias() {
+        cy.get(':nth-child(1) > :nth-child(1) > :nth-child(2) > .col-md-12 > .panel-accordion > .table > tbody > :nth-child(7) > :nth-child(2)')
+            .invoke('text')
+            .then((data) => {
+                const partes = data.trim().split('/')
+                const dataObj = new Date(partes[2], partes[1] - 1, partes[0]) // ano, mês, dia
+
+                // somar 10 dias
+                dataObj.setDate(dataObj.getDate() + 10)
+
+                // formatar de volta em dd/mm/yyyy
+                const novaData = dataObj.toLocaleDateString('pt-BR')
+
+                // validação
+                cy.get('.panel-body > :nth-child(2) > :nth-child(1) > .panel-accordion > :nth-child(1) > tbody > :nth-child(5) > :nth-child(2)')
+                    .should('contain', novaData)
+            })
+    }
+
+
     adicionarPagamentoCAMudas(data,valor,select){
         //cy.get('.col-md-12 > .btn').click()
         cy.get(':nth-child(2) > .col-md-12 > .btn').first().click()
@@ -412,7 +458,7 @@ class demandas_consultar {
         cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn').click()
     }
     adicionarPagamentoCA(data,valor,select){
-        cy.get(':nth-child(10) > .col-md-12 > .btn').first().click()
+        cy.get('.col-md-12 > .btn').first().click()
         cy.wait(1000)
         cy.get('#dt_pagamento').type(data)
         cy.get('#vl_pagamento').type(valor)
@@ -447,9 +493,72 @@ class demandas_consultar {
         cy.wait(1000)
         cy.contains('button','OK').click()
     }
+    campoObrigatorioDataRecAI() {
+        cy.get('#error_dt_recebimento').should('contain','O campo Data de Recebimento do AI é obrigatória!')
+    }
+    campoObrigatoriotipoSancao() {
+        cy.get('#error_tp_sancao').should('contain','O campo Tipo de Sanção é obrigatória!')
+    }
+    campoObrigatoriotipoAtividade() {
+        cy.get('#error_tp_atividade').should('contain','O campo Tipo de Atividade é obrigatória!')
+    }
+    campoObrigatorioDescricaoAI() {
+        cy.get('#error_ds_auto_infracao').should('contain','O campo Descrição do AI (motivo) é obrigatória!')
+    }
+    campoObrigatorioStatusAI() {
+        cy.get('#error_tp_status').should('contain','O campo Status do AI é obrigatória!')
+    }
     excluirSalvar(){
         cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary').first().click()
         cy.contains('button','OK')
+    }
+    campoEmpreendimentoObrigatorio(){
+        cy.get('#error__empreendimentos').should('contain','O campo Empreendimento é obrigatório')
+    }
+    campoTipoObrigatorio(){
+        cy.get('#error_tp_demanda').should('contain','O campo Tipo é obrigatório')
+    }
+    campoNumeroObrigatorio(){
+        cy.get('#error_nr_demanda').should('contain','O campo Número  é obrigatório')
+    }
+    campoAnoObrigatorio(){
+        cy.get('#error_aa_demanda').should('contain','O campo Ano é obrigatório')
+    }
+    campoOrgDemandaObrigatorio(){
+        cy.get('#error_cd_orgao_demanda').should('contain','O campo Órgão Demanda é obrigatório')
+    }
+    campoDataPubObrigatorio(){
+        cy.get('#error_dt_publicacao').should('contain','O campo Data Publicação é obrigatório')
+    }
+    campoVigenciaObrigatorio(){
+        cy.get('#error_qt_dias_vigencia').should('contain','O campo Vigência em dias é obrigatório')
+    }
+    campoDescricaoObrigatorio(){
+        cy.get('#error_ds_demanda').should('contain','O campo Descrição é obrigatório')
+    }
+    campoTitularObrigatorio(){
+        cy.get('#error_cd_pessoa_titular').should('contain','O campo Titular é obrigatório')
+    }
+    campoSuplenteObrigatorio(){
+        cy.get('#error_cd_pessoa_suplente').should('contain','O campo Suplente é obrigatório')
+    }
+    campoValorTotalObrigatorio(){
+        cy.get('#error_vl_valor_compensacao_ambiental').should('contain','O campo Valor Total Compensação Ambiental é obrigatório')
+    }
+    campoPrazoDiasObrigatorioCA(){
+        cy.get('#error_qt_dias_prazo_pagamento').should('contain','O campo Prazo em Dias (CA) é obrigatório')
+    }
+    campoStatusRecADMObrigatorio(){
+        cy.get('#error_tp_status_recurso').should('contain','O campo Status do Recurso Administrativo é obrigatório')
+    }
+    campoLegReferenciaObrigatorio(){
+        cy.get('#error_tp_legislacao_referencia').should('contain','O campo Legislação de Referência é obrigatório')
+    }
+    campoPrazoDiasObrigatorioCF(){
+        cy.get('#error_qt_dias_prazo_limite_cf').should('contain','O campo Prazo em Dias (CF) é obrigatório')
+    }
+    campoStatusRecADMObrigatorioCF(){
+        cy.get('#error_tp_status_recurso_cf').should('contain','O campo Status do Recurso Administrativo é obrigatório')
     }
 
 }
