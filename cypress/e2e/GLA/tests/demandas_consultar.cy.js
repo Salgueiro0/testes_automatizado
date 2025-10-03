@@ -59,6 +59,11 @@ function acessarDemanda(numero, acaoFinal) {
 function visualizarDemanda(numero) {
     acessarDemanda(numero, () => demandas_consultar.clicarPrimeiroBotaoVisualizar());
 }
+function mensagemObrigatoriaPagamento() {
+    demandas_consultar.clicarSalvar()
+    demandas_consultar.validarMsgObrigatorio()
+    demandas_consultar.clicarOk()
+}
 
 function editarDemanda(numero) {
     acessarDemanda(numero, () => demandas_consultar.clicarPrimeiroBotaoEditar());
@@ -136,6 +141,7 @@ describe('DEMANDAS', () => {
         visualizarDemanda(20000)
         demandas_consultar.selecionarDadosEspecificosAI()
         demandas_consultar.validarDataLimite() // EU011 - US041 - RN082, RN083, RN084 E RN085
+        demandas_consultar.demandaSemPagamento() //EU036 - US045 - RN136 Pagamentos - Tabelas
         demandas_consultar.irParaRequerimentos() // EU087 - US007.2
 
         //EDITAR DEMANDA - EXCLUIR DEMANDA // -- US033 - RN015 Caminhos Editar Demanda --
@@ -156,6 +162,7 @@ describe('DEMANDAS', () => {
         demandas_consultar.validarPrazoHabilitado()
         demandas_consultar.checkPossuiPrazo()
         demandas_consultar.validarPrazoDesabilitado()
+        demandas_consultar.selecionarArquivada()
         // -- EU001 - US033 - RN064 - SEI DOC DO RECURSO ADMINISTRATIVO --
         demandas_consultar.clicarStatusRecAdm()
         demandas_consultar.seletorDropdown('Deferido')
@@ -174,6 +181,25 @@ describe('DEMANDAS', () => {
         salvarDemanda()
         //VISUALIZAR DEMANDA COMPENSAÇÃO AMBIENTAL
         visualizarDemanda(10000)
+        demandas_consultar.selecionarDadosEspecificosCA()
+        demandas_consultar.demandaArquivada()   //EU087 - US007.7 RN244 - Dados Específicos de CA - Arquivada
+        //PAGAMENTOS
+        demandas_consultar.botaoAdicionarPagamento()
+        demandas_consultar.seiCertidaoQuitacaoDesab()       //EU034 - US067 - Desabilitado - RN131
+        demandas_consultar.digitarDataPagamento('2020-01-01')
+        demandas_consultar.digitarValorPagamento(1)
+        mensagemObrigatoriaPagamento()                      //EU034 - US067 - Status do Pagamento (Obrigatório)
+        demandas_consultar.selecionarStatusPagamento()
+        demandas_consultar.seiCertidaoQuitacaoHab()         //EU034 - US067 - Habilitado - RN131
+        demandas_consultar.limparValorPagamento()
+        mensagemObrigatoriaPagamento()                      //EU034 - US067 - Valor do Pagamento (Obrigatório)
+        demandas_consultar.digitarValorPagamento(1)
+        demandas_consultar.limparDataPagamento()
+        mensagemObrigatoriaPagamento()                      //EU034 - US067 - Data do Pagamento (Obrigatório)
+
+
+
+        cy.reload(true)
         //DEMANDA SEM PRAZO LIMITE
         demandas_consultar.selecionarDadosEspecificosCA()
         demandas_consultar.dataPubVigenciaDias() //EU003 - US035 - RN078 - DATA LIMITE PARA CUMPRIMENTO DA CA
@@ -341,7 +367,7 @@ describe('DEMANDAS', () => {
 
 
     it('Validar campos de texto', () => {
-        //consultar demandas
+        //RN120
         irConsultarDemandas()
         demandas_consultar.validarTituloDemanda()
         demandas_consultar.validarTituloDados()
@@ -430,7 +456,7 @@ describe('DEMANDAS', () => {
         demandas_consultar.validarTabelaTitular()
         demandas_consultar.validarTabelaAcao()
 
-        visualizarDemanda('Produção')                              //US039 - RN089, RN095, RN096 - PESQUISA SEM CASE SENSISTIVE E DIFERENCIAÇÃO
+        visualizarDemanda('Produção')                              //US039 - RN089, RN095, RN096,US040 - RN092 - PESQUISA SEM CASE SENSISTIVE E DIFERENCIAÇÃO
 
         //DADOS DETALHADOS
         // EU027 - US061 | EU028 - US062 | EU029 - US046
@@ -541,8 +567,5 @@ describe('DEMANDAS', () => {
         demandas_consultar.campoObrigatorioStatusAI() //RN111 - STATUS DO AI (Obrigatório)
 
     })
-
-
-
 })
 
