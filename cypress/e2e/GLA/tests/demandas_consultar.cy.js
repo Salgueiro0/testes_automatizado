@@ -113,15 +113,15 @@ describe('DEMANDAS', () => {
         demandas_consultar.valorMultaDesabilitado()                //US043 - RN073 - VALOR DA MULTA DESABILITADO
         demandas_consultar.digitarDataRecebAI('2020-01-01')
         demandas_consultar.selecionarTipoSancao()
-        demandas_consultar.seletorDropdown('Multa Simples')  //RN240
+        demandas_consultar.seletorDropdown('Multa Simples')  //RN240  - EU010 - US043 - Tipos de Sanção - Permitir Múltipla Escolha
         demandas_consultar.valorMultaHabilitado()                  //US043 - RN073 - VALOR DA MULTA HABILITADO
-        demandas_consultar.digitarValorMulta(10000)
+        demandas_consultar.digitarValorMulta('1'.repeat(16)) //EU010 - US043 Valor da Multa  15 caracteres
         demandas_consultar.selecionarTipoAtividade()
-        demandas_consultar.seletorDropdown('Obra de Infraestrutura')
+        demandas_consultar.seletorDropdown('Obra de Infraestrutura') //EU010 - US043 - Tipo de Atividade - Obrigatório Multipla escolha
         demandas_consultar.digitarDataRecebimentoAI('2020-01-01')
-        demandas_consultar.digitarMotivo('motivo')
+        demandas_consultar.digitarMotivo('a'.repeat(2001)) //EU010 - US043 Descrição do AI (motivo) 2000 caracteres
         demandas_consultar.selecionarStatusAI()
-        demandas_consultar.seletorDropdown('Em análise inicial pela GEMAM')
+        demandas_consultar.seletorDropdown('Em análise inicial pela GEMAM') //EU010 - US043 - Status do AI - Só pode selecionar 1
         demandas_consultar.instanciaRecDesab()                  //US043 - RN074 - INSTÂNCIA RECURSAL DESABILITADA
         demandas_consultar.digitarDataDecisao('2000-01-01')
         demandas_consultar.botaoSubmit()
@@ -217,7 +217,7 @@ describe('DEMANDAS', () => {
         demandas_consultar.clicarExcluirDemanda()
         demandas_consultar.clicarConfirmar()
     })
-    it('DEMANDA COM COMPENSAÇÃO FLORESTAL', () => {
+    it.only('DEMANDA COM COMPENSAÇÃO FLORESTAL', () => {
         irConsultarDemandas()
         //CADASTRAR DEMANDA //EU002 - US036 -
         demandas_consultar.clicarBotaoCadastro()         // -- US033 - RN015 Caminhos ABA Nova Demanda --
@@ -252,6 +252,7 @@ describe('DEMANDAS', () => {
         demandas_consultar.seletorDropdown('A protocolar')
         demandas_consultar.validarSeiDOCRecADMDesabilitado()            //RN072 - SEI DOC DO RECURSO ADMINISTRATIVO
         //RN090 - ADIÇÃO DE MÚLTIPLAS CF
+        //SEM PRAZO LIMITE
         demandas_consultar.digitarQuantMudasEstimadas(1)
         demandas_consultar.digitarQuantMudasDefinitivas(1)
         demandas_consultar.digitarValorCF(1000)
@@ -265,12 +266,13 @@ describe('DEMANDAS', () => {
         demandas_consultar.selecionarStatusRecAdmCF()
         demandas_consultar.seletorDropdown('A protocolar')
         demandas_consultar.clicarBotaoAdicionar()
+        //COM PRAZO LIMITE
         selecionarLegislacaoRef('Decreto 14.783/1993')
         selecionarModalidadePagamento('Pecúnia')
         demandas_consultar.digitarValorCF(1000)
         demandas_consultar.selecionarStatusRecAdmCF()
         demandas_consultar.seletorDropdown('A protocolar')
-        demandas_consultar.marcarPossuiPrazo()
+        demandas_consultar.digitarPrazoDiasCF(10)
         demandas_consultar.clicarBotaoAdicionar()
         salvarDemanda()
         // cy.contains('button','OK').click()
@@ -284,6 +286,8 @@ describe('DEMANDAS', () => {
         visualizarDemanda(3000)
         //COM MUDAS
         demandas_consultar.selecionarDadosEspecificosCF()
+        demandas_consultar.dataPubPrazoDiasCF()                 //EU004 - US038 - RN080 - DATA LIMITE PARA CUMPRIMENTO DA CF  - Data de Publicação (Demanda) + Prazo em Dias (CF)
+        demandas_consultar.dataPubVigenciaDiasCF()              //EU004 - US038 - RN080 - DATA LIMITE PARA CUMPRIMENTO DA CF  -  Data de Publicação (Demanda) + Vigência em Dias (Demanda)
         demandas_consultar.subtrairData('2025-07-10')                     //US038 - RN081 - DIAS RESTANTES
         demandas_consultar.validarSaldoPositivoCFMudas()                       //EU038 - US070 - RN134 - RN138
         demandas_consultar.adicionarPagamentoCAMudas('2020-01-01','1000','Quitado')
@@ -490,7 +494,7 @@ describe('DEMANDAS', () => {
         demandas_consultar.validarFormDescricao_Especifico()
     })
 
-    it.only('demandas_consultar: campos obrigatórios', () => {
+    it('demandas_consultar: campos obrigatórios', () => {
         irConsultarDemandas()
         demandas_consultar.clicarBotaoCadastro()
         demandas_consultar.editarSalvar()
@@ -530,10 +534,10 @@ describe('DEMANDAS', () => {
         demandas_consultar.selecionarTipo()
         demandas_consultar.seletorDropdown('AI - Auto de Infração')
         demandas_consultar.editarSalvar()
-        demandas_consultar.campoObrigatorioDataRecAI()
-        demandas_consultar.campoObrigatoriotipoSancao()
-        demandas_consultar.campoObrigatoriotipoAtividade()
-        demandas_consultar.campoObrigatorioDescricaoAI()
+        demandas_consultar.campoObrigatorioDataRecAI() //EU010 - US043 - Data de Recebimento do AI (Obrigatório)
+        demandas_consultar.campoObrigatoriotipoSancao() //EU010 - US043 - Tipos de Sanção (Obrigatório)
+        demandas_consultar.campoObrigatoriotipoAtividade() //EU010 - US043 - Tipos de Atividade (Obrigatório)
+        demandas_consultar.campoObrigatorioDescricaoAI()  //EU010 - US043 - Descrição do AI (motivo) (Obrigatório)
         demandas_consultar.campoObrigatorioStatusAI() //RN111 - STATUS DO AI (Obrigatório)
 
     })

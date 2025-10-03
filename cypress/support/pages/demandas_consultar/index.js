@@ -328,10 +328,11 @@ class demandas_consultar {
     marcarCompensFlorestal(){cy.get('#fl_compensacao_florestal').click()}
     prazoEmDiasHab(){cy.get('#qt_dias_prazo_limite_cf').should('not.be.disabled')}
     marcarPossuiPrazo(){cy.get(el.checkPossuiPrazo).click()}
-    checkPossuiPrazoMarcado(){cy.get(el.checkPossuiPrazo).should('have.attr', 'tabindex', '1')}
+    checkPossuiPrazoMarcado(){cy.get(el.checkPossuiPrazo).should('have.value', '1')}
     checkArquivado(){cy.get(el.checkArquivadoCF).should('not.have.attr', 'tabindex', '1')}
     prazoEmDiasDesab(){cy.get('#qt_dias_prazo_limite_cf').should('be.disabled')}
     selecionarStatusRecAdmCF(){cy.get(':nth-child(5) > :nth-child(1) > .form-group > .select2-container > .selection > .select2-selection').click()}
+    digitarPrazoDiasCF(dias){cy.get('#qt_dias_prazo_limite_cf').type(dias)}
     validarSeiDOCRecADMHabilitado(){cy.get('#ds_sei_doc_recurso_adm_cf').should('not.be.disabled')}
     validarSeiDOCRecADMDesabilitado(){cy.get('#ds_sei_doc_recurso_adm_cf').should('be.disabled')}
     adicionarCF(){cy.get('#add_compensao_florestal').click()}
@@ -418,6 +419,31 @@ class demandas_consultar {
                     })
             })
     }
+    dataPubVigenciaDiasCF() {
+        cy.get(':nth-child(2) > .col-md-12 > .panel-accordion > .table > tbody > :nth-child(7) > :nth-child(2)')
+            .invoke('text')
+            .then((data) => {
+                const partes = data.trim().split('/')
+                const dataObj = new Date(partes[2], partes[1] - 1, partes[0]) // ano, mês, dia
+
+                // agora pega a vigência
+                cy.get(':nth-child(2) > .col-md-12 > .panel-accordion > .table > tbody > :nth-child(8) > :nth-child(2)')
+                    .invoke('text')
+                    .then((vigenciaText) => {
+                        const dias = parseInt(vigenciaText.trim(), 10) || 0
+
+                        // somar os dias
+                        dataObj.setDate(dataObj.getDate() + dias)
+
+                        // formatar de volta em dd/mm/yyyy
+                        const novaData = dataObj.toLocaleDateString('pt-BR')
+
+                        // validação
+                        cy.get(':nth-child(3) > :nth-child(1) > .panel-accordion > :nth-child(1) > tbody > :nth-child(9) > :nth-child(2)')
+                            .should('contain', novaData)
+                    })
+            })
+    }
     dataPubPrazoDias() {
         cy.get(':nth-child(1) > :nth-child(1) > :nth-child(2) > .col-md-12 > .panel-accordion > .table > tbody > :nth-child(7) > :nth-child(2)')
             .invoke('text')
@@ -433,6 +459,24 @@ class demandas_consultar {
 
                 // validação
                 cy.get('.panel-body > :nth-child(2) > :nth-child(1) > .panel-accordion > :nth-child(1) > tbody > :nth-child(5) > :nth-child(2)')
+                    .should('contain', novaData)
+            })
+    }
+    dataPubPrazoDiasCF() {
+        cy.get(':nth-child(2) > .col-md-12 > .panel-accordion > .table > tbody > :nth-child(7) > :nth-child(2)')
+            .invoke('text')
+            .then((data) => {
+                const partes = data.trim().split('/')
+                const dataObj = new Date(partes[2], partes[1] - 1, partes[0]) // ano, mês, dia
+
+                // somar 10 dias
+                dataObj.setDate(dataObj.getDate() + 10)
+
+                // formatar de volta em dd/mm/yyyy
+                const novaData = dataObj.toLocaleDateString('pt-BR')
+
+                // validação
+                cy.get(':nth-child(9) > tbody > :nth-child(9) > :nth-child(2)')
                     .should('contain', novaData)
             })
     }
