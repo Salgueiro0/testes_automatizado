@@ -27,6 +27,7 @@ function cadastroDemanda(tipo,numero){
 function salvarDemanda(){
     demandas_consultar.botaoSalvar()
     demandas_consultar.clicarModalSalvar()
+    cy.wait(1000)
     demandas_consultar.modalSim()
 }
 function selecionarLegislacaoRef(legislacao){
@@ -108,7 +109,7 @@ describe('DEMANDAS', () => {
         demandas_consultar.validarDemandaVinculaExigencia()             //US039 - RN224 - Módulo Demandas - Botão Vincular Exigências
         demandas_consultar.validarStatusExigencia()                     //US039 - RN225 - Filtrar Demandas - Botão Vincular Exigências
     })
-    it.only('DEMANDA COM AUTO DE INFRAÇÃO', () => {
+    it('DEMANDA COM AUTO DE INFRAÇÃO', () => {
         irConsultarDemandas()
         //CADASTRAR DEMANDA
         demandas_consultar.clicarBotaoCadastro()         // -- US033 - RN015 Caminhos ABA Nova Demanda --
@@ -369,7 +370,7 @@ describe('DEMANDAS', () => {
     })
 
 
-    it('Validar campos de texto', () => {
+    it.only('Validar campos de texto', () => {
         //RN120
         irConsultarDemandas()
         demandas_consultar.validarTituloDemanda()

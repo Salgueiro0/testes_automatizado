@@ -172,6 +172,7 @@ describe('pagamento', () => {
         exigencias.validarLabelStatusModal()
         exigencias.validarLabelDataLimiteDilacaoPrazo()
         exigencias.digitarObservacaoSeiPedido()
+        exigencias.validarOpcoesStatus() //EU84 -US020.4 - RN237 -  Status da Dilação de Prazos
         exigencias.botaoSalvar()
 
         //alterar Dilações de Prazos

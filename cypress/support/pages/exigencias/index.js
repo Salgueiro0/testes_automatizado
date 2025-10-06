@@ -81,6 +81,17 @@ class exigencias{
         cy.wait(1000)
         cy.get(el.descricaoObservacaoSeiPedido).type('6512154')
     }
+    validarOpcoesStatus() {
+        cy.get(':nth-child(2) > .col-md-4 > .form-group > .select2-container > .selection > .select2-selection').click()
+
+        const opcoesEsperadas = ['Em Análise', 'Deferido', 'Indeferido']
+
+        cy.get(el.dropdownGla).find('li').then((opcoes) => {
+            const textos = [...opcoes].map(o => o.innerText.trim())
+            expect(textos).to.include.members(opcoesEsperadas)
+        })
+    }
+
     botaoSalvar(){
         cy.contains('button', "Salvar").click()
         cy.wait(3000)
