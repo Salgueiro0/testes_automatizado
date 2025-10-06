@@ -5,7 +5,6 @@ describe('Documentos', () => {
 
     it('Documentos', () => {
 
-
         documentos.irParaGLA()
         documentos.login()
 
@@ -27,6 +26,7 @@ describe('Documentos', () => {
 
         //Cadastrar documento
 
+
         documentos.selecionarTipoDocumento()
         documentos.digitarNumeroDocumento()
         documentos.digitarDataDocumento()
@@ -34,6 +34,7 @@ describe('Documentos', () => {
         documentos.digitarNumeroSeiDocumento()
         documentos.digitarDescricaoDocumento()
         documentos.clicarBotaoSalvar()
+        documentos.validarMSGCadastro()  //EU087 - US007.3 - MSG016
         documentos.clicarModalBotaoOk()
 
 
@@ -115,4 +116,27 @@ describe('Documentos', () => {
         documentos.clicarModalBotaoConfirmar()
         documentos.clicarModalBotaoOk()
     })
+    it('Campos Obrigatórios', () => {
+        documentos.irParaGLA()
+        documentos.login()
+        documentos.clicarEmpreendimento()
+        documentos.selecionarEmpreendimento()
+        documentos.pesquisarEmpreendimento()
+        documentos.clicarVisualizarPrimeiraOpcao()
+        documentos.clicarBotaoNovoDocumento()
+        //EU087 - US007.3 - Campos Obrigatórios em cadastrar Novo Documento
+        documentos.clicarBotaoSalvar()
+        documentos.selecionarTipoDocumento()
+        documentos.clicarBotaoSalvar()
+        documentos.digitarNumeroDocumento()
+        documentos.clicarBotaoSalvar()
+        documentos.digitarDataDocumento()
+        documentos.clicarBotaoSalvar()
+        documentos.selecionarOrgaoDocumento()
+        documentos.clicarBotaoSalvar()
+        documentos.digitarDescricaoDocumento()
+        documentos.clicarBotaoSalvar()
+        documentos.clicarModalBotaoOk()
+    })
+
 })

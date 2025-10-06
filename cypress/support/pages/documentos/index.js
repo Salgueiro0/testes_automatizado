@@ -69,6 +69,7 @@ class documentos{
     clicarBotaoSalvar(){
         cy.get(el.botaoSalvar).click()
     }
+    validarMSGCadastro(){cy.get('.bootbox-body').should('contain','Documento cadastrado com sucesso.')}
 
     clicarModalBotaoOk(){
         cy.contains('button', 'OK').click()

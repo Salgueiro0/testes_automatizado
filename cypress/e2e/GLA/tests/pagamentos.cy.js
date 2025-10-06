@@ -63,13 +63,13 @@ describe('pagamento', () => {
         pagamentos.clicarBotaoAdicionarPagamento()
         pagamentos.digitarDataPagamento('2025-01-01')
         pagamentos.clicarBotaoSalvar()
-        pagamentos.validarMsgCamposObrigatorio()                        //-- US064 - (10) sem valor pagamento --
+        pagamentos.validarMsgCamposObrigatorio()                        //--EU031 - US064 - Obrigatório (10) sem valor pagamento --
         pagamentos.clicarModalOk()
 
         pagamentos.digitarValorPagamento('1565665565657835')
         pagamentos.limparDataPagamento()
         pagamentos.clicarBotaoSalvar()
-        pagamentos.validarMsgCamposObrigatorio()                        //-- US064- (09) sem data pagamento --
+        pagamentos.validarMsgCamposObrigatorio()                        //--EU031 - US064- Obrigatório (09) sem data pagamento --
         pagamentos.clicarModalOk()
         pagamentos.clicarModalFechar()
 
