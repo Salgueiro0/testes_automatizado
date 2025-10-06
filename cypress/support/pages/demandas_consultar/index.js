@@ -266,6 +266,13 @@ class demandas_consultar {
 
     }
     demandaSemPagamento(){cy.get('[aria-label="Valor do Pagamento (R$): Ordenar colunas de forma ascendente"]').should('not.exist')}
+    adicionarPagamentoAI(data,valor){
+        cy.get('.col-md-12 > .btn').click()
+        cy.get('#dt_pagamento').type(data)
+        cy.get('#vl_pagamento').type(valor)
+        cy.get('#botao-salvar').click()
+        cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn').click()
+    }
     irParaRequerimentos(){cy.get('.requerimentos-aba').click()}
     clicarAbaDemandas(){
         cy.wait(1000)

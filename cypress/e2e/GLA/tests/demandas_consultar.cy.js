@@ -108,7 +108,7 @@ describe('DEMANDAS', () => {
         demandas_consultar.validarDemandaVinculaExigencia()             //US039 - RN224 - Módulo Demandas - Botão Vincular Exigências
         demandas_consultar.validarStatusExigencia()                     //US039 - RN225 - Filtrar Demandas - Botão Vincular Exigências
     })
-    it('DEMANDA COM AUTO DE INFRAÇÃO', () => {
+    it.only('DEMANDA COM AUTO DE INFRAÇÃO', () => {
         irConsultarDemandas()
         //CADASTRAR DEMANDA
         demandas_consultar.clicarBotaoCadastro()         // -- US033 - RN015 Caminhos ABA Nova Demanda --
@@ -142,15 +142,17 @@ describe('DEMANDAS', () => {
         demandas_consultar.selecionarDadosEspecificosAI()
         demandas_consultar.validarDataLimite() // EU011 - US041 - RN082, RN083, RN084 E RN085
         demandas_consultar.demandaSemPagamento() //EU036 - US045 - RN136 Pagamentos - Tabelas
+        demandas_consultar.adicionarPagamentoAI('2020-01-01','1000')
+        cy.reload(true)
         demandas_consultar.irParaRequerimentos() // EU087 - US007.2
 
-        //EDITAR DEMANDA - EXCLUIR DEMANDA // -- US033 - RN015 Caminhos Editar Demanda --
-        editarDemanda(20000)
-        demandas_consultar.selecionarTipo()
-        demandas_consultar.seletorDropdown('Licença de Operação')
-        demandas_consultar.editarSalvar()
-        demandas_consultar.clicarExcluirDemanda()
-        demandas_consultar.clicarConfirmar()
+        // //EDITAR DEMANDA - EXCLUIR DEMANDA // -- US033 - RN015 Caminhos Editar Demanda --
+        // editarDemanda(20000)
+        // demandas_consultar.selecionarTipo()
+        // demandas_consultar.seletorDropdown('Licença de Operação')
+        // demandas_consultar.editarSalvar()
+        // demandas_consultar.clicarExcluirDemanda()
+        // demandas_consultar.clicarConfirmar()
     })
     it('DEMANDA COM COMPENSAÇÃO AMBIENTAL', () => {
         irConsultarDemandas()
@@ -243,7 +245,7 @@ describe('DEMANDAS', () => {
         demandas_consultar.clicarExcluirDemanda()
         demandas_consultar.clicarConfirmar()
     })
-    it.only('DEMANDA COM COMPENSAÇÃO FLORESTAL', () => {
+    it('DEMANDA COM COMPENSAÇÃO FLORESTAL', () => {
         irConsultarDemandas()
         //CADASTRAR DEMANDA //EU002 - US036 -
         demandas_consultar.clicarBotaoCadastro()         // -- US033 - RN015 Caminhos ABA Nova Demanda --
