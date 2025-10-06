@@ -273,6 +273,34 @@ class demandas_consultar {
         cy.get('#botao-salvar').click()
         cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn').click()
     }
+    validarSaldoAI() {
+        cy.get('#total_AI')
+            .invoke('text')
+            .then((totalAIText) => {
+                cy.get('.odd > :nth-child(3)')
+                    .invoke('text')
+                    .then((valorPagamentoText) => {
+                        // Converter os textos para número (removendo símbolos e vírgulas, se houver)
+                        const totalAI = parseFloat(totalAIText.replace(/[^\d,.-]/g, '').replace(',', '.')) || 0;
+                        const valorPagamento = parseFloat(valorPagamentoText.replace(/[^\d,.-]/g, '').replace(',', '.')) || 0;
+
+                        const subtracao = totalAI - valorPagamento;
+
+                        cy.get('#saldo_AI').should(($saldo) => {
+                            const saldoText = $saldo.text().replace(/[^\d,.-]/g, '').replace(',', '.');
+                            const saldo = parseFloat(saldoText) || 0;
+                            expect(saldo).to.be.closeTo(subtracao, 0.01); // permite pequena diferença de arredondamento
+                        });
+                    });
+            });
+    }
+    excluirPagamentoAI(){
+        cy.get('.btn-delete-pagamento-AI > .fas').click()
+        cy.wait(1000)
+        cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary').click()
+        cy.wait(1000)
+        cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn').click()
+    }
     irParaRequerimentos(){cy.get('.requerimentos-aba').click()}
     clicarAbaDemandas(){
         cy.wait(1000)
@@ -287,6 +315,7 @@ class demandas_consultar {
     clicarConfirmar(){
         cy.wait(1000)
         cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary').click()}
+
     validarMSGExclusao(){cy.get('.bootbox > .modal-dialog > .modal-content > .modal-body').should('contain','Existem (Compensação Florestal) associados')}
     validaCompenAmbNotCheck(){cy.get('#fl_compensacao_ambiental').should('be.disabled')}
     validaCompenFloNotCheck(){cy.get('#fl_compensacao_florestal').should('be.disabled')}

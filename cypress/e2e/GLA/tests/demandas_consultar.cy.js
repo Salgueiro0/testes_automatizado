@@ -143,16 +143,17 @@ describe('DEMANDAS', () => {
         demandas_consultar.validarDataLimite() // EU011 - US041 - RN082, RN083, RN084 E RN085
         demandas_consultar.demandaSemPagamento() //EU036 - US045 - RN136 Pagamentos - Tabelas
         demandas_consultar.adicionarPagamentoAI('2020-01-01','1000')
-        cy.reload(true)
+        demandas_consultar.validarSaldoAI() //EU087 - US007.6 - RN241 - Saldo do Auto de Infração
+        demandas_consultar.excluirPagamentoAI()
         demandas_consultar.irParaRequerimentos() // EU087 - US007.2
 
-        // //EDITAR DEMANDA - EXCLUIR DEMANDA // -- US033 - RN015 Caminhos Editar Demanda --
-        // editarDemanda(20000)
-        // demandas_consultar.selecionarTipo()
-        // demandas_consultar.seletorDropdown('Licença de Operação')
-        // demandas_consultar.editarSalvar()
-        // demandas_consultar.clicarExcluirDemanda()
-        // demandas_consultar.clicarConfirmar()
+        //EDITAR DEMANDA - EXCLUIR DEMANDA // -- US033 - RN015 Caminhos Editar Demanda --
+        editarDemanda(20000)
+        demandas_consultar.selecionarTipo()
+        demandas_consultar.seletorDropdown('Licença de Operação')
+        demandas_consultar.editarSalvar()
+        demandas_consultar.clicarExcluirDemanda()
+        demandas_consultar.clicarConfirmar()
     })
     it('DEMANDA COM COMPENSAÇÃO AMBIENTAL', () => {
         irConsultarDemandas()
