@@ -1,6 +1,57 @@
 /// <reference types="cypress" />
 
 import demandas_associacao from "../../../support/pages/demandas_associacao";
+//HUs desatualizadas:  EU014 - US048(RN033, RN034, RN037) EU016 - US050(RN044),
+
+function cadastrarAssociacaoDemanda(tipo,regiao,empreendimento,demanda,regiao2,empreendimento2,demanda2) {
+    demandas_associacao.irParaDemandas()
+    demandas_associacao.irParaDemandasAssociacao()
+    demandas_associacao.clicarBotaoNovoCadastro()
+    demandas_associacao.selecionarTpAssociacao()
+    demandas_associacao.seletorDropdown(tipo)
+    cy.wait(2000)
+    demandas_associacao.seletorRegiaoAdmin()
+    demandas_associacao.seletorDropdown(regiao)
+    cy.wait(2000)
+    demandas_associacao.seletorEmpreendimento()
+    demandas_associacao.seletorDropdown(empreendimento)
+    cy.wait(2000)
+    demandas_associacao.seletorDemanda()
+    demandas_associacao.seletorDropdown(demanda)
+    demandas_associacao.clicarBotaoAdicionar()
+    cy.wait(2000)
+    demandas_associacao.seletorRegiaoAdmin()
+    cy.wait(1000)
+    demandas_associacao.seletorDropdown(regiao2)
+    cy.wait(2000)
+    demandas_associacao.selecionarCdEmpreendCont()
+    demandas_associacao.seletorDropdown(empreendimento2)
+    cy.wait(2000)
+    demandas_associacao.seletorDemanda()
+    demandas_associacao.seletorDropdown(demanda2)
+    demandas_associacao.clicarBotaoAdicionar()
+    demandas_associacao.botaoSalvar()
+    demandas_associacao.clicarModalBTNOk()
+}
+
+
+function pesquisarDemanda(tipo,ra,empreendimento){
+    demandas_associacao.irParaDemandas()
+    demandas_associacao.irParaDemandasAssociacao()
+    demandas_associacao.pesquisarTipoAssociacao()
+    demandas_associacao.seletorDropdown(tipo)
+    demandas_associacao.pesquisarRA()
+    demandas_associacao.seletorDropdown(ra)
+    demandas_associacao.pesquisarEmpreendimento()
+    demandas_associacao.seletorDropdown(empreendimento)
+    demandas_associacao.clicarBotaoPesquisar()
+}
+
+function excluirDemanda(){
+    demandas_associacao.excluirAssociacaoDemanda()
+    demandas_associacao.clicarModalBTNOk()
+    demandas_associacao.clicarModalOk()
+}
 
 describe('pendência', () => {
     beforeEach(() => {
@@ -27,7 +78,7 @@ describe('pendência', () => {
         demandas_associacao.seletorDropdown('RA-I - BRASILIA')
         demandas_associacao.seletorEmpreendimento()
         demandas_associacao.seletorDropdown('103 - Estagio de produção')
-        demandas_associacao.limparFormularioPesquisa()
+        demandas_associacao.limparFormularioPesquisa() //EU014 - US048 RN046 - LIMPAR
 
         //validação de novo cadastro
         demandas_associacao.clicarBotaoNovoCadastro()    // -- US033 - RN015 Caminhos Cadastro demanda associação --
@@ -57,34 +108,37 @@ describe('pendência', () => {
         demandas_associacao.clicarExcluir()
 
         //validação do botão voltar
-        demandas_associacao.clicarBotaoVoltar()
+        demandas_associacao.clicarBotaoVoltar() //EU014 - US048 - RN046 - VOLTAR
 
         //salvamento de novo cadastro
-        demandas_associacao.clicarBotaoNovoCadastro()
-        demandas_associacao.seletorTpAssociacao()
-        demandas_associacao.seletorDropdown('Geral')
-        cy.wait(2000)
-        demandas_associacao.seletorRegiaoAdmin()
-        demandas_associacao.seletorDropdown('RA-I - BRASILIA')
-        cy.wait(2000)
-        demandas_associacao.seletorCdEmpreendimento()
-        demandas_associacao.seletorDropdown('103 - Estagio de produção')
-        cy.wait(2000)
-        demandas_associacao.seletorDemanda()
-        demandas_associacao.seletorDropdown('LOC - Licença de Operação Corretiva nº 07/04/2025')
-        demandas_associacao.clicarBotaoAdicionar()
-        demandas_associacao.seletorRegiaoAdmin()
-        cy.wait(1000)
-        demandas_associacao.seletorDropdown('RA-II - GAMA')
-        cy.wait(2000)
-        demandas_associacao.selecionarCdEmpreendCont()
-        demandas_associacao.seletorDropdown('8 - FAZENDA VINICIUS')
-        cy.wait(2000)
-        demandas_associacao.seletorDemanda()
-        demandas_associacao.seletorDropdown('MP - Manifestação de Pendências nº 1/2024')
-        demandas_associacao.clicarBotaoAdicionar()
-        demandas_associacao.botaoSalvar()
-        demandas_associacao.clicarModalBTNOk()
+        // demandas_associacao.clicarBotaoNovoCadastro()
+        // demandas_associacao.seletorTpAssociacao()
+        // demandas_associacao.seletorDropdown('Geral')
+        // cy.wait(2000)
+        // demandas_associacao.seletorRegiaoAdmin()
+        // demandas_associacao.seletorDropdown('RA-I - BRASILIA')
+        // cy.wait(2000)
+        // demandas_associacao.seletorCdEmpreendimento()
+        // demandas_associacao.seletorDropdown('103 - Estagio de produção')
+        // cy.wait(2000)
+        // demandas_associacao.seletorDemanda()
+        // demandas_associacao.seletorDropdown('LOC - Licença de Operação Corretiva nº 07/04/2025')
+        // demandas_associacao.clicarBotaoAdicionar()
+        // demandas_associacao.seletorRegiaoAdmin()
+        // cy.wait(1000)
+        // demandas_associacao.seletorDropdown('RA-II - GAMA')
+        // cy.wait(2000)
+        // demandas_associacao.selecionarCdEmpreendCont()
+        // demandas_associacao.seletorDropdown('8 - FAZENDA VINICIUS')
+        // cy.wait(2000)
+        // demandas_associacao.seletorDemanda()
+        // demandas_associacao.seletorDropdown('MP - Manifestação de Pendências nº 1/2024')
+        // demandas_associacao.clicarBotaoAdicionar()
+        // demandas_associacao.botaoSalvar() //EU014 - US048 - RN046 - SALVAR
+        // demandas_associacao.clicarModalBTNOk()
+        cadastrarAssociacaoDemanda('Geral','RA-I - BRASILIA','103 - Estagio de produção','LOC - Licença de Operação Corretiva nº 07/04/2025',
+            'RA-II - GAMA','8 - FAZENDA VINICIUS','MP - Manifestação de Pendências nº 1/2024')
+
 
         //validação de salvamento
         demandas_associacao.seletorRegiaoAdmin()
@@ -107,6 +161,7 @@ describe('pendência', () => {
         demandas_associacao.clicarBotaoAdicionar()
 
         //validação de visualização
+        // //EU016 - US050 - RN043 - LISTA DE DEMANDAS CADASTRADAS com filtros
         demandas_associacao.seletorRegiaoAdmin()
         demandas_associacao.seletorDropdown('RA-I - BRASILIA')
         cy.wait(2000)
@@ -123,11 +178,52 @@ describe('pendência', () => {
         demandas_associacao.seletorEmpreendimento()
         demandas_associacao.seletorDropdown('103 - Estagio de produção')
         demandas_associacao.clicarBotaoPesquisar()
-        demandas_associacao.clicarPrimeiroBotaoVisualizar()         // -- US033 - RN015  Visualizar Associação de Demanda (por meio do Ícone do Olho). --
+        demandas_associacao.clicarPrimeiroBotaoVisualizar()         // -- US033 - RN015  Visualizar Associação de Demanda (por meio do Ícone do Olho). EU015 - US049 - RN040 - ÍCONE DE AÇÃO
         demandas_associacao.botaoExcluirAssocDemand()
 
         //validação para excluir a associação
         demandas_associacao.clicarModalBTNOk()
         demandas_associacao.clicarModalOk()
+        demandas_associacao.clicarBotaoPesquisar() //EU016 - US050 - RN043 - LISTA DE DEMANDAS CADASTRADAS sem filtros
+        demandas_associacao.clicarPrimeiroBotaoVisualizar()
+        demandas_associacao.clicarBotaoVoltar()
+        demandas_associacao.validarVoltaPesquisa() //EU015 - US049 - RN041 - BOTÃO VOLTAR
+
+        //EU014 - US048 - RN046 - SALVAR
+    })
+    it('campos obrigatórios', () => {
+        demandas_associacao.irParaGLA()
+        demandas_associacao.login()
+        demandas_associacao.irParaDemandas()
+        demandas_associacao.irParaDemandasAssociacao()
+        demandas_associacao.clicarBotaoNovoCadastro()
+        demandas_associacao.seletorRegiaoAdmin()
+        demandas_associacao.seletorDropdown('RA-I - BRASILIA')
+        demandas_associacao.seletorEmpreendimento()
+        demandas_associacao.seletorDropdown('103 - Estagio de produção')
+        demandas_associacao.seletorDemanda()
+        demandas_associacao.seletorDropdown('LOC - Licença de Operação Corretiva nº 07/04/2025')
+        demandas_associacao.clicarBotaoAdicionar()
+        demandas_associacao.validarMSGObrigatoriaCadastro() //EU014 - US048 Tipo de Associação e Demandas - Obrigatório RN038
+        demandas_associacao.clicarOK()
+        demandas_associacao.selecionarTpAssociacao()
+        demandas_associacao.validarSelecoesTipoAssoc()  //EU014 - US048 - RN032 - TIPO DE ASSOCIAÇÃO
+    })
+    it.only('Cadastrar várias associações de demanda', () => {
+        demandas_associacao.irParaGLA()
+        demandas_associacao.login()
+
+        cadastrarAssociacaoDemanda('Geral','RA-I - BRASILIA','103 - Estagio de produção','LOC - Licença de Operação Corretiva nº 07/04/2025',
+            'RA-II - GAMA','8 - FAZENDA VINICIUS','MP - Manifestação de Pendências nº 1/2024') //EU014 - US048 - RN046 - SALVAR
+        cy.reload(true)
+        cadastrarAssociacaoDemanda('Geral','RA-I - BRASILIA','103 - Estagio de produção','LIC - Licença de Instalação Corretiva nº 101/2025',
+            'RA-I - BRASILIA','103 - Estagio de produção','TCCF - Termo de Compromisso de Compensação Florestal  nº 00001111/2025')
+
+        pesquisarDemanda('Geral','RA-I - BRASILIA','103 - Estagio de produção')
+        demandas_associacao.validarTabelaVariosRAs() //EU016 - US050 - RN124,RN125 - CONSULTAR ASSOCIAÇÃO DE DEMANDA - TABELA RA
+        demandas_associacao.validarTabelaUmRA() //EU016 - US050 - RN124,RN125 - CONSULTAR ASSOCIAÇÃO DE DEMANDA - TABELA RA
+        demandas_associacao.validarArquivados() //EU016 - US050 - RN126 - CONSULTAR ASSOCIAÇÃO DEMANDA - TABELA ARQUIVADO
+        excluirDemanda()
+        excluirDemanda()
     })
 })

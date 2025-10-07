@@ -40,5 +40,6 @@ export const ELEMENTS = {
     botaoPesquisar: '#pesquisar',
     primeiroBotaoEditar: 'a[title="Editar"]',
     primeiroBotaoVisualizar: 'a[title="Visualizar"]',
+    primeiroBotaoExcluir: 'a[title="Excluir"]',
     botaoExcluirAssocDemand: '#btn-delete-associacao-demanda'
 }

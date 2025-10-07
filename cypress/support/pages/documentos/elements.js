@@ -28,7 +28,7 @@ export const ELEMENTS = {
     labelDemanda: ':nth-child(2) > :nth-child(2) > .form-group > .control-label',
     labelRequerimento: ':nth-child(4) > .form-group > .control-label',
     labelNumero: ':nth-child(5) > :nth-child(2) > .form-group > .control-label',
-    labelArquivoPrincipal: ':nth-child(5) > :nth-child(3) > .form-group > .control-label',
+    labelArquivoPrincipal: ':nth-child(6) > :nth-child(3) > .form-group > .control-label',
     labelPeriodoDataPublicacao: ':nth-child(6) > :nth-child(2) > .form-group > .control-label',
     labelEmpreendedorResponsavel: ':nth-child(7) > :nth-child(2) > .form-group > label',
     rowOrigem:'.sorting_asc',

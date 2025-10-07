@@ -10,6 +10,9 @@ class demandas_associacao {
     validarTextoPendencia(){cy.get(el.textoPendencia).should('have.text', "Pendência")}
     irParaDemandas(){cy.get(el.abaDemandas).click()}
     irParaDemandasAssociacao(){cy.get(el.menuDemandasAssociacao).click()}
+    pesquisarTipoAssociacao(){cy.get('.col-md-4 > .form-group > .select2-container > .selection > .select2-selection').click()}
+    pesquisarRA(){cy.get(':nth-child(2) > :nth-child(1) > .form-group > .select2-container > .selection > .select2-selection').click()}
+    pesquisarEmpreendimento(){cy.get(':nth-child(2) > .form-group > .select2-container > .selection > .select2-selection').click()}
     validarAbaAssocDemanda(){cy.get(el.tituloAssocDemanda).should('have.text',"Associação de Demanda")}
     validarAbaAssocPesquisar(){cy.get(el.tituloAssocPesquisar).should('have.text',"Pesquisar")}
     validarAbaAssocTipoAssoc(){cy.get(el.labelAssocTipoAssoc).should('have.text',"Tipo de Associação")}
@@ -19,9 +22,25 @@ class demandas_associacao {
     clicaModalSalvar(){cy.get(el.botaoModalSalvar).click()}
     seletorDropdown(opcao){cy.get(el.listaSelect2).find('li').contains(opcao).click({force:true})}
     seletorRegiaoAdmin(){cy.get(el.selectRegiaoAdmin).click()}
+    validarTabelaVariosRAs(){
+        const RegADM = ['RA-I - BRASILIA', 'RA-II - GAMA']
+        RegADM.forEach(ra => {
+            cy.get('.odd > :nth-child(1)').should('contain',ra)
+        })
+    }
+    validarTabelaUmRA(){cy.get('.even > :nth-child(1)').should('contain','RA-I - BRASILIA')}
+    validarArquivados(){
+        const simNao = ['Sim', 'Não']
+        simNao.forEach(sn => {
+            cy.get('.odd > :nth-child(4)').should('contain',sn)
+        })
+        cy.get('.even > :nth-child(4)').should('contain','Não')
+    }
+    excluirAssociacaoDemanda(){cy.get(el.primeiroBotaoExcluir).click()}
     seletorEmpreendimento(){cy.get(el.limparEmpreendimento).click()}
     limparFormularioPesquisa(){cy.get(el.botaoLimparForm).click()}
     clicarBotaoNovoCadastro(){cy.get(el.botaoNovoCadastro).click()}
+    selecionarAssociacao(){cy.get(':nth-child(1) > :nth-child(1) > .form-group > .select2-container > .selection > .select2-selection').click()}
     validarTitulo(){cy.get('h1').should('contain','Associação de Demanda')}
     validarNovoCadasLabelNovoCadas(){cy.get(el.tituloAssocPesquisar).should('have.text', "Novo Cadastro")}
     validarNovoCadasLabelTipoAssoc(){cy.get(el.labelNovoTipoAssoc).should('have.text',"Tipo de Associação *")}
@@ -34,17 +53,28 @@ class demandas_associacao {
     validarNovoCadasTabelaArquivada(){cy.get(el.tabelaArquivada).should('have.text',"Arquivada")}
     validarNovoCadasTabelaAcao(){cy.get(el.tabelaAcao).should('have.text',"Ação")}
     selecionarTpAssociacao(){cy.get(el.selectTpAssociacaocont).click()}
+    validarSelecoesTipoAssoc() {
+        const opcoes = ['Geral', 'Compensação Ambiental', 'Compensação Florestal', 'Auto de Infração']
+        opcoes.forEach(op => {
+            cy.get(el.listaSelect2).find('li').should('contain', op)
+        })
+    }
     seletorDemanda(){cy.wait(2000);cy.get(el.selectDemanda).click()}
     clicarBotaoAdicionar(){cy.get(el.botaoAdicionar).click()}
+    validarMSGObrigatoriaCadastro(){cy.get('.bootbox-body').should('contain','Selecione o Tipo de Associação e uma Demanda')}
     clicarExcluir(){cy.get(el.botaoExcluir).click()}
     seletorTpAssociacao(){cy.get(el.selectTpAssociacao).click()}
     seletorCdEmpreendimento(){cy.get(el.selectCdEmpreendimento,{timeout:10000}).should('be.visible').click()}
     botaoSalvar(){cy.get(el.botaoSalvar).click()}
     clicarModalOk(){cy.get(el.botaoModalOk).should('be.visible').and('contain.text','OK').click()}
+    clicarOK(){cy.get('.modal-footer > .btn').click()}
     clicarModalBTNOk(){cy.get(el.botaoModalBTNOk).click()}
     clicarBotaoVoltar(){cy.get(el.botaoVoltar).click()}
+    validarVoltaPesquisa(){cy.get('.box-title').should('contain','Pesquisar')}
     clicarBotaoSalvar(){cy.get(el.botaoSalvar).click()}
-    clicarBotaoPesquisar(){cy.get(el.botaoPesquisar).click()}
+    clicarBotaoPesquisar(){
+        cy.wait(2000)
+        cy.get(el.botaoPesquisar).click()}
     clicarPrimeiroBotaoEditar(){cy.get(el.primeiroBotaoEditar).first().click()}
     clicarPrimeiroBotaoVisualizar(){cy.get(el.primeiroBotaoVisualizar).first().click()}
     botaoExcluirAssocDemand(){cy.get(el.botaoExcluirAssocDemand).click()}
