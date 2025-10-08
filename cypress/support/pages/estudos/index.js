@@ -101,13 +101,21 @@ class estudos {
     seletorDropdown(select){ cy.get(el.seletorDropdown).contains(select).click({force: true}) }
     selecionarEmpreendimento(){ cy.get(el.selecionarEmpreendimento).click(); cy.wait(3000) }
     selecionarTpRequerimento(){ cy.get(el.selecionarTpRequerimento).click() }
+    requerimentosDesabilitado(){cy.get(':nth-child(5) > .form-group > .select2-container > .selection > .select2-selection').should('have.attr', 'tabindex', '-1')}
+    requerimentosHabilitado(){{cy.get(':nth-child(5) > .form-group > .select2-container > .selection > .select2-selection').should('have.attr', 'tabindex', '0')}}
     selecionarCdRequerimento(){ cy.get(el.selecionarCdRequerimento).click() }
+    validarRequerimento(select){ cy.get(el.seletorDropdown).should('contain',select)}
     clicarBotaoAdicionarRequerimento(){ cy.get(el.clicarBotaoAdicionarRequerimento).click() }
+    MSGRequerimentoObrigatorio(){cy.get('.bootbox-body').should('contain','Selecione um Empreendimento, um Tipo de Requerimento e um Requerimento.')}
     selecionarRegiaoAdminExi(){ cy.get(el.selecionarRegiaoAdminExi).click() }
     selecionarEmpreendimentoExi(){ cy.get(el.selecionarEmpreendimentoExi).click() }
     selecionarDemandaContainer(){ cy.get(el.selecionarDemandaContainer).click() }
     selecionarExigenciaContainer(){ cy.get(el.selecionarExigenciaContainer).click() }
+    validarExigencia(select){ cy.get(el.seletorDropdown).should('contain',select)}
     clicarBotaoAdicionarExigencia(){ cy.get(el.clicarBotaoAdicionarExigencia).click() }
+    exigenciasDesabilitado(){cy.get('#form_exigencia > :nth-child(4) > .form-group > .select2-container > .selection > .select2-selection').should('have.attr', 'tabindex', '-1')}
+    exigenciasHabilitado(){cy.get('#form_exigencia > :nth-child(4) > .form-group > .select2-container > .selection > .select2-selection').should('have.attr', 'tabindex', '0')}
+    validarMSGObrigatorios(){cy.get('.bootbox-body').should('contain','Selecione um Empreendimento, uma Demanda e uma Exigência.')}
     selecionarTpEstudoContainer(){ cy.get(el.selecionarTpEstudoContainer).click() }
     selecionarTpNaturezaContainer(){ cy.get(el.selecionarTpNaturezaContainer).click() }
     selecionarTpObjetoContainer(){ cy.get(el.selecionarTpObjetoContainer).click() }
@@ -116,6 +124,9 @@ class estudos {
     selecionarCdPessoaSuplenteContainer(){ cy.get(el.selecionarCdPessoaSuplenteContainer).click() }
     clicarBotaoSalvar(){ cy.get(el.clicarBotaoSalvar).click() }
     clicarBotaoContinuar(){ cy.get(el.clicarBotaoContinuar).click() }
+    clicarBotaoOkObrigatorios(){
+        cy.wait(1000)
+        cy.get('.modal-footer > .btn').click()}
     clicarBotaoOk(){ cy.get(el.clicarBotaoOk).click() }
     clicarBotaoVoltar(){ cy.get(el.clicarBotaoVoltar).click(); cy.get(el.clicarBotaoVoltar).click() }
     selecionarPesTitular(){ cy.get(el.selecionarPesTitular).click() }
@@ -127,6 +138,13 @@ class estudos {
     seletorPessoaSuplente(){ cy.get(el.seletorPessoaSuplente).click() }
     clicarPrimeiroBotaoExcluir(){ cy.get(el.clicarPrimeiroBotaoExcluir).first().click() }
     clicarModalOk(){ cy.get(el.clicarModalOk).should('be.visible').and('contain.text', 'OK').click() }
+    referenciaObrigatoria(){cy.get('#error_referencia').should('contain','Informe pelo menos uma Referência')}
+    naturezaObrigatoria(){cy.get('#error_tp_natureza').should('contain','O campo Natureza é obrigatório')}
+    tipoDeEstudoObrigatoria(){cy.get('#error_tp_estudo').should('contain','O campo Tipo de Estudo é obrigatório')}
+    objetoObrigatoria(){cy.get('#error_tp_objeto').should('contain','O campo Objeto é obrigatório')}
+    statusObrigatoria(){cy.get('#error_tp_status').should('contain','O campo Status é obrigatório')}
+    titularObrigatoria(){cy.get('#error_cd_pessoa_titular').should('contain','O campo Titular é obrigatório')}
+    suplenteObrigatoria(){cy.get('#error_cd_pessoa_suplente').should('contain','O campo Suplente é obrigatório')}
 }
 
 export default new estudos()
