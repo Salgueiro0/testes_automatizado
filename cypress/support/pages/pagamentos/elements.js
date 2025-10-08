@@ -43,7 +43,7 @@ export const ELEMENTS = {
     rowRA: '.sorting_asc',
     rowEmpreendimento: '[aria-label="Empreendimento: Ordenar colunas de forma ascendente"]',
     rowOrigem: '[aria-label="Origem: Ordenar colunas de forma ascendente"]',
-    rowValorPagamento: '[aria-label="Valor do Pagamento (R$): Ordenar colunas de forma ascendente"]',
+    rowValorPagamento: '[aria-label="Valor do Pagamento (R$, ha, mudas): Ordenar colunas de forma ascendente"]',
     rowAcao: 'tr > .text-center',
 
     descricaoPagamento: '#ds_pagamento',

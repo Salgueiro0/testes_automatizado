@@ -36,7 +36,11 @@ class demandas_associacao {
         })
         cy.get('.even > :nth-child(4)').should('contain','Não')
     }
-    excluirAssociacaoDemanda(){cy.get(el.primeiroBotaoExcluir).click()}
+    excluirAssociacaoDemanda(){
+        // cy.wait(1000)
+        // cy.get(el.primeiroBotaoExcluir).click()
+        cy.get('[id^="excluir_"] > .fas').first().click();
+    }
     seletorEmpreendimento(){cy.get(el.limparEmpreendimento).click()}
     limparFormularioPesquisa(){cy.get(el.botaoLimparForm).click()}
     clicarBotaoNovoCadastro(){cy.get(el.botaoNovoCadastro).click()}
@@ -66,11 +70,14 @@ class demandas_associacao {
     seletorTpAssociacao(){cy.get(el.selectTpAssociacao).click()}
     seletorCdEmpreendimento(){cy.get(el.selectCdEmpreendimento,{timeout:10000}).should('be.visible').click()}
     botaoSalvar(){cy.get(el.botaoSalvar).click()}
-    clicarModalOk(){cy.get(el.botaoModalOk).should('be.visible').and('contain.text','OK').click()}
+    clicarModalOk(){cy.get(el.botaoModalOk).should('be.visible').and('contain.text','OK').click({ multiple: true })}
     clicarOK(){cy.get('.modal-footer > .btn').click()}
-    clicarModalBTNOk(){cy.get(el.botaoModalBTNOk).click()}
+    clicarModalBTNOk(){
+        cy.wait(1000)
+        cy.get(el.botaoModalBTNOk).click({ force: true })}
     clicarBotaoVoltar(){cy.get(el.botaoVoltar).click()}
     validarVoltaPesquisa(){cy.get('.box-title').should('contain','Pesquisar')}
+    clicarConfirmar(){cy.contains('button','Confirmar').click()}
     clicarBotaoSalvar(){cy.get(el.botaoSalvar).click()}
     clicarBotaoPesquisar(){
         cy.wait(2000)

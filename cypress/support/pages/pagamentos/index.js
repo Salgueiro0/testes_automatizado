@@ -91,7 +91,7 @@ class Pagamentos {
     validarLabelDatadoPagamento() {cy.get(el.labelDataPagamento).should('have.text', "Data do Pagamento");}
 
     validarLabelValordOPagamento() {
-        cy.get(el.labelValorPagamento).should('have.text', "Valor do Pagamento (R$)");
+        cy.get(el.labelValorPagamento).should('have.text', "Valor do Pagamento (R$, ha, mudas)");
     }
 
     validarLabelStatusDoPagamento() {
@@ -151,7 +151,7 @@ class Pagamentos {
     }
 
     validarRowValorPagamento() {
-        cy.get(el.rowValorPagamento).should('have.text', "Valor do Pagamento (R$)");
+        cy.get(el.rowValorPagamento).should('have.text', "Valor do Pagamento (R$, ha, mudas)");
     }
 
     validarRowAcao() {cy.get(el.rowAcao).should('have.text', "Ação");}
