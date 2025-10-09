@@ -114,6 +114,7 @@ export const ELEMENTS = {
     selecionarPesSuplente: ':nth-child(6) > :nth-child(2) > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered > .select2-search > .select2-search__field',
     botaoPesquisar: '#pesquisar',
     clicarPrimeiroBotaoEditar: 'a[title="Editar"]',
+    clicarPrimeiroBotaoVisualizar: 'a[title="Visualizar"]',
     validarTituloEditar: '.box-title',
     seletorPessoaTitular: '#select2-cd_pessoa_titular-container > .select2-selection__clear',
     seletorPessoaSuplente: '#select2-cd_pessoa_suplente-container > .select2-selection__clear',

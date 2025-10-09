@@ -6,7 +6,8 @@ import estudos from "../../../support/pages/estudos";
 // EU019.2 - US053 - (RN232,RN234)
 // EU019.4 - US053 - (RN234,RN243)
 // EU020 - US054 - (RN147)
-function cadastroDadosGerais(tipo,natureza,objeto,status,titular,suplente){
+//EU020.1 - US054 - (RN233)
+function cadastroDadosGerais(tipo,natureza,objeto,status,titular,suplente,valor){
     estudos.selecionarTpEstudoContainer()
     estudos.seletorDropdown(tipo)
     estudos.selecionarTpNaturezaContainer()
@@ -19,6 +20,7 @@ function cadastroDadosGerais(tipo,natureza,objeto,status,titular,suplente){
     estudos.seletorDropdown(titular)
     estudos.selecionarCdPessoaSuplenteContainer()
     estudos.seletorDropdown(suplente)
+    estudos.valorEstimado(valor)
     estudos.clicarBotaoSalvar()
     estudos.clicarBotaoContinuar()
     estudos.clicarBotaoOk()
@@ -30,6 +32,15 @@ function pesquisarEstudo(pesTitular,pesSuplente){
     estudos.selecionarPesSuplente()
     estudos.seletorDropdown(pesSuplente)
     estudos.botaoPesquisar()
+}
+function visualizarEstudo(pesTitular,pesSuplente){
+    estudos.irAbaEstudos()
+    estudos.selecionarPesTitular()
+    estudos.seletorDropdown(pesTitular)
+    estudos.selecionarPesSuplente()
+    estudos.seletorDropdown(pesSuplente)
+    estudos.botaoPesquisar()
+    estudos.clicarPrimeiroBotaoVisualizar()
 }
 function excluir(){
     estudos.clicarPrimeiroBotaoExcluir()
@@ -50,6 +61,12 @@ function cadastrarExigencia(ra,empreendimento,demanda,exigencia){
     estudos.validarExigencia(exigencia) //EU019 - US053 - RN058 - INCLUIR EXIGÊNCIA
     estudos.seletorDropdown(exigencia)
     estudos.clicarBotaoAdicionarExigencia()
+}
+function selecionaTipoNatureza(tipo,natureza){
+    estudos.selecionarTpEstudoContainer()
+    estudos.seletorDropdown(tipo)
+    estudos.selecionarTpNaturezaContainer()
+    estudos.validaDropdownObjeto(natureza)
 }
 describe('estudos', () => {
     beforeEach(() => {
@@ -82,7 +99,7 @@ describe('estudos', () => {
         estudos.validarRequerimento('88 - LP - Licença Prévia - Ofício nº 6/1565 - ACJUR p/ ADASA')//EU019 - US053 - RN057 - INCLUIR REQUERIMENTO
         estudos.seletorDropdown('88 - LP - Licença Prévia - Ofício nº 6/1565 - ACJUR p/ ADASA')
         estudos.clicarBotaoAdicionarRequerimento()
-        cadastroDadosGerais('Obra/Serviço','Licitação','Paisagismo','A licitar','PAULO CESAR COSTA','LUCAS DIAS DE LIMA')
+        cadastroDadosGerais('Obra/Serviço','Licitação','Paisagismo','A licitar','PAULO CESAR COSTA','LUCAS DIAS DE LIMA','1000')
 
         //Voltar
         estudos.clicarBotaoVoltar()
@@ -118,7 +135,7 @@ describe('estudos', () => {
         //EXCLUIR
         excluir()
     })
-    it.only('Incluir exigência', () => {
+    it('Incluir exigência', () => {
         //CADASTRO
         estudos.irParaGLA()
         estudos.login()
@@ -131,15 +148,14 @@ describe('estudos', () => {
         estudos.clicarBotaoOkObrigatorios()
         cadastrarExigencia('RA-I - BRASILIA','12 - Polos 06, 07, 08 - Projeto Orla - Beira Lago','LP nº 737/1998','82|1|----------------- ÇÇÇ Â ÂÂ' )
         cadastrarExigencia('RA-I - BRASILIA','12 - Polos 06, 07, 08 - Projeto Orla - Beira Lago','LP nº 212/2025','363|10454457|teste' ) //EU019 - US053 - RN058 - INCLUIR EXIGÊNCIA
-        cadastroDadosGerais('Obra/Serviço','Licitação','Paisagismo','A licitar','PAULO CESAR COSTA','LUCAS DIAS DE LIMA')
+        cadastroDadosGerais('Obra/Serviço','Licitação','Paisagismo','A licitar','PAULO CESAR COSTA','LUCAS DIAS DE LIMA','1000')
 
 
         //EXCLUIR
         pesquisarEstudo('NELSON ALVES LOUZEIRO JUNIOR','PEDRO RAFAEL MANDAI')
         excluir()
     })
-    it('teste Associação-consultar', () => {
-
+    it('Campos de Texto', () => {
         estudos.irParaGLA()
         estudos.login()
         estudos.validarTituloPendencia()
@@ -247,5 +263,152 @@ describe('estudos', () => {
         estudos.clicarBotaoAdicionarRequerimento()
         estudos.MSGRequerimentoObrigatorio() //EU019 - US053 - RN057 - INCLUIR REQUERIMENTO
         estudos.clicarBotaoOkObrigatorios()
+    })
+
+    it('Pagamentos', () => {
+        estudos.irParaGLA()
+        estudos.login()
+        estudos.irAbaEstudos()
+        estudos.botaoNovoCadastro()
+        estudos.clicarBotaoMais()
+        cadastrarExigencia('RA-I - BRASILIA','12 - Polos 06, 07, 08 - Projeto Orla - Beira Lago','LP nº 737/1998','82|1|----------------- ÇÇÇ Â ÂÂ' )
+        cadastroDadosGerais('Obra/Serviço','Licitação','Paisagismo','A licitar','PAULO CESAR COSTA','LUCAS DIAS DE LIMA','1000')
+        visualizarEstudo('PAULO CESAR COSTA','LUCAS DIAS DE LIMA')
+        estudos.adicionarPagamento('2020-01-01','10000000000000') //12 caracteres antes da virgula
+    })
+    it.only('Tipo/Natureza/Status', () => {
+        estudos.irParaGLA()
+        estudos.login()
+        estudos.irAbaEstudos()
+        estudos.botaoNovoCadastro()
+        estudos.clicarBotaoMais()
+        selecionaTipoNatureza('Obra/Serviço','Licitação') //EU023 - US057 - RN100 - NATUREZA/ ESTUDOS
+        selecionaTipoNatureza('Obra/Serviço','Elaborado internamente')
+        selecionaTipoNatureza('Compra de Bens','Licitação')
+        selecionaTipoNatureza('Obra/Serviço','Elaborado internamente')
+
+        estudos.selecionarTpEstudoContainer()
+        estudos.seletorDropdown('Obra/Serviço')
+        estudos.clicaObjeto()
+        estudos.validaDropdownObjeto([
+            "Elaboração de Inventário Florestal",
+            "Resgate de Flora",
+            "Estudo de Fauna",
+            "Programa de Monitoramento de Fauna",
+            "Plantio de gramado",
+            "Elaboração de PRAD",
+            "Execução de PRAD",
+            "Elaboração de EIA/RIMA",
+            "Elaboração de PCA",
+            "Execução de PCA",
+            "Elaboração de RCA",
+            "Elaboração de PCA/RCA",
+            "Elaboração de PEA",
+            "Execução de PEA",
+            "Elaboração de RIAC",
+            "Elaboração de RIAP",
+            "Elaboração de RIVI",
+            "Elaboração de RAS",
+            "Elaboração de PGAI",
+            "Execução de PGAI",
+            "Elaboração de PGAO",
+            "Execução de PGAO",
+            "Elaboração de RIPA",
+            "Elaboração de Plano de Manejo",
+            "Elaboração de Zoneamento",
+            "Elaboração de Plano de Monitoramento de Recursos Hídricos",
+            "Execução de Monitoramento de Recursos Hídricos",
+            "Elaboração de Plano de Monitoramento Ambiental",
+            "Acompanhamento de Condicionantes de Licenças",
+            "Execução de Auditoria e Fiscalização",
+            "Estudo de Viabilidade",
+            "Estudo Arqueológico",
+            "Investigação do Solo e Subsolo",
+            "Estudo de Tráfego",
+            "Estudo para Certificação",
+            "Estudo para cálculo da Compensação Florestal Pretérita",
+            "Estudo para  atualização da compensação florestal ao Decreto nº 39.469/2018",
+            "Monitoramento de Ruídos",
+            "Mapeamento de Risco Geotécnico",
+            "Elaboração de Plano de Arborização e Paisagismo",
+            //"Elaboração de Projeto de Arborização e Paisagismo",
+            "Execução de Projeto de Arborização e Paisagismo",
+            "Plantio de Mudas ou Semeadura",
+            "Manutenção de Gramado",
+            "Identificação de Lançamentos Irregulares",
+            "Estudo para Desativação de Tanque de Combustível",
+            "Elaboração de Projeto de Aproveitamento de Água",
+            "Execução de Limpeza de Vias",
+            "Serviços de Vigilância",
+            "Cercamento",
+            "Mapeamento com Drone",
+            "Projeto de Engenharia (não listado)",
+            "Obra de Engenharia (não listada)",
+            "Serviço de Engenharia (não listado)"
+        ])
+        estudos.selecionarTpEstudoContainer()
+        estudos.seletorDropdown('Compra de Bens')
+        estudos.clicaObjeto()
+        estudos.validaDropdownObjeto([
+            "Veículo",
+            "Mobiliário",
+            "Máquinas / Equipamentos / Materiais / Insumos"
+        ])
+        estudos.selecionarTpEstudoContainer()
+        estudos.seletorDropdown('Dação em Pagamento')
+        estudos.digitaObjeto('Texto livre')
+
+        selecionaTipoNatureza('Obra/Serviço','Licitação')
+        estudos.selecionarTpStatusContainer()
+        estudos.validaDropdownStatus([
+            "A licitar",
+            "Em licitação",
+            "Contratado, a solicitar OS",
+            "OS Solicitada",
+            "Em execução",
+            "Pausado/Suspenso",
+            "Executado",
+            "Em análise por órgão externo",
+            "Atendendo exigências externas",
+            "Aprovado por órgão externo"
+        ])
+
+        selecionaTipoNatureza('Obra/Serviço','Elaborado internamente')
+        estudos.validaDropdownStatus([
+            "Não iniciado",
+            "Em execução",
+            "Pausado/Suspenso",
+            "Executado",
+            "Em análise por órgão externo",
+            "Atendendo exigências externas",
+            "Aprovado por órgão externo"
+        ])
+
+        estudos.selecionarTpEstudoContainer()
+        estudos.seletorDropdown('Compra de Bens')
+        estudos.validaDropdownStatus([
+            "A licitar",
+            "Em licitação",
+            "Contratado, a emitir OS",
+            "OS Solicitada",
+            "Em execução",
+            "Pausado/Suspenso",
+            "Executado",
+            "Em análise por órgão externo",
+            "Atendendo exigências externas",
+            "Aprovado por órgão externo"
+        ])
+
+        estudos.selecionarTpEstudoContainer()
+        estudos.seletorDropdown('Dação em Pagamento')
+        estudos.validaDropdownStatus([
+            "Não iniciado",
+            "Em execução",
+            "Pausado/Suspenso",
+            "Executado",
+            "Em análise por órgão externo",
+            "Atendendo exigências externas",
+            "Aprovado por órgão externo"
+        ])
     })
 })

@@ -97,8 +97,43 @@ class estudos {
     validarFormCadastroDescricaObjetoContrato(){ cy.get(el.validarFormCadastroDescricaObjetoContrato).should('have.text', "Descrição do Objeto do Contrato") }
     validarFormCadastroDadosOrdemServico(){ cy.get(el.validarFormCadastroDadosOrdemServico).should('have.text', "Dados da Ordem de Serviço da Empresa") }
     clicarBotaoMais(){ cy.get(el.clicarBotaoMais).click() }
+    adicionarPagamento(data,valor){
+        cy.get("[onclick=\"toggleFormAccordion('pg')\"]").click()
+        cy.get('.col-md-12 > .btn').click()
+        cy.get('#dt_pagamento').type(data)
+        cy.get('#vl_pagamento').click(valor)
+        cy.get('#botao-salvar').click()
+        cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn').click()
+    }
     selecionarRegiaoAdmin(){ cy.get(el.selecionarRegiaoAdmin).click() }
     seletorDropdown(select){ cy.get(el.seletorDropdown).contains(select).click({force: true}) }
+    validaDropdownObjeto(selects) {
+        cy.get('#form_dados_gerais > :nth-child(2) > .form-group').then($e => {
+            const container = ($e.attr('tabindex') === '-1') ? cy.wrap($e) : cy.get(el.seletorDropdown)
+
+            if (Array.isArray(selects)) {
+                selects.forEach(item => {
+                    container.should('contain', item)
+                })
+            } else {
+                container.should('contain', selects)
+            }
+        })
+    }
+    validaDropdownStatus(selects) {
+        cy.get(':nth-child(6) > .form-group > .select2-container > .selection > .select2-selection').then($e => {
+            const container = ($e.attr('tabindex') === '-1') ? cy.wrap($e) : cy.get(el.seletorDropdown)
+
+            if (Array.isArray(selects)) {
+                selects.forEach(item => {
+                    container.should('contain', item)
+                })
+            } else {
+                container.should('contain', selects)
+            }
+        })
+    }
+
     selecionarEmpreendimento(){ cy.get(el.selecionarEmpreendimento).click(); cy.wait(3000) }
     selecionarTpRequerimento(){ cy.get(el.selecionarTpRequerimento).click() }
     requerimentosDesabilitado(){cy.get(':nth-child(5) > .form-group > .select2-container > .selection > .select2-selection').should('have.attr', 'tabindex', '-1')}
@@ -117,11 +152,18 @@ class estudos {
     exigenciasHabilitado(){cy.get('#form_exigencia > :nth-child(4) > .form-group > .select2-container > .selection > .select2-selection').should('have.attr', 'tabindex', '0')}
     validarMSGObrigatorios(){cy.get('.bootbox-body').should('contain','Selecione um Empreendimento, uma Demanda e uma Exigência.')}
     selecionarTpEstudoContainer(){ cy.get(el.selecionarTpEstudoContainer).click() }
-    selecionarTpNaturezaContainer(){ cy.get(el.selecionarTpNaturezaContainer).click() }
+    clicaObjeto(){cy.get('#tp_objeto_field > .select2-container > .selection > .select2-selection').click()}
+    digitaObjeto(texto){cy.get('#ds_objeto').type(texto)}
+    selecionarTpNaturezaContainer(){
+            cy.get('#form_dados_gerais > :nth-child(2) > .form-group > .select2-container > .selection > .select2-selection')
+                .should('have.attr', 'tabindex', '0')
+                .click({ force: true })
+    }
     selecionarTpObjetoContainer(){ cy.get(el.selecionarTpObjetoContainer).click() }
     selecionarTpStatusContainer(){ cy.get(el.selecionarTpStatusContainer).click() }
     selecionarCdPessoaTitularContainer(){ cy.get(el.selecionarCdPessoaTitularContainer).click() }
     selecionarCdPessoaSuplenteContainer(){ cy.get(el.selecionarCdPessoaSuplenteContainer).click() }
+    valorEstimado(valor){cy.get('#vl_estimado').type(valor)}
     clicarBotaoSalvar(){ cy.get(el.clicarBotaoSalvar).click() }
     clicarBotaoContinuar(){ cy.get(el.clicarBotaoContinuar).click() }
     clicarBotaoOkObrigatorios(){
@@ -133,6 +175,7 @@ class estudos {
     selecionarPesSuplente(){ cy.get(el.selecionarPesSuplente).click() }
     botaoPesquisar(){ cy.get(el.botaoPesquisar).click() }
     clicarPrimeiroBotaoEditar(){ cy.get(el.clicarPrimeiroBotaoEditar).first().click() }
+    clicarPrimeiroBotaoVisualizar(){ cy.get(el.clicarPrimeiroBotaoVisualizar).first().click() }
     validarTituloEditar(){ cy.get(el.validarTituloEditar).should('have.text', "Editar"); cy.wait(4000) }
     seletorPessoaTitular(){ cy.get(el.seletorPessoaTitular).click(); cy.wait(4000) }
     seletorPessoaSuplente(){ cy.get(el.seletorPessoaSuplente).click() }
