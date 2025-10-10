@@ -2,6 +2,9 @@
 
 import estudos from "../../../support/pages/estudos";
 //destualizados:
+//GLA - EU018 - US052 - RN102 - TITULAR/ SUPLENTE
+
+//(Conferir:)
 // EU019 - US053 - (RN055,RN056)
 // EU019.2 - US053 - (RN232,RN234)
 // EU019.4 - US053 - (RN234,RN243)
@@ -57,7 +60,7 @@ function cadastrarExigencia(ra,empreendimento,demanda,exigencia){
     estudos.seletorDropdown(demanda)
     cy.wait(1000)
     estudos.selecionarExigenciaContainer()
-    estudos.exigenciasHabilitado() //EU019 - US053 - RN058 - INCLUIR EXIGÊNCIA
+    estudos.exigenciasHabilitado() //EU019 - US053 - RN058 - INCLUIR EXIGÊNCIA / EU018 - US052 - RN098 - COMBO EXIGÊNCIAS
     estudos.validarExigencia(exigencia) //EU019 - US053 - RN058 - INCLUIR EXIGÊNCIA
     estudos.seletorDropdown(exigencia)
     estudos.clicarBotaoAdicionarExigencia()
@@ -65,8 +68,17 @@ function cadastrarExigencia(ra,empreendimento,demanda,exigencia){
 function selecionaTipoNatureza(tipo,natureza){
     estudos.selecionarTpEstudoContainer()
     estudos.seletorDropdown(tipo)
+    cy.wait(1000)
     estudos.selecionarTpNaturezaContainer()
     estudos.validaDropdownObjeto(natureza)
+    cy.wait(2000)
+}
+function visualizarEmpreendimento(){
+    estudos.irEmpreendimentos()
+    estudos.pesquisarEmpreendimento()
+    estudos.filtrar('Polos 06, 07, 08')
+    estudos.clicarPrimeiroBotaoVisualizar()
+    estudos.clicarEstudos()
 }
 describe('estudos', () => {
     beforeEach(() => {
@@ -94,7 +106,7 @@ describe('estudos', () => {
         estudos.seletorDropdown('12 - Polos 06, 07, 08 - Projeto Orla - Beira Lago')
         estudos.selecionarTpRequerimento()
         estudos.seletorDropdown('Nova Permissão')
-        estudos.requerimentosHabilitado() //EU019 - US053 - RN057 - INCLUIR REQUERIMENTO
+        estudos.requerimentosHabilitado() //EU019 - US053 - RN057 - INCLUIR REQUERIMENTO /  EU018 - US052 - RN097 - COMBO REQUERIMENTOS
         estudos.selecionarCdRequerimento()
         estudos.validarRequerimento('88 - LP - Licença Prévia - Ofício nº 6/1565 - ACJUR p/ ADASA')//EU019 - US053 - RN057 - INCLUIR REQUERIMENTO
         estudos.seletorDropdown('88 - LP - Licença Prévia - Ofício nº 6/1565 - ACJUR p/ ADASA')
@@ -123,14 +135,12 @@ describe('estudos', () => {
         estudos.clicarBotaoOk()
         cy.wait(6000)
 
-        //Salvamento
-        // estudos.irAbaEstudos()
-        // estudos.selecionarPesTitular()
-        // estudos.seletorDropdown('NELSON ALVES LOUZEIRO JUNIOR')
-        // estudos.selecionarPesSuplente()
-        // estudos.seletorDropdown('PEDRO RAFAEL MANDAI')
-        // estudos.botaoPesquisar()
         pesquisarEstudo('NELSON ALVES LOUZEIRO JUNIOR','PEDRO RAFAEL MANDAI')
+        estudos.validaTabelaRequerimento()
+
+        visualizarEstudo('NELSON ALVES LOUZEIRO JUNIOR','PEDRO RAFAEL MANDAI')
+        estudos.validaTitularReq() // EU018 - US052 - RN102 - TITULAR/ SUPLENTE
+        estudos.validaSuplenteReq() // EU018 - US052 - RN102 - TITULAR/ SUPLENTE
 
         //EXCLUIR
         excluir()
@@ -150,9 +160,13 @@ describe('estudos', () => {
         cadastrarExigencia('RA-I - BRASILIA','12 - Polos 06, 07, 08 - Projeto Orla - Beira Lago','LP nº 212/2025','363|10454457|teste' ) //EU019 - US053 - RN058 - INCLUIR EXIGÊNCIA
         cadastroDadosGerais('Obra/Serviço','Licitação','Paisagismo','A licitar','PAULO CESAR COSTA','LUCAS DIAS DE LIMA','1000')
 
+        visualizarEstudo('NELSON ALVES LOUZEIRO JUNIOR','PEDRO RAFAEL MANDAI')
+        estudos.validaTitularReq() // EU018 - US052 - RN102 - TITULAR/ SUPLENTE
+        estudos.validaSuplenteReq() // EU018 - US052 - RN102 - TITULAR/ SUPLENTE
 
         //EXCLUIR
         pesquisarEstudo('NELSON ALVES LOUZEIRO JUNIOR','PEDRO RAFAEL MANDAI')
+        estudos.validaTabelaExigencia()
         excluir()
     })
     it('Campos de Texto', () => {
@@ -243,6 +257,10 @@ describe('estudos', () => {
         estudos.validarFormCadastroFimVigenciaContrato()
         estudos.validarFormCadastroDescricaObjetoContrato()
         estudos.validarFormCadastroDadosOrdemServico()
+
+        visualizarEmpreendimento()
+        estudos.validaIdentificacaoEmpreendimento()
+        estudos.validaTabelaEmpreendimento()
     })
     it('Campos Obrigatórios', () => {
         //EU019 - US053 - RN047 - VALIDAÇÃO DOS CAMPOS OBRIGATÓRIOS
@@ -265,7 +283,7 @@ describe('estudos', () => {
         estudos.clicarBotaoOkObrigatorios()
     })
 
-    it('Pagamentos', () => {
+    it.only('Pagamentos', () => {
         estudos.irParaGLA()
         estudos.login()
         estudos.irAbaEstudos()
@@ -275,8 +293,9 @@ describe('estudos', () => {
         cadastroDadosGerais('Obra/Serviço','Licitação','Paisagismo','A licitar','PAULO CESAR COSTA','LUCAS DIAS DE LIMA','1000')
         visualizarEstudo('PAULO CESAR COSTA','LUCAS DIAS DE LIMA')
         estudos.adicionarPagamento('2020-01-01','10000000000000') //12 caracteres antes da virgula
+        estudos.validaMSGImpossivelExcluir()
     })
-    it.only('Tipo/Natureza/Status', () => {
+    it('Tipo/Natureza/Status', () => {
         estudos.irParaGLA()
         estudos.login()
         estudos.irAbaEstudos()
@@ -410,5 +429,15 @@ describe('estudos', () => {
             "Atendendo exigências externas",
             "Aprovado por órgão externo"
         ])
+    })
+    it('Validações Gerais', () => {
+        estudos.irParaGLA()
+        estudos.login()
+        estudos.irEmpreendimentos()
+        estudos.pesquisarEmpreendimento()
+        estudos.filtrar('Polos 06, 07, 08')
+        estudos.clicarPrimeiroBotaoVisualizar()
+        estudos.clicarEstudos()
+        estudos.validaResultadosEstudos() //EU023 - US057 - RN113
     })
 })

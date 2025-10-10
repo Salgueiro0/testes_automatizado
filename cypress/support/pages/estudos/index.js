@@ -101,7 +101,7 @@ class estudos {
         cy.get("[onclick=\"toggleFormAccordion('pg')\"]").click()
         cy.get('.col-md-12 > .btn').click()
         cy.get('#dt_pagamento').type(data)
-        cy.get('#vl_pagamento').click(valor)
+        cy.get('#vl_pagamento').type(valor)
         cy.get('#botao-salvar').click()
         cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn').click()
     }
@@ -188,6 +188,37 @@ class estudos {
     statusObrigatoria(){cy.get('#error_tp_status').should('contain','O campo Status é obrigatório')}
     titularObrigatoria(){cy.get('#error_cd_pessoa_titular').should('contain','O campo Titular é obrigatório')}
     suplenteObrigatoria(){cy.get('#error_cd_pessoa_suplente').should('contain','O campo Suplente é obrigatório')}
+    validaTabelaRequerimento(){cy.get('.odd > :nth-child(2)').should('contain','Nova Permissão - Ofício n° 6/1565 - ACJUR p/ ADASA')}
+    validaTabelaExigencia(){}
+    irEmpreendimentos(){cy.get('.active > a > span').click()}
+    pesquisarEmpreendimento(){cy.get('#pesquisar').click()}
+    filtrar(filtro){cy.get('#table-empreendimento_filter > label > .form-control').type(filtro)}
+    clicarEstudos(){cy.get('.novo-estudo-aba').click()}
+    validaResultadosEstudos(){cy.get('#tabela-estudo-aba_wrapper > :nth-child(2) > .col-sm-12').should('contain','Nova Permissão')}
+    validaIdentificacaoEmpreendimento(){
+        cy.get('#form_estudo > .box > .box-body > .panel > .panel-body > :nth-child(1) > :nth-child(1) > .form-group > label').should('contain','Tipo')
+        cy.get('#form_estudo > .box > .box-body > .panel > .panel-body > :nth-child(1) > :nth-child(2) > .form-group > .control-label').should('contain','Natureza')
+        cy.get(':nth-child(3) > .control-label').should('contain','Objeto')
+        cy.get('.col-md-12 > .form-group > .control-label').should('contain','Descrição do Objeto do Estudo/Serviço')
+        cy.get('#form_estudo > .box > .box-body > .panel > .panel-body > :nth-child(3) > :nth-child(1) > .form-group > .control-label').should('contain','Status')
+        cy.get('#form_estudo > .box > .box-body > .panel > .panel-body > :nth-child(3) > :nth-child(2) > .form-group > .control-label').should('contain','Data de Elaboração')
+    }
+    validaTabelaEmpreendimento(){
+        cy.get('#tabela-estudo-aba > thead > tr > .sorting_asc').should('contain','Referência')
+        cy.get('[aria-label="Natureza: Ordenar colunas de forma ascendente"]').should('contain','Natureza')
+        cy.get('[aria-label="Objeto: Ordenar colunas de forma ascendente"]').should('contain','Objeto')
+        cy.get('[aria-label="Status: Ordenar colunas de forma ascendente"]').should('contain','Status')
+        cy.get('[aria-label="Contrato | OS: Ordenar colunas de forma ascendente"]').should('contain','Contrato | OS')
+        cy.get('#tabela-estudo-aba > thead > tr > [aria-label="Ação: Ordenar colunas de forma ascendente"]').should('contain','Ação')
+    }
+    validaTitularReq(){cy.get('tbody > :nth-child(11) > :nth-child(2)').should('contain','NELSON ALVES LOUZEIRO JUNIOR')}
+    validaSuplenteReq(){cy.get('tbody > :nth-child(12) > :nth-child(2)').should('contain','PEDRO RAFAEL MANDAI')}
+    validaMSGImpossivelExcluir(){
+        cy.get('#btn-delete-estudo').click()
+        cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary')
+        cy.get('.bootbox-body').should('contain','Impossível excluir este Estudo, Compra ou Serviço Ambiental.Existem (Pagamentos) vinculados')
+        cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn').click()
+    }
 }
 
 export default new estudos()
