@@ -215,9 +215,10 @@ class estudos {
     validaSuplenteReq(){cy.get('tbody > :nth-child(12) > :nth-child(2)').should('contain','PEDRO RAFAEL MANDAI')}
     validaMSGImpossivelExcluir(){
         cy.get('#btn-delete-estudo').click()
-        cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary')
-        cy.get('.bootbox-body').should('contain','Impossível excluir este Estudo, Compra ou Serviço Ambiental.Existem (Pagamentos) vinculados')
-        cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn').click()
+        cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary').click()
+        cy.get('.bootbox-body').should('contain', 'Impossível excluir este Estudo, Compra ou Serviço Ambiental.')
+        cy.get('.bootbox-body').should('contain', ' Existem (Pagamentos) vinculados')
+        cy.contains('button','OK').click()
     }
 }
 

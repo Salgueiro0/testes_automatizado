@@ -293,7 +293,7 @@ describe('estudos', () => {
         cadastroDadosGerais('Obra/Serviço','Licitação','Paisagismo','A licitar','PAULO CESAR COSTA','LUCAS DIAS DE LIMA','1000')
         visualizarEstudo('PAULO CESAR COSTA','LUCAS DIAS DE LIMA')
         estudos.adicionarPagamento('2020-01-01','10000000000000') //12 caracteres antes da virgula
-        estudos.validaMSGImpossivelExcluir()
+        estudos.validaMSGImpossivelExcluir() //EU044 - US076 - EXCLUIR ESTUDOS - RN148 - Estudos - Botão Excluir
     })
     it('Tipo/Natureza/Status', () => {
         estudos.irParaGLA()
