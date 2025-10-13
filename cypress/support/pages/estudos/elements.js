@@ -91,7 +91,7 @@ export const ELEMENTS = {
     clicarBotaoMais: '#os_plus',
     selecionarRegiaoAdmin: '#select2-cd_regiao_admin_req-container',
     seletorDropdown: '.select2-results li',
-    selecionarEmpreendimento: '#select2-cd_empreendimento_req-container > .select2-selection__clear',
+    selecionarEmpreendimento: '#select2-cd_empreendimento_req-container',
     selecionarTpRequerimento: '#select2-tp_requerimento-container',
     selecionarCdRequerimento: '#select2-cd_requerimento-container > .select2-selection__clear',
     clicarBotaoAdicionarRequerimento: '#btnAdicionar_requerimento',

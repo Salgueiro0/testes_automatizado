@@ -78,7 +78,7 @@ class estudos {
     validarFormCadastroStatus(){ cy.get(el.validarFormCadastroStatus).should('have.text', "Status") }
     validarFormCadastroDescricaoStatus(){ cy.get(el.validarFormCadastroDescricaoStatus).should('have.text', "Descrição do Status") }
     validarFormCadastroOrgaoExterno(){ cy.get(el.validarFormCadastroOrgaoExterno).should('have.text', "Órgão Externo avaliador") }
-    validarFormCadastroValorEstimado(){ cy.get(el.validarFormCadastroValorEstimado).should('have.text', "Valor Estimado") }
+    validarFormCadastroValorEstimado(){ cy.get(el.validarFormCadastroValorEstimado).should('have.text', "Valor do Estudo") }
     validarFormCadastroProcessoSEI(){ cy.get(el.validarFormCadastroProcessoSEI).should('have.text', "Processo SEI de Acompanhamento / Contratação") }
     validarFormCadastroTitular(){ cy.get(el.validarFormCadastroTitular).should('have.text', "Titular") }
     validarFormCadastroSuplente(){ cy.get(el.validarFormCadastroSuplente).should('have.text', "Suplente") }
@@ -96,12 +96,32 @@ class estudos {
     validarFormCadastroFimVigenciaContrato(){ cy.get(el.validarFormCadastroFimVigenciaContrato).should('have.text', "Fim da Vigência do Contrato") }
     validarFormCadastroDescricaObjetoContrato(){ cy.get(el.validarFormCadastroDescricaObjetoContrato).should('have.text', "Descrição do Objeto do Contrato") }
     validarFormCadastroDadosOrdemServico(){ cy.get(el.validarFormCadastroDadosOrdemServico).should('have.text', "Dados da Ordem de Serviço da Empresa") }
+    validarDGTipo() {cy.get('[width="350px"]').should('contain','Tipo')}
+    validarDGNatureza() {cy.get('tbody > :nth-child(2) > :nth-child(1)').should('contain','Natureza')}
+    validarDGObjeto(){cy.get('tbody > :nth-child(3) > :nth-child(1)').should('contain','Objeto')}
+    validarDGDescricaoObjeto() {cy.get(':nth-child(4) > :nth-child(1) > b').should('contain','Descrição do Objeto do Estudo/Serviço')}
+    validarDGAreaPoligonal() {cy.get(':nth-child(5) > :nth-child(1) > b').should('contain','Área da Poligonal de Estudos')}
+    validarDGStatus() {cy.get('tbody > :nth-child(6) > :nth-child(1)').should('contain','Status')}
+    validarDGDescStatus() {cy.get('tbody > :nth-child(7) > :nth-child(1)').should('contain','Descrição do Status')}
+    validarDGOrgaoExAvaliador() {cy.get('tbody > :nth-child(8) > :nth-child(1)').should('contain','Órgão Externo Avaliador')}
+    validarDGProcessoSEI() {cy.get('tbody > :nth-child(9) > :nth-child(1)').should('contain','Processo SEI de Acompanhamento / Contratação')}
+    validarDGTitular() {cy.get('tbody > :nth-child(10) > :nth-child(1)').should('contain','Titular')}
+    validarDGSuplente() {cy.get('tbody > :nth-child(11) > :nth-child(1)').should('contain','Suplente')}
+    validarDGCaminhoDepart() {cy.get('tbody > :nth-child(12) > :nth-child(1)').should('contain','Caminho no Depart')}
+    validarDGDataElab() {cy.get('tbody > :nth-child(13) > :nth-child(1)').should('contain','Data de Elaboração')}
+    validarDGPrevConclusaoEstudo() {cy.get('tbody > :nth-child(14) > :nth-child(1)').should('contain','Previsão de Conclusão do Estudo')}
+    validarDGObservacoes() {cy.get(':nth-child(15) > :nth-child(1)').should('contain','Observações (Processos)')}
+    validarDGValorEstudo() {cy.get(':nth-child(16) > :nth-child(1)').should('contain','Valor do Estudo')}
+    validarDGValorPagoEstudo() {cy.get(':nth-child(17) > :nth-child(1)').should('contain','Valor Pago do Estudo')}
+    validarDGSaldoEstudo(){cy.get(':nth-child(18) > :nth-child(1)').should('contain','Saldo do Estudo')}
     clicarBotaoMais(){ cy.get(el.clicarBotaoMais).click() }
-    adicionarPagamento(data,valor){
+    adicionarPagamento(data,valor,select){
         cy.get("[onclick=\"toggleFormAccordion('pg')\"]").click()
-        cy.get('.col-md-12 > .btn').click()
+        cy.get(':nth-child(14) > :nth-child(1) > .col-md-12 > .btn').click()
         cy.get('#dt_pagamento').type(data)
         cy.get('#vl_pagamento').type(valor)
+        cy.get('#select2-objeto_estudo-container').click()
+        cy.get(el.seletorDropdown).contains(select).click({force: true})
         cy.get('#botao-salvar').click()
         cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn').click()
     }
@@ -134,7 +154,10 @@ class estudos {
         })
     }
 
-    selecionarEmpreendimento(){ cy.get(el.selecionarEmpreendimento).click(); cy.wait(3000) }
+    selecionarEmpreendimento(){
+        cy.wait(3000)
+        cy.get(el.selecionarEmpreendimento).click()
+        cy.wait(3000) }
     selecionarTpRequerimento(){ cy.get(el.selecionarTpRequerimento).click() }
     requerimentosDesabilitado(){cy.get(':nth-child(5) > .form-group > .select2-container > .selection > .select2-selection').should('have.attr', 'tabindex', '-1')}
     requerimentosHabilitado(){{cy.get(':nth-child(5) > .form-group > .select2-container > .selection > .select2-selection').should('have.attr', 'tabindex', '0')}}
@@ -170,12 +193,17 @@ class estudos {
         cy.wait(1000)
         cy.get('.modal-footer > .btn').click()}
     clicarBotaoOk(){ cy.get(el.clicarBotaoOk).click() }
-    clicarBotaoVoltar(){ cy.get(el.clicarBotaoVoltar).click(); cy.get(el.clicarBotaoVoltar).click() }
+    clicarBotaoVoltar(){ cy.get(el.clicarBotaoVoltar).click()}
     selecionarPesTitular(){ cy.get(el.selecionarPesTitular).click() }
     selecionarPesSuplente(){ cy.get(el.selecionarPesSuplente).click() }
     botaoPesquisar(){ cy.get(el.botaoPesquisar).click() }
     clicarPrimeiroBotaoEditar(){ cy.get(el.clicarPrimeiroBotaoEditar).first().click() }
     clicarPrimeiroBotaoVisualizar(){ cy.get(el.clicarPrimeiroBotaoVisualizar).first().click() }
+    excluirEstudo(){
+        cy.get('#btn-delete-estudo').click()
+        cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary').click()
+        cy.contains('button','OK').click()
+    }
     validarTituloEditar(){ cy.get(el.validarTituloEditar).should('have.text', "Editar"); cy.wait(4000) }
     seletorPessoaTitular(){ cy.get(el.seletorPessoaTitular).click(); cy.wait(4000) }
     seletorPessoaSuplente(){ cy.get(el.seletorPessoaSuplente).click() }
@@ -189,12 +217,11 @@ class estudos {
     titularObrigatoria(){cy.get('#error_cd_pessoa_titular').should('contain','O campo Titular é obrigatório')}
     suplenteObrigatoria(){cy.get('#error_cd_pessoa_suplente').should('contain','O campo Suplente é obrigatório')}
     validaTabelaRequerimento(){cy.get('.odd > :nth-child(2)').should('contain','Nova Permissão - Ofício n° 6/1565 - ACJUR p/ ADASA')}
-    validaTabelaExigencia(){}
-    irEmpreendimentos(){cy.get('.active > a > span').click()}
+    irEmpreendimentos(){cy.get('.sidebar-menu > :nth-child(2) > a').click()}
     pesquisarEmpreendimento(){cy.get('#pesquisar').click()}
     filtrar(filtro){cy.get('#table-empreendimento_filter > label > .form-control').type(filtro)}
     clicarEstudos(){cy.get('.novo-estudo-aba').click()}
-    validaResultadosEstudos(){cy.get('#tabela-estudo-aba_wrapper > :nth-child(2) > .col-sm-12').should('contain','Nova Permissão')}
+    validaResultadosEstudos(){cy.get('#tabela-estudo-aba_wrapper > :nth-child(2) > .col-sm-12').should('contain','R$')}
     validaIdentificacaoEmpreendimento(){
         cy.get('#form_estudo > .box > .box-body > .panel > .panel-body > :nth-child(1) > :nth-child(1) > .form-group > label').should('contain','Tipo')
         cy.get('#form_estudo > .box > .box-body > .panel > .panel-body > :nth-child(1) > :nth-child(2) > .form-group > .control-label').should('contain','Natureza')
@@ -211,14 +238,63 @@ class estudos {
         cy.get('[aria-label="Contrato | OS: Ordenar colunas de forma ascendente"]').should('contain','Contrato | OS')
         cy.get('#tabela-estudo-aba > thead > tr > [aria-label="Ação: Ordenar colunas de forma ascendente"]').should('contain','Ação')
     }
-    validaTitularReq(){cy.get('tbody > :nth-child(11) > :nth-child(2)').should('contain','NELSON ALVES LOUZEIRO JUNIOR')}
-    validaSuplenteReq(){cy.get('tbody > :nth-child(12) > :nth-child(2)').should('contain','PEDRO RAFAEL MANDAI')}
+    validaTitularReq(){cy.get('tbody > :nth-child(10) > :nth-child(2)').should('contain','PAULO CESAR COSTA')}
+    validaSuplenteReq(){cy.get('tbody > :nth-child(11) > :nth-child(2)').should('contain','LUCAS DIAS DE LIMA')}
     validaMSGImpossivelExcluir(){
         cy.get('#btn-delete-estudo').click()
         cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary').click()
         cy.get('.bootbox-body').should('contain', 'Impossível excluir este Estudo, Compra ou Serviço Ambiental.')
         cy.get('.bootbox-body').should('contain', ' Existem (Pagamentos) vinculados')
         cy.contains('button','OK').click()
+    }
+    filtrarEstudo(filtro){cy.get('#table-estudo_filter > label > .form-control').type(filtro)}
+    validarTabelaReq() {
+        cy.get(':nth-child(1) > .panel > .panel-body > :nth-child(2)')
+            .invoke('text')
+            .then((text) => {
+                const textoNormalizado = text.replace(/\s+/g, ' ').trim()
+                expect(textoNormalizado).to.include('88 - LP - Licença Prévia - Ofício n° 6/1565 - ACJUR p/ ADASA')
+            })
+
+        cy.get(':nth-child(1) > .panel > .panel-body > :nth-child(2)')
+            .invoke('text')
+            .then((text) => {
+                const textoNormalizado = text.replace(/\s+/g, ' ').trim()
+                expect(textoNormalizado).to.include('39 - Prorrogação / Renovação de LP - Licença Prévia n° 737/1998 - IBAMA - Ofício n° 123/2010 - ACJUR p/ ABDI')
+            })
+    }
+    validaTabelaExigencia(){
+        cy.get(':nth-child(1) > .panel > .panel-body > :nth-child(2)')
+            .invoke('text')
+            .then((text) => {
+                const textoNormalizado = text.replace(/\s+/g, ' ').trim()
+                expect(textoNormalizado).to.include('LP n° 737/1998 - IBAMA - Exigência n° 1 - ----------------- ÇÇÇ Â ÂÂ')
+            })
+
+        cy.get(':nth-child(1) > .panel > .panel-body > :nth-child(2)')
+            .invoke('text')
+            .then((text) => {
+                const textoNormalizado = text.replace(/\s+/g, ' ').trim()
+                expect(textoNormalizado).to.include('LP n° 212/2025 - ABDI - Exigência n° 10454457 - teste')
+            })
+    }
+    adicionarProduto(tipo,numero,nome,status){
+        cy.get(':nth-child(10) > :nth-child(1) > .col-md-12 > .btn').click()
+        cy.get('#select2-tp_objeto_estudo-container').click()
+        cy.get(el.seletorDropdown).contains(tipo).click({force: true})
+        cy.get('#co_objeto_estudo').type(numero)
+        cy.get('#nm_objeto_estudo').type(nome)
+        cy.get('#select2-tp_status-container > .select2-selection__placeholder').click()
+        cy.get(el.seletorDropdown).contains(status).click({force: true})
+        cy.get('#botao-salvar-obj-est').click()
+        cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn').click()
+    }
+    validaSubtracao(){
+        const saldoEstudo = cy.get('#vl_saldo').invoke('text')
+        const valorPago = cy.get('#table-pagamento > tbody > .odd > :nth-child(2)').invoke('text')
+
+        const subtracao = saldoEstudo - valorPago
+        cy.get('#vl_saldo').should('contain',subtracao)
     }
 }
 
