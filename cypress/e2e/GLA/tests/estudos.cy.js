@@ -5,6 +5,8 @@ import estudos from "../../../support/pages/estudos";
 //GLA - EU018 - US052 - RN102 - TITULAR/ SUPLENTE
 //EU020 - US054 - RN115 - CAMPOS AUTOMÁTICOS SEM DISPARO DE E-MAIL
 //EU020 - US054 - RN146
+//EU025 - US059 - RN121
+//EU018 - US052 - RN059
 //(Conferir:)
 // EU019 - US053 - (RN055,RN056)
 // EU019.2 - US053 - (RN232,RN234)
@@ -52,6 +54,8 @@ function cadastrarExigencia(ra,empreendimento,demanda,exigencia){
     cy.wait(1000)
     estudos.selecionarEmpreendimentoExi() //EU019.2 - US053 - RN231
     estudos.seletorDropdown(empreendimento)
+    estudos.selecionarEmpreendimentoExi()
+    estudos.seletorDropdown(empreendimento)
     cy.wait(1000)
     estudos.selecionarDemandaContainer()
     estudos.seletorDropdown(demanda)
@@ -73,9 +77,11 @@ function selecionaTipoNatureza(tipo,natureza){
 function visualizarEmpreendimento(){
     estudos.irEmpreendimentos()
     estudos.pesquisarEmpreendimento()
+    estudos.pesquisarEmpreendimento()
     estudos.filtrar('Polos 06, 07, 08')
     estudos.clicarPrimeiroBotaoVisualizar()
     estudos.clicarEstudos()
+    estudos.validarTituloEmpreendimento()
 }
 function referenciarRequerimento(ra,empreendimento,tipoRequerimento,requerimento){
     estudos.selecionarRegiaoAdmin()
@@ -155,8 +161,19 @@ describe('estudos', () => {
         estudos.validaTitularReq() // EU018 - US052 - RN102 - TITULAR/ SUPLENTE
         estudos.validaSuplenteReq() // EU018 - US052 - RN102 - TITULAR/ SUPLENTE
 
-        //EXCLUIR
-        estudos.excluirEstudo()
+        // //EXCLUIR
+        // estudos.excluirEstudo()
+    })
+    it('Incluir pendência', () => {
+        estudos.irParaGLA()
+        estudos.login()
+        estudos.irAbaEstudos()
+        estudos.botaoNovoCadastro()
+        estudos.clicarBotaoMais()
+        estudos.adicionarSemCamposObrigatorios() //EU021.3 - US055 - Pendências obrigatório
+        //EU018 - US052 - RN233
+        estudos.referenciarPendencia('RA-I - BRASILIA','12 - Polos 06, 07, 08 - Projeto Orla - Beira Lago','Lista de Pendências para obter (LP)','Audiência Pública - teste - Cumprida')
+        cadastroDadosGerais('Obra/Serviço','Licitação','Paisagismo','A licitar','PAULO CESAR COSTA','LUCAS DIAS DE LIMA','1000')
     })
     it('Campos de Texto', () => {
         estudos.irParaGLA()
@@ -247,9 +264,24 @@ describe('estudos', () => {
         estudos.validarFormCadastroDescricaObjetoContrato()
         estudos.validarFormCadastroDadosOrdemServico()
 
+        //Caminhos para estudos
+        //EU022 - US056 - RN108
         visualizarEmpreendimento()
-        estudos.validaIdentificacaoEmpreendimento()
-        estudos.validaTabelaEmpreendimento()
+        estudos.validaIdentificacao()
+        estudos.validaTabela() //EU023 - US057 - RN113
+        estudos.validaTabelaEmpreendimento() //EU023 - US057 - RN116
+
+        estudos.visualizarDemandas()
+        estudos.validaIdentificacao()
+        estudos.validaTabela() //EU023 - US057 - RN113
+
+        estudos.visualizarRequerimento()
+        estudos.validaIdentificacao()
+        estudos.validaTabela() //EU023 - US057 - RN113
+
+        estudos.visualizarExigencia('RA-I - BRASILIA','12 - Polos 06, 07, 08 - Projeto Orla - Beira Lago')
+        estudos.validaIdentificacao()
+        estudos.validaTabela() //EU023 - US057 - RN113
 
         visualizarEstudo('ALLAN GUIMARAES DIOGENES','ALLAN GUIMARAES DIOGENES')
         //DADOS GERAIS
@@ -275,7 +307,7 @@ describe('estudos', () => {
 
 
     })
-    it('Campos Obrigatórios', () => {
+    it.only('Campos Obrigatórios', () => {
         //EU019 - US053 - RN047 - VALIDAÇÃO DOS CAMPOS OBRIGATÓRIOS
         estudos.irParaGLA()
         estudos.login()
@@ -294,9 +326,10 @@ describe('estudos', () => {
         estudos.clicarBotaoAdicionarRequerimento()
         estudos.MSGRequerimentoObrigatorio() //EU019 - US053 - RN057 - INCLUIR REQUERIMENTO
         estudos.clicarBotaoOkObrigatorios()
+        estudos.pendenciaObrigatoria()
     })
 
-    it.only('Pagamentos e Produtos', () => {
+    it('Pagamentos e Produtos', () => {
         estudos.irParaGLA()
         estudos.login()
         estudos.irAbaEstudos()
@@ -306,11 +339,12 @@ describe('estudos', () => {
         cadastroDadosGerais('Obra/Serviço','Licitação','Paisagismo','A licitar','PAULO CESAR COSTA','LUCAS DIAS DE LIMA','1000')
         visualizarEstudo('PAULO CESAR COSTA','LUCAS DIAS DE LIMA')
         estudos.adicionarProduto('PRODUTO',1,'TESTE','Não Executado')
-        estudos.adicionarPagamento('2020-01-01','10000000000000','PRODUTO 1 - 1 - -') //12 caracteres antes da virgula
+        estudos.adicionarPagamento('2020-01-01','10000000000000','PRODUTO 1 - TESTE - -') //12 caracteres antes da virgula
         estudos.validaMSGImpossivelExcluir() //EU044 - US076 - EXCLUIR ESTUDOS - RN148 - Estudos - Botão Excluir
-        estudos.validaSubtracao()
+        estudos.validaSubtracao() //EU020.2 - US054 - RN242
     })
     it('Tipo/Natureza/Status', () => {
+        //EU023 - US057 - RN0101 - STATUS/ESTUDOS
         estudos.irParaGLA()
         estudos.login()
         estudos.irAbaEstudos()
@@ -321,6 +355,7 @@ describe('estudos', () => {
         selecionaTipoNatureza('Compra de Bens','Licitação')
         selecionaTipoNatureza('Obra/Serviço','Elaborado internamente')
 
+        //EU023 - US057 - RN099
         estudos.selecionarTpEstudoContainer()
         estudos.seletorDropdown('Obra/Serviço')
         estudos.clicaObjeto()
@@ -365,7 +400,6 @@ describe('estudos', () => {
             "Monitoramento de Ruídos",
             "Mapeamento de Risco Geotécnico",
             "Elaboração de Plano de Arborização e Paisagismo",
-            //"Elaboração de Projeto de Arborização e Paisagismo",
             "Execução de Projeto de Arborização e Paisagismo",
             "Plantio de Mudas ou Semeadura",
             "Manutenção de Gramado",
@@ -392,7 +426,7 @@ describe('estudos', () => {
         estudos.seletorDropdown('Dação em Pagamento')
         estudos.digitaObjeto('Texto livre')
 
-        selecionaTipoNatureza('Obra/Serviço','Licitação')
+        estudos.selecionaTipoNatureza('Obra/Serviço','Licitação')
         estudos.selecionarTpStatusContainer()
         estudos.validaDropdownStatus([
             "A licitar",
@@ -406,8 +440,11 @@ describe('estudos', () => {
             "Atendendo exigências externas",
             "Aprovado por órgão externo"
         ])
+        estudos.seletorDropdown('A licitar')
+        estudos.dadosContratoDesab() //EU018 - US052 - RN144 - DADOS DO CONTRATO / DADOS DA ORDEM DE SERVIÇO
 
-        selecionaTipoNatureza('Obra/Serviço','Elaborado internamente')
+        estudos.selecionaTipoNatureza('Obra/Serviço','Elaborado internamente')
+        estudos.selecionarTpStatusContainer()
         estudos.validaDropdownStatus([
             "Não iniciado",
             "Em execução",
@@ -417,13 +454,15 @@ describe('estudos', () => {
             "Atendendo exigências externas",
             "Aprovado por órgão externo"
         ])
+        estudos.dadosContratoDesab() //EU018 - US052 - RN144 - DADOS DO CONTRATO / DADOS DA ORDEM DE SERVIÇO
 
         estudos.selecionarTpEstudoContainer()
         estudos.seletorDropdown('Compra de Bens')
+        estudos.selecionarTpStatusContainer()
         estudos.validaDropdownStatus([
             "A licitar",
             "Em licitação",
-            "Contratado, a emitir OS",
+            "Contratado, a solicitar OS",
             "OS Solicitada",
             "Em execução",
             "Pausado/Suspenso",
@@ -432,9 +471,11 @@ describe('estudos', () => {
             "Atendendo exigências externas",
             "Aprovado por órgão externo"
         ])
+        estudos.dadosContratoHabilitado() //EU018 - US052 - RN144 - DADOS DO CONTRATO / DADOS DA ORDEM DE SERVIÇO
 
         estudos.selecionarTpEstudoContainer()
         estudos.seletorDropdown('Dação em Pagamento')
+        estudos.selecionarTpStatusContainer()
         estudos.validaDropdownStatus([
             "Não iniciado",
             "Em execução",

@@ -116,9 +116,11 @@ class estudos {
     validarDGSaldoEstudo(){cy.get(':nth-child(18) > :nth-child(1)').should('contain','Saldo do Estudo')}
     clicarBotaoMais(){ cy.get(el.clicarBotaoMais).click() }
     adicionarPagamento(data,valor,select){
+        cy.get('.sorting_1').should('be.visible')
         cy.get("[onclick=\"toggleFormAccordion('pg')\"]").click()
-        cy.get(':nth-child(14) > :nth-child(1) > .col-md-12 > .btn').click()
-        cy.get('#dt_pagamento').type(data)
+        cy.get(':nth-child(14) > :nth-child(1) > .col-md-12 > .btn').should('be.visible').click()
+        cy.wait(3000)
+        cy.get('#dt_pagamento').should('be.visible').type(data)
         cy.get('#vl_pagamento').type(valor)
         cy.get('#select2-objeto_estudo-container').click()
         cy.get(el.seletorDropdown).contains(select).click({force: true})
@@ -166,9 +168,9 @@ class estudos {
     clicarBotaoAdicionarRequerimento(){ cy.get(el.clicarBotaoAdicionarRequerimento).click() }
     MSGRequerimentoObrigatorio(){cy.get('.bootbox-body').should('contain','Selecione um Empreendimento, um Tipo de Requerimento e um Requerimento.')}
     selecionarRegiaoAdminExi(){ cy.get(el.selecionarRegiaoAdminExi).click() }
-    selecionarEmpreendimentoExi(){ cy.get(el.selecionarEmpreendimentoExi).click() }
-    selecionarDemandaContainer(){ cy.get(el.selecionarDemandaContainer).click() }
-    selecionarExigenciaContainer(){ cy.get(el.selecionarExigenciaContainer).click() }
+    selecionarEmpreendimentoExi(){ cy.get(el.selecionarEmpreendimentoExi).should('have.attr', 'tabindex', '0').click() }
+    selecionarDemandaContainer(){ cy.get(el.selecionarDemandaContainer).should('have.attr', 'tabindex', '0').click() }
+    selecionarExigenciaContainer(){ cy.get(el.selecionarExigenciaContainer).should('have.attr', 'tabindex', '0').click() }
     validarExigencia(select){ cy.get(el.seletorDropdown).should('contain',select)}
     clicarBotaoAdicionarExigencia(){ cy.get(el.clicarBotaoAdicionarExigencia).click() }
     exigenciasDesabilitado(){cy.get('#form_exigencia > :nth-child(4) > .form-group > .select2-container > .selection > .select2-selection').should('have.attr', 'tabindex', '-1')}
@@ -222,7 +224,7 @@ class estudos {
     filtrar(filtro){cy.get('#table-empreendimento_filter > label > .form-control').type(filtro)}
     clicarEstudos(){cy.get('.novo-estudo-aba').click()}
     validaResultadosEstudos(){cy.get('#tabela-estudo-aba_wrapper > :nth-child(2) > .col-sm-12').should('contain','R$')}
-    validaIdentificacaoEmpreendimento(){
+    validaIdentificacao(){
         cy.get('#form_estudo > .box > .box-body > .panel > .panel-body > :nth-child(1) > :nth-child(1) > .form-group > label').should('contain','Tipo')
         cy.get('#form_estudo > .box > .box-body > .panel > .panel-body > :nth-child(1) > :nth-child(2) > .form-group > .control-label').should('contain','Natureza')
         cy.get(':nth-child(3) > .control-label').should('contain','Objeto')
@@ -230,21 +232,28 @@ class estudos {
         cy.get('#form_estudo > .box > .box-body > .panel > .panel-body > :nth-child(3) > :nth-child(1) > .form-group > .control-label').should('contain','Status')
         cy.get('#form_estudo > .box > .box-body > .panel > .panel-body > :nth-child(3) > :nth-child(2) > .form-group > .control-label').should('contain','Data de Elaboração')
     }
-    validaTabelaEmpreendimento(){
+    validaTabela(){
         cy.get('#tabela-estudo-aba > thead > tr > .sorting_asc').should('contain','Referência')
         cy.get('[aria-label="Natureza: Ordenar colunas de forma ascendente"]').should('contain','Natureza')
         cy.get('[aria-label="Objeto: Ordenar colunas de forma ascendente"]').should('contain','Objeto')
         cy.get('[aria-label="Status: Ordenar colunas de forma ascendente"]').should('contain','Status')
         cy.get('[aria-label="Contrato | OS: Ordenar colunas de forma ascendente"]').should('contain','Contrato | OS')
         cy.get('#tabela-estudo-aba > thead > tr > [aria-label="Ação: Ordenar colunas de forma ascendente"]').should('contain','Ação')
+        cy.get('.col-md-12 > .panel-border > .panel-body').should('contain','Contrato')
     }
+    validaTabelaEmpreendimento(){
+        cy.get('#tabela-estudo-aba_filter > label > .form-control').type('Nova Permissão')
+        cy.get('#tabela-estudo-aba > tbody > :nth-child(1) > .sorting_1').should('contain','Nova Permissão')
+        cy.get('#tabela-estudo-aba > tbody > :nth-child(1) > .sorting_1').should('contain','Ofício')
+    }
+
     validaTitularReq(){cy.get('tbody > :nth-child(10) > :nth-child(2)').should('contain','PAULO CESAR COSTA')}
     validaSuplenteReq(){cy.get('tbody > :nth-child(11) > :nth-child(2)').should('contain','LUCAS DIAS DE LIMA')}
     validaMSGImpossivelExcluir(){
         cy.get('#btn-delete-estudo').click()
         cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary').click()
         cy.get('.bootbox-body').should('contain', 'Impossível excluir este Estudo, Compra ou Serviço Ambiental.')
-        cy.get('.bootbox-body').should('contain', ' Existem (Pagamentos) vinculados')
+        cy.get('.bootbox-body').should('contain', 'Existem (Produtos/subprodutos/Serviços, Pagamentos) vinculados')
         cy.contains('button','OK').click()
     }
     filtrarEstudo(filtro){cy.get('#table-estudo_filter > label > .form-control').type(filtro)}
@@ -279,7 +288,8 @@ class estudos {
             })
     }
     adicionarProduto(tipo,numero,nome,status){
-        cy.get(':nth-child(10) > :nth-child(1) > .col-md-12 > .btn').click()
+        cy.get("[onclick=\"toggleFormAccordion('pss')\"]").click()
+        cy.get(':nth-child(10) > :nth-child(1) > .col-md-12 > .btn').should('be.visible').click()
         cy.get('#select2-tp_objeto_estudo-container').click()
         cy.get(el.seletorDropdown).contains(tipo).click({force: true})
         cy.get('#co_objeto_estudo').type(numero)
@@ -289,13 +299,70 @@ class estudos {
         cy.get('#botao-salvar-obj-est').click()
         cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn').click()
     }
-    validaSubtracao(){
-        const saldoEstudo = cy.get('#vl_saldo').invoke('text')
-        const valorPago = cy.get('#table-pagamento > tbody > .odd > :nth-child(2)').invoke('text')
-
-        const subtracao = saldoEstudo - valorPago
-        cy.get('#vl_saldo').should('contain',subtracao)
+    validaSubtracao() {
+        cy.get('#vl_estimado').should('contain','R$ 10,00')
+        cy.get(':nth-child(17) > :nth-child(2)').should('contain','1.000.000.000,00')
+        cy.get('#vl_saldo').should('contain','999.999.990,00')
     }
+    referenciarPendencia(ra,empreendimento,listaPendencia,pendencias){
+        cy.get('#select2-cd_regiao_admin_pen-container > .select2-selection__placeholder').click()
+        cy.get(el.seletorDropdown).contains(ra).click({force: true})
+        cy.get('#select2-cd_empreendimento_pen-container').click()
+        cy.get(el.seletorDropdown).contains(empreendimento).click({force: true})
+        cy.get('#form_pendencia > :nth-child(3) > .form-group > .select2-container > .selection > .select2-selection').should('have.attr', 'tabindex', '0').click()
+        cy.get(el.seletorDropdown).contains(listaPendencia).click({force: true})
+        cy.get('#select2-cd_pendencia-container > .select2-selection__placeholder').click()
+        cy.get(el.seletorDropdown).contains(pendencias).click({force: true})
+        cy.get('#btnAdicionar_pendencia').click()
+    }
+    adicionarSemCamposObrigatorios(){
+        cy.get('#btnAdicionar_pendencia').click()
+        cy.get('.bootbox-body').should('contain','Selecione um Empreendimento , uma categoria e uma Pendência.')
+        cy.get('.modal-footer > .btn').click()
+    }
+    visualizarDemandas(){
+        cy.get(':nth-child(3) > [href="#"] > :nth-child(2)').click()
+        cy.get('.menu-open > .treeview-menu > :nth-child(1) > a > span').should('be.visible').click()
+        cy.get('#pesquisar').should('be.visible').click()
+        cy.get('#pesquisar').should('be.visible').click()
+        cy.get(el.clicarPrimeiroBotaoVisualizar).should('be.visible').first().click()
+        cy.get('.novo-estudo-aba').should('be.visible').click()
+        cy.get('h1').should('contain','Demanda')
+    }
+    visualizarRequerimento(){
+        cy.get(':nth-child(7) > [href="#"] > :nth-child(2)').click()
+        cy.get('.menu-open > .treeview-menu > :nth-child(1) > a > span').should('be.visible').click()
+        cy.get('#pesquisarRequerimento').should('be.visible').click()
+        cy.get('#pesquisarRequerimento').should('be.visible').click()
+        cy.get(el.clicarPrimeiroBotaoVisualizar).should('be.visible').first().click()
+        cy.get('.novo-estudo-aba').should('be.visible').click()
+        cy.get('h1').should('contain','Requerimento')
+    }
+    validarTituloEmpreendimento(){
+        cy.get('h1').should('contain','Empreendimento')
+    }
+    visualizarExigencia(ra,empreendimento){
+        cy.get(':nth-child(6) > a > span').click()
+        cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn').should('be.visible').click()
+        cy.get(':nth-child(1) > :nth-child(1) > .form-group > .select2-container > .selection > .select2-selection').click()
+        cy.get(el.seletorDropdown).contains(ra).click({force: true})
+        cy.wait(3000)
+        cy.get(':nth-child(1) > :nth-child(2) > .form-group > .select2-container > .selection > .select2-selection').click()
+        cy.get(el.seletorDropdown).contains(empreendimento).click({force: true})
+        cy.get('#pesquisarExigencia').should('be.visible').click()
+        cy.get('#pesquisarExigencia').should('be.visible').click()
+        cy.get(el.clicarPrimeiroBotaoVisualizar).should('be.visible').first().click()
+        cy.get('.novo-estudo-aba').should('be.visible').click()
+        cy.get('h1').should('contain','Exigência')
+    }
+    selecionaTipoNatureza(tipo,natureza){
+        cy.get('#select2-tp_estudo-container').click()
+        cy.get(el.seletorDropdown).contains(tipo).click({force: true})
+        cy.get('#form_dados_gerais > :nth-child(2) > .form-group > .select2-container > .selection > .select2-selection').should('have.attr', 'tabindex', '0').click()
+        cy.get(el.seletorDropdown).contains(natureza).click({force: true})
+    }
+    dadosContratoDesab(){cy.get('#nr_contrato_convenio').should('be.disabled')}
+    dadosContratoHabilitado(){cy.get('#nr_contrato_convenio').should('not.be.disabled')}
 }
 
 export default new estudos()
