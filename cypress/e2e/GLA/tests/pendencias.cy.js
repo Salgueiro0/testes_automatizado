@@ -10,7 +10,7 @@ describe('pendência', () => {
        
           
     })
-    it('teste cadastrar pendência no empreendimento', () => {
+  it('teste cadastrar pendência no empreendimento', () => {
      pendencias.irParaGLA()
      pendencias.login()
      pendencias.clicarAbaPendencia()
@@ -92,9 +92,9 @@ describe('pendência', () => {
      pendencias.clicarBtnSucess()
      pendencias.clicarLista()
      pendencias.clicarModalVinculoPendencia()
-    })
+  })
 
-   it('Campos de Texto', () => {
+  it('Campos de Texto', () => {
     pendencias.irParaGLA()
     pendencias.login()
     pendencias.validarTituloPendencia()          // -- US033 - RN015 identificação/título--
@@ -131,5 +131,47 @@ describe('pendência', () => {
     pendencias.validarALabelDiasCumprimento()
     pendencias.validarALabelDataLimite()
     pendencias.validarALabelDiasLimite()
-   })
+  })
+  it('Vincular exigência', () => {
+   // EU052 - US084 - RN151
+   pendencias.irParaGLA()
+   pendencias.login()
+   pendencias.clicarAbaPendencia()
+   pendencias.clicarBotaoCadastrarEditar()
+   pendencias.pesquisarPendencia() //EU051 - US083 - Empreendimento obrigatório
+   pendencias.selecionarCdEmpreendimento()
+   pendencias.dropdownGLA('4 - Empreendimento XPTO 5 ')
+   pendencias.pesquisarPendencia()
+   pendencias.adicionarListaPendencias()
+   pendencias.adicionarLP()
+   pendencias.botaoAdicionar()
+   pendencias.adicionarListaPendencias()
+   pendencias.LPDesabilitado() //EU051 - US083 - RN150
+   pendencias.clicarFechar()
+   pendencias.expandirLP()
+   pendencias.validarBotoesRodapeListaPendencias() //EU052 - US084 - RN160 - conjunto de botões “Adicionar Linha”, “Vincular Exigências” e “Excluir Lista de Pendências"
+   pendencias.clicarOrdenar()  //EU052 - US084 - RN160 - As colunas terão botões de ordenamento
+   pendencias.clicarVincularExigencia() // EU051 - US083 - RN170
+   pendencias.selecionarStatusExigencia()
+   pendencias.dropdownGLA('Em Execução')
+   pendencias.consultarExigencia()
+   pendencias.selecionarPrimeiraExigencia()
+   pendencias.clicarConfirmarVinculoExigencia()
+   pendencias.clicarExcluirListaPendencias() //EU051 - US083 - RN150
+   pendencias.salvarExclusao()
+  })
+  it.only('Excluir todas as linhas', () => {
+    pendencias.irParaGLA()
+    pendencias.login()
+    pendencias.clicarAbaPendencia()
+    pendencias.clicarBotaoCadastrarEditar()
+    pendencias.selecionarCdEmpreendimento()
+    pendencias.dropdownGLA('4 - Empreendimento XPTO 5 ')
+    pendencias.pesquisarPendencia()
+    pendencias.adicionarListaPendencias()
+    pendencias.adicionarLP()
+    pendencias.botaoAdicionar()
+    pendencias.expandirLP()
+    pendencias.excluir8Linhas() //EU052 - US084 - RN160 - Caso todas as linhas sejam excluídas, a tabela deverá ser excluída
+  })
 })

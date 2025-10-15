@@ -48,7 +48,7 @@ class pendencias {
     adicionar3Dado(){cy.get(el.btnAdicionar3Dado).click()}
     adicionar4Dado(){cy.get(el.btnAdicionar4Dado).click();cy.wait(2000)}
     selecionarCdDemanda(){cy.get(el.cdDemandaContainer).click();cy.wait(2000)}
-    selecionarDado(){cy.get(el.selecionarDadoContainer).click()}
+    selecionarStatusExigencia(){cy.get(el.selecionarDadoContainer).click()}
     clicarBotaoEditar(){cy.get(el.btnEditar).click()}
     clicarExigencia(){cy.get(el.btnExigencia).click()}
     clicarSegBotaoEditar(){cy.get(el.btnSegEditar).click()}
@@ -93,6 +93,42 @@ class pendencias {
         cy.get(el.btnPesquisarPendencias).should('contain','Pesquisar')
         cy.get(el.btnSucess).should('contain','Adicionar Lista de Pendências')
     }
+    adicionarListaPendencias(){cy.get('.panel-body > .panel-footer > .btn-toolbar > .btn-success').should('be.visible').click()}
+    adicionarLP(){cy.get('[id*="lista_chk_cd_"]').should('be.visible').eq(0).click({ multiple: true })}
+    botaoAdicionar(){cy.get('#modal-vinculo-pendencia > .modal-dialog > .modal-content > .modal-footer > #botao-editar').should('be.visible').click()}
+    LPDesabilitado(){cy.get('[id*="lista_chk_cd_"]').should('be.disabled')}
+    clicarFechar(){cy.get('#modal-vinculo-pendencia > .modal-dialog > .modal-content > .modal-footer > .btn-form').click()}
+    expandirLP(){cy.get('.content > :nth-child(3) > .box-header > .box-tools > .btn > .fa').click()}
+    clicarExcluirListaPendencias(){cy.get('#pendenciaTodas3282 > .panel-footer > .btn-toolbar > .btn-danger').click()}
+    clicarSalvar(){cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary').click()}
+    clicarVincularExigencia(){cy.get(':nth-child(1) > :nth-child(3) > a > .fa').click()}
+    consultarExigencia() {cy.get(':nth-child(2) > #botao-editar').click()}
+    selecionarPrimeiraExigencia(){cy.get(':nth-child(1) > .sorting_1 > .exigencia').click()}
+    clicarConfirmarVinculoExigencia(){cy.get(':nth-child(4) > #botao-editar').click()}
+    selecionarDemanda(){cy.get(':nth-child(2) > .form-group > .select2-container > .selection > .select2-selection').click()}
+    salvarExclusao(){cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary').click()}
+    validarBotoesRodapeListaPendencias(){
+        cy.get('[id^="pendenciaTodas"] > .panel-footer > .btn-toolbar > .btn-primary').should('contain','Adicionar Linha')
+        cy.get('[id^="pendenciaTodas"] > .panel-footer > .btn-toolbar > .btn-success').should('contain','Vincular Exigências')
+        cy.get('[id^="pendenciaTodas"] > .panel-footer > .btn-toolbar > .btn-danger').should('contain','Excluir Lista de Pendências')
+    }
+    clicarOrdenar(){cy.get('thead > tr > .noVis').click()}
+    excluir8Linhas() {
+        for (let i = 0; i < 8; i++) {
+            cy.get(':nth-child(1) > .text-center > a > .fas').click()
+            cy.wait(1000)
+            cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary').click()
+            cy.wait(1000)
+
+            // Verifica se o botão de confirmação existe antes de clicar
+            cy.get('body').then(($body) => {
+                if ($body.find('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn').length) {
+                    cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn').click()
+                }
+            })
+        }
+    }
+
 }
 
 export default new pendencias()
