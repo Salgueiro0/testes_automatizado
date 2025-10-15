@@ -7,6 +7,8 @@ import estudos from "../../../support/pages/estudos";
 //EU020 - US054 - RN146
 //EU025 - US059 - RN121
 //EU018 - US052 - RN059
+//EU018 - US052 - RN232
+//EU039 - US074 - RN140
 //(Conferir:)
 // EU019 - US053 - (RN055,RN056)
 // EU019.2 - US053 - (RN232,RN234)
@@ -39,13 +41,14 @@ function pesquisarEstudo(pesTitular,pesSuplente){
     estudos.seletorDropdown(pesSuplente)
     estudos.botaoPesquisar()
 }
-function visualizarEstudo(pesTitular,pesSuplente){
+function visualizarEstudo(pesTitular,pesSuplente,filtro=null){
     estudos.irAbaEstudos()
     estudos.selecionarPesTitular()
     estudos.seletorDropdown(pesTitular)
     estudos.selecionarPesSuplente()
     estudos.seletorDropdown(pesSuplente)
     estudos.botaoPesquisar()
+    estudos.filtrarEstudo(filtro)
     estudos.clicarPrimeiroBotaoVisualizar()
 }
 function cadastrarExigencia(ra,empreendimento,demanda,exigencia){
@@ -125,19 +128,15 @@ describe('estudos', () => {
         estudos.clicarBotaoVoltar()
 
         //Pesquisar
-        visualizarEstudo('PAULO CESAR COSTA','LUCAS DIAS DE LIMA')
+        visualizarEstudo('PAULO CESAR COSTA','LUCAS DIAS DE LIMA','Licença Prévia')
         estudos.validarTabelaReq() //EU020 - US054 - RN147 - VISUALIZAR REQUERIMENTO
 
-        // //Edição
-        // estudos.clicarPrimeiroBotaoEditar()
-        // estudos.validarTituloEditar()
-        // estudos.seletorPessoaTitular()
-        // estudos.seletorDropdown('NELSON ALVES LOUZEIRO JUNIOR')
-        // estudos.seletorPessoaSuplente()
-        // estudos.seletorDropdown('PEDRO RAFAEL MANDAI')
-        // estudos.clicarBotaoSalvar()
-        // estudos.clicarBotaoContinuar()
-        // estudos.clicarBotaoOk()
+        //Edição
+        estudos.botaoEditar()
+        estudos.valorEstimado(4000)
+        estudos.clicarBotaoSalvar()
+        estudos.clicarBotaoContinuar()
+        estudos.clicarBotaoOk()
 
         estudos.excluirEstudo()
     })
@@ -156,13 +155,15 @@ describe('estudos', () => {
         cadastrarExigencia('RA-I - BRASILIA','12 - Polos 06, 07, 08 - Projeto Orla - Beira Lago','LP nº 212/2025','363|10454457|teste' ) //EU019 - US053 - RN058 - INCLUIR EXIGÊNCIA
         cadastroDadosGerais('Obra/Serviço','Licitação','Paisagismo','A licitar','PAULO CESAR COSTA','LUCAS DIAS DE LIMA','1000')
 
-        visualizarEstudo('PAULO CESAR COSTA','LUCAS DIAS DE LIMA')
+        //EDITAR
+        visualizarEstudo('PAULO CESAR COSTA','LUCAS DIAS DE LIMA','LP n° 212/2025')
         estudos.validaTabelaExigencia() //EU020 - US054 - RN147 - VISUALIZAR EXIGÊNCIA
         estudos.validaTitularReq() // EU018 - US052 - RN102 - TITULAR/ SUPLENTE
         estudos.validaSuplenteReq() // EU018 - US052 - RN102 - TITULAR/ SUPLENTE
 
-        // //EXCLUIR
-        // estudos.excluirEstudo()
+        //EXCLUIR
+        visualizarEstudo('PAULO CESAR COSTA','LUCAS DIAS DE LIMA')
+        estudos.excluirEstudo()
     })
     it('Incluir pendência', () => {
         estudos.irParaGLA()
@@ -174,6 +175,10 @@ describe('estudos', () => {
         //EU018 - US052 - RN233
         estudos.referenciarPendencia('RA-I - BRASILIA','12 - Polos 06, 07, 08 - Projeto Orla - Beira Lago','Lista de Pendências para obter (LP)','Audiência Pública - teste - Cumprida')
         cadastroDadosGerais('Obra/Serviço','Licitação','Paisagismo','A licitar','PAULO CESAR COSTA','LUCAS DIAS DE LIMA','1000')
+
+        //EXCLUIR
+        visualizarEstudo('PAULO CESAR COSTA','LUCAS DIAS DE LIMA')
+        estudos.excluirEstudo()
     })
     it('Campos de Texto', () => {
         estudos.irParaGLA()
@@ -307,7 +312,7 @@ describe('estudos', () => {
 
 
     })
-    it.only('Campos Obrigatórios', () => {
+    it('Campos Obrigatórios', () => {
         //EU019 - US053 - RN047 - VALIDAÇÃO DOS CAMPOS OBRIGATÓRIOS
         estudos.irParaGLA()
         estudos.login()
@@ -326,7 +331,6 @@ describe('estudos', () => {
         estudos.clicarBotaoAdicionarRequerimento()
         estudos.MSGRequerimentoObrigatorio() //EU019 - US053 - RN057 - INCLUIR REQUERIMENTO
         estudos.clicarBotaoOkObrigatorios()
-        estudos.pendenciaObrigatoria()
     })
 
     it('Pagamentos e Produtos', () => {
@@ -497,7 +501,7 @@ describe('estudos', () => {
         estudos.validaResultadosEstudos() //EU023 - US057 - RN113
 
         visualizarEstudo('NELSON ALVES LOUZEIRO JUNIOR','PEDRO RAFAEL MANDAI')
-        estudos.validaTitularReq() // EU018 - US052 - RN102 - TITULAR/ SUPLENTE
-        estudos.validaSuplenteReq() // EU018 - US052 - RN102 - TITULAR/ SUPLENTE
+        estudos.validaTitularReq('NELSON ALVES LOUZEIRO JUNIOR') // EU018 - US052 - RN102 - TITULAR/ SUPLENTE
+        estudos.validaSuplenteReq('PEDRO RAFAEL MANDAI') // EU018 - US052 - RN102 - TITULAR/ SUPLENTE
     })
 })

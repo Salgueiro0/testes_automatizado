@@ -247,8 +247,8 @@ class estudos {
         cy.get('#tabela-estudo-aba > tbody > :nth-child(1) > .sorting_1').should('contain','Ofício')
     }
 
-    validaTitularReq(){cy.get('tbody > :nth-child(10) > :nth-child(2)').should('contain','PAULO CESAR COSTA')}
-    validaSuplenteReq(){cy.get('tbody > :nth-child(11) > :nth-child(2)').should('contain','LUCAS DIAS DE LIMA')}
+    validaTitularReq(titular){cy.get('tbody > :nth-child(10) > :nth-child(2)').should('contain',titular)}
+    validaSuplenteReq(suplente){cy.get('tbody > :nth-child(11) > :nth-child(2)').should('contain',suplente)}
     validaMSGImpossivelExcluir(){
         cy.get('#btn-delete-estudo').click()
         cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary').click()
@@ -256,8 +256,10 @@ class estudos {
         cy.get('.bootbox-body').should('contain', 'Existem (Produtos/subprodutos/Serviços, Pagamentos) vinculados')
         cy.contains('button','OK').click()
     }
-    filtrarEstudo(filtro){cy.get('#table-estudo_filter > label > .form-control').type(filtro)}
-    validarTabelaReq() {
+    filtrarEstudo(filtro){
+        if(filtro){cy.get('#table-estudo_filter > label > .form-control').type(filtro)}
+    }
+        validarTabelaReq() {
         cy.get(':nth-child(1) > .panel > .panel-body > :nth-child(2)')
             .invoke('text')
             .then((text) => {
@@ -307,6 +309,7 @@ class estudos {
     referenciarPendencia(ra,empreendimento,listaPendencia,pendencias){
         cy.get('#select2-cd_regiao_admin_pen-container > .select2-selection__placeholder').click()
         cy.get(el.seletorDropdown).contains(ra).click({force: true})
+        cy.wait(3000)
         cy.get('#select2-cd_empreendimento_pen-container').click()
         cy.get(el.seletorDropdown).contains(empreendimento).click({force: true})
         cy.get('#form_pendencia > :nth-child(3) > .form-group > .select2-container > .selection > .select2-selection').should('have.attr', 'tabindex', '0').click()
@@ -363,6 +366,7 @@ class estudos {
     }
     dadosContratoDesab(){cy.get('#nr_contrato_convenio').should('be.disabled')}
     dadosContratoHabilitado(){cy.get('#nr_contrato_convenio').should('not.be.disabled')}
+    botaoEditar(){cy.get(':nth-child(2) > .panel-footer > .btn-toolbar > a.btn').click()}
 }
 
 export default new estudos()
