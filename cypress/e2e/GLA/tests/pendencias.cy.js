@@ -39,7 +39,7 @@ describe('pendência', () => {
      pendencias.selecionarOrgaoUnidadeInterna()
      pendencias.dropdownGLA('ACJUR - ADVOCACIA E CONSULTORIA JURIDICA ')
      pendencias.adicionarUnidadeInterna()
-     pendencias.clicarPrimeiroBotao()
+     pendencias.clicarConfirmar()
      pendencias.adicionar9Dado()
      pendencias.digitarOrgaoProcessoSei('11111')
      pendencias.DigitarNumeroProcessoSei('11111111')
@@ -162,7 +162,7 @@ describe('pendência', () => {
    pendencias.clicarExcluirListaPendencias() //EU051 - US083 - RN150
    pendencias.salvarExclusao()
   })
-  it('Excluir todas as linhas', () => {
+  it('Excluir todas as linhas Campos das Tabelas de Resultados ', () => {
     pendencias.irParaGLA()
     pendencias.login()
     pendencias.clicarAbaPendencia()
@@ -173,10 +173,12 @@ describe('pendência', () => {
     pendencias.adicionarListaPendencias()
     pendencias.adicionarLP()
     pendencias.botaoAdicionar()
+    pendencias.clicarCamposTabelasResultados()
+    pendencias.validarCamposMarcadosPadrao()   //EU052 - US084 - RN152 - Módulo pendência - Campos da Tabela de Resultados
     pendencias.expandirLP()
     pendencias.excluir8Linhas() //EU052 - US084 - RN160 - Caso todas as linhas sejam excluídas, a tabela deverá ser excluída
   })
-  it.only('Campos das Tabelas de Resultados', () => {
+  it.only('Adicionar Lista de Pendência', () => {
       pendencias.irParaGLA()
       pendencias.login()
       pendencias.clicarAbaPendencia()
@@ -189,6 +191,14 @@ describe('pendência', () => {
       pendencias.botaoAdicionar()
       pendencias.expandirLP()
 
-  })
 
+
+      //UNIDADE INTERNA
+      pendencias.unidadeInterna()
+      pendencias.selecionarOrgaoUnidadeInterna()
+      pendencias.dropdownGLA('ACJUR -ADVOCACIA E CONSULTORIA JURIDICA') //EU052 - US084 - RN154
+      pendencias.adicionarUnidadeInterna()
+      pendencias.clicarConfirmar()
+
+  })
 })

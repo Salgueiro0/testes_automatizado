@@ -55,8 +55,12 @@ class pendencias {
     adicionar5Dado(){cy.get(el.btnAdicionar5Dado).click()}
     adicionar9Dado(){cy.get(el.btnAdicionar9Dado).click()}
     selecionarOrgaoUnidadeInterna(){cy.get(el.cdOrgaoUnidadeInternaContainer).click()}
-    adicionarUnidadeInterna(){cy.get(el.btnAdicionarUnidadeInterna).click();cy.wait(1000)}
-    clicarPrimeiroBotao(){cy.get(el.btnPrimeiro).click();cy.wait(1000)}
+    adicionarUnidadeInterna(){
+        cy.get(el.btnAdicionarUnidadeInterna).click()
+        cy.wait(1000)
+    }
+    unidadeInterna(){cy.get(':nth-child(1) > :nth-child(4) > a > .fa').click()}
+    clicarConfirmar(){cy.get(el.btnPrimeiro).click();cy.wait(1000)}
     digitarOrgaoProcessoSei(texto){cy.get(el.inputOrgaoProcessoSei).type(texto);cy.wait(1000)}
     DigitarNumeroProcessoSei(texto){cy.get(el.inputNumeroProcessoSei).type(texto);cy.wait(1000)}
     digitarAnoProcessoSei(texto){cy.get(el.inputAnoProcessoSei).type(texto);cy.wait(4000)}
@@ -128,7 +132,15 @@ class pendencias {
             })
         }
     }
-
+    clicarCamposTabelasResultados(){cy.get('.content > :nth-child(2) > .box-header').click()}
+    validarCamposMarcadosPadrao() {
+        cy.get('.content > :nth-child(2) > .box-body > .panel > .panel-body')
+            .within(() => {
+                cy.get('input[type="checkbox"]').each(($checkbox) => {
+                    cy.wrap($checkbox).should('be.checked')
+                })
+            })
+    }
 }
 
 export default new pendencias()
