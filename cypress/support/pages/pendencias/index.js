@@ -89,6 +89,10 @@ class pendencias {
     clicarBtnSucess(){cy.get(el.btnSucess).click()}
     clicarLista(){cy.get(el.chkLista).click()}
     clicarModalVinculoPendencia(){cy.get(el.btnModalVinculoPendencia).click()}
+    validacoesBotoesCadastrarEditar(){
+        cy.get(el.btnPesquisarPendencias).should('contain','Pesquisar')
+        cy.get(el.btnSucess).should('contain','Adicionar Lista de Pendências')
+    }
 }
 
 export default new pendencias()
