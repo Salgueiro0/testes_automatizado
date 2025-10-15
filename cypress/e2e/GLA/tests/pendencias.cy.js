@@ -2,6 +2,8 @@
 /// <reference types="cypress" />
 
 import pendencias from "../../../support/pages/pendencias";
+//HUs INVÁLIDAS:
+//EU052 - US084 - RN164
 
 describe('pendência', () => {
     beforeEach(() => {
@@ -160,7 +162,7 @@ describe('pendência', () => {
    pendencias.clicarExcluirListaPendencias() //EU051 - US083 - RN150
    pendencias.salvarExclusao()
   })
-  it.only('Excluir todas as linhas', () => {
+  it('Excluir todas as linhas', () => {
     pendencias.irParaGLA()
     pendencias.login()
     pendencias.clicarAbaPendencia()
@@ -174,4 +176,19 @@ describe('pendência', () => {
     pendencias.expandirLP()
     pendencias.excluir8Linhas() //EU052 - US084 - RN160 - Caso todas as linhas sejam excluídas, a tabela deverá ser excluída
   })
+  it.only('Campos das Tabelas de Resultados', () => {
+      pendencias.irParaGLA()
+      pendencias.login()
+      pendencias.clicarAbaPendencia()
+      pendencias.clicarBotaoCadastrarEditar()
+      pendencias.selecionarCdEmpreendimento()
+      pendencias.dropdownGLA('4 - Empreendimento XPTO 5 ')
+      pendencias.pesquisarPendencia()
+      pendencias.adicionarListaPendencias()
+      pendencias.adicionarLP()
+      pendencias.botaoAdicionar()
+      pendencias.expandirLP()
+
+  })
+
 })
