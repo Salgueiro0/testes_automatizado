@@ -43,8 +43,8 @@ class pendencias {
     validarAdListaPendencia(){cy.get('.panel-body > .panel-footer > .btn-toolbar > .btn-success').should('have.text', "Adicionar Lista de Pendências")}
     clicarBtn(){cy.get('.content > :nth-child(3) > .box-header > .box-tools > .btn > .fa').click()}
     criarLinhas(){for(var i=0;i<14;i++){cy.get(el.pendenciaTodasBtn).click();cy.wait(1000)}}
-    adicionar1Dado(){cy.get(el.btnAdicionar1Dado).click();cy.wait(2000)}
-    adicionar2Dado(texto){cy.get(el.iframeAdicionar2Dado).its('0.contentDocument.body').should('not.be.empty').then(cy.wrap).find('p').click().type(texto)}
+    resumo(){cy.get(el.adicionarResumo).click();cy.wait(2000)}
+    digitarResumo(texto){cy.get(el.iframeAdicionar2Dado).its('0.contentDocument.body').should('not.be.empty').then(cy.wrap).find('p').click().type(texto)}
     adicionar3Dado(){cy.get(el.btnAdicionar3Dado).click()}
     adicionar4Dado(){cy.get(el.btnAdicionar4Dado).click();cy.wait(2000)}
     selecionarCdDemanda(){cy.get(el.cdDemandaContainer).click();cy.wait(2000)}
@@ -140,6 +140,18 @@ class pendencias {
                     cy.wrap($checkbox).should('be.checked')
                 })
             })
+    }
+    categoria(categoria){cy.get(':nth-child(1) > .noVis > select')
+        .select(categoria)
+        cy.wait(2000)
+    }
+    statusPendencia(status){
+        cy.get(':nth-child(1) > :nth-child(6) > select')
+            .select(status)
+    }
+    exigeContratacao(simNao){
+        cy.get(':nth-child(1) > :nth-child(8) > select')
+            .select(simNao)
     }
 }
 

@@ -25,8 +25,8 @@ describe('pendência', () => {
      pendencias.validarAdListaPendencia()
      pendencias.clicarBtn()
      pendencias.criarLinhas()
-     pendencias.adicionar1Dado()
-     pendencias.adicionar2Dado('teste')
+     pendencias.resumo()
+     pendencias.digitarResumo('teste')
      pendencias.adicionar3Dado()
      pendencias.adicionar4Dado()
      pendencias.selecionarCdDemanda()
@@ -177,6 +177,7 @@ describe('pendência', () => {
     pendencias.validarCamposMarcadosPadrao()   //EU052 - US084 - RN152 - Módulo pendência - Campos da Tabela de Resultados
     pendencias.expandirLP()
     pendencias.excluir8Linhas() //EU052 - US084 - RN160 - Caso todas as linhas sejam excluídas, a tabela deverá ser excluída
+      // EU052 - US084 - RN154 - Ações
   })
   it.only('Adicionar Lista de Pendência', () => {
       pendencias.irParaGLA()
@@ -191,14 +192,27 @@ describe('pendência', () => {
       pendencias.botaoAdicionar()
       pendencias.expandirLP()
 
-
+      //CATEGORIA
+      pendencias.categoria('Consulta ao CONAM') //EU052 - US084 - RN154
 
       //UNIDADE INTERNA
       pendencias.unidadeInterna()
       pendencias.selecionarOrgaoUnidadeInterna()
-      pendencias.dropdownGLA('ACJUR -ADVOCACIA E CONSULTORIA JURIDICA') //EU052 - US084 - RN154
+      pendencias.dropdownGLA('ACJUR - ADVOCACIA E CONSULTORIA JURIDICA ') //EU052 - US084 - RN154
       pendencias.adicionarUnidadeInterna()
       pendencias.clicarConfirmar()
+
+      //STATUS DA PENDÊNCIA
+      pendencias.statusPendencia('Informativo') //EU052 - US084 - RN154
+
+      //EXIGE CONTRATAÇÃO
+      pendencias.exigeContratacao('Sim') //EU052 - US084 - RN154
+
+      //RESUMO
+      pendencias.resumo()
+      pendencias.digitarResumo('a'.repeat(501)) //EU052 - US084 - RN155 - Máximo de 500 caracteres
+
+
 
   })
 })
