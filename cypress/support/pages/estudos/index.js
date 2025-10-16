@@ -115,18 +115,18 @@ class estudos {
     validarDGValorPagoEstudo() {cy.get(':nth-child(17) > :nth-child(1)').should('contain','Valor Pago do Estudo')}
     validarDGSaldoEstudo(){cy.get(':nth-child(18) > :nth-child(1)').should('contain','Saldo do Estudo')}
     clicarBotaoMais(){ cy.get(el.clicarBotaoMais).click() }
-    adicionarPagamento(data,valor,select){
+    expandirPagamento(){
         cy.get('.sorting_1').should('be.visible')
-        cy.get("[onclick=\"toggleFormAccordion('pg')\"]").click()
+        cy.get("[onclick=\"toggleFormAccordion('pg')\"]").click()}
+    botaoAdicionarPagamento(){
         cy.get(':nth-child(14) > :nth-child(1) > .col-md-12 > .btn').should('be.visible').click()
         cy.wait(3000)
-        cy.get('#dt_pagamento').should('be.visible').type(data)
-        cy.get('#vl_pagamento').type(valor)
-        cy.get('#select2-objeto_estudo-container').click()
-        cy.get(el.seletorDropdown).contains(select).click({force: true})
-        cy.get('#botao-salvar').click()
-        cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn').click()
     }
+    digitarDataPagamento(data){cy.get('#dt_pagamento').should('be.visible').type(data)}
+    digitarValorPagamento(valor){cy.get('#vl_pagamento').type(valor)}
+    selecionarProdutoPagamento(){ cy.get('#select2-objeto_estudo-container').click()}
+    botaoSalvarPagamento(){cy.get('#botao-salvar').click()}
+    botaoOkPagamento(){cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn').click()}
     selecionarRegiaoAdmin(){ cy.get(el.selecionarRegiaoAdmin).click() }
     seletorDropdown(select){ cy.get(el.seletorDropdown).contains(select).click({force: true}) }
     validaDropdownObjeto(selects) {
@@ -220,7 +220,7 @@ class estudos {
     suplenteObrigatoria(){cy.get('#error_cd_pessoa_suplente').should('contain','O campo Suplente é obrigatório')}
     validaTabelaRequerimento(){cy.get('.odd > :nth-child(2)').should('contain','Nova Permissão - Ofício n° 6/1565 - ACJUR p/ ADASA')}
     irEmpreendimentos(){cy.get('.sidebar-menu > :nth-child(2) > a').click()}
-    pesquisarEmpreendimento(){cy.get('#pesquisar').click()}
+    pesquisarEstudo(){cy.get('#pesquisar').click()}
     filtrar(filtro){cy.get('#table-empreendimento_filter > label > .form-control').type(filtro)}
     clicarEstudos(){cy.get('.novo-estudo-aba').click()}
     validaResultadosEstudos(){cy.get('#tabela-estudo-aba_wrapper > :nth-child(2) > .col-sm-12').should('contain','R$')}
@@ -253,7 +253,7 @@ class estudos {
         cy.get('#btn-delete-estudo').click()
         cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary').click()
         cy.get('.bootbox-body').should('contain', 'Impossível excluir este Estudo, Compra ou Serviço Ambiental.')
-        cy.get('.bootbox-body').should('contain', 'Existem (Produtos/subprodutos/Serviços, Pagamentos) vinculados')
+        cy.get('.bootbox-body').should('contain', 'Existem (Ordens de serviço da Empresa, Produtos/subprodutos/Serviços, Pagamentos) vinculados')
         cy.contains('button','OK').click()
     }
     filtrarEstudo(filtro){
@@ -289,18 +289,15 @@ class estudos {
                 expect(textoNormalizado).to.include('LP n° 212/2025 - ABDI - Exigência n° 10454457 - teste')
             })
     }
-    adicionarProduto(tipo,numero,nome,status){
-        cy.get("[onclick=\"toggleFormAccordion('pss')\"]").click()
-        cy.get(':nth-child(10) > :nth-child(1) > .col-md-12 > .btn').should('be.visible').click()
-        cy.get('#select2-tp_objeto_estudo-container').click()
-        cy.get(el.seletorDropdown).contains(tipo).click({force: true})
-        cy.get('#co_objeto_estudo').type(numero)
-        cy.get('#nm_objeto_estudo').type(nome)
-        cy.get('#select2-tp_status-container > .select2-selection__placeholder').click()
-        cy.get(el.seletorDropdown).contains(status).click({force: true})
-        cy.get('#botao-salvar-obj-est').click()
-        cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn').click()
-    }
+    expandirProduto(){cy.get("[onclick=\"toggleFormAccordion('pss')\"]").click()}
+    botaoAdicionarProduto(){cy.get(':nth-child(10) > :nth-child(1) > .col-md-12 > .btn').should('be.visible').click()}
+    clicarTipoProduto(){cy.get('#select2-tp_objeto_estudo-container').click()}
+    digitarNumeroProduto(numero){cy.get('#co_objeto_estudo').type(numero)}
+    digitarNomeProduto(nome){cy.get('#nm_objeto_estudo').type(nome)}
+    selecionarStatusProduto(){cy.get('#select2-tp_status-container > .select2-selection__placeholder').click()}
+    botaoSalvarProduto(){cy.get('#botao-salvar-obj-est').click()}
+    botaoOkProduto(){cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn').first().click()}
+
     validaSubtracao() {
         cy.get('#vl_estimado').should('contain','R$ 10,00')
         cy.get(':nth-child(17) > :nth-child(2)').should('contain','1.000.000.000,00')
@@ -367,6 +364,25 @@ class estudos {
     dadosContratoDesab(){cy.get('#nr_contrato_convenio').should('be.disabled')}
     dadosContratoHabilitado(){cy.get('#nr_contrato_convenio').should('not.be.disabled')}
     botaoEditar(){cy.get(':nth-child(2) > .panel-footer > .btn-toolbar > a.btn').click()}
+    expandirDadosOS(){cy.get("[onclick=\"toggleFormAccordion('os')\"]").click()}
+    clicarAdicionar(){cy.get(':nth-child(12) > :nth-child(1) > .col-md-12 > .btn').click()}
+    selecionarProduto(){cy.get('#select2-objeto_estudo_os-container').click()}
+    adicionarProduto(){cy.get('#adicionarObjetoEstudoOsBtn').click()}
+    digitarNumero(numero){cy.get('#nr_ordem_servico').type(numero)}
+    digitarAno(ano){cy.get('#aa_ordem_servico').type(ano)}
+    botaoSalvar(){cy.get('#botao-salvar-os').click()}
+    botaoOk(){cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn').click()}
+    clicarExcluirDadosDetalhados(posicaoExcluir){cy.get(el.clicarPrimeiroBotaoExcluir)
+        .should('be.visible')
+        .eq(posicaoExcluir).click()}
+    clicarConfirmarExcluirDadosDetalhados(){cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn-primary').first().click()}
+    validaMSGPreenchaCampos(){cy.get('.bootbox-body').should('contain','Preencha todos os campos obrigatórios')}
+    limparTipoProduto(){cy.get('#select2-tp_objeto_estudo-container > .select2-selection__clear').click()}
+    limparNumero(){cy.get('#co_objeto_estudo').clear()}
+    limparNome(){cy.get('#nm_objeto_estudo').clear()}
+    limparStatus(){cy.get('#select2-tp_status-container > .select2-selection__clear').click()}
+    fecharModalProduto(){cy.get('#modal-produtos-subprodutos-servicos > .modal-dialog > .modal-content > .modal-footer > .btn-secondary').click()}
+    digitarDescricaoPagamentos(descricao){cy.get('#ds_pagamento').type(descricao)}
 }
 
 export default new estudos()

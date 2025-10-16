@@ -9,12 +9,7 @@ import estudos from "../../../support/pages/estudos";
 //EU018 - US052 - RN059
 //EU018 - US052 - RN232
 //EU039 - US074 - RN140
-//(Conferir:)
-// EU019 - US053 - (RN055,RN056)
-// EU019.2 - US053 - (RN232,RN234)
-// EU019.4 - US053 - (RN234,RN243)
-// EU020 - US054 - (RN147)
-//EU020.1 - US054 - (RN233)
+
 function cadastroDadosGerais(tipo,natureza,objeto,status,titular,suplente,valor){
     estudos.selecionarTpEstudoContainer()
     estudos.seletorDropdown(tipo)
@@ -79,8 +74,8 @@ function selecionaTipoNatureza(tipo,natureza){
 }
 function visualizarEmpreendimento(){
     estudos.irEmpreendimentos()
-    estudos.pesquisarEmpreendimento()
-    estudos.pesquisarEmpreendimento()
+    estudos.pesquisarEstudo()
+    estudos.pesquisarEstudo()
     estudos.filtrar('Polos 06, 07, 08')
     estudos.clicarPrimeiroBotaoVisualizar()
     estudos.clicarEstudos()
@@ -98,6 +93,11 @@ function referenciarRequerimento(ra,empreendimento,tipoRequerimento,requerimento
     estudos.validarRequerimento(requerimento)//EU019 - US053 - RN057 - INCLUIR REQUERIMENTO
     estudos.seletorDropdown(requerimento)
     estudos.clicarBotaoAdicionarRequerimento()
+}
+function excluirDadosDetalhados(posicaoExcluir){
+    estudos.clicarExcluirDadosDetalhados(posicaoExcluir)
+    estudos.clicarConfirmarExcluirDadosDetalhados()
+    estudos.botaoOkProduto()
 }
 
 describe('estudos', () => {
@@ -173,7 +173,7 @@ describe('estudos', () => {
         estudos.clicarBotaoMais()
         estudos.adicionarSemCamposObrigatorios() //EU021.3 - US055 - Pendências obrigatório
         //EU018 - US052 - RN233
-        estudos.referenciarPendencia('RA-I - BRASILIA','12 - Polos 06, 07, 08 - Projeto Orla - Beira Lago','Lista de Pendências para obter (LP)','Audiência Pública - teste - Cumprida')
+        estudos.referenciarPendencia('RA-I - BRASILIA','12 - Polos 06, 07, 08 - Projeto Orla - Beira Lago','Lista de Pendências para obter (LP)','Audiência Pública - teste - Cumprida') //EU018 - US052 - RN233
         cadastroDadosGerais('Obra/Serviço','Licitação','Paisagismo','A licitar','PAULO CESAR COSTA','LUCAS DIAS DE LIMA','1000')
 
         //EXCLUIR
@@ -331,9 +331,60 @@ describe('estudos', () => {
         estudos.clicarBotaoAdicionarRequerimento()
         estudos.MSGRequerimentoObrigatorio() //EU019 - US053 - RN057 - INCLUIR REQUERIMENTO
         estudos.clicarBotaoOkObrigatorios()
+        //
+        //
+        // //DADOS DETALHADOS
+        // estudos.irAbaEstudos()
+        // estudos.pesquisarEstudo()
+        // estudos.clicarPrimeiroBotaoVisualizar()
+        //
+        // //PRODUTOS  EU018 - US052 - Obrigatório
+        // estudos.expandirProduto()
+        // estudos.botaoAdicionarProduto()
+        //
+        // //tipo
+        // estudos.clicarTipoProduto()
+        // estudos.seletorDropdown('PRODUTO')
+        // estudos.botaoSalvarProduto()
+        // estudos.botaoOkProduto()
+        // estudos.validaMSGPreenchaCampos()
+        // estudos.limparTipoProduto()
+        //
+        // //número
+        // estudos.digitarNumeroProduto(1)
+        // estudos.botaoSalvarProduto()
+        // estudos.botaoOkProduto()
+        // estudos.validaMSGPreenchaCampos()
+        // estudos.limparNumero()
+        //
+        // //nome
+        // estudos.digitarNomeProduto('a'.repeat(231)) //EU018 - US052 - Limite de 250 caracteres
+        // estudos.botaoSalvarProduto()
+        // estudos.botaoOkProduto()
+        // estudos.validaMSGPreenchaCampos()
+        // estudos.limparNome()
+        //
+        // //status
+        // estudos.selecionarStatusProduto()
+        // estudos.seletorDropdown('Não Executado')
+        // estudos.botaoSalvarProduto()
+        // estudos.botaoOkProduto()
+        // estudos.validaMSGPreenchaCampos()
+        // estudos.limparStatus()
+        //
+        // estudos.fecharModalProduto()
+        //
+        // //DADOS DA OS  EU018 - US052 - Obrigatório
+        // estudos.expandirDadosOS()
+        // estudos.clicarAdicionar()
+        //
+        // //produto
+        // estudos.selecionarProduto()
+        // estudos.seletorDropdown('PRODUTO 1 - teste - -')
+        // estudos.adicionarProduto()
     })
 
-    it('Pagamentos e Produtos', () => {
+    it.only('Pagamentos e Produtos', () => {
         estudos.irParaGLA()
         estudos.login()
         estudos.irAbaEstudos()
@@ -342,10 +393,48 @@ describe('estudos', () => {
         cadastrarExigencia('RA-I - BRASILIA','12 - Polos 06, 07, 08 - Projeto Orla - Beira Lago','LP nº 737/1998','82|1|----------------- ÇÇÇ Â ÂÂ' )
         cadastroDadosGerais('Obra/Serviço','Licitação','Paisagismo','A licitar','PAULO CESAR COSTA','LUCAS DIAS DE LIMA','1000')
         visualizarEstudo('PAULO CESAR COSTA','LUCAS DIAS DE LIMA')
-        estudos.adicionarProduto('PRODUTO',1,'TESTE','Não Executado')
-        estudos.adicionarPagamento('2020-01-01','10000000000000','PRODUTO 1 - TESTE - -') //12 caracteres antes da virgula
-        estudos.validaMSGImpossivelExcluir() //EU044 - US076 - EXCLUIR ESTUDOS - RN148 - Estudos - Botão Excluir
+
+         //ADICIONAR PRODUTO
+        estudos.expandirProduto()
+        estudos.botaoAdicionarProduto()
+        estudos.clicarTipoProduto()
+        estudos.seletorDropdown('PRODUTO')
+        estudos.digitarNumeroProduto(1)
+        estudos.digitarNomeProduto('teste') //EU018 - US052 - Limite de 250 caracteres
+        estudos.selecionarStatusProduto()
+        estudos.seletorDropdown('Não Executado')
+        estudos.botaoSalvarProduto()
+        estudos.botaoOkProduto()
+
+        //ADICIONAR PAGAMENTO
+        estudos.expandirPagamento()
+        estudos.botaoAdicionarPagamento()
+        estudos.digitarDataPagamento('2020-01-01')
+        estudos.digitarValorPagamento('10000000000000') //12 caracteres antes da virgula
+        estudos.selecionarProdutoPagamento()
+        estudos.seletorDropdown('PRODUTO 1 - teste - -')
+        estudos.digitarDescricaoPagamentos('a'.repeat(500) + 'Mais de 500 caracteres') //EU018 - US052 Limitado a 500 caracteres
+        estudos.botaoSalvarPagamento()
+        estudos.botaoOkPagamento()
         estudos.validaSubtracao() //EU020.2 - US054 - RN242
+
+        //ADICIONAR DADOS DA OS DA EMPRESA
+         estudos.expandirDadosOS()
+        estudos.clicarAdicionar()
+        estudos.selecionarProduto()
+        estudos.seletorDropdown('PRODUTO 1 - teste - -')
+        estudos.adicionarProduto()
+        estudos.digitarNumero(1)
+        estudos.digitarAno(2000) //4 dígitos - EU018 - US052
+        estudos.botaoSalvar()
+        estudos.botaoOk()
+
+        estudos.validaMSGImpossivelExcluir() //EU044 - US076 - EXCLUIR ESTUDOS - RN148 - Estudos - Botão Excluir - EU018 - US052 - RN234 - Estudos - Regras de Exclusão
+        excluirDadosDetalhados(1)
+        excluirDadosDetalhados(2)
+        excluirDadosDetalhados(0)
+
+        estudos.excluirEstudo()
     })
     it('Tipo/Natureza/Status', () => {
         //EU023 - US057 - RN0101 - STATUS/ESTUDOS
@@ -429,7 +518,7 @@ describe('estudos', () => {
         estudos.selecionarTpEstudoContainer()
         estudos.seletorDropdown('Dação em Pagamento')
         estudos.digitaObjeto('Texto livre')
-
+        //EU018 - US052 - RN0101
         estudos.selecionaTipoNatureza('Obra/Serviço','Licitação')
         estudos.selecionarTpStatusContainer()
         estudos.validaDropdownStatus([
@@ -494,7 +583,7 @@ describe('estudos', () => {
         estudos.irParaGLA()
         estudos.login()
         estudos.irEmpreendimentos()
-        estudos.pesquisarEmpreendimento()
+        estudos.pesquisarEstudo()
         estudos.filtrar('Polos 06, 07, 08')
         estudos.clicarPrimeiroBotaoVisualizar()
         estudos.clicarEstudos()
