@@ -40,7 +40,7 @@ export const ELEMENTS = {
     aLabelDiasLimite: '[aria-label="Dias Restantes (Data Limite): Ordenar colunas de forma ascendente"]',
     botaoCadastrarEditar: '.btn-success',
     pendenciaTodasBtn: '#pendenciaTodas3283 > .panel-footer > .btn-toolbar > .btn-primary',
-    adicionarResumo: ':nth-child(1) > :nth-child(2) > div > a > .fa',
+    adicionarResumo: ':nth-child(2) > :nth-child(2) > div > a > .fa',
     iframeAdicionar2Dado: '#cke_1_contents iframe',
     btnAdicionar3Dado: '#modal-alteracao-resumo > .modal-dialog > .modal-content > .modal-footer > #botao-editar',
     btnAdicionar4Dado: ':nth-child(2) > :nth-child(3) > a > .fa',

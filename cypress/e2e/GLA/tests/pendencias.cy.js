@@ -159,6 +159,8 @@ describe('pendência', () => {
    pendencias.consultarExigencia()
    pendencias.selecionarPrimeiraExigencia()
    pendencias.clicarConfirmarVinculoExigencia()
+   pendencias.validarExigenciaSemEditar() //EU052 - US084 - RN153 - usuário não pode alterar.
+   pendencias.linkExigenciaVinculada()  //EU052 - US084 - RN159 - link das exigências vinculadas
    pendencias.clicarExcluirListaPendencias() //EU051 - US083 - RN150
    pendencias.salvarExclusao()
   })
@@ -200,6 +202,10 @@ describe('pendência', () => {
       pendencias.selecionarOrgaoUnidadeInterna()
       pendencias.dropdownGLA('ACJUR - ADVOCACIA E CONSULTORIA JURIDICA ') //EU052 - US084 - RN154
       pendencias.adicionarUnidadeInterna()
+
+      pendencias.selecionarOrgaoUnidadeInterna()
+      pendencias.dropdownGLA(' ADCOM - ADCOM-ASSESSORIA DA DIRETORIA DE DESENVOLVIMENTO E COMERCIAL ') //EU052 - US084 - RN165 - múltiplas “Unidades Internas”
+      pendencias.adicionarUnidadeInterna()
       pendencias.clicarConfirmar()
 
       //STATUS DA PENDÊNCIA
@@ -209,10 +215,16 @@ describe('pendência', () => {
       pendencias.exigeContratacao('Sim') //EU052 - US084 - RN154
 
       //RESUMO
-      pendencias.resumo()
-      pendencias.digitarResumo('a'.repeat(501)) //EU052 - US084 - RN155 - Máximo de 500 caracteres
+      pendencias.resumo() //EU052 - US084 - RN155 - botão Editar
+      pendencias.digitarResumo('a'.repeat(501)) //EU052 - US084 - RN155 - Máximo de 500 caracteres  - RN171 - texto livre
+      pendencias.confirmarDescricaoResumo()//EU052 - US084 - RN155 -  botão confirmar
 
-
-
+      pendencias.clicarVincularExigencia() // EU051 - US083 - RN170
+      pendencias.selecionarStatusExigencia()
+      pendencias.dropdownGLA('Em Execução')
+      pendencias.consultarExigencia()
+      pendencias.selecionarPrimeiraExigencia()
+      pendencias.clicarConfirmarVinculoExigencia()
+      pendencias.validarTextoResumo('teste')//EU052 - US084 - RN171 - Possui Exigência vinculada
   })
 })

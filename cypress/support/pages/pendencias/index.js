@@ -39,12 +39,23 @@ class pendencias {
     selecionarCdEmpreendimento(){cy.get('#select2-cd_empreendimento-container').click()}
     dropdownGLA(seletor){cy.get('.select2-results').find('li').contains(seletor).click({force:true})}
     pesquisarPendencia(){cy.get('#pesquisarPendencias').click()}
+
     validarTituloCadastrarEditar(){cy.get('#pendencia > .box > .box-header > .box-title').should('have.text', "Cadastrar/Editar")}
     validarAdListaPendencia(){cy.get('.panel-body > .panel-footer > .btn-toolbar > .btn-success').should('have.text', "Adicionar Lista de Pendências")}
     clicarBtn(){cy.get('.content > :nth-child(3) > .box-header > .box-tools > .btn > .fa').click()}
     criarLinhas(){for(var i=0;i<14;i++){cy.get(el.pendenciaTodasBtn).click();cy.wait(1000)}}
     resumo(){cy.get(el.adicionarResumo).click();cy.wait(2000)}
-    digitarResumo(texto){cy.get(el.iframeAdicionar2Dado).its('0.contentDocument.body').should('not.be.empty').then(cy.wrap).find('p').click().type(texto)}
+    digitarResumo(texto) {
+        cy.get(el.iframeAdicionar2Dado)
+            .its('0.contentDocument.body')
+            .should('not.be.empty')
+            .then(cy.wrap)
+            .find('p')
+            .click()
+            .type(texto)
+            .invoke('text')
+            .should('have.length.at.most', 500)
+    }
     adicionar3Dado(){cy.get(el.btnAdicionar3Dado).click()}
     adicionar4Dado(){cy.get(el.btnAdicionar4Dado).click();cy.wait(2000)}
     selecionarCdDemanda(){cy.get(el.cdDemandaContainer).click();cy.wait(2000)}
@@ -153,6 +164,14 @@ class pendencias {
         cy.get(':nth-child(1) > :nth-child(8) > select')
             .select(simNao)
     }
+    confirmarDescricaoResumo(){cy.get('#modal-alteracao-resumo > .modal-dialog > .modal-content > .modal-footer > #botao-editar').click()}
+    validarTextoResumo(valor) {cy.get('tbody > :nth-child(1) > :nth-child(2) > div').should('contain',valor)}
+    validarExigenciaSemEditar(){
+        cy.get('tbody > :nth-child(1) > :nth-child(3)')
+            .find('fa')
+            .should('not.exist')
+    }
+    linkExigenciaVinculada(){cy.get('tbody > :nth-child(1) > :nth-child(3) > a').click()}
 }
 
 export default new pendencias()
