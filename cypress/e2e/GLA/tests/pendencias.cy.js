@@ -5,12 +5,12 @@ import pendencias from "../../../support/pages/pendencias";
 //HUs INVÁLIDAS:
 //EU052 - US084 - RN164
 
+//HUs inválidas:
+//EU052 - US084 - RN172
 describe('pendência', () => {
     beforeEach(() => {
         cy.visit('http://gla-homol.terracapnet.local')
         cy.viewport(1980, 1200)
-       
-          
     })
   it('teste cadastrar pendência no empreendimento', () => {
      pendencias.irParaGLA()
@@ -48,7 +48,7 @@ describe('pendência', () => {
      pendencias.selecionar()
      pendencias.adicionar6Dado()
      pendencias.digitarEmParagrafo('teste')
-     pendencias.alterarModalProvidencia()
+     pendencias.confirmarModalProvidencia()
      pendencias.adicionar7Dado()
 
      const dataBrasileira = '01/01/2024';
@@ -164,7 +164,7 @@ describe('pendência', () => {
    pendencias.clicarExcluirListaPendencias() //EU051 - US083 - RN150
    pendencias.salvarExclusao()
   })
-  it('Excluir todas as linhas Campos das Tabelas de Resultados ', () => {
+  it('Validações Gerais', () => {
     pendencias.irParaGLA()
     pendencias.login()
     pendencias.clicarAbaPendencia()
@@ -179,7 +179,8 @@ describe('pendência', () => {
     pendencias.validarCamposMarcadosPadrao()   //EU052 - US084 - RN152 - Módulo pendência - Campos da Tabela de Resultados
     pendencias.expandirLP()
     pendencias.excluir8Linhas() //EU052 - US084 - RN160 - Caso todas as linhas sejam excluídas, a tabela deverá ser excluída
-      // EU052 - US084 - RN154 - Ações
+    // EU052 - US084 - RN154 - Ações
+
   })
   it.only('Adicionar Lista de Pendência', () => {
       pendencias.irParaGLA()
@@ -195,36 +196,76 @@ describe('pendência', () => {
       pendencias.expandirLP()
 
       //CATEGORIA
-      pendencias.categoria('Consulta ao CONAM') //EU052 - US084 - RN154
+      pendencias.categoria1Linha('Consulta ao CONAM') //EU052 - US084 - RN154
 
-      //UNIDADE INTERNA
-      pendencias.unidadeInterna()
+      //VINCULAR EXIGÊNCIA
+      pendencias.clicarVincularExigencia() // EU051 - US083 - RN170
+      pendencias.selecionarStatusExigencia()
+      pendencias.dropdownGLA('Pendente')
+      pendencias.consultarExigencia()
+      pendencias.filtrarExigencia('TESTE AUTOMATIZADO')
+      pendencias.selecionarPrimeiraExigencia()
+      pendencias.clicarConfirmarVinculoExigencia()
+
+      //RESUMO SEM EXIGÊNCIA
+      pendencias.resumo2Linha() //EU052 - US084 - RN155 - botão Editar
+      pendencias.digitarResumo('a'.repeat(500) + 'Tem mais de 500') //EU052 - US084 - RN155 - Máximo de 500 caracteres  - RN171 - texto livre - EU052 - US084 - RN168
+      pendencias.confirmarDescricaoResumo()//EU052 - US084 - RN155 -  botão confirmar
+
+      //RESUMO COM EXIGÊNCIA
+      pendencias.validarTextoResumo('TESTE AUTOMATIZADO')//EU052 - US084 - RN171 - Possui Exigência vinculada
+
+      //UNIDADE INTERNA COM EXIGÊNCIA - EU052 - US084 - RN173
+      pendencias.unidadeInterna1Linha()
       pendencias.selecionarOrgaoUnidadeInterna()
       pendencias.dropdownGLA('ACJUR - ADVOCACIA E CONSULTORIA JURIDICA ') //EU052 - US084 - RN154
-      pendencias.adicionarUnidadeInterna()
+      pendencias.adicionarUnidadeInterna() 
 
       pendencias.selecionarOrgaoUnidadeInterna()
       pendencias.dropdownGLA(' ADCOM - ADCOM-ASSESSORIA DA DIRETORIA DE DESENVOLVIMENTO E COMERCIAL ') //EU052 - US084 - RN165 - múltiplas “Unidades Internas”
-      pendencias.adicionarUnidadeInterna()
+      pendencias.adicionarUnidadeInterna() 
       pendencias.clicarConfirmar()
 
-      //STATUS DA PENDÊNCIA
-      pendencias.statusPendencia('Informativo') //EU052 - US084 - RN154
+      //UNIDADE INTERNA SEM EXIGÊNCIA - EU052 - US084 - RN173
+      pendencias.unidadeInterna2Linha()
+      pendencias.selecionarOrgaoUnidadeInterna()
+      pendencias.dropdownGLA('ACJUR - ADVOCACIA E CONSULTORIA JURIDICA ')
+      pendencias.adicionarUnidadeInterna()
+      pendencias.clicarConfirmar()
+      
+      //PROCESSO SEI COM EXIGÊNCIA - EU052 - US084 - RN174
+      pendencias.processoSEI1Linha()
+      pendencias.editarProcessoSEI('1','1','2020')
+      pendencias.modalConfirmarSEI()
+      
+      //PROCESSO SEI SEM EXIGÊNCIA - EU052 - US084 - RN174
+      pendencias.validarProcessoSEIvinculadoExig('00002-00000002/2020')
+      pendencias.processoSEI2Linha()
+      pendencias.editarProcessoSEI('1','1','2020')
+      pendencias.modalConfirmarSEI()
+      
+      //STATUS DA PENDÊNCIA COM EXIGÊNCIA - EU052 - US084 - RN156 - RN167 - RN154
+      pendencias.validaStatusPendenciaVinculadoExig('Pendente')
+      
+      //STATUS DA PENDÊNCIA SEM EXIGÊNCIA - EU052 - US084 - RN156 - RN167 - RN154
+      pendencias.statusPendenciaLinha2('Pendente')
+      
+      //PROVIDÊNCIAS COM EXIGÊNCIA - EU052 - US084 - RN175
+      pendencias.providenciaVinculadoExig('TESTE AUTOMATIZADO')
+      pendencias.editarProvidenciaLinha1()
+      pendencias.digitarEmParagrafo('teste')
+      pendencias.confirmarModalProvidencia()
+      
+      //PROVIDÊNCIAS SEM EXIGÊNCIA - EU052 - US084 - RN175
+      pendencias.editarProvidenciaLinha2()
+      pendencias.digitarEmParagrafo('teste')
+      pendencias.confirmarModalProvidencia()
 
-      //EXIGE CONTRATAÇÃO
-      pendencias.exigeContratacao('Sim') //EU052 - US084 - RN154
+      //EXIGE CONTRATAÇÃO COM EXIGÊNCIA? - EU052 - US084 - RN176 - RN154
+      pendencias.exigeContratacaoVinculadoExig('Não')
+      pendencias.exigeContratacaoLinha1('Sim')
 
-      //RESUMO
-      pendencias.resumo() //EU052 - US084 - RN155 - botão Editar
-      pendencias.digitarResumo('a'.repeat(501)) //EU052 - US084 - RN155 - Máximo de 500 caracteres  - RN171 - texto livre
-      pendencias.confirmarDescricaoResumo()//EU052 - US084 - RN155 -  botão confirmar
-
-      pendencias.clicarVincularExigencia() // EU051 - US083 - RN170
-      pendencias.selecionarStatusExigencia()
-      pendencias.dropdownGLA('Em Execução')
-      pendencias.consultarExigencia()
-      pendencias.selecionarPrimeiraExigencia()
-      pendencias.clicarConfirmarVinculoExigencia()
-      pendencias.validarTextoResumo('teste')//EU052 - US084 - RN171 - Possui Exigência vinculada
+      //EXIGE CONTRATAÇÃO SEM EXIGÊNCIA? - EU052 - US084 - RN176 - RN154
+      pendencias.exigeContratacaoLinha2('Sim')
   })
 })
