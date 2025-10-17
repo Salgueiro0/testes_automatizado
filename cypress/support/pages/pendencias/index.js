@@ -571,13 +571,15 @@ class pendencias {
     }
 
     filtrarExigencia(filtro) {
-        cy.wait(20000)
         cy.get('.odd > .sorting_1 > .exigencia').should('be.visible').then(() => {
             cy.get('#table-exigencias_filter > label > .form-control')
                 .should('be.visible')
                 .type(filtro)
             })
         }
-    }
 
+
+    clicarAbaCumpridas(){cy.get('.pendenciaCumpridas3282').click()}
+    validarPendenciaAbaCumprida(){cy.get('#table-pendencia-3282 > tbody > .odd > :nth-child(2)').should('contain','TESTE AUTOMATIZADO')}
+    }
 export default new pendencias()

@@ -201,7 +201,7 @@ describe('pendência', () => {
       //VINCULAR EXIGÊNCIA
       pendencias.clicarVincularExigencia() // EU051 - US083 - RN170
       pendencias.selecionarStatusExigencia()
-      pendencias.dropdownGLA('Pendente')
+      pendencias.dropdownGLA('Em Execução')
       pendencias.consultarExigencia()
       pendencias.filtrarExigencia('TESTE AUTOMATIZADO')
       pendencias.selecionarPrimeiraExigencia()
@@ -239,7 +239,7 @@ describe('pendência', () => {
       pendencias.modalConfirmarSEI()
       
       //PROCESSO SEI SEM EXIGÊNCIA - EU052 - US084 - RN174
-      pendencias.validarProcessoSEIvinculadoExig('00002-00000002/2020')
+      pendencias.validarProcessoSEIvinculadoExig('00001-00000001/2020')
       pendencias.processoSEI2Linha()
       pendencias.editarProcessoSEI('1','1','2020')
       pendencias.modalConfirmarSEI()
@@ -267,5 +267,12 @@ describe('pendência', () => {
 
       //EXIGE CONTRATAÇÃO SEM EXIGÊNCIA? - EU052 - US084 - RN176 - RN154
       pendencias.exigeContratacaoLinha2('Sim')
+
+      //TORNAR PENDÊNCIA COMO STATUS CUMPRIDA - EU052 - US084 - RN158
+      pendencias.selecionarStatusExigencia()
+      pendencias.dropdownGLA('Cumprida')
+      pendencias.clicarAbaCumpridas()
+      pendencias.validarPendenciaAbaCumprida()
+
   })
 })
