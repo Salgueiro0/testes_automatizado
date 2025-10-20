@@ -181,7 +181,7 @@ class pendencias {
         }
     }
 
-    resumo2Linha() {
+    resumoLinha1() {
         cy.get(el.adicionarResumo).click();
         cy.wait(2000)
     }
@@ -213,7 +213,9 @@ class pendencias {
     }
 
     selecionarStatusExigencia() {
-        cy.get(el.selecionarDadoContainer).click()
+        cy.get(el.selecionarDadoContainer)
+            .should('be.visible')
+            .click()
     }
 
     clicarBotaoEditar() {
@@ -254,8 +256,21 @@ class pendencias {
     }
 
     clicarConfirmar() {
-        cy.get(el.btnPrimeiro).click();
+        cy.get(el.btnPrimeiro)
+            .should('be.visible')
+            .click({ force: true })
+
+        // Espera um pouco pra ver se o clique funcionou
         cy.wait(1000)
+
+        // Verifica se a ação esperada aconteceu (exemplo: botão desapareceu ou modal fechou)
+        // se não aconteceu, clica de novo
+        cy.get('body').then(($body) => {
+            if ($body.find(el.btnPrimeiro).length > 0) {
+                cy.log('Primeiro clique não funcionou, tentando novamente...')
+                cy.get(el.btnPrimeiro).click({ force: true })
+            }
+        })
     }
 
     digitarOrgaoProcessoSei(texto) {
@@ -298,11 +313,9 @@ class pendencias {
         cy.get(el.select1).select('1')
     }
 
-    digitarDataPrevisaoCumprimento() {
-        cy.get(el.inputDataPrevisaoCumprimento).type("2025-01-01")
-    }
+    digitarDataPrevisaoCumprimento(data) {cy.get(el.inputDataPrevisaoCumprimento).clear().type(data)}
 
-    alterarModalCumprimento() {
+    ConfirmarModalCumprimento() {
         cy.get(el.btnAlterarModalCumprimento).click()
     }
 
@@ -367,10 +380,7 @@ class pendencias {
         cy.get(el.btnTodasPendencias).click()
     }
 
-    clicarModal() {
-        cy.get(el.btnModal).click();
-        cy.wait(3000)
-    }
+    clicarModal() {cy.get(el.btnModal).click();}
 
     clicarBtnSucess() {
         cy.get(el.btnSucess).click()
@@ -571,15 +581,29 @@ class pendencias {
     }
 
     filtrarExigencia(filtro) {
+        cy.wait(4000)
         cy.get('.odd > .sorting_1 > .exigencia').should('be.visible').then(() => {
             cy.get('#table-exigencias_filter > label > .form-control')
                 .should('be.visible')
                 .type(filtro)
-            })
-        }
+        })
+    }
 
 
     clicarAbaCumpridas(){cy.get('.pendenciaCumpridas3282').click()}
     validarPendenciaAbaCumprida(){cy.get('#table-pendencia-3282 > tbody > .odd > :nth-child(2)').should('contain','TESTE AUTOMATIZADO')}
+    abaPendenciasAtivas(){cy.get('.pendenciaTodas3282').click()}
+    alterarPrevisaoLinha1(){cy.get(':nth-child(1) > .sorting_1 > a > .fa').click()}
+    clicarOkSeExisteUnidade() {
+        cy.get('.bootbox > .modal-dialog > .modal-content > .modal-body', { timeout: 5000 })
+            .should('exist')
+            .then(($body) => {
+                if ($body.length) {
+                    cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn')
+                        .click()
+                }
+            })
     }
+}
+
 export default new pendencias()
