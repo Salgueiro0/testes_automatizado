@@ -613,6 +613,8 @@ class pendencias {
     validarRelatorioPersonalizadoAbreModal(){cy.get('#modal-relatorio-personalizado > .modal-dialog > .modal-content > .modal-header').should('contain','Relatório Personalizado')}
     fecharModalRelatorioPersonalizado(){cy.get('#modal-relatorio-personalizado > .modal-dialog > .modal-content > .modal-body > .modal-footer > .btn-form').click()}
     validarBotaoRelatorioPadrao(conteudo){cy.get('#gerarRelatorioPDF').should('contain',conteudo)}
+    clicarAbaPendencias(){cy.get(el.abaPendencias).click()}
+    validarBotaoRelatorioPadraoRodape(conteudo){cy.get('#pendencias-aba > .panel-footer > .btn-toolbar > .btn-default').should('contain',conteudo)}
 }
 
 export default new pendencias()

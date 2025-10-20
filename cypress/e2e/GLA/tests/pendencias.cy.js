@@ -7,7 +7,8 @@ import empreendimento from "../../../support/pages/empreendimento";
 
 //HUs inválidas:
 //EU052 - US084 - RN172 - RN178 - RN180 - RN157 - RN223 (e-mail) - RN0227 (e-mail)
-//EU061 - US093 - RN188 (PDF)
+//EU061 - US093 - RN188 (PDF) - RN192(PDF) - RN206(PDF)
+
 
 describe('pendência', () => {
     beforeEach(() => {
@@ -98,7 +99,7 @@ describe('pendência', () => {
      pendencias.clicarModalVinculoPendencia()
   })
 
-  it.only('Campos de Texto', () => {
+  it('Campos de Texto', () => {
     pendencias.irParaGLA()
     pendencias.login()
     pendencias.validarTituloPendencia()          // -- US033 - RN015 identificação/título--
@@ -136,7 +137,7 @@ describe('pendência', () => {
     pendencias.validarALabelDataLimite()
     pendencias.validarALabelDiasLimite()
   })
-  it('Vincular exigência', () => {
+  it.only('Vincular exigência', () => {
    // EU052 - US084 - RN151
    pendencias.irParaGLA()
    pendencias.login()
@@ -188,9 +189,10 @@ describe('pendência', () => {
     pendencias.alterarDataLimite() //EU052 - US084 - RN0226
     pendencias.validarMSGDataLimiteMenor('Data Limite deve ser maior que a data atual')  //EU052 - US084 - RN0226
     pendencias.clicarModal()
+
     //RELATÓRIOS
-    pendencias.validarBotaoRelatorioPadrao('Relatório Padrão')  //EU061 - US093 - RN189
-    pendencias.gerarRelatorioPDF() //EU061 - US093 - RN185
+    pendencias.validarBotaoRelatorioPadrao('Relatório Padrão')  //EU061 - US093 - RN189 - RN190
+    pendencias.gerarRelatorioPDF() //EU061 - US093 - RN185 - RN194
     pendencias.botaoGerarRelatorioPersonalizado()
     pendencias.validarRelatorioPersonalizadoAbreModal()  //EU061 - US093 - RN186
     pendencias.fecharModalRelatorioPersonalizado()
@@ -198,6 +200,8 @@ describe('pendência', () => {
     empreendimento.irParaEmpreendimento()
     pendencias.clicarBotaoPesquisar()
     empreendimento.clicarPrimeiroBotaoVisualizar()
+    pendencias.clicarAbaPendencias()
+    pendencias.validarBotaoRelatorioPadraoRodape('Relatório Padrão') //EU061 - US093 - RN189 - RN190 - RN196
 
     pendencias.excluir8Linhas() //EU052 - US084 - RN160 - Caso todas as linhas sejam excluídas, a tabela deverá ser excluída - EU052 - US084 - RN161 -
     // EU052 - US084 - RN154 - Ações

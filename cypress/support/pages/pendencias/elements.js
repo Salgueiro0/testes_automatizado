@@ -81,4 +81,5 @@ export const ELEMENTS = {
     btnSucess: '.panel-body > .panel-footer > .btn-toolbar > .btn-success',
     chkLista: '#lista_chk_cd_3283',
     btnModalVinculoPendencia: '#modal-vinculo-pendencia > .modal-dialog > .modal-content > .modal-footer > #botao-editar',
+    abaPendencias:'cy.get(:nth-child(1) > :nth-child(1) > :nth-child(1) > :nth-child(5) > a)'
 }
