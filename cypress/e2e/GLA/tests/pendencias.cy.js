@@ -2,10 +2,13 @@
 /// <reference types="cypress" />
 
 import pendencias from "../../../support/pages/pendencias";
+import empreendimento from "../../../support/pages/empreendimento";
 
 
 //HUs inválidas:
-//EU052 - US084 - RN172 - RN178
+//EU052 - US084 - RN172 - RN178 - RN180 - RN157 - RN223 (e-mail) - RN0227 (e-mail)
+//EU061 - US093 - RN188 (PDF)
+
 describe('pendência', () => {
     beforeEach(() => {
         cy.visit('http://gla-homol.terracapnet.local')
@@ -95,7 +98,7 @@ describe('pendência', () => {
      pendencias.clicarModalVinculoPendencia()
   })
 
-  it('Campos de Texto', () => {
+  it.only('Campos de Texto', () => {
     pendencias.irParaGLA()
     pendencias.login()
     pendencias.validarTituloPendencia()          // -- US033 - RN015 identificação/título--
@@ -140,6 +143,7 @@ describe('pendência', () => {
    pendencias.clicarAbaPendencia()
    pendencias.clicarBotaoCadastrarEditar()
    pendencias.pesquisarPendencia() //EU051 - US083 - Empreendimento obrigatório
+   pendencias.semBotaoRelatorioPadrao('not.exist')  //EU061 - US093 - RN187
    pendencias.selecionarCdEmpreendimento()
    pendencias.dropdownGLA('4 - Empreendimento XPTO 5 ')
    pendencias.pesquisarPendencia()
@@ -177,7 +181,25 @@ describe('pendência', () => {
     pendencias.clicarCamposTabelasResultados()
     pendencias.validarCamposMarcadosPadrao()   //EU052 - US084 - RN152 - Módulo pendência - Campos da Tabela de Resultados
     pendencias.expandirLP()
-    pendencias.excluir8Linhas() //EU052 - US084 - RN160 - Caso todas as linhas sejam excluídas, a tabela deverá ser excluída
+    pendencias.adicionarLinha()  //EU052 - US084 - RN162
+    pendencias.validarCategoriaPadraoLinhaNova() //EU052 - US084 - RN163
+    pendencias.digitarPrevisaoAtualizacao('2026-10-01') //EU052 - US084 - RN222
+    pendencias.validarDataLimite('Data Limite') //EU052 - US084 - RN0226
+    pendencias.alterarDataLimite() //EU052 - US084 - RN0226
+    pendencias.validarMSGDataLimiteMenor('Data Limite deve ser maior que a data atual')  //EU052 - US084 - RN0226
+    pendencias.clicarModal()
+    //RELATÓRIOS
+    pendencias.validarBotaoRelatorioPadrao('Relatório Padrão')  //EU061 - US093 - RN189
+    pendencias.gerarRelatorioPDF() //EU061 - US093 - RN185
+    pendencias.botaoGerarRelatorioPersonalizado()
+    pendencias.validarRelatorioPersonalizadoAbreModal()  //EU061 - US093 - RN186
+    pendencias.fecharModalRelatorioPersonalizado()
+
+    empreendimento.irParaEmpreendimento()
+    pendencias.clicarBotaoPesquisar()
+    empreendimento.clicarPrimeiroBotaoVisualizar()
+
+    pendencias.excluir8Linhas() //EU052 - US084 - RN160 - Caso todas as linhas sejam excluídas, a tabela deverá ser excluída - EU052 - US084 - RN161 -
     // EU052 - US084 - RN154 - Ações
 
   })
@@ -196,10 +218,14 @@ describe('pendência', () => {
 
       //VINCULAR EXIGÊNCIA
       pendencias.clicarVincularExigencia() // EU051 - US083 - RN170
+      pendencias.validarEmpreendimentoSemAlterar('Empreendimento XPTO 5') // EU051 - US083 - RN166
+      pendencias.selecionarCdDemanda()
+      pendencias.validarDemandas('Ofício')  // EU051 - US083 - RN166
       pendencias.selecionarStatusExigencia()
       pendencias.dropdownGLA('Em Execução')
       pendencias.consultarExigencia()
       pendencias.filtrarExigencia('TESTE AUTOMATIZADO')
+      pendencias.validarExigenciasConsultadas('TESTE AUTOMATIZADO') //EU051 - US083 - RN166
       pendencias.selecionarPrimeiraExigencia()
       pendencias.clicarConfirmarVinculoExigencia()
 
@@ -214,6 +240,7 @@ describe('pendência', () => {
       pendencias.clicarConfirmar()
 
       //PROCESSO SEI COM EXIGÊNCIA - EU052 - US084 - RN174
+      pendencias.validarProcessoSEIvinculadoExig('00001-00000001/2020')
       pendencias.processoSEI1Linha()
       pendencias.editarProcessoSEI('1','1','2020')
       pendencias.modalConfirmarSEI()
@@ -230,8 +257,20 @@ describe('pendência', () => {
       //EXIGE CONTRATAÇÃO COM EXIGÊNCIA? - EU052 - US084 - RN176 - RN154
       pendencias.exigeContratacaoVinculadoExig('Não')
       pendencias.exigeContratacaoLinha1('Sim')
+
+      //ÚLTIMA ALTERAÇÃO
+      pendencias.validarSemEdicaoUltimaAlteracao() //EU052 - US084 - RN179
+
+      //ESTUDOS VINCULADOS
+      pendencias.validarEstudosVinculados('Obra/Serviço - Licitação - Paisagismo') //EU052 - US084 - RN229
+
+      //PREVISÃO DE CUMPRIMENTO - EU053 - US085 - RN177
+      pendencias.alterarPrevisaoLinha1()
+      pendencias.validarPrevCumpExigencia('01/01/2000')
+      pendencias.digitarDataPrevisaoCumprimento('2020-02-02') //EU052 - US084 - RN169
+      pendencias.ConfirmarModalCumprimento()
   })
-  it.only('Adicionar Lista de Pendência sem exigência', () => {
+  it('Adicionar Lista de Pendência sem exigência', () => {
       pendencias.irParaGLA()
       pendencias.login()
       pendencias.clicarAbaPendencia()
@@ -264,7 +303,6 @@ describe('pendência', () => {
       pendencias.clicarConfirmar()
       
       //PROCESSO SEI SEM EXIGÊNCIA - EU052 - US084 - RN174
-      pendencias.validarProcessoSEIvinculadoExig('00001-00000001/2020')
       pendencias.processoSEI1Linha()
       pendencias.editarProcessoSEI('1','1','2020')
       pendencias.modalConfirmarSEI()
@@ -274,22 +312,25 @@ describe('pendência', () => {
 
       //PROVIDÊNCIAS SEM EXIGÊNCIA - EU052 - US084 - RN175
       pendencias.editarProvidenciaLinha1()
-      pendencias.digitarEmParagrafo('teste')
+      pendencias.digitarEmParagrafo('a'.repeat(500) + 'Tem mais de 500') //máximo de 500 caracteres - EU052 - US084
       pendencias.confirmarModalProvidencia()
 
       //EXIGE CONTRATAÇÃO SEM EXIGÊNCIA? - EU052 - US084 - RN176 - RN154
       pendencias.exigeContratacaoLinha1('Sim')
 
-      //TORNAR PENDÊNCIA COMO STATUS CUMPRIDA - EU052 - US084 - RN158 - RN164
+      //TORNAR PENDÊNCIA COMO STATUS CUMPRIDA - EU052 - US084 - RN158 - RN164 - RN166
       pendencias.statusPendencia('Cumprida')
       pendencias.clicarAbaCumpridas()
       pendencias.validarPendenciaAbaCumprida()
       pendencias.statusPendencia('Em Execução')
       pendencias.abaPendenciasAtivas()
 
-      //PREVISÃO DE CUMPRIMENTO
+      //PREVISÃO DE CUMPRIMENTO - EU053 - US085 - RN177
       pendencias.alterarPrevisaoLinha1()
       pendencias.digitarDataPrevisaoCumprimento('2020-02-02') //EU052 - US084 - RN169
       pendencias.ConfirmarModalCumprimento()
+
+      //ÚLTIMA ALTERAÇÃO
+      pendencias.validarSemEdicaoUltimaAlteracao() //EU052 - US084 - RN179
   })
 })

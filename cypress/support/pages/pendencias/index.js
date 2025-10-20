@@ -207,11 +207,7 @@ class pendencias {
         cy.wait(2000)
     }
 
-    selecionarCdDemanda() {
-        cy.get(el.cdDemandaContainer).click();
-        cy.wait(2000)
-    }
-
+    selecionarCdDemanda() {cy.get(el.cdDemandaContainer).click()}
     selecionarStatusExigencia() {
         cy.get(el.selecionarDadoContainer)
             .should('be.visible')
@@ -301,13 +297,8 @@ class pendencias {
         cy.get(el.btnAdicionar6Dado).click()
     }
 
-    digitarEmParagrafo(texto) {
-        cy.get(el.iframeDigitarParagrafo).its('0.contentDocument.body').should('not.be.empty').then(cy.wrap).find('p').click().type(texto)
-    }
-
-    confirmarModalProvidencia() {
-        cy.get(el.btnAlterarModalProvidencia).click()
-    }
+    digitarEmParagrafo(texto) {cy.get(el.iframeDigitarParagrafo).its('0.contentDocument.body').should('not.be.empty').then(cy.wrap).find('p').click().clear().type(texto)}
+    confirmarModalProvidencia() {cy.get(el.btnAlterarModalProvidencia).click()}
 
     adicionar7Dado() {
         cy.get(el.select1).select('1')
@@ -363,10 +354,7 @@ class pendencias {
         cy.get(el.btnLimparPesquisa).click({force: true})
     }
 
-    gerarRelatorioPDF() {
-        cy.get(el.btnGerarRelatorioPDF).click({force: true});
-        cy.wait(10000)
-    }
+    gerarRelatorioPDF() {cy.get(el.btnGerarRelatorioPDF).click({force: true});}
 
     clicarPesquisarPendencias() {
         cy.get(el.btnPesquisarPendencias).click()
@@ -591,9 +579,9 @@ class pendencias {
 
 
     clicarAbaCumpridas(){cy.get('.pendenciaCumpridas3282').click()}
-    validarPendenciaAbaCumprida(){cy.get('#table-pendencia-3282 > tbody > .odd > :nth-child(2)').should('contain','TESTE AUTOMATIZADO')}
+    validarPendenciaAbaCumprida(){cy.get('.odd > :nth-child(2) > div').should('contain','a')}
     abaPendenciasAtivas(){cy.get('.pendenciaTodas3282').click()}
-    alterarPrevisaoLinha1(){cy.get(':nth-child(1) > .sorting_1 > a > .fa').click()}
+    alterarPrevisaoLinha1(){cy.get(':nth-child(1) > :nth-child(9) > a > .fa').click()}
     clicarOkSeExisteUnidade() {
         cy.get('.bootbox > .modal-dialog > .modal-content > .modal-body', { timeout: 5000 })
             .should('exist')
@@ -604,6 +592,27 @@ class pendencias {
                 }
             })
     }
+    validarSemEdicaoUltimaAlteracao() {cy.get('tbody > :nth-child(1) > :nth-child(16) button').should('not.exist')}
+    adicionarLinha(){cy.get('#pendenciaTodas3282 > .panel-footer > .btn-toolbar > .btn-primary').click()}
+    validarCategoriaPadraoLinhaNova(){cy.get(':nth-child(8) > .noVis > select').should('contain','Outro (LP)')}
+    validarEmpreendimentoSemAlterar(nomeEmpreendimento){cy.get('#nomeEmpreendimento').should('contain',nomeEmpreendimento)}
+    validarDemandas(demanda){cy.get('.select2-results').find('li').should('contain',demanda)}
+    validarExigenciasConsultadas(exigencia){cy.get('.odd > .text-justify').should('contain',exigencia)}
+    validarEstudosVinculados(estudosVinculados){cy.get('tbody > :nth-child(1) > :nth-child(15)').should('contain',estudosVinculados)}
+    digitarPrevisaoAtualizacao(data){cy.get('#dt_previsao_atualizacao3282').type(data)}
+    validarDataLimite(dataLimite){cy.get('.justify-content-end > :nth-child(2)').should('contain',dataLimite)}
+    alterarDataLimite(){cy.get(':nth-child(1) > :nth-child(11) > a > .fa').type('2020-01-01')}
+    validarMSGDataLimiteMenor(mensagem){cy.get('.bootbox > .modal-dialog > .modal-content > .modal-body').should('contain',mensagem)}
+    clicarFecharModalDataLimite(){cy.get('#modal-alteracao-limite > .modal-dialog > .modal-content > .modal-footer > .btn-form').click()}
+    validarPrevCumpExigencia(dataPrevisao){cy.get('tbody > :nth-child(1) > :nth-child(9)').should('contain',dataPrevisao)}
+    semBotaoRelatorioPadrao(validacao){
+        cy.get('#gerarRelatorioPDF').should(validacao)
+        cy.get('#gerarRelatorioPersonalizadoPDF').should(validacao)
+    }
+    botaoGerarRelatorioPersonalizado(){cy.get('#gerarRelatorioPersonalizadoPDF').click()}
+    validarRelatorioPersonalizadoAbreModal(){cy.get('#modal-relatorio-personalizado > .modal-dialog > .modal-content > .modal-header').should('contain','Relatório Personalizado')}
+    fecharModalRelatorioPersonalizado(){cy.get('#modal-relatorio-personalizado > .modal-dialog > .modal-content > .modal-body > .modal-footer > .btn-form').click()}
+    validarBotaoRelatorioPadrao(conteudo){cy.get('#gerarRelatorioPDF').should('contain',conteudo)}
 }
 
 export default new pendencias()
