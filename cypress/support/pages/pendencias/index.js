@@ -594,7 +594,7 @@ class pendencias {
     }
     validarSemEdicaoUltimaAlteracao() {cy.get('tbody > :nth-child(1) > :nth-child(16) button').should('not.exist')}
     adicionarLinha(){cy.get('#pendenciaTodas3282 > .panel-footer > .btn-toolbar > .btn-primary').click()}
-    validarCategoriaPadraoLinhaNova(){cy.get(':nth-child(8) > .noVis > select').should('contain','Outro (LP)')}
+    validarCategoriaPadraoLinhaNova(categoria){cy.get(':nth-child(8) > .noVis > select').should('contain',categoria)}
     validarEmpreendimentoSemAlterar(nomeEmpreendimento){cy.get('#nomeEmpreendimento').should('contain',nomeEmpreendimento)}
     validarDemandas(demanda){cy.get('.select2-results').find('li').should('contain',demanda)}
     validarExigenciasConsultadas(exigencia){cy.get('.odd > .text-justify').should('contain',exigencia)}

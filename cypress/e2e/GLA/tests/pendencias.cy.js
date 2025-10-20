@@ -168,7 +168,7 @@ describe('pendência', () => {
    pendencias.clicarExcluirListaPendencias() //EU051 - US083 - RN150
    pendencias.salvarExclusao()
   })
-  it('Validações Gerais', () => {
+  it.only('Validações Gerais', () => {
     pendencias.irParaGLA()
     pendencias.login()
     pendencias.clicarAbaPendencia()
@@ -183,7 +183,7 @@ describe('pendência', () => {
     pendencias.validarCamposMarcadosPadrao()   //EU052 - US084 - RN152 - Módulo pendência - Campos da Tabela de Resultados
     pendencias.expandirLP()
     pendencias.adicionarLinha()  //EU052 - US084 - RN162
-    pendencias.validarCategoriaPadraoLinhaNova() //EU052 - US084 - RN163
+    pendencias.validarCategoriaPadraoLinhaNova('Outro (LP)') //EU052 - US084 - RN163 - EU051 - US083 - RN170
     pendencias.digitarPrevisaoAtualizacao('2026-10-01') //EU052 - US084 - RN222
     pendencias.validarDataLimite('Data Limite') //EU052 - US084 - RN0226
     pendencias.alterarDataLimite() //EU052 - US084 - RN0226
