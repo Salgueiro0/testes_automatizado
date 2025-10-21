@@ -383,6 +383,15 @@ class estudos {
     limparStatus(){cy.get('#select2-tp_status-container > .select2-selection__clear').click()}
     fecharModalProduto(){cy.get('#modal-produtos-subprodutos-servicos > .modal-dialog > .modal-content > .modal-footer > .btn-secondary').click()}
     digitarDescricaoPagamentos(descricao){cy.get('#ds_pagamento').type(descricao)}
+    validarAcordeoes(referencias,dadosGerais,dadosContrato,vinculosCACF,produto,dadosOs,pagamento){
+        cy.get("[onclick=\"toggleFormAccordion('rf')\"]").should('contain',referencias)
+        cy.get("[onclick=\"toggleFormAccordion('gr')\"]").should('contain',dadosGerais)
+        cy.get("[onclick=\"toggleFormAccordion('ct')\"]").should('contain',dadosContrato)
+        cy.get("[onclick=\"toggleFormAccordion('vi')\"]").should('contain',vinculosCACF)
+        cy.get("[onclick=\"toggleFormAccordion('pss')\"]").should('contain',produto)
+        cy.get("[onclick=\"toggleFormAccordion('os')\"]").should('contain',dadosOs)
+        cy.get("[onclick=\"toggleFormAccordion('pg')\"]").should('contain',pagamento)
+    }
 }
 
 export default new estudos()
