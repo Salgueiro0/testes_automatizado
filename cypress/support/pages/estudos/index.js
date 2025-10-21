@@ -392,6 +392,7 @@ class estudos {
         cy.get("[onclick=\"toggleFormAccordion('os')\"]").should('contain',dadosOs)
         cy.get("[onclick=\"toggleFormAccordion('pg')\"]").should('contain',pagamento)
     }
+    digitarDOCSEI(docSei){cy.get('#nr_sei_doc_ordem_servico').type(docSei).clear()}
 }
 
 export default new estudos()

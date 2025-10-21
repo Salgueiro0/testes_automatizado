@@ -180,7 +180,7 @@ describe('estudos', () => {
         visualizarEstudo('PAULO CESAR COSTA','LUCAS DIAS DE LIMA')
         estudos.excluirEstudo()
     })
-    it.only('Campos de Texto', () => {
+    it('Campos de Texto', () => {
         estudos.irParaGLA()
         estudos.login()
         estudos.validarTituloPendencia()
@@ -197,7 +197,7 @@ describe('estudos', () => {
         estudos.validarLabelDescricaoObjeto()
         estudos.validarLabelStatus()
         estudos.validarLabelPrevisaoConclusao()
-        estudos.validarLabelValorEstimado()
+        estudos.validarLabelValorEstimado() //EU021.4 - US055
         estudos.validarLabelDataElaboracao()
         estudos.validarLabelTitular()
         estudos.validarLabelSuplente()
@@ -393,7 +393,7 @@ describe('estudos', () => {
         // estudos.adicionarProduto()
     })
 
-    it('Pagamentos e Produtos', () => {
+    it.only('Pagamentos e Produtos', () => {
         estudos.irParaGLA()
         estudos.login()
         estudos.irAbaEstudos()
@@ -435,6 +435,7 @@ describe('estudos', () => {
         estudos.adicionarProduto()
         estudos.digitarNumero(1)
         estudos.digitarAno(2000) //4 dígitos - EU018 - US052
+        estudos.digitarDOCSEI('a'.repeat(400)+'Tem mais de 400 caracteres') //EU020.3 - US054
         estudos.botaoSalvar()
         estudos.botaoOk()
 
