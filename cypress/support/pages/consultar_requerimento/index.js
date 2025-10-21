@@ -29,7 +29,7 @@ class consultar_requerimento {
     digitarNumeroDocSeiDespacho(){ cy.get(el.campoNrDocSeiDespacho).type('1111') }
     clicarBotaoSalvar(){ cy.get(el.botaoSalvar).first().click() }
     clicarBotaoSalvarPagamento(){cy.get('#botao-salvar').click()}
-    clicarContinuar(){ cy.wait(1000);
+    clicarContinuar(){ cy.wait(2000);
         cy.get(el.botaoContinuar).should('be.visible').and('contain.text', 'Continuar').click() }
     clicarOk(){ cy.get(el.botaoOk).should('be.visible').and('contain.text', 'OK').click({ multiple: true }) }
     clicarModalOk(){cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn').click()}
