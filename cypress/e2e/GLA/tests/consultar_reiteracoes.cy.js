@@ -9,7 +9,6 @@ describe('consultar_reiteracoes', () => {
     it('consultar_reiteracoes', () => {
 
         Cypress.on('uncaught:exception', (err, runnable) => {
-            // Retorna false para evitar que o Cypress falhe o teste
             return false;
         })
 
@@ -53,6 +52,8 @@ describe('consultar_reiteracoes', () => {
         consultar_reiteracoes.validarAriaLabelPesquisarReiteracaoTipoRequerimento()
         consultar_reiteracoes.validarAriaLabelPesquisarReiteracaoDataPubReq()
         consultar_reiteracoes.validarAriaLabelPesquisarReiteracaoAcao()
+
+        consultar_reiteracoes.clicarBotaoPesquisar() //EU098 - US031 - RA não obrigatório
 
         consultar_reiteracoes.selecionarRegiaoAdmin()
         consultar_reiteracoes.selecionarTpRequerimento()

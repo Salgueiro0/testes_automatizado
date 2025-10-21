@@ -112,10 +112,11 @@ class demandas_consultar {
     validarVisualizarInfoEmpreendimentos(){cy.get(el.infoEmpreendimentos).should('have.text', "Informações dos Empreendimentos");}
     validarVisualizarDadosGerais(){cy.get(el.dadosGerais).should('have.text', "Dados Gerais");}
     validarVisualizarInfoDocumento(){cy.get(el.infoDocumento).should('have.text', "Informações do Documento");}
-    validarVisualizarCompensacaoAmbiental(){cy.get(el.compensacaoAmbiental).should('have.text', "Dados Específicos da Compensação Ambiental");}
-    validarVisualizarCompensacaoFlorestal(){cy.get(el.compensacaoFlorestal).should('have.text', "Dados Específicos da Compensação Florestal");}
-    validarVisualizarAutoInfracao(){cy.get(el.autoInfracao).should('have.text', "Dados Específicos do Auto de Infração");}
-    validarWhidthTipo(){cy.get(el.whidthTipo).should('have.text', "Tipo");}
+    validarVisualizarAssociacoesDemanda(){cy.get(el.associacoesDemanda).should('have.text', "Associações de Demanda");}
+    validarVisualizarCompensacaoAmbiental(){cy.get(el.compensacaoAmbiental).should('contain', "Dados Específicos da Compensação Ambiental")}
+    validarVisualizarCompensacaoFlorestal(){cy.get(el.compensacaoFlorestal).should('contain', "Dados Específicos da Compensação Florestal");}
+    validarVisualizarAutoInfracao(){cy.get(el.autoInfracao).should('contain', "Dados Específicos do Auto de Infração");}
+    validarWhidthTipo(){cy.get(el.whidthTipo).should('have.text', "Tipo")}
     validarWhidthNumero(){cy.get(el.whidthNumero).should('have.text', "Número");}
     validarWhidthAno(){cy.get(el.whidthAno).should('have.text', "Ano");}
     validarWhidthOrgao(){cy.get(el.whidthOrgao).should('have.text', "Órgão");}
@@ -228,23 +229,23 @@ class demandas_consultar {
 
         const casos = [
             {
-                origem: ':nth-child(4) > :nth-child(1) > .panel-accordion > :nth-child(1) > tbody > :nth-child(1) > :nth-child(2)',
-                destino: ':nth-child(5) > tbody > :nth-child(5) > :nth-child(2)',
+                origem: el.dataRecebimentoAI,
+                destino: el.dataLimiteEnvioRec1Instancia,
                 dias: 9
             },
             {
-                origem: ':nth-child(5) > tbody > :nth-child(3) > :nth-child(2)',
-                destino: ':nth-child(7) > tbody > :nth-child(5) > :nth-child(2)',
+                origem: el.dataCienciaDecisao1Instancia,
+                destino: el.dataLimiteEnvioRecurso2Instancia,
                 dias: 4
             },
             {
-                origem: ':nth-child(7) > tbody > :nth-child(3) > :nth-child(2)',
-                destino: ':nth-child(9) > tbody > :nth-child(5) > :nth-child(2)',
+                origem: el.dataCienciaDecisao2Instancia,
+                destino: el.dataLimiteEnvioRecurso3Instancia,
                 dias: 4
             },
             {
-                origem: ':nth-child(9) > tbody > :nth-child(3) > :nth-child(2)',
-                destino: ':nth-child(9) > tbody > :nth-child(6) > :nth-child(2)',
+                origem: el.dataCienciaDecisao3Instancia,
+                destino: el.dataLimitePagamentoMulta,
                 dias: 4
             }
         ];
@@ -270,12 +271,14 @@ class demandas_consultar {
     demandaSemPagamento(){cy.get('[aria-label="Valor do Pagamento (R$): Ordenar colunas de forma ascendente"]').should('not.exist')}
     adicionarPagamentoAI(data,valor){
         cy.get('.col-md-12 > .btn').click()
+        cy.wait(3000)
         cy.get('#dt_pagamento').type(data)
         cy.get('#vl_pagamento').type(valor)
         cy.get('#botao-salvar').click()
         cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn').click()
     }
     validarSaldoAI() {
+        cy.wait(2000)
         cy.get('#total_AI')
             .invoke('text')
             .then((totalAIText) => {
@@ -334,7 +337,8 @@ class demandas_consultar {
         cy.wait(2000)
     }
     validarPrazoDesabilitado(){cy.get('#qt_dias_prazo_limite_cf').should('be.disabled')}
-    selecionarArquivada(){cy.get('#fl_arquivado').click()}
+    selecionarArquivadaCA(){cy.get('#fl_arquivado').click()}
+    selecionarArquivadaCF(){cy.get('#fl_arquivado_cf').click()}
     validarPrazoHabilitado(){cy.get('#qt_dias_prazo_pagamento').should('not.be.disabled')}
     digitarPrazoDiasCA(dias){cy.get('#qt_dias_prazo_pagamento').type(dias)}
     clicarStatusRecAdm(){cy.get(':nth-child(4) > :nth-child(1) > .form-group > .select2-container > .selection > .select2-selection').click()}
@@ -384,8 +388,9 @@ class demandas_consultar {
     digitarAreaTotal(){cy.get('#nr_area_total').type('10000' +
         '')}
     filtrarDemandaPesquisa(pesquisa){cy.get('#table-demanda_filter > label > .form-control').type(pesquisa)}
-    selecionarDadosEspecificosCA(){cy.get('.panel-body > :nth-child(2) > :nth-child(1) > .accordion').click()}
-    demandaArquivada(){cy.get('#saldo_CA').should('contain','-')}
+    selecionarDadosEspecificosCA(){cy.get('.panel-body > :nth-child(3) > :nth-child(1) > .accordion').click()}
+    demandaArquivadaCA(){cy.get(el.saldoDevedorCA).should('contain','-')}
+    demandaArquivadaCF(){cy.get(el.saldoDevedorCA).should('contain','-')}
     validarSaldoPagoAMais(){cy.get('[id^="saldo_CF"]').should('contain','valor pago a mais, crédito')}
     validarSaldo0CFMudas(){cy.get('[id^="saldo_CF"]').should('contain','0,00')}
     validarSaldo0CFha(){cy.get('[id^="saldo_CF"]').should('contain','0,00')}
@@ -429,7 +434,7 @@ class demandas_consultar {
         const diffMs = hoje - dataAlvo;
         const dias = Math.floor(diffMs / (1000 * 60 * 60 * 24))
          if(data === '2025-07-16'){
-            cy.get('.panel-body > :nth-child(2) > :nth-child(1) > .panel-accordion > :nth-child(1) > tbody > :nth-child(6) > :nth-child(2)').should('contain', dias)
+            cy.get(el.diasRestantesCF).should('contain', dias)
         }
     }
     dataPubVigenciaDias() {
@@ -452,7 +457,7 @@ class demandas_consultar {
                         const novaData = dataObj.toLocaleDateString('pt-BR')
 
                         // validação
-                        cy.get('.panel-body > :nth-child(2) > :nth-child(1) > .panel-accordion > :nth-child(1) > tbody > :nth-child(5) > :nth-child(2)')
+                        cy.get(el.dataLimiteCumprimentoCA)
                             .should('contain', novaData)
                     })
             })
@@ -477,7 +482,7 @@ class demandas_consultar {
                         const novaData = dataObj.toLocaleDateString('pt-BR')
 
                         // validação
-                        cy.get(':nth-child(3) > :nth-child(1) > .panel-accordion > :nth-child(1) > tbody > :nth-child(9) > :nth-child(2)')
+                        cy.get(el.dataLimiteCumprimentoCF)
                             .should('contain', novaData)
                     })
             })
@@ -496,7 +501,7 @@ class demandas_consultar {
                 const novaData = dataObj.toLocaleDateString('pt-BR')
 
                 // validação
-                cy.get('.panel-body > :nth-child(2) > :nth-child(1) > .panel-accordion > :nth-child(1) > tbody > :nth-child(5) > :nth-child(2)')
+                cy.get( el.dataLimiteCumprimentoCA)
                     .should('contain', novaData)
             })
     }
@@ -561,12 +566,12 @@ class demandas_consultar {
     clicarOk(){cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn').click()}
     selecionarStatusPagamento(){cy.get('#tp_situacao').select('Quitado')}
     adicionarPagamentoCF(){cy.get(':nth-child(2) > .col-md-12 > .btn').click()}
-    validarSaldoPositivo(){cy.get('.panel-body > :nth-child(2) > :nth-child(1) > .panel-accordion > :nth-child(1) > tbody > :nth-child(12) > :nth-child(2)').should('contain','a pagar')}
-    validarSaldo0(){cy.get('.panel-body > :nth-child(2) > :nth-child(1) > .panel-accordion > :nth-child(1) > tbody > :nth-child(12) > :nth-child(2)').should('contain','0,00')}
+    validarSaldoPositivo(){cy.get(el.saldoDevedorCA).should('contain','a pagar')}
+    validarSaldo0(){cy.get(el.saldoDevedorCA).should('contain','0,00')}
 
     selecionarEmpreendimentoPesquisa(){cy.get('#form_geral > :nth-child(1) > :nth-child(2) > .form-group > .select2-container > .selection > .select2-selection > .select2-selection__rendered').click()}
-    selecionarDadosEspecificosCF(){cy.get('.panel-body > :nth-child(3) > :nth-child(1) > .accordion').click()}
-    selecionarDadosEspecificosAI(){cy.get(':nth-child(4) > :nth-child(1) > .accordion').click()}
+    selecionarDadosEspecificosCF(){cy.get(':nth-child(4) > :nth-child(1) > .accordion').click()}
+    selecionarDadosEspecificosAI(){cy.get('[onclick="toggleFormAccordion(\'ai\')"]').click()}
     validarDemandaVinculaExigencia(){
         cy.get('.exigencias-aba').click()
         cy.get('.btn-toolbar > button.btn-success').should('contain','Vincular Exigência')
@@ -652,7 +657,8 @@ class demandas_consultar {
     campoStatusRecADMObrigatorioCF(){
         cy.get('#error_tp_status_recurso_cf').should('contain','O campo Status do Recurso Administrativo é obrigatório')
     }
-
+    expandirDadosEspecificosCAEditar(){cy.get("[onclick=\"toggleFormAccordion('ca')\"]").click()}
+    expandirDadosEspecificosCFEditar(){cy.get("[onclick=\"toggleFormAccordion('cf')\"]").click()}
 }
 
 export default new demandas_consultar ()

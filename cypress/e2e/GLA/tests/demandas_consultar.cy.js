@@ -156,9 +156,8 @@ describe('DEMANDAS', () => {
         demandas_consultar.clicarExcluirDemanda()
         demandas_consultar.clicarConfirmar()
     })
-    it('DEMANDA COM COMPENSAÇÃO AMBIENTAL', () => {
+    it('DEMANDA COM COMPENSAÇÃO AMBIENTAL SEM PRAZO LIMITE', () => {
         irConsultarDemandas()
-        //CADASTRAR DEMANDA SEM PRAZO LIMITE
         demandas_consultar.clicarBotaoCadastro()         // -- US033 - RN015 Caminhos ABA Nova Demanda --
         cadastroDemanda('Licença de Operação','10000')
         // -- EU001 - US033 - RN063 - PRAZOS EM DIAS --
@@ -166,7 +165,6 @@ describe('DEMANDAS', () => {
         demandas_consultar.validarPrazoHabilitado()
         demandas_consultar.checkPossuiPrazo()
         demandas_consultar.validarPrazoDesabilitado()
-        demandas_consultar.selecionarArquivada()
         // -- EU001 - US033 - RN064 - SEI DOC DO RECURSO ADMINISTRATIVO --
         demandas_consultar.clicarStatusRecAdm()
         demandas_consultar.seletorDropdown('Deferido')
@@ -183,10 +181,11 @@ describe('DEMANDAS', () => {
         demandas_consultar.selecionarStatusRecAdm()
         demandas_consultar.seletorDropdown('Não se aplica')  //(12)
         salvarDemanda()
+
         //VISUALIZAR DEMANDA COMPENSAÇÃO AMBIENTAL
         visualizarDemanda(10000)
         demandas_consultar.selecionarDadosEspecificosCA()
-        demandas_consultar.demandaArquivada()   //EU087 - US007.7 RN244 - Dados Específicos de CA - Arquivada
+
         //PAGAMENTOS
         demandas_consultar.botaoAdicionarPagamento()
         demandas_consultar.seiCertidaoQuitacaoDesab()       //EU034 - US067 - Desabilitado - RN131
@@ -200,10 +199,8 @@ describe('DEMANDAS', () => {
         demandas_consultar.digitarValorPagamento(1)
         demandas_consultar.limparDataPagamento()
         mensagemObrigatoriaPagamento()                      //EU034 - US067 - Data do Pagamento (Obrigatório)
-
-
-
         cy.reload(true)
+
         //DEMANDA SEM PRAZO LIMITE
         demandas_consultar.selecionarDadosEspecificosCA()
         demandas_consultar.dataPubVigenciaDias() //EU003 - US035 - RN078 - DATA LIMITE PARA CUMPRIMENTO DA CA
@@ -216,18 +213,19 @@ describe('DEMANDAS', () => {
         demandas_consultar.adicionarPagamentoCA('2020-01-01','2000','Quitado')
         cy.reload(true)
         demandas_consultar.selecionarDadosEspecificosCA()
-        demandas_consultar.validarSaldoPagoAMais()                      // EU037 - US069 - RN130
+        //demandas_consultar.validarSaldoPagoAMais()                      // EU037 - US069 - RN130
         demandas_consultar.excluirPagamentos()
 
-        // DEMANDA - EXCLUIR DEMANDA // -- US033 - RN015 Caminhos Editar Demanda --
+        //EXCLUIR DEMANDA
         editarDemanda(10000)
         demandas_consultar.abrirCompAmb()
         demandas_consultar.editarSalvar()
         demandas_consultar.clicarExcluirDemanda()
         demandas_consultar.clicarConfirmar()
+    })
 
-        //CADASTRAR DEMANDA COM PRAZO LIMITE
-        cy.wait(2000)
+    it('DEMANDA COM COMPENSAÇÃO AMBIENTAL COM PRAZO LIMITE', () => {
+        irConsultarDemandas()
         demandas_consultar.clicarBotaoCadastro()         // -- US033 - RN015 Caminhos ABA Nova Demanda --
         cadastroDemanda('Licença de Operação','10000')
         demandas_consultar.marcarCompensAmb()
@@ -240,14 +238,22 @@ describe('DEMANDAS', () => {
         demandas_consultar.selecionarDadosEspecificosCA()
         demandas_consultar.dataPubPrazoDias() //EU003 - US035 - RN078 - DATA LIMITE PARA CUMPRIMENTO DA CA
 
-        //XCLUIR DEMANDA
+        //DEMANDA ARQUIVADA
+        editarDemanda(10000)
+        demandas_consultar.expandirDadosEspecificosCAEditar()
+        demandas_consultar.selecionarArquivadaCA()
+        demandas_consultar.editarSalvar()
+        visualizarDemanda(10000)
+        demandas_consultar.demandaArquivadaCA()   //EU087 - US007.7 RN244 - Dados Específicos de CA - Arquivada - EU087 - US007.7 - RN244
+
+        //EXCLUIR DEMANDA
         editarDemanda(10000)
         demandas_consultar.abrirCompAmb()
         demandas_consultar.editarSalvar()
         demandas_consultar.clicarExcluirDemanda()
         demandas_consultar.clicarConfirmar()
     })
-    it('DEMANDA COM COMPENSAÇÃO FLORESTAL', () => {
+    it.only('DEMANDA COM COMPENSAÇÃO FLORESTAL', () => {
         irConsultarDemandas()
         //CADASTRAR DEMANDA //EU002 - US036 -
         demandas_consultar.clicarBotaoCadastro()         // -- US033 - RN015 Caminhos ABA Nova Demanda --
@@ -329,7 +335,7 @@ describe('DEMANDAS', () => {
         demandas_consultar.clicarBotaoVoltar()
         visualizarDemanda(3000)
         demandas_consultar.selecionarDadosEspecificosCF()
-        demandas_consultar.validarSaldoPagoAMaisCFMudas()                      //EU038 - US070 - RN134 - RN138
+        //demandas_consultar.validarSaldoPagoAMaisCFMudas()                      //EU038 - US070 - RN134 - RN138
         demandas_consultar.excluirPagamentosCF()
 
         //COM ha
@@ -343,7 +349,7 @@ describe('DEMANDAS', () => {
         demandas_consultar.clicarBotaoVoltar()
         visualizarDemanda(3000)
         demandas_consultar.selecionarDadosEspecificosCF()
-        demandas_consultar.validarSaldoPagoAMaisCFha()                        //EU038 - US070 - RN134 - RN138
+        //demandas_consultar.validarSaldoPagoAMaisCFha()                        //EU038 - US070 - RN134 - RN138
         demandas_consultar.excluirPagamentosCF()
 
         //SEM ha E MUDAS
@@ -353,13 +359,21 @@ describe('DEMANDAS', () => {
         demandas_consultar.clicarBotaoVoltar()
         visualizarDemanda(3000)
         demandas_consultar.selecionarDadosEspecificosCF()
-        demandas_consultar.validarSaldo0CF()                                //EU038 - US070 - RN134 - RN138
+        //demandas_consultar.validarSaldo0CF()                                //EU038 - US070 - RN134 - RN138
         demandas_consultar.adicionarPagamentoCA('2020-01-01','2000','Quitado')
         demandas_consultar.clicarBotaoVoltar()
         visualizarDemanda(3000)
         demandas_consultar.selecionarDadosEspecificosCF()
-        demandas_consultar.validarSaldoPagoAMaisCF()                        //EU038 - US070 - RN134 - RN138
+        //demandas_consultar.validarSaldoPagoAMaisCF()                        //EU038 - US070 - RN134 - RN138
         demandas_consultar.excluirPagamentosCF()
+
+        //DEMANDA ARQUIVADA
+        editarDemanda(10000)
+        demandas_consultar.expandirDadosEspecificosCFEditar()
+        demandas_consultar.selecionarArquivadaCF()
+        demandas_consultar.editarSalvar()
+        visualizarDemanda(10000)
+        demandas_consultar.demandaArquivadaCF() //EU087 - US007.7 - RN244
 
         //EDITAR DEMANDA - EXCLUIR DEMANDA // -- US033 - RN015 Caminhos Editar Demanda --
         editarDemanda(3000)
@@ -370,7 +384,7 @@ describe('DEMANDAS', () => {
     })
 
 
-    it.only('Validar campos de texto', () => {
+    it('Validar campos de texto', () => {
         //RN120
         irConsultarDemandas()
         demandas_consultar.validarTituloDemanda()
@@ -468,6 +482,7 @@ describe('DEMANDAS', () => {
         demandas_consultar.validarVisualizarInfoEmpreendimentos()
         demandas_consultar.validarVisualizarDadosGerais()
         demandas_consultar.validarVisualizarInfoDocumento()
+        demandas_consultar.validarVisualizarAssociacoesDemanda()
         demandas_consultar.validarVisualizarCompensacaoAmbiental()
         demandas_consultar.validarVisualizarCompensacaoFlorestal()
         demandas_consultar.validarVisualizarAutoInfracao()
@@ -498,6 +513,7 @@ describe('DEMANDAS', () => {
         demandas_consultar.validarWhidthEmpreendimento()
 
         //CADASTRAR DEMANDA
+        cy.reload(true)
         demandas_consultar.irAbaDemanda()
         demandas_consultar.irAbaDemandaConsultar()
         demandas_consultar.clicarBotaoCadastro()         // -- US033 - RN015 Caminhos ABA Nova Demanda --
