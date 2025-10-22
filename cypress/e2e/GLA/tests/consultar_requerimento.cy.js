@@ -3,7 +3,7 @@ import consultar_requerimento from "../../../support/pages/consultar_requeriment
 describe('consultar_requerimentos', () => {
 
 
-    it('Editar um requerimento', () => {
+    it.only('Editar um requerimento', () => {
 
 
         Cypress.on('uncaught:exception', (err) => {
@@ -68,12 +68,17 @@ describe('consultar_requerimentos', () => {
         consultar_requerimento.digitarTaxaLicenc('teste200000')         //-- EU088 - US022.2 - campo numérico, opcional e editável--
         consultar_requerimento.digitarEstudosServicos('teste200000')    //-- EU088 - US022.2 - campo numérico, opcional e editável--
         consultar_requerimento.clicarBotaoSalvar()
-        consultar_requerimento.clicarContinuar()
+        consultar_requerimento.clicarContinuar('Continuar')
         consultar_requerimento.clicarOk()
 
         // CONSULTAR REQUERIMENTO
         consultar_requerimento.irParaRequerimento()
         consultar_requerimento.clicarConsultarRequerimentos()
+        consultar_requerimento.pesquisarRequerimento()
+        consultar_requerimento.clicarPrimeiroBotaoExcluir()
+        consultar_requerimento.clicarContinuar('Confirmar')
+        consultar_requerimento.validarMensagem('Impossível excluir este Requerimento. Existem ( Estudos). vinculados') //EU85 - US026.3 - MSG050
+        consultar_requerimento.clicarOk()
 
         //Testando preencher e Limpar todos os campos
         consultar_requerimento.digitarDescricaoRequerimento()
@@ -119,16 +124,13 @@ describe('consultar_requerimentos', () => {
 
         //EDITAR REQUERIMENTO
         consultar_requerimento.irParaAbaRequerimento()
-
-        //editar
-
         consultar_requerimento.digitarDescricaoRequerimento()
         consultar_requerimento.digitarNSeiDoc('teste')                  //-- EU088 - US022.1 - campo numérico --
         consultar_requerimento.digitarSeiProcesso('teste')              //-- EU088 - US022.1 - campo numérico --
         consultar_requerimento.digitarTaxaLicenc('teste10')         //-- EU088 - US023 - campo numérico, opcional e editavel--
         consultar_requerimento.digitarEstudosServicos('teste10')    //-- EU088 - US023 - campo numérico, opcional e editavel--
         consultar_requerimento.clicarBotaoSalvar()
-        consultar_requerimento.clicarContinuar()
+        consultar_requerimento.clicarContinuar('Continuar')
         consultar_requerimento.clicarEditarOk()
 
         //Limpar campos de texto
@@ -148,7 +150,7 @@ describe('consultar_requerimentos', () => {
         consultar_requerimento.clicarBotaoConfirmar()
         consultar_requerimento.clicarOkDeletar()
     })
-    it.only('Validar Campos de texto', () => {
+    it('Validar Campos de texto', () => {
 
         consultar_requerimento.irParaGLA()
         consultar_requerimento.login()
@@ -182,35 +184,6 @@ describe('consultar_requerimentos', () => {
         consultar_requerimento.irParaRequerimento()
         cy.wait(1000)
         consultar_requerimento.clicarConsultarRequerimentos()
-        //Validação de textos
-        consultar_requerimento.validarLabelTipoRequerimento()
-        consultar_requerimento.validarLabelDemanda()
-        consultar_requerimento.validarLabelNumeroOficio()
-        consultar_requerimento.validarLabelAnoOficio()
-        consultar_requerimento.validarLabelEmitenteOficio()
-        consultar_requerimento.validarLabelNSeiDocRequerimento()
-        consultar_requerimento.validarLabelTitular()
-        consultar_requerimento.validarLabelSuplente()
-        consultar_requerimento.validarLabelDescricao()
-        consultar_requerimento.validarLabelOrgaoRequerimento()
-        consultar_requerimento.validarLabelDataPublicacaoRequerimento()
-        consultar_requerimento.validarLabelStatusRequerimento()
-        consultar_requerimento.validarLabelSeiProcessoRequerimento()
-        consultar_requerimento.validarLabelReservaOrcamentaria()
-        consultar_requerimento.validarLabelNDocSeiDespacho()
-        consultar_requerimento.validarLabelStatusPagamento()
-        consultar_requerimento.validarLabelPrazoMaximoAnalise()
-        consultar_requerimento.validarLabelEstudoServico()
-        consultar_requerimento.validarLabelObservacaoSei()
-        consultar_requerimento.validarLabelObservacaoProcesso()
-        consultar_requerimento.validarLabelPagamentosPrecoPublico()
-        consultar_requerimento.validarLabelSeiComprovantePagamento()
-        consultar_requerimento.validarLabelDataPagamento()
-        consultar_requerimento.validarLabelValorPagamento()
-        consultar_requerimento.validarAriaLabelStatusPagamento()
-        consultar_requerimento.validarLabelSeiCertidaoQuitacao()
-        consultar_requerimento.validarLabelDescricaoPagamento()
-        consultar_requerimento.validarLabelAcao()
 
         //Validação dos campos de texto
         consultar_requerimento.validarControlLabelRAConsultar()
@@ -241,6 +214,39 @@ describe('consultar_requerimentos', () => {
         consultar_requerimento.validarAriaLabelEmitenteConsultar()
         consultar_requerimento.validarAriaLabelDataPublicacaoConsultar()
         consultar_requerimento.validarAriaLabelAcaoConsultar()
+
+
+        consultar_requerimento.pesquisarRequerimento()
+        consultar_requerimento.clicarVisualizarPrimeiro()
+        //Validação de textos
+        consultar_requerimento.validarLabelTipoRequerimento()
+        consultar_requerimento.validarLabelDemanda()
+        consultar_requerimento.validarLabelNumeroOficio()
+        consultar_requerimento.validarLabelAnoOficio()
+        consultar_requerimento.validarLabelEmitenteOficio()
+        consultar_requerimento.validarLabelNSeiDocRequerimento()
+        consultar_requerimento.validarLabelTitular()
+        consultar_requerimento.validarLabelSuplente()
+        consultar_requerimento.validarLabelDescricao()
+        consultar_requerimento.validarLabelOrgaoRequerimento()
+        consultar_requerimento.validarLabelDataPublicacaoRequerimento()
+        consultar_requerimento.validarLabelStatusRequerimento()
+        consultar_requerimento.validarLabelSeiProcessoRequerimento()
+        consultar_requerimento.validarLabelReservaOrcamentaria()
+        consultar_requerimento.validarLabelNDocSeiDespacho()
+        consultar_requerimento.validarLabelStatusPagamento()
+        consultar_requerimento.validarLabelPrazoMaximoAnalise()
+        consultar_requerimento.validarLabelEstudoServico()
+        consultar_requerimento.validarLabelObservacaoSei()
+        consultar_requerimento.validarLabelObservacaoProcesso()
+        consultar_requerimento.validarLabelPagamentosPrecoPublico()
+        consultar_requerimento.validarLabelSeiComprovantePagamento()
+        consultar_requerimento.validarLabelDataPagamento()
+        consultar_requerimento.validarLabelValorPagamento()
+        consultar_requerimento.validarAriaLabelStatusPagamento()
+        consultar_requerimento.validarLabelSeiCertidaoQuitacao()
+        consultar_requerimento.validarLabelDescricaoPagamento()
+        consultar_requerimento.validarLabelAcao()
 
         consultar_requerimento.irParaAbaRequerimento()
         //Validar campos de texto

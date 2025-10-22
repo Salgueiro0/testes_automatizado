@@ -128,4 +128,6 @@ export const ELEMENTS = {
     controlLabelSeiProcessoRequerimentoEditar:':nth-child(7) > :nth-child(4) > :nth-child(1) > .form-group > label',
     controlLabelReservaOrcamentariaDiplaEditar:':nth-child(8) > .col-md-12 > .form-group > .control-label',
     controlLabelNDocSeiDespachoEditar:'.col-md-4 > .form-group > .control-label',
+    adicionarEmpreendimento:'#add_empreendimento',
+    caixaAviso:'.bootbox-body',
 }

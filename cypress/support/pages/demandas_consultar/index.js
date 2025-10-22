@@ -659,6 +659,9 @@ class demandas_consultar {
     }
     expandirDadosEspecificosCAEditar(){cy.get("[onclick=\"toggleFormAccordion('ca')\"]").click()}
     expandirDadosEspecificosCFEditar(){cy.get("[onclick=\"toggleFormAccordion('cf')\"]").click()}
+    editarAdicionarEmpreendimento(){cy.get(el.editarAdicionarEmpreendimento).click()}
+    validarMensagem(mensagem){cy.get(el.caixaAviso).should('contain',mensagem)}
+    clicarBotaoOk(){cy.get(el.botaoOk).click()}
 }
 
 export default new demandas_consultar ()

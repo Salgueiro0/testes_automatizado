@@ -178,4 +178,7 @@ export const ELEMENTS = {
     diasRestantesCF: ':nth-child(3) > :nth-child(1) > .panel-accordion > :nth-child(1) > tbody > :nth-child(6) > :nth-child(2)',
     saldoDevedorCA:'#saldo_CA',
     saldoDevedorCF:'#saldo_CF1',
+    editarAdicionarEmpreendimento:'#add_empreendimento',
+    caixaAviso:'.bootbox-body',
+    botaoOk:'.modal-footer > .btn',
 }

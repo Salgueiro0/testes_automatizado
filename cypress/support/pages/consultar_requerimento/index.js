@@ -29,8 +29,8 @@ class consultar_requerimento {
     digitarNumeroDocSeiDespacho(){ cy.get(el.campoNrDocSeiDespacho).type('1111') }
     clicarBotaoSalvar(){ cy.get(el.botaoSalvar).first().click() }
     clicarBotaoSalvarPagamento(){cy.get('#botao-salvar').click()}
-    clicarContinuar(){ cy.wait(2000);
-        cy.get(el.botaoContinuar).should('be.visible').and('contain.text', 'Continuar').click() }
+    clicarContinuar(textoBotao){ cy.wait(2000);
+        cy.get(el.botaoContinuar).should('be.visible').and('contain.text', textoBotao).click() }
     clicarOk(){ cy.get(el.botaoOk).should('be.visible').and('contain.text', 'OK').click({ multiple: true }) }
     clicarModalOk(){cy.get('.bootbox > .modal-dialog > .modal-content > .modal-footer > .btn').click()}
     irParaRequerimento(){ cy.get(el.abaRequerimento).click() }
@@ -42,6 +42,7 @@ class consultar_requerimento {
         cy.wait(1000);
         cy.get(el.dropdownGLAOptions).filter(':contains("Polos 06, 07, 08 - Projeto Orla - Beira Lago")').first().click() }
     pesquisarRequerimento(){ cy.get(el.botaoPesquisarRequerimento).should('be.visible').click(); cy.wait(1000) }
+    adicionarEmpreendimento(){cy.get(el.adicionarEmpreendimento).click()}
     gerarRelatorioPDF(){ cy.get(el.botaoGerarRelatorioPDF).should('be.visible').click() }
     digitarFiltroRequerimento(){ cy.get(el.filtroRequerimento).type('Licença de Operação') }
     clicarVisualizarPrimeiro(){ cy.get(el.botaoVisualizar).first().click() }
@@ -160,6 +161,7 @@ class consultar_requerimento {
     clicarConfirmar(){cy.contains('button','Confirmar').click({ multiple: true })}
     clicarOkDeletar(){cy.get('.modal-footer > .btn').first().click()}
     clicarEditarOk(){cy.get('.modal-footer > .btn').first().click()}
+    validarMensagem(mensagem){cy.get(el.caixaAviso).should('contain',mensagem)}
 
 
 }

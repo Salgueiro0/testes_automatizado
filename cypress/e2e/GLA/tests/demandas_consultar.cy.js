@@ -224,7 +224,7 @@ describe('DEMANDAS', () => {
         demandas_consultar.clicarConfirmar()
     })
 
-    it('DEMANDA COM COMPENSAÇÃO AMBIENTAL COM PRAZO LIMITE', () => {
+    it.only('DEMANDA COM COMPENSAÇÃO AMBIENTAL COM PRAZO LIMITE', () => {
         irConsultarDemandas()
         demandas_consultar.clicarBotaoCadastro()         // -- US033 - RN015 Caminhos ABA Nova Demanda --
         cadastroDemanda('Licença de Operação','10000')
@@ -248,12 +248,15 @@ describe('DEMANDAS', () => {
 
         //EXCLUIR DEMANDA
         editarDemanda(10000)
+        demandas_consultar.editarAdicionarEmpreendimento()
+        demandas_consultar.validarMensagem('Selecione um empreendimento!') //EU007 - US034.2 - MSG047
+        demandas_consultar.clicarBotaoOk()
         demandas_consultar.abrirCompAmb()
         demandas_consultar.editarSalvar()
         demandas_consultar.clicarExcluirDemanda()
         demandas_consultar.clicarConfirmar()
     })
-    it.only('DEMANDA COM COMPENSAÇÃO FLORESTAL', () => {
+    it('DEMANDA COM COMPENSAÇÃO FLORESTAL', () => {
         irConsultarDemandas()
         //CADASTRAR DEMANDA //EU002 - US036 -
         demandas_consultar.clicarBotaoCadastro()         // -- US033 - RN015 Caminhos ABA Nova Demanda --
