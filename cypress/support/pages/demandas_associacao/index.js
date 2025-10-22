@@ -12,7 +12,7 @@ class demandas_associacao {
     irParaDemandasAssociacao(){cy.get(el.menuDemandasAssociacao).click()}
     pesquisarTipoAssociacao(){cy.get('.col-md-4 > .form-group > .select2-container > .selection > .select2-selection').click()}
     pesquisarRA(){cy.get(':nth-child(2) > :nth-child(1) > .form-group > .select2-container > .selection > .select2-selection').click()}
-    pesquisarEmpreendimento(){cy.get(':nth-child(2) > .form-group > .select2-container > .selection > .select2-selection').click()}
+    pesquisarEmpreendimento(){cy.get(el.selectCdEmpreendimento).click()}
     validarAbaAssocDemanda(){cy.get(el.tituloAssocDemanda).should('have.text',"Associação de Demanda")}
     validarAbaAssocPesquisar(){cy.get(el.tituloAssocPesquisar).should('have.text',"Pesquisar")}
     validarAbaAssocTipoAssoc(){cy.get(el.labelAssocTipoAssoc).should('have.text',"Tipo de Associação")}
@@ -65,7 +65,7 @@ class demandas_associacao {
     }
     seletorDemanda(){cy.wait(2000);cy.get(el.selectDemanda).click()}
     clicarBotaoAdicionar(){cy.get(el.botaoAdicionar).click()}
-    validarMSGObrigatoriaCadastro(){cy.get('.bootbox-body').should('contain','Selecione o Tipo de Associação e uma Demanda')}
+    validarMSGObrigatoriaCadastro(){cy.get('.bootbox-body').should('contain','Selecione o Tipo de Associação, um Empreendimento e uma Demanda.')}
     clicarExcluir(){cy.get(el.botaoExcluir).click()}
     seletorTpAssociacao(){cy.get(el.selectTpAssociacao).click()}
     seletorCdEmpreendimento(){cy.get(el.selectCdEmpreendimento,{timeout:10000}).should('be.visible').click()}

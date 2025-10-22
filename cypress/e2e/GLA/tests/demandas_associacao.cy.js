@@ -41,6 +41,7 @@ function pesquisarDemanda(tipo,ra,empreendimento){
     demandas_associacao.seletorDropdown(tipo)
     demandas_associacao.pesquisarRA()
     demandas_associacao.seletorDropdown(ra)
+    cy.wait(3000)
     demandas_associacao.pesquisarEmpreendimento()
     demandas_associacao.seletorDropdown(empreendimento)
     demandas_associacao.clicarBotaoPesquisar()
@@ -141,6 +142,7 @@ describe('pendência', () => {
 
         //Excluir
         demandas_associacao.clicarModalBTNOk()
+        cy.wait(1000)
         demandas_associacao.clicarModalOk()
         demandas_associacao.clicarBotaoPesquisar() //EU016 - US050 - RN043 - LISTA DE DEMANDAS CADASTRADAS sem filtros
         demandas_associacao.clicarPrimeiroBotaoVisualizar()
@@ -162,7 +164,7 @@ describe('pendência', () => {
         demandas_associacao.seletorDemanda()
         demandas_associacao.seletorDropdown('LOC - Licença de Operação Corretiva nº 07/04/2025')
         demandas_associacao.clicarBotaoAdicionar()
-        demandas_associacao.validarMSGObrigatoriaCadastro() //EU014 - US048 Tipo de Associação e Demandas - Obrigatório RN038
+        demandas_associacao.validarMSGObrigatoriaCadastro() //EU014 - US048 Tipo de Associação e Demandas - Obrigatório RN038  - EU017 - US051.1 - MSG049
         demandas_associacao.clicarOK()
         demandas_associacao.selecionarTpAssociacao()
         demandas_associacao.validarSelecoesTipoAssoc()  //EU014 - US048 - RN032 - TIPO DE ASSOCIAÇÃO
